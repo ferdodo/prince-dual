@@ -23,6 +23,7 @@ class Game{
 	}
 
 	reset(){
+		if (this.matteTimeout) clearTimeout(this.matteTimeout);
 		this.state = gameStates.waitPlayerA;
 		this.playerA = undefined;
 		this.playerB = undefined;
@@ -74,7 +75,6 @@ function handlePlayerConnect(game, player){
 						connection.on('error', handleDisconnection(game));
 						connection.on('close', handleDisconnection(game));
 						game.state = gameStates.waitPlayerB;
-						console.log("Player A is connected", game.playerA.name);
 						break;
 					case gameStates.waitPlayerB:
 						var connectingPlayer = player.verify(playerJwt);
@@ -82,7 +82,6 @@ function handlePlayerConnect(game, player){
 						game.playerB = connectingPlayer;
 						connection.on('error', handleDisconnection(game));
 						connection.on('close', handleDisconnection(game));
-						console.log("Player B is connected", game.playerB.name);
 						game.matte();
 						break;
 

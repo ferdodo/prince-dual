@@ -1,4 +1,10 @@
 <div class="main">
+	<p v-if="disconnected" class="disconnectedFromServer">Disconnected from server.</p>
 	<div class="title" v-on:click="connect" v-if="showTitle"></div>
-	<div class="arena" v-on:click="hit" v-if="!showTitle"></div>
+	<div class="arena" v-on:click="hit" v-if="!showTitle"> 
+		<p v-if="hajime" class="exclamationPoints">!!</p>
+		<p v-if="playerA && player.id == playerA.id" class="playerADisplay">Player 1</p>
+		<p v-if="playerB && player.id == playerB.id" class="playerBDisplay">Player 2</p>
+		<player v-if="showPlayers" v-bind:winner="winner"></player>
+	</div>
 </div>

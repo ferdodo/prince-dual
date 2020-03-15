@@ -7,7 +7,7 @@ module.exports = {
 		"path"     : __dirname + "/dist",
 		"filename" : "bundle.js"
 	},
-	"plugins": [new HtmlWebpackPlugin({"title":"COUCOU"})],
+	"plugins": [new HtmlWebpackPlugin({"title":"Prince Duals"})],
 	"module" : {
 		"rules" : [{
 			"test" : /\.css$/,

@@ -16,7 +16,7 @@ body {
 
 .main{
 	width: 100%;
-	height: 100%;
+	padding-bottom: 75%;
 }
 
 
@@ -25,16 +25,62 @@ body {
 	background-size: contain;
 	background-repeat: no-repeat;
 	image-rendering: crisp-edges;
-	width: 100%;
-	height: 100%;
+	image-rendering: pixelated;
+	width: 100%; 
+	padding-bottom: 75%;
 }
 
 
-.main > .arena {
+.main > .arena { 
 	background-image: url("background.gif");
 	background-size: contain;
 	background-repeat: no-repeat;
 	image-rendering: crisp-edges;
+	image-rendering: pixelated;
 	width: 100%;
-	height: 100%;
+	padding-bottom: 75%;
+}
+
+
+.main > .arena > .exclamationPoints{
+	text-align: center;
+	color: white;
+	font-size: 5vw;
+	position: absolute;
+	width: 100vw;
+}
+
+
+.main .disconnectedFromServer{
+	color: black;
+	background-color: red;
+	text-align: center;
+	font-size: 5vw;
+	position: absolute;
+	width: 100vw;
+}
+
+
+
+.main > .arena > .playerADisplay{
+	text-align: left;
+	color: #585800;
+	font-size: 5vw;
+	position: absolute;
+	top: 37vw;
+	width: 100vw;
+	margin-left: 3vw;
+	text-shadow: 2px 2px 2px black;
+}
+
+
+.main > .arena > .playerBDisplay{
+	text-align: left;
+	color: #90451c;
+	font-size: 5vw;
+	position: absolute;
+	top: 37vw;
+	width: 100vw;
+	margin-left: 77.3vw;
+	text-shadow: 2px 2px 2px black;
 }

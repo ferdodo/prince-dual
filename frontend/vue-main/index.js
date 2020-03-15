@@ -16,7 +16,8 @@ new Vue({
 	data,
 	"methods":{
 		connect,
-		hit
+		hit,
+		reset
 	}
 });
 
@@ -26,13 +27,14 @@ function data(){
 		"playerToken" : undefined,
 		"player" : undefined,
 		"showTitle" : true,
+		"showPlayers" : false,
 		"matte" : false,
 		"hajime" : false,
 		"wsClient" : undefined,
 		"playerA" : undefined,
 		"playerB" : undefined,
 		"winner" : undefined,
-		"loser" : undefined
+		"disconnected" : false 
 	}
 }
 
@@ -43,9 +45,14 @@ async function mounted(){
 	this.player = jwtDecode(playerJwt);
 	this.wsClient = new WsClient();
 
+	this.wsClient.onClose((function(){
+		this.disconnected = true;
+	}).bind(this));
+
 	this.wsClient.on('matte', (function(content){ 
 		this.playerA = content.playerA;
 		this.playerB = content.playerB;
+		this.showPlayers = true;
 		this.matte = true;
 	}).bind(this));
 
@@ -53,20 +60,23 @@ async function mounted(){
 		this.hajime = true;
 	}).bind(this));
 
-	this.wsClient.on('fight-result', (function({winner, loser}){ 
-		this.winner = winner;
-		this.loser = loser;
+	this.wsClient.on('fight-result', (function({winner}){ 
+		if (winner.id == this.playerA.id){
+			this.winner = "playerA";
+		} else if (winner.id == this.playerB.id){
+			this.winner = "playerB";
+		} else {
+			console.log(new Error("Unexpected winner !"));
+		}
+
+		setTimeout(this.reset.bind(this), 5000);
 	}).bind(this));
 
-	this.wsClient.on('player-disconnected', (function({winner, loser}){ 
-		this.showTitle = data().showTitle;
-		this.matte = data().matte;
-		this.hajime = data().hajime;
-		this.playerA = data().playerA;
-		this.playerB = data().playerB;
-		this.winner = data().winner;
-		this.loser = data().loser;
+	this.wsClient.on('player-disconnected', (function({winner}){ 
+		this.reset();
 	}).bind(this));
+
+	document.onkeypress = hit.bind(this);
 }
 
 
@@ -78,4 +88,14 @@ function connect(){
 function hit(){
 	this.wsClient.send("player-hit", this.playerJwt);
 	this.showTitle = false;
+}
+
+function reset(){
+	this.showTitle = data().showTitle;
+	this.showPlayers = data().showPlayers;
+	this.matte = data().matte;
+	this.hajime = data().hajime;
+	this.playerA = data().playerA;
+	this.playerB = data().playerB;
+	this.winner = data().winner;
 }

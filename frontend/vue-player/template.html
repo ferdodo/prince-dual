@@ -1,0 +1,8 @@
+<div class="vue-player">
+	<div class="playerA" v-if="!winner"></div>
+	<div class="playerB" v-if="!winner"></div>
+	<div class="playerAwins" v-if="winner == 'playerA'"></div>
+	<div class="playerBloses" v-if="winner == 'playerA'"></div>
+	<div class="playerAloses" v-if="winner == 'playerB'"></div>
+	<div class="playerBwins" v-if="winner == 'playerB'"></div>
+</div>
