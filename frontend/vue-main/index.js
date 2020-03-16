@@ -45,6 +45,10 @@ async function mounted(){
 	this.player = jwtDecode(playerJwt);
 	this.wsClient = new WsClient();
 
+	this.wsClient.connected.catch((function(){
+		this.disconnected = true;
+	}).bind(this));
+
 	this.wsClient.onClose((function(){
 		this.disconnected = true;
 	}).bind(this));
