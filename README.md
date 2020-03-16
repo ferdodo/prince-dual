@@ -4,9 +4,7 @@ Samurai Kirby-like game based on Prince of Persia.
 
 Require two players.
 
-![Example1](/frontend/vue-main/title.png)
-![Example1](/frontend/vue-main/background.gif)
-
+![Example1](/preview.png)
 
 ## Build and run
 
