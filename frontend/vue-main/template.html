@@ -5,6 +5,8 @@
 		<p v-if="hajime" class="exclamationPoints">!!</p>
 		<p v-if="playerA && player.id == playerA.id" class="playerADisplay">Player 1</p>
 		<p v-if="playerB && player.id == playerB.id" class="playerBDisplay">Player 2</p>
+		<p v-if="playerA && player.id != playerB.id && player.id != playerA.id" class="spectatorDisplay">Spectator</p>
+		<p v-if="!playerA" class="waitPlayerDisplay">Waiting for players</p>
 		<player v-if="showPlayers" v-bind:winner="winner"></player>
 	</div>
 </div>

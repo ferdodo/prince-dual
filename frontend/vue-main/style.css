@@ -84,3 +84,25 @@ body {
 	margin-left: 77.3vw;
 	text-shadow: 2px 2px 2px black;
 }
+
+
+.main > .arena > .spectatorDisplay{
+	text-align: center;
+	color: black;
+	font-size: 5vw;
+	position: absolute;
+	top: 37vw;
+	width: 100vw;
+	text-shadow: 2px 2px 2px black;
+}
+
+
+.main > .arena > .waitPlayerDisplay{
+	text-align: center;
+	color: black;
+	font-size: 5vw;
+	position: absolute;
+	top: 37vw;
+	width: 100vw;
+	text-shadow: 2px 2px 2px black;
+}
