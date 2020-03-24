@@ -12,7 +12,7 @@ var morgan = require('morgan');
 			app.use(express.static('dist'));
 			var wsServer = new WsServer(app);
 			var player = new Player(app);
-			var game = new Game(app, wsServer, player);
+			var game = new Game(wsServer, player);
 			app.listen(3000, resolve).on("error", reject);
 		});
 
