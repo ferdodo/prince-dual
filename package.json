@@ -19,6 +19,7 @@
     "html-webpack-plugin": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "morgan": "^1.10.0",
     "nick-generator": "^1.0.1",
     "raw-loader": "^4.0.0",
     "style-loader": "^1.1.3",
