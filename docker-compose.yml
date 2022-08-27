@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: prince-duals-backend
+    ports:
+      - "9977:3000"
+    networks:
+      - alternative
+
+  frontend:
+    image: prince-duals-frontend
+    ports:
+      - "9966:80"
+    networks:
+      - alternative
+
+networks:
+  alternative:
