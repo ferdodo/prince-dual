@@ -16,7 +16,6 @@
 			<div class="playerBwins" v-if="game.playerB && bWins"></div>
 		</div>
 
-		<p v-if="!game.playerA || !game.playerB" class="waitPlayerDisplay"> Attente d'un joueur </p>
-		<p v-if="game.state === GameState.AWinsByFault || game.state === GameState.BWinsByFault" class="tooSoon"> Trop tôt ! </p>
+		<p class="indication"> {{ indication }} </p>
 	</div>
 </div>

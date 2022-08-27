@@ -1,7 +1,7 @@
 import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
-import { waitConnected, waitDisconnected } from "ws-client";
+import { waitConnected, waitDisconnected, send } from "ws-client";
 import { observeGame } from "player/observe-game";
 import { observeMyPlayer } from "player/observe-my-player";
 import { getGame } from "player/get-game";
@@ -9,6 +9,11 @@ import { getMyPlayer } from "player/get-my-player";
 import { action } from "player/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
 import { MyPlayer } from "player";
+
+setInterval(function keepAlive() {
+	send({ eventType: "KEEP_ALIVE" })
+		.catch(console.error);
+}, 25000);
 
 export const app = createApp({
 	setup() {
@@ -89,6 +94,67 @@ export const app = createApp({
 				|| game.value.state === GameState.BWinsByFault;
 		});
 
+		const indication = computed(function() {
+			if (myPlayer.value === null) {
+				return "";
+			}
+
+			if (game.value === null) {
+				return "";
+			}
+
+			switch(game.value.state) {
+				case GameState.WaitingPlayerB:
+					return "Attende d'un deuxieme joueur";
+				case GameState.Matte:
+					switch(myPlayer.value) {
+						case MyPlayer.PlayerA:
+						case MyPlayer.PlayerB:
+							return "Attendez...";
+						default:
+							return "";
+					}
+				case GameState.AWins:
+					switch(myPlayer.value) {
+						case MyPlayer.PlayerA:
+							return "Vous gagnez !";
+						case MyPlayer.PlayerB:
+							return "Vous perdez !";
+						default:
+							return "";
+					}
+				case GameState.BWins:
+					switch(myPlayer.value) {
+						case MyPlayer.PlayerA:
+							return "Vous perdez !";
+						case MyPlayer.PlayerB:
+							return "Vous gagnez !";
+						default:
+							return "";
+					}
+				case GameState.AWinsByFault:
+					switch(myPlayer.value) {
+						case MyPlayer.PlayerA:
+							return "Gagné ! L'adversaire a frappé trop tôt !";
+						case MyPlayer.PlayerB:
+							return "Perdu ! vous frappez trop tôt !";
+						default:
+							return "";
+					}
+				case GameState.BWinsByFault:
+					switch(myPlayer.value) {
+						case MyPlayer.PlayerA:
+							return "Perdu ! vous frappez trop tôt !";
+						case MyPlayer.PlayerB:
+							return "Gagné ! L'adversaire a frappé trop tôt !";
+						default:
+							return "";
+					}
+				default:
+					return ""	
+			}
+		});
+
 		return {
 			myPlayer,
 			game,
@@ -97,7 +163,8 @@ export const app = createApp({
 			showTitle,
 			aWins,
 			bWins,
-			disconnected
+			disconnected,
+			indication
 		};
 	},
 	render

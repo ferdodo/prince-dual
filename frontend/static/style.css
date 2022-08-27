@@ -96,18 +96,7 @@ body {
 	text-shadow: 2px 2px 2px black;
 }
 
-
-.main > .arena > .waitPlayerDisplay{
-	text-align: center;
-	color: black;
-	font-size: 5vw;
-	position: absolute;
-	top: 37vw;
-	width: 100vw;
-	text-shadow: 2px 2px 2px black;
-}
-
-.main > .arena > .tooSoon{
+.main > .arena > .indication{
 	text-align: center;
 	color: white;
 	font-size: 4vw;
