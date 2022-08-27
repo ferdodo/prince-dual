@@ -25,6 +25,6 @@
     "ws-client": "file:./lib/ws-client",
     "ws-server": "file:./lib/ws-server",
     "yargs": "^17.5.1",
-    "zx": "^7.0.8"
+    "zx": "^7.0.7"
   }
 }
