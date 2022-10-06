@@ -84,11 +84,13 @@ export function action(connexions$: Observable<Connexion>): Subscription {
 
 					switch(connexion.id) {
 						case game.playerA:
+							clearTimeout(hajimeTimeout);
 							game.playerA = undefined;
 							game.playerB = undefined;
 							game.state = PlayerADisconnected;
 							break;
 						case game.playerB:
+							clearTimeout(hajimeTimeout);
 							game.playerA = undefined;
 							game.playerB = undefined;
 							game.state = PlayerBDisconnected;
