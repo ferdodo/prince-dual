@@ -3,12 +3,12 @@ import { Observable } from "rxjs";
 import { action } from "player/action/node";
 import { getGame } from "player/get-game/node";
 import { observeGame } from "player/observe-game/node";
-import { getMyPlayer } from "player/get-my-player/node";
-import { observeMyPlayer } from "player/observe-my-player/node";
+import { getMyCharacter } from "player/get-my-character/node";
+import { observeMyCharacter } from "player/observe-my-character/node";
 
 const connexions$: Observable<Connexion> = startServer();
 action(connexions$);
 getGame(connexions$);
 observeGame(connexions$);
-getMyPlayer(connexions$)
-observeMyPlayer(connexions$);
+getMyCharacter(connexions$)
+observeMyCharacter(connexions$);

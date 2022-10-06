@@ -1,4 +1,4 @@
-export enum MyPlayer {
+export enum Character {
 	PlayerA,
 	PlayerB,
 	None

@@ -15,6 +15,7 @@
     "eslint-plugin-rxjs": "^5.0.2",
     "game": "file:./models/game",
     "player": "file:./domains/player",
+    "character": "file:./models/character",
     "rxjs": "^7.5.6",
     "shelljs": "^0.8.5",
     "spinnies": "^0.5.1",

@@ -3,12 +3,12 @@ import { render } from "./template";
 import { Game, GameState } from "game";
 import { waitConnected, waitDisconnected, send } from "ws-client";
 import { observeGame } from "player/observe-game";
-import { observeMyPlayer } from "player/observe-my-player";
+import { observeMyCharacter } from "player/observe-my-character";
 import { getGame } from "player/get-game";
-import { getMyPlayer } from "player/get-my-player";
+import { getMyCharacter } from "player/get-my-character";
 import { action } from "player/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
-import { MyPlayer } from "player";
+import { Character } from "character";
 
 setInterval(function keepAlive() {
 	send({ eventType: "KEEP_ALIVE" })
@@ -17,22 +17,22 @@ setInterval(function keepAlive() {
 
 export const app = createApp({
 	setup() {
-		const myPlayer: Ref<MyPlayer | null> = ref(null);
+		const myCharacter: Ref<Character | null> = ref(null);
 		const game: Ref<Game | null> = ref(null);
 		const disconnected: Ref<boolean> = ref(false);
 	
 		const gameSub = observeGame()
 			.subscribe(value => game.value = value);
 
-		const myPlayerSub = observeMyPlayer()
-			.subscribe(value => myPlayer.value = value);
+		const myCharacterSub = observeMyCharacter()
+			.subscribe(value => myCharacter.value = value);
 
 		getGame()
 			.then(value => game.value = value)
 			.catch(console.error);
 
-		getMyPlayer()
-			.then(value => myPlayer.value = value)
+		getMyCharacter()
+			.then(value => myCharacter.value = value)
 			.catch(console.error);
 
 		waitDisconnected
@@ -52,7 +52,7 @@ export const app = createApp({
 		onUnmounted(function() {
 			controlsSub.unsubscribe();
 			gameSub.unsubscribe();
-			myPlayerSub.unsubscribe();
+			myCharacterSub.unsubscribe();
 		});
 
 		const showTitle = computed(function() {
@@ -60,7 +60,7 @@ export const app = createApp({
 				return true;
 			}
 
-			if (myPlayer.value === null) {
+			if (myCharacter.value === null) {
 				return true;
 			}
 
@@ -70,7 +70,7 @@ export const app = createApp({
 				case GameState.PlayerBDisconnected:
 					return true;
 				case GameState.WaitingPlayerB:
-					return myPlayer.value !== MyPlayer.PlayerA;
+					return myCharacter.value !== Character.PlayerA;
 				default:
 					return false;
 			}
@@ -95,7 +95,7 @@ export const app = createApp({
 		});
 
 		const indication = computed(function() {
-			if (myPlayer.value === null) {
+			if (myCharacter.value === null) {
 				return "";
 			}
 
@@ -105,47 +105,47 @@ export const app = createApp({
 
 			switch(game.value.state) {
 				case GameState.WaitingPlayerB:
-					return "Attende d'un deuxieme joueur";
+					return "Attente d'un deuxieme joueur";
 				case GameState.Matte:
-					switch(myPlayer.value) {
-						case MyPlayer.PlayerA:
-						case MyPlayer.PlayerB:
+					switch(myCharacter.value) {
+						case Character.PlayerA:
+						case Character.PlayerB:
 							return "Attendez...";
 						default:
 							return "";
 					}
 				case GameState.AWins:
-					switch(myPlayer.value) {
-						case MyPlayer.PlayerA:
+					switch(myCharacter.value) {
+						case Character.PlayerA:
 							return "Vous gagnez !";
-						case MyPlayer.PlayerB:
+						case Character.PlayerB:
 							return "Vous perdez !";
 						default:
 							return "";
 					}
 				case GameState.BWins:
-					switch(myPlayer.value) {
-						case MyPlayer.PlayerA:
+					switch(myCharacter.value) {
+						case Character.PlayerA:
 							return "Vous perdez !";
-						case MyPlayer.PlayerB:
+						case Character.PlayerB:
 							return "Vous gagnez !";
 						default:
 							return "";
 					}
 				case GameState.AWinsByFault:
-					switch(myPlayer.value) {
-						case MyPlayer.PlayerA:
+					switch(myCharacter.value) {
+						case Character.PlayerA:
 							return "Gagné ! L'adversaire a frappé trop tôt !";
-						case MyPlayer.PlayerB:
+						case Character.PlayerB:
 							return "Perdu ! vous frappez trop tôt !";
 						default:
 							return "";
 					}
 				case GameState.BWinsByFault:
-					switch(myPlayer.value) {
-						case MyPlayer.PlayerA:
+					switch(myCharacter.value) {
+						case Character.PlayerA:
 							return "Perdu ! vous frappez trop tôt !";
-						case MyPlayer.PlayerB:
+						case Character.PlayerB:
 							return "Gagné ! L'adversaire a frappé trop tôt !";
 						default:
 							return "";
@@ -156,10 +156,10 @@ export const app = createApp({
 		});
 
 		return {
-			myPlayer,
+			myCharacter,
 			game,
 			GameState,
-			MyPlayer,
+			Character,
 			showTitle,
 			aWins,
 			bWins,

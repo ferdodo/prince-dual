@@ -1,9 +1,9 @@
 import { messages$ } from "ws-client";
 import { filterMessage } from "./model";
-import { MyPlayer } from "player";
+import { Character } from "character";
 import { Observable, filter } from "rxjs";
 
-export function observeMyPlayer(): Observable<MyPlayer> {
+export function observeMyCharacter(): Observable<Character> {
 	return new Observable(function(subscriber) {
 		const subscription = messages$.pipe(filter(filterMessage))
 			.subscribe({
