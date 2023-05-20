@@ -1,17 +1,67 @@
 services:
+  #backend:
+  #  build:
+  #    context: .
+  #    dockerfile: docker/backend.Dockerfile
+  #  ports:
+  #    - "3377:3000"
+
+  #frontend:
+  #  build:
+  #    context: .
+  #    dockerfile: docker/frontend.Dockerfile
+  #  ports:
+  #    - "3366:80"
+
+
+  ws-server:
+    build:
+      context: lib/ws-server
+      tags:
+        - "prince-duals-ws-server"
+
+  config:
+    build:
+      context: lib/config
+      tags:
+        - "prince-duals-config"
+      args:
+        PRINCE_DUALS_WS_PROTOCOL: ws
+        PRINCE_DUALS_WS_PORT: 3377
+        PRINCE_DUALS_WEB_DOMAIN: localhost
+        PRINCE_DUALS_WEB_PROTOCOL: http
+        PRINCE_DUALS_WEB_PORT: 3366
+
+  ws-client:
+    build:
+      context: lib/ws-client
+      tags:
+        - "prince-duals-ws-client"
+
+  game:
+    build:
+      context: models/game
+      tags:
+        - "prince-duals-game"
+
+  character:
+    build:
+      context: models/character
+      tags:
+        - "prince-duals-character"
+
+  player:
+    build:
+      context: domains/player
+      tags:
+        - "prince-duals-player"
+
   backend:
-    image: prince-duals-backend
+    build: backend
     ports:
-      - "9977:3000"
-    networks:
-      - alternative
+      - "3377:3000"
 
   frontend:
-    image: prince-duals-frontend
+    build: frontend
     ports:
-      - "9966:80"
-    networks:
-      - alternative
-
-networks:
-  alternative:
+      - "3366:80"

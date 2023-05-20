@@ -1,0 +1,14 @@
+{
+  "name": "new-project",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "devDependencies": {
+        "rxjs": "^7.8.1",
+        "typescript": "^5.0.4",
+        "ws-server": "file:../ws-server"
+      }
+    }
+  }
+}

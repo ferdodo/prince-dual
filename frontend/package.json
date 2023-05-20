@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "build": "zx ./scripts/build.mjs"
+  },
+  "devDependencies": {
+    "character": "file:../models/character",
+    "esbuild": "^0.17.19",
+    "game": "file:../models/game",
+    "player": "file:../domains/player",
+    "rxjs": "^7.8.1",
+    "shelljs": "^0.8.5",
+    "typescript": "^5.0.4",
+    "vue": "^3.3.4",
+    "vue-compiler-dom-cli": "^0.2.1",
+    "ws-client": "file:../lib/ws-client",
+    "ws-server": "file:../lib/ws-server",
+    "zx": "^7.2.2",
+    "zx-run-task": "^1.0.2"
+  }
+}

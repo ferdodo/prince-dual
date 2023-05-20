@@ -1,0 +1,11 @@
+{
+  "scripts": {
+  	 "build": "tsc"
+  },
+  "devDependencies": {
+    "ws-server": "file:../ws-server",
+    "config": "file:../config",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.0.4"
+  }
+}

@@ -1,5 +1,5 @@
 import { readGame } from "game/node";
-import { Character } from "character";
+import { Character } from ".";
 import { Connexion } from "ws-server";
 
 export function resolveMyCharacter(connexion: Connexion): Character {

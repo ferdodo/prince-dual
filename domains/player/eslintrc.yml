@@ -1,12 +1,13 @@
 parser: "@typescript-eslint/parser"
 parserOptions: 
   project:
-    - "./backend/tsconfig.json"
-    - "./frontend/tsconfig.json"
+    - "tsconfig.json"
+plugins:
+  - "@typescript-eslint"
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/eslint-recommended
   - plugin:rxjs/recommended
+  - plugin:@typescript-eslint/recommended
 rules:
   no-undef: 0
   no-unused-vars: 0
@@ -22,10 +23,7 @@ rules:
     - 2
     -
       ignoreChainWithDepth: 1
-  "@typescript-eslint/tslint/config":
-    - "warn"
-    - rules:
-        no-floating-promises: 2
+  "@typescript-eslint/no-floating-promises": 2
   rxjs/no-async-subscribe: 2
   rxjs/no-ignored-observable: 2
   rxjs/no-ignored-subscription: 2

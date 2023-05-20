@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "build": "tsc && npx eslint --max-warnings 0 --config eslintrc.yml --ext .ts ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "character": "file:../../models/character",
+    "eslint": "^8.40.0",
+    "eslint-plugin-rxjs": "^5.0.3",
+    "game": "file:../../models/game",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.0.4",
+    "ws-client": "file:../../lib/ws-client",
+    "ws-server": "file:../../lib/ws-server"
+  }
+}

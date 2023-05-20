@@ -1,6 +1,6 @@
 import { Observable, share } from "rxjs";
 import { Message } from "ws-server";
-import "config/constants";
+import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
 const wsUrl = getWsUrl();
 const socket = new WebSocket(wsUrl);
@@ -32,8 +32,8 @@ export const messages$: Observable<Message> = new Observable<Message>(function(s
 	.pipe(share());
 
 function getWsUrl(): string {
-	const showPort = PRINCE_DUALS_WS_PROTOCOL === 'ws' && PRINCE_DUALS_WS_PORT != "80"
-		|| PRINCE_DUALS_WS_PROTOCOL === 'wss' && PRINCE_DUALS_WS_PORT != "443";
+	const showPort = WS_PROTOCOL === 'ws' && WS_PORT != "80"
+		|| WS_PROTOCOL === 'wss' && WS_PORT != "443";
 
-	return`${ PRINCE_DUALS_WS_PROTOCOL }://${ PRINCE_DUALS_WEB_DOMAIN }${ showPort ? (":"+PRINCE_DUALS_WS_PORT) : "" }/ws`;
+	return`${ WS_PROTOCOL }://${ WEB_DOMAIN }${ showPort ? (":"+WS_PORT) : "" }/ws`;
 }

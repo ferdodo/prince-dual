@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "tsc && npx esbuild index.ts --bundle --platform=node --tree-shaking=true --outfile=dist/main.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "esbuild": "^0.17.19",
+    "player": "../domains/player",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.0.4",
+    "ws-server": "../lib/ws-server"
+  }
+}

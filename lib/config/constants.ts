@@ -1,5 +1,5 @@
-declare const PRINCE_DUALS_WEB_PROTOCOL: string;
-declare const PRINCE_DUALS_WEB_DOMAIN: string;
-declare const PRINCE_DUALS_WEB_PORT: string;
-declare const PRINCE_DUALS_WS_PROTOCOL: string;
-declare const PRINCE_DUALS_WS_PORT: string;
+export const WEB_PROTOCOL = PRINCE_DUALS_WEB_PROTOCOL;
+export const WEB_DOMAIN = PRINCE_DUALS_WEB_DOMAIN;
+export const WEB_PORT = PRINCE_DUALS_WEB_PORT;
+export const WS_PROTOCOL = PRINCE_DUALS_WS_PROTOCOL;
+export const WS_PORT = PRINCE_DUALS_WS_PORT;

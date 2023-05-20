@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "game": "file:../game",
+    "typescript": "^5.0.4",
+    "ws-server": "file:../../lib/ws-server"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1"
+  }
+}
