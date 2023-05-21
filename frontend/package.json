@@ -13,7 +13,7 @@
     "vue": "^3.3.4",
     "vue-compiler-dom-cli": "^0.2.1",
     "ws-client": "file:../lib/ws-client",
-    "ws-server": "file:../lib/ws-server",
+    "link": "file:../lib/link",
     "zx": "^7.2.2",
     "zx-run-task": "^1.0.2"
   }

@@ -1,10 +1,10 @@
-FROM prince-duals-ws-server
+FROM prince-duals-link
 FROM prince-duals-config
 FROM prince-duals-game
 FROM prince-duals-ws-client
 
 FROM node
-COPY --from=0 /prince-duals/lib/ws-server /prince-duals/lib/ws-server
+COPY --from=0 /prince-duals/lib/link /prince-duals/lib/link
 COPY --from=1 /prince-duals/lib/config /prince-duals/lib/config
 COPY --from=2 /prince-duals/models/game /prince-duals/models/game
 COPY --from=3 /prince-duals/lib/ws-client /prince-duals/lib/ws-client

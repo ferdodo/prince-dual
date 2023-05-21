@@ -1,4 +1,8 @@
+FROM prince-duals-link
+
 FROM node
+COPY --from=0 /prince-duals/lib/link /prince-duals/lib/link
+
 WORKDIR /prince-duals/lib/ws-server
 COPY package.json .
 COPY npm-shrinkwrap.json .

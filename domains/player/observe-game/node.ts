@@ -1,4 +1,4 @@
-import { Connexion } from "ws-server";
+import { Connexion } from "link";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
 import { Game } from "game";

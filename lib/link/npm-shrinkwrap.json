@@ -5,25 +5,9 @@
   "packages": {
     "": {
       "devDependencies": {
-        "config": "file:../config",
-        "link": "file:../link",
         "rxjs": "^7.8.1",
         "typescript": "^5.0.4"
       }
-    },
-    "../config": {
-      "dev": true
-    },
-    "../link": {
-      "dev": true
-    },
-    "node_modules/config": {
-      "resolved": "../config",
-      "link": true
-    },
-    "node_modules/link": {
-      "resolved": "../link",
-      "link": true
     },
     "node_modules/rxjs": {
       "version": "7.8.1",

@@ -1,9 +1,9 @@
-FROM prince-duals-ws-server
 FROM prince-duals-config
+FROM prince-duals-link
 
 FROM node
-COPY --from=0 /prince-duals/lib/ws-server /prince-duals/lib/ws-server
-COPY --from=1 /prince-duals/lib/config /prince-duals/lib/config
+COPY --from=0 /prince-duals/lib/config /prince-duals/lib/config
+COPY --from=1 /prince-duals/lib/link /prince-duals/lib/link
 WORKDIR /prince-duals/lib/ws-client
 COPY package.json .
 COPY npm-shrinkwrap.json .

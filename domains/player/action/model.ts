@@ -1,4 +1,4 @@
-import { Message } from "ws-server";
+import { Message } from "link";
 
 export type ActionMessage = {
 	eventType: "ACTION"

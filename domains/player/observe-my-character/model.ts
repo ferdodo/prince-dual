@@ -1,5 +1,5 @@
 import { Character } from "character";
-import { Message } from "ws-server";
+import { Message } from "link";
 
 export const observeMyCharacterEventType = "MY_CHARACTER_UPDATE";
 

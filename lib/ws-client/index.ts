@@ -1,5 +1,5 @@
 import { Observable, share } from "rxjs";
-import { Message } from "ws-server";
+import { Message } from "link";
 import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
 const wsUrl = getWsUrl();

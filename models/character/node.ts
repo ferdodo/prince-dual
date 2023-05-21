@@ -1,6 +1,6 @@
 import { readGame } from "game/node";
 import { Character } from ".";
-import { Connexion } from "ws-server";
+import { Connexion } from "link";
 
 export function resolveMyCharacter(connexion: Connexion): Character {
 	const game = readGame();

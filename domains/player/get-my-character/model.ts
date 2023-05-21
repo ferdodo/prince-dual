@@ -1,4 +1,4 @@
-import { Message } from "ws-server";
+import { Message } from "link";
 import { Character } from "character";
 
 export const getMyCharacterEventType = "GET_MY_CHARACTER";

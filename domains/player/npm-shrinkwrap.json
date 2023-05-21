@@ -12,17 +12,20 @@
         "eslint": "^8.40.0",
         "eslint-plugin-rxjs": "^5.0.3",
         "game": "file:../../models/game",
+        "link": "file:../../lib/link",
         "rxjs": "^7.8.1",
         "typescript": "^5.0.4",
-        "ws-client": "file:../../lib/ws-client",
-        "ws-server": "file:../../lib/ws-server"
+        "ws-client": "file:../../lib/ws-client"
       }
+    },
+    "../lib/link": {
+      "dev": true
     },
     "../lib/ws-client": {
       "dev": true
     },
     "../lib/ws-server": {
-      "dev": true
+      "extraneous": true
     },
     "../models/character": {
       "dev": true
@@ -1622,6 +1625,10 @@
         "node": ">= 0.8.0"
       }
     },
+    "node_modules/link": {
+      "resolved": "../lib/link",
+      "link": true
+    },
     "node_modules/locate-path": {
       "version": "6.0.0",
       "resolved": "https://registry.npmjs.org/locate-path/-/locate-path-6.0.0.tgz",
@@ -2244,10 +2251,6 @@
     },
     "node_modules/ws-client": {
       "resolved": "../lib/ws-client",
-      "link": true
-    },
-    "node_modules/ws-server": {
-      "resolved": "../lib/ws-server",
       "link": true
     },
     "node_modules/y18n": {

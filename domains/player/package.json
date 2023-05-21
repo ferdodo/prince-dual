@@ -13,6 +13,6 @@
     "rxjs": "^7.8.1",
     "typescript": "^5.0.4",
     "ws-client": "file:../../lib/ws-client",
-    "ws-server": "file:../../lib/ws-server"
+    "link": "file:../../lib/link"
   }
 }

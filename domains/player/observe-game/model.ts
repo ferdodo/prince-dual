@@ -1,5 +1,5 @@
 import { Game } from "game";
-import { Message } from "ws-server";
+import { Message } from "link";
 
 export const eventType = "GAME_UPDATE";
 
