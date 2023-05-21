@@ -1,10 +1,14 @@
 {
   "scripts": {
-  	 "build": "tsc"
+    "build": "tsc && npx eslint --max-warnings 0 --config eslintrc.yml --ext .ts ."
   },
   "devDependencies": {
-    "link": "file:../link",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
     "config": "file:../config",
+    "eslint": "^8.41.0",
+    "eslint-plugin-rxjs": "^5.0.3",
+    "link": "file:../link",
     "rxjs": "^7.8.1",
     "typescript": "^5.0.4"
   }

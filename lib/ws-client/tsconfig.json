@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
+		"strict": true,
 		"target": "es6",
 		"module": "nodenext",
+		"noImplicitAny": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"noEmit": true
 	}
 }

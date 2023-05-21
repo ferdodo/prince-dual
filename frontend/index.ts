@@ -1,7 +1,7 @@
 import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
-import { waitConnected, waitDisconnected, send } from "ws-client";
+import { waitDisconnected, send, connect } from "ws-client";
 import { observeGame } from "player/observe-game";
 import { observeMyCharacter } from "player/observe-my-character";
 import { getGame } from "player/get-game";
@@ -170,6 +170,6 @@ export const app = createApp({
 	render
 });
 
-waitConnected
+connect()
 	.then(() =>	app.mount("body"))
 	.catch(console.error);

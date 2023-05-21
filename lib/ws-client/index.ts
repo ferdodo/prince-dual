@@ -1,33 +1,62 @@
-import { Observable, share } from "rxjs";
+import { Observable, share, ReplaySubject, Subscription } from "rxjs";
 import { Message } from "link";
 import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
-const wsUrl = getWsUrl();
-const socket = new WebSocket(wsUrl);
+const socket$: ReplaySubject<WebSocket> = new ReplaySubject(1);
+let connected = false;
 
-export const waitConnected = new Promise(function(resolve) {
-	socket.onopen = () => resolve(undefined);
-});
+async function getSocket(): Promise<WebSocket> {
+	const socket: WebSocket = await new Promise(function(resolve) {
+		const subscription: Subscription = socket$.subscribe(function(socket: WebSocket) {
+			resolve(socket);
+		});
 
-export const waitDisconnected = new Promise(function(resolve) {
-	socket.onclose = () => resolve(undefined);
-});
+		subscription.unsubscribe();
+	});
+
+	return socket;
+}
+
+export async function connect() {
+	if (connected === false) {
+		const wsUrl = getWsUrl();
+		const socket: WebSocket = new WebSocket(wsUrl);
+
+		await new Promise(function(resolve) {
+			socket.onopen = () => resolve(undefined);
+		});
+
+		socket$.next(socket);
+		connected = true;
+	}
+}
+
+export const waitDisconnected = getSocket()
+	.then(function(socket: WebSocket) {
+		return new Promise(function (resolve) {
+			socket.onclose = () => resolve(undefined);
+		});
+	});
 
 export async function send(message) {
+	const socket: WebSocket = await getSocket();
 	const serialized = JSON.stringify(message);
-	await waitConnected;
 	socket.send(serialized);
 }
 
 export const messages$: Observable<Message> = new Observable<Message>(function(subscriber) {
-	socket.onmessage = function(event) {
-		const deserialized = JSON.parse(event.data);
-		subscriber.next(deserialized);
-	};
+	getSocket()
+		.then(function(socket: WebSocket) {
+			socket.onmessage = function(event) {
+				const deserialized = JSON.parse(event.data);
+				subscriber.next(deserialized);
+			};
+		})
+		.catch(error => subscriber.error(error));
 
 	waitDisconnected
 		.then(() => subscriber.complete())
-		.catch(console.error);
+		.catch(error => subscriber.error(error));
 })
 	.pipe(share());
 
