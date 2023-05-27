@@ -4,38 +4,32 @@
   "requires": true,
   "packages": {
     "": {
+      "dependencies": {
+        "character": "file:../../models/character",
+        "client": "file:../../lib/client",
+        "game": "file:../../models/game",
+        "link": "file:../../lib/link",
+        "rxjs": "^7.8.1"
+      },
       "devDependencies": {
         "@types/node": "^20.2.1",
         "@typescript-eslint/eslint-plugin": "^5.59.6",
         "@typescript-eslint/parser": "^5.59.6",
-        "character": "file:../../models/character",
-        "client": "file:../../lib/client",
         "eslint": "^8.40.0",
         "eslint-plugin-rxjs": "^5.0.3",
-        "game": "file:../../models/game",
-        "link": "file:../../lib/link",
-        "rxjs": "^7.8.1",
         "typescript": "^5.0.4"
       }
     },
-    "../lib/client": {
-      "dev": true
-    },
-    "../lib/link": {
-      "dev": true
-    },
+    "../lib/client": {},
+    "../lib/link": {},
     "../lib/ws-client": {
       "extraneous": true
     },
     "../lib/ws-server": {
       "extraneous": true
     },
-    "../models/character": {
-      "dev": true
-    },
-    "../models/game": {
-      "dev": true
-    },
+    "../models/character": {},
+    "../models/game": {},
     "node_modules/@babel/code-frame": {
       "version": "7.21.4",
       "resolved": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.21.4.tgz",
@@ -1967,7 +1961,6 @@
       "version": "7.8.1",
       "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz",
       "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
-      "dev": true,
       "dependencies": {
         "tslib": "^2.1.0"
       }
@@ -2121,8 +2114,7 @@
     "node_modules/tslib": {
       "version": "2.5.2",
       "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.2.tgz",
-      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==",
-      "dev": true
+      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA=="
     },
     "node_modules/tsutils": {
       "version": "3.21.0",
