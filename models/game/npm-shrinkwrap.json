@@ -4,9 +4,11 @@
   "requires": true,
   "packages": {
     "": {
+      "dependencies": {
+        "rxjs": "^7.8.1"
+      },
       "devDependencies": {
         "@types/node": "^20.2.1",
-        "rxjs": "^7.8.1",
         "typescript": "^5.0.4"
       }
     },
@@ -20,16 +22,14 @@
       "version": "7.8.1",
       "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz",
       "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
-      "dev": true,
       "dependencies": {
         "tslib": "^2.1.0"
       }
     },
     "node_modules/tslib": {
-      "version": "2.5.1",
-      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.1.tgz",
-      "integrity": "sha512-KaI6gPil5m9vF7DKaoXxx1ia9fxS4qG5YveErRRVknPDXXriu5M8h48YRjB6h5ZUOKuAKlSJYb0GaDe8I39fRw==",
-      "dev": true
+      "version": "2.5.2",
+      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.2.tgz",
+      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA=="
     },
     "node_modules/typescript": {
       "version": "5.0.4",
