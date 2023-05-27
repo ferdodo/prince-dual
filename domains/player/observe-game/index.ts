@@ -1,4 +1,4 @@
-import { messages$ } from "ws-client";
+import { messages$ } from "client";
 import { filterMessage } from "./model";
 import { Game } from "game";
 import { Observable, filter } from "rxjs";

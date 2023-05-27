@@ -1,0 +1,9 @@
+{
+  "scripts": {
+  	 "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "ws-client": "file:../ws-client"
+  }
+}

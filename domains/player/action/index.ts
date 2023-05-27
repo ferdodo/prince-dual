@@ -1,4 +1,4 @@
-import { send } from "ws-client";
+import { send } from "client";
 import { ActionMessage } from "./model";
 
 export async function action() {

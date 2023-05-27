@@ -1,4 +1,4 @@
-import { send, messages$ } from "ws-client";
+import { send, messages$ } from "client";
 import { filter, firstValueFrom, Observable } from "rxjs";
 import { Character } from "character";
 

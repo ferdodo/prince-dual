@@ -1,5 +1,5 @@
 import { GetGameMessage, GetGameResponse, filterMessage } from "./model";
-import { send, messages$ } from "ws-client";
+import { send, messages$ } from "client";
 import { filter, firstValueFrom, Observable } from "rxjs";
 import { Game } from "game";
 

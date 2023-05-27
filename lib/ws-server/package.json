@@ -3,9 +3,11 @@
     "build": "tsc"
   },
   "dependencies": {
+    "link": "../link",
     "rxjs": "^7.8.1",
-    "typescript": "^5.0.4",
-    "ws": "^8.13.0",
-    "link": "../link"
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
   }
 }
