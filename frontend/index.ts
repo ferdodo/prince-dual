@@ -1,7 +1,7 @@
 import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
-import { waitDisconnected, send, connect } from "ws-client";
+import { createConnexion } from "ws-client";
 import { observeGame } from "player/observe-game";
 import { observeMyCharacter } from "player/observe-my-character";
 import { getGame } from "player/get-game";
@@ -9,34 +9,32 @@ import { getMyCharacter } from "player/get-my-character";
 import { action } from "player/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
 import { Character } from "character";
-
-setInterval(function keepAlive() {
-	send({ eventType: "KEEP_ALIVE" })
-		.catch(console.error);
-}, 25000);
+import { Connexion } from "link";
 
 export const app = createApp({
 	setup() {
 		const myCharacter: Ref<Character | null> = ref(null);
 		const game: Ref<Game | null> = ref(null);
 		const disconnected: Ref<boolean> = ref(false);
+		const connexion: Connexion = createConnexion();
+
+		const connexionSub = connexion.messages$.subscribe({
+			error: () => disconnected.value = true,
+			complete: () => disconnected.value = true
+		});
 	
-		const gameSub = observeGame()
+		const gameSub = observeGame(connexion)
 			.subscribe(value => game.value = value);
 
-		const myCharacterSub = observeMyCharacter()
+		const myCharacterSub = observeMyCharacter(connexion)
 			.subscribe(value => myCharacter.value = value);
 
-		getGame()
+		getGame(connexion)
 			.then(value => game.value = value)
 			.catch(console.error);
 
-		getMyCharacter()
+		getMyCharacter(connexion)
 			.then(value => myCharacter.value = value)
-			.catch(console.error);
-
-		waitDisconnected
-			.then(() => disconnected.value = true)
 			.catch(console.error);
 
 		const controlsSub = merge(
@@ -45,7 +43,7 @@ export const app = createApp({
 		)
 			.pipe(throttleTime(500))
 			.subscribe(function() {
-				action()
+				action(connexion)
 					.catch(console.error);
 			});
 
@@ -53,6 +51,7 @@ export const app = createApp({
 			controlsSub.unsubscribe();
 			gameSub.unsubscribe();
 			myCharacterSub.unsubscribe();
+			connexionSub.unsubscribe();
 		});
 
 		const showTitle = computed(function() {
@@ -170,6 +169,4 @@ export const app = createApp({
 	render
 });
 
-connect()
-	.then(() =>	app.mount("body"))
-	.catch(console.error);
+app.mount("body");

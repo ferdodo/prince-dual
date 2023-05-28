@@ -1,64 +1,65 @@
-import { Observable, share, ReplaySubject, Subscription } from "rxjs";
-import { Message } from "link";
+import { Observable, share } from "rxjs";
+import { Message, Connexion } from "link";
 import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
-const socket$: ReplaySubject<WebSocket> = new ReplaySubject(1);
-let connected = false;
-
-async function getSocket(): Promise<WebSocket> {
-	const socket: WebSocket = await new Promise(function(resolve) {
-		const subscription: Subscription = socket$.subscribe(function(socket: WebSocket) {
-			resolve(socket);
-		});
-
-		subscription.unsubscribe();
-	});
-
-	return socket;
-}
-
-export async function connect() {
-	if (connected === false) {
-		const wsUrl = getWsUrl();
-		const socket: WebSocket = new WebSocket(wsUrl);
-
-		await new Promise(function(resolve) {
-			socket.onopen = () => resolve(undefined);
-		});
-
-		socket$.next(socket);
-		connected = true;
+function * idGenerator(): Iterator<number> {
+	while(true) {
+		for(let id = 1; id < 99999999; id++) {
+			yield id;
+		}
 	}
 }
 
-export const waitDisconnected = getSocket()
-	.then(function(socket: WebSocket) {
-		return new Promise(function (resolve) {
-			socket.onclose = () => resolve(undefined);
-		});
+const idIterator = idGenerator();
+
+export function createConnexion(): Connexion {
+	const wsUrl = getWsUrl();
+	const socket: WebSocket = new WebSocket(wsUrl);
+
+	const waitDisconnected = new Promise(function(resolve) {
+		socket.onclose = () => resolve(undefined);
 	});
 
-export async function send(message) {
-	const socket: WebSocket = await getSocket();
-	const serialized = JSON.stringify(message);
-	socket.send(serialized);
+	const waitConnected = new Promise(function(resolve, reject) {
+		socket.onopen = () => resolve(undefined);
+
+		waitDisconnected.finally(reject);
+	});
+
+	const messages$ = new Observable<Message>(function(subscriber) {
+		socket.onmessage = function(event) {
+			const deserialized: Message = JSON.parse(event.data);
+			subscriber.next(deserialized);
+		};
+
+		waitDisconnected.finally(() => subscriber.complete());
+	})
+		.pipe(share());
+
+	let keepAliveInteval;
+
+	/**
+	 * Prevent web servers or reverse proxy automatically close
+	 * inactive sockets by keeping it active.
+	 */
+	waitConnected.then(function() {
+		const keepAliveMessage: Message = { eventType: "KEEP_ALIVE" };
+		const serialized = JSON.stringify(keepAliveMessage);
+		keepAliveInteval = setInterval(() => socket.send(serialized), 25000);
+		return waitDisconnected;
+	})
+		.finally(() => clearInterval(keepAliveInteval));
+
+	return {
+		id: idIterator.next().value,
+		messages$,
+		async send(message: Message) {
+			await waitConnected;
+			const serialized = JSON.stringify(message);
+			socket.send(serialized);
+		}
+	}
 }
-
-export const messages$: Observable<Message> = new Observable<Message>(function(subscriber) {
-	getSocket()
-		.then(function(socket: WebSocket) {
-			socket.onmessage = function(event) {
-				const deserialized = JSON.parse(event.data);
-				subscriber.next(deserialized);
-			};
-		})
-		.catch(error => subscriber.error(error));
-
-	waitDisconnected
-		.then(() => subscriber.complete())
-		.catch(error => subscriber.error(error));
-})
-	.pipe(share());
 
 function getWsUrl(): string {
 	const showPort = WS_PROTOCOL === 'ws' && WS_PORT != "80"

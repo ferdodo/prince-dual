@@ -1,11 +1,11 @@
-import { messages$ } from "client";
 import { filterMessage } from "./model";
 import { Character } from "character";
 import { Observable, filter } from "rxjs";
+import { Connexion } from "link";
 
-export function observeMyCharacter(): Observable<Character> {
+export function observeMyCharacter(connexion: Connexion): Observable<Character> {
 	return new Observable(function(subscriber) {
-		const subscription = messages$.pipe(filter(filterMessage))
+		const subscription = connexion.messages$.pipe(filter(filterMessage))
 			.subscribe({
 				next(message) {
 					subscriber.next(message.content);
