@@ -2,14 +2,16 @@ import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
 import { createConnexion } from "ws-client";
-import { observeGame } from "player/observe-game";
-import { observeMyCharacter } from "player/observe-my-character";
-import { getGame } from "player/get-game";
-import { getMyCharacter } from "player/get-my-character";
-import { action } from "player/action";
+import { observeGame } from "player/async-api/observe-game";
+import { observeMyCharacter } from "player/async-api/observe-my-character";
+import { getGame } from "player/async-api/get-game";
+import { getMyCharacter } from "player/async-api/get-my-character";
+import { action } from "player/async-api/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
 import { Character } from "character";
 import { Connexion } from "link";
+import { computeIndication } from "player/logic/compute-indication";
+import { isTitleShown } from "player/logic/is-title-shown";
 
 export const app = createApp({
 	setup() {
@@ -54,26 +56,7 @@ export const app = createApp({
 			connexionSub.unsubscribe();
 		});
 
-		const showTitle = computed(function() {
-			if (game.value === null) {
-				return true;
-			}
-
-			if (myCharacter.value === null) {
-				return true;
-			}
-
-			switch(game.value.state) {
-				case GameState.WaitingPlayerA:
-				case GameState.PlayerADisconnected:
-				case GameState.PlayerBDisconnected:
-					return true;
-				case GameState.WaitingPlayerB:
-					return myCharacter.value !== Character.PlayerA;
-				default:
-					return false;
-			}
-		});
+		const showTitle = computed(() => isTitleShown(myCharacter.value, game.value));
 
 		const aWins = computed(function() {
 			if (game.value === null) {
@@ -93,67 +76,8 @@ export const app = createApp({
 				|| game.value.state === GameState.BWinsByFault;
 		});
 
-		const indication = computed(function() {
-			if (myCharacter.value === null) {
-				return "";
-			}
-
-			if (game.value === null) {
-				return "";
-			}
-
-			switch(game.value.state) {
-				case GameState.WaitingPlayerB:
-					return "Attente d'un deuxieme joueur";
-				case GameState.Matte:
-					switch(myCharacter.value) {
-						case Character.PlayerA:
-						case Character.PlayerB:
-							return "Attendez...";
-						default:
-							return "";
-					}
-				case GameState.AWins:
-					switch(myCharacter.value) {
-						case Character.PlayerA:
-							return "Vous gagnez !";
-						case Character.PlayerB:
-							return "Vous perdez !";
-						default:
-							return "";
-					}
-				case GameState.BWins:
-					switch(myCharacter.value) {
-						case Character.PlayerA:
-							return "Vous perdez !";
-						case Character.PlayerB:
-							return "Vous gagnez !";
-						default:
-							return "";
-					}
-				case GameState.AWinsByFault:
-					switch(myCharacter.value) {
-						case Character.PlayerA:
-							return "Gagné ! L'adversaire a frappé trop tôt !";
-						case Character.PlayerB:
-							return "Perdu ! vous frappez trop tôt !";
-						default:
-							return "";
-					}
-				case GameState.BWinsByFault:
-					switch(myCharacter.value) {
-						case Character.PlayerA:
-							return "Perdu ! vous frappez trop tôt !";
-						case Character.PlayerB:
-							return "Gagné ! L'adversaire a frappé trop tôt !";
-						default:
-							return "";
-					}
-				default:
-					return ""	
-			}
-		});
-
+		const indication = computed(() => computeIndication(myCharacter.value, game.value));
+		
 		return {
 			myCharacter,
 			game,
