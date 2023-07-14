@@ -4,6 +4,9 @@
   },
   "devDependencies": {
     "typescript": "^5.0.4",
-    "ws-client": "file:../ws-client"
+    "ws-client": "file:../ws-client",
+    "config": "file:../config",
+    "offline": "file:../offline",
+    "link": "file:../link"
   }
 }

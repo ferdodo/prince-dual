@@ -3,7 +3,8 @@ import {
 	WEB_DOMAIN,
 	WEB_PORT,
 	WS_PROTOCOL,
-	WS_PORT
+	WS_PORT,
+	OFFLINE_MODE
 } from "./dist/constants";
 
 import assert from "assert/strict";
@@ -18,3 +19,4 @@ assert(typeof WEB_DOMAIN === "string");
 assert(typeof WEB_PORT === "number");
 assert(typeof WS_PROTOCOL === "string");
 assert(typeof WS_PORT === "number");
+assert(typeof OFFLINE_MODE === "boolean");

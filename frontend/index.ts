@@ -1,7 +1,7 @@
 import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
-import { createConnexion } from "ws-client";
+import { createConnexion } from "client";
 import { observeGame } from "player/async-api/observe-game";
 import { observeMyCharacter } from "player/async-api/observe-my-character";
 import { getGame } from "player/async-api/get-game";

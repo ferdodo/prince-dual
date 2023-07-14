@@ -1,0 +1,51 @@
+import { Connexion, Message } from "link";
+import { Observable, Subject } from "rxjs";
+
+function * idGenerator(): Iterator<number> {
+	while(true) {
+		for(let id = 1; id < 99999999; id++) {
+			yield id;
+		}
+	}
+}
+
+const idIterator = idGenerator();
+const serverConnexions$ = new Subject<Connexion>();
+let serverStarted = false;
+
+export function startServer(): Observable<Connexion> {
+	if (!serverStarted) {
+		throw new Error("Server is already started !");
+	}
+
+	serverStarted = true;
+	return serverConnexions$.asObservable();
+}
+
+export function createConnexion(): Connexion {
+	if (!serverStarted) {
+		throw new Error("Failed to connect to server !");
+	}
+
+	const messagesToServer$ = new Subject<Message>();
+	const messagesToClient$ = new Subject<Message>();
+
+	const serverConnexion = {
+		id: idIterator.next().value,
+		messages$: messagesToServer$.asObservable(),
+		async send(message: Message) {
+			messagesToClient$.next(message);
+		}
+	}
+
+	const clientConnexion = {
+		id: idIterator.next().value,
+		messages$: messagesToClient$.asObservable(),
+		async send(message: Message) {
+			messagesToServer$.next(message);
+		}
+	};
+
+	serverConnexions$.next(serverConnexion);
+	return clientConnexion;
+}

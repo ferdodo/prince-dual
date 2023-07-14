@@ -20,6 +20,7 @@ services:
         PRINCE_DUALS_WEB_DOMAIN: localhost
         PRINCE_DUALS_WEB_PROTOCOL: http
         PRINCE_DUALS_WEB_PORT: 3366
+        PRINCE_DUALS_OFFLINE_MODE: false
 
   ws-client:
     build:
@@ -60,3 +61,9 @@ services:
       context: lib/client
       tags:
         - "prince-duals-client"
+
+  offline:
+    build: 
+      context: lib/offline
+      tags:
+        - "prince-duals-offline"
