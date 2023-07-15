@@ -1,5 +1,5 @@
 import { Observable, share } from "rxjs";
-import { Message, Connexion } from "link";
+import { Message, Connection } from "link";
 import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
 function * idGenerator(): Iterator<number> {
@@ -12,7 +12,7 @@ function * idGenerator(): Iterator<number> {
 
 const idIterator = idGenerator();
 
-export function createConnexion(): Connexion {
+export function createConnexion(): Connection {
 	const wsUrl = getWsUrl();
 	const socket: WebSocket = new WebSocket(wsUrl);
 

@@ -1,7 +1,7 @@
 import { ActionMessage } from "./model";
-import { Connexion } from "link";
+import { Connection } from "link";
 
-export async function action(connexion: Connexion) {
+export async function action(connection: Connection) {
 	const message: ActionMessage = { eventType: "ACTION" };
-	await connexion.send(message);
+	await connection.send(message);
 }

@@ -9,7 +9,7 @@ import { getMyCharacter } from "player/async-api/get-my-character";
 import { action } from "player/async-api/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
 import { Character } from "character";
-import { Connexion } from "link";
+import { Connection } from "link";
 import { computeIndication } from "player/logic/compute-indication";
 import { isTitleShown } from "player/logic/is-title-shown";
 
@@ -18,24 +18,24 @@ export const app = createApp({
 		const myCharacter: Ref<Character | null> = ref(null);
 		const game: Ref<Game | null> = ref(null);
 		const disconnected: Ref<boolean> = ref(false);
-		const connexion: Connexion = createConnexion();
+		const connection: Connection = createConnexion();
 
-		const connexionSub = connexion.messages$.subscribe({
+		const connexionSub = connection.messages$.subscribe({
 			error: () => disconnected.value = true,
 			complete: () => disconnected.value = true
 		});
 	
-		const gameSub = observeGame(connexion)
+		const gameSub = observeGame(connection)
 			.subscribe(value => game.value = value);
 
-		const myCharacterSub = observeMyCharacter(connexion)
+		const myCharacterSub = observeMyCharacter(connection)
 			.subscribe(value => myCharacter.value = value);
 
-		getGame(connexion)
+		getGame(connection)
 			.then(value => game.value = value)
 			.catch(console.error);
 
-		getMyCharacter(connexion)
+		getMyCharacter(connection)
 			.then(value => myCharacter.value = value)
 			.catch(console.error);
 
@@ -45,7 +45,7 @@ export const app = createApp({
 		)
 			.pipe(throttleTime(500))
 			.subscribe(function() {
-				action(connexion)
+				action(connection)
 					.catch(console.error);
 			});
 

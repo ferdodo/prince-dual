@@ -1,9 +1,9 @@
 import { OFFLINE_MODE } from "config";
-import { Connexion } from "link";
+import { Connection } from "link";
 import { createConnexion as createOnlineConnexion } from "ws-client";
 import { createConnexion as createOfflineConnexion } from "offline";
 
-export function createConnexion(): Connexion {
+export function createConnexion(): Connection {
 	if (OFFLINE_MODE) {
 		return createOfflineConnexion();
 	} else {

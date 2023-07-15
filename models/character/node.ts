@@ -1,11 +1,11 @@
 import { readGame } from "game/node";
 import { Character } from ".";
-import { Connexion } from "link";
+import { Connection } from "link";
 
-export function resolveMyCharacter(connexion: Connexion): Character {
+export function resolveMyCharacter(connection: Connection): Character {
 	const game = readGame();
 
-	switch(connexion.id) {
+	switch(connection.id) {
 		case game.playerA:
 			return Character.PlayerA;
 		case game.playerB:

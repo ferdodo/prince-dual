@@ -1,16 +1,16 @@
-import { Connexion } from "link";
+import { Connection } from "link";
 import { filterMessage, GetMyCharacterResponse, getMyCharacterEventType } from "./model";
 import { Observable, filter, Subscription } from "rxjs";
 import { resolveMyCharacter } from "character/node";
 
-export function getMyCharacter(connexions$: Observable<Connexion>): Subscription {
-	return connexions$.subscribe(function(connexion: Connexion) {
-		const subscription = connexion.messages$.pipe(filter(filterMessage))
+export function getMyCharacter(connexions$: Observable<Connection>): Subscription {
+	return connexions$.subscribe(function(connection: Connection) {
+		const subscription = connection.messages$.pipe(filter(filterMessage))
 			.subscribe({
 				next() {				
-					connexion.send(<GetMyCharacterResponse> {
+					connection.send(<GetMyCharacterResponse> {
 						eventType: getMyCharacterEventType,
-						content: resolveMyCharacter(connexion)
+						content: resolveMyCharacter(connection)
 					});
 				},
 				complete(){

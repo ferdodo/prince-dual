@@ -1,4 +1,4 @@
-import { Connexion, Message } from "link";
+import { Connection, Message } from "link";
 import { Observable, Subject } from "rxjs";
 
 function * idGenerator(): Iterator<number> {
@@ -10,10 +10,10 @@ function * idGenerator(): Iterator<number> {
 }
 
 const idIterator = idGenerator();
-const serverConnexions$ = new Subject<Connexion>();
+const serverConnexions$ = new Subject<Connection>();
 let serverStarted = false;
 
-export function startServer(): Observable<Connexion> {
+export function startServer(): Observable<Connection> {
 	if (!serverStarted) {
 		throw new Error("Server is already started !");
 	}
@@ -22,7 +22,7 @@ export function startServer(): Observable<Connexion> {
 	return serverConnexions$.asObservable();
 }
 
-export function createConnexion(): Connexion {
+export function createConnexion(): Connection {
 	if (!serverStarted) {
 		throw new Error("Failed to connect to server !");
 	}

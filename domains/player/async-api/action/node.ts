@@ -1,4 +1,4 @@
-import { Connexion } from "link";
+import { Connection } from "link";
 import { Observable, filter, Subscription } from "rxjs";
 import { Game, GameState } from "game";
 import { readGame, saveGame } from "game/node";
@@ -19,9 +19,9 @@ const {
 
 let hajimeTimeout;
 
-export function action(connexions$: Observable<Connexion>): Subscription {
-	return connexions$.subscribe(function(connexion: Connexion) {
-		const messageSub = connexion.messages$.pipe(filter(filterMessage))
+export function action(connexions$: Observable<Connection>): Subscription {
+	return connexions$.subscribe(function(connection: Connection) {
+		const messageSub = connection.messages$.pipe(filter(filterMessage))
 			.subscribe({
 				next() {
 					const game: Game = readGame();
@@ -38,12 +38,12 @@ export function action(connexions$: Observable<Connexion>): Subscription {
 						case PlayerADisconnected:
 						case PlayerBDisconnected:
 						case WaitingPlayerA:
-							game.playerA = connexion.id;
+							game.playerA = connection.id;
 							game.state = WaitingPlayerB;
 							break;
 						case WaitingPlayerB:
-							if (game.playerA !== connexion.id) {
-								game.playerB = connexion.id;
+							if (game.playerA !== connection.id) {
+								game.playerB = connection.id;
 								game.state = Matte;
 
 								hajimeTimeout = setTimeout(function() {
@@ -56,19 +56,19 @@ export function action(connexions$: Observable<Connexion>): Subscription {
 
 							break;
 						case Matte:
-							if (connexion.id === game.playerA) {
+							if (connection.id === game.playerA) {
 								clearTimeout(hajimeTimeout);
 								game.state = BWinsByFault;
-							} else if (connexion.id === game.playerB) {
+							} else if (connection.id === game.playerB) {
 								clearTimeout(hajimeTimeout);
 								game.state = AWinsByFault;
 							}
 
 							break;
 						case Hajime:
-							if (connexion.id === game.playerA) {
+							if (connection.id === game.playerA) {
 								game.state = AWins;
-							} else if (connexion.id === game.playerB) {
+							} else if (connection.id === game.playerB) {
 								game.state = BWins;
 							}
 
@@ -82,7 +82,7 @@ export function action(connexions$: Observable<Connexion>): Subscription {
 				complete() {
 					const game: Game = readGame();
 
-					switch(connexion.id) {
+					switch(connection.id) {
 						case game.playerA:
 							clearTimeout(hajimeTimeout);
 							game.playerA = undefined;

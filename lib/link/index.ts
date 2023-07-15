@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
-export type Message = {
+export interface Message<T = any> {
 	eventType: string,
-	content?: any
+	content?: T
 }
 
-export type Connexion = {
+export interface Connection<T = any> {
 	id: number;
-	messages$: Observable<Message>,
-	send: (payload: Message) => void
+	messages$: Observable<Message<T>>,
+	send: (payload: Message<T>) => void
 }

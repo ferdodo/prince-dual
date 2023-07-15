@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { Observable, share } from "rxjs";
-import { Connexion, Message } from "link";
+import { Connection, Message } from "link";
 
 function * idGenerator(): Iterator<number> {
 	while(true) {
@@ -10,8 +10,8 @@ function * idGenerator(): Iterator<number> {
 	}
 }
 
-export function startServer(): Observable<Connexion> {
-	return new Observable<Connexion>(function(connexionSubscriber) {
+export function startServer(): Observable<Connection> {
+	return new Observable<Connection>(function(connexionSubscriber) {
 		const wss = new WebSocketServer({ port: 3000, path: "/ws" });
 		const idIterator = idGenerator();
 

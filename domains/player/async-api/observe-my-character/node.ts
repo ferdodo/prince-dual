@@ -1,20 +1,20 @@
-import { Connexion } from "link";
+import { Connection } from "link";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
 import { ObserveMyCharacterBroadcast, observeMyCharacterEventType } from "./model";
 import { resolveMyCharacter } from "character/node";
 
-export function observeMyCharacter(connexions$: Observable<Connexion>): Subscription {
-	return connexions$.subscribe(function(connexion: Connexion) {
+export function observeMyCharacter(connexions$: Observable<Connection>): Subscription {
+	return connexions$.subscribe(function(connection: Connection) {
 		const subscription = watchGame()
 			.subscribe(function() {
-				connexion.send(<ObserveMyCharacterBroadcast> {
+				connection.send(<ObserveMyCharacterBroadcast> {
 					eventType: observeMyCharacterEventType,
-					content: resolveMyCharacter(connexion)
+					content: resolveMyCharacter(connection)
 				});
 			});
 
-		const messageSubscription = connexion.messages$.subscribe({
+		const messageSubscription = connection.messages$.subscribe({
 			complete() {
 				subscription.unsubscribe();
 				messageSubscription.unsubscribe();
