@@ -1,7 +1,7 @@
 import { filterMessage } from "./model";
 import { Game } from "game";
 import { Observable, filter } from "rxjs";
-import { Connection } from "link";
+import { Connection } from "connection-types";
 
 export function observeGame(connection: Connection): Observable<Game> {
 	return new Observable(function(subscriber) {

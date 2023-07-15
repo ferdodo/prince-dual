@@ -1,15 +1,15 @@
 import { Game } from "game";
-import { Message } from "link";
+import { Message } from "connection-types";
 
 export type GetGameMessage = {
-	eventType: "GET_GAME"
+	messageType: "GET_GAME"
 }
 
 export type GetGameResponse =  {
-	eventType: "GET_GAME",
+	messageType: "GET_GAME",
 	content: Game
 }
 
 export function filterMessage(message: Message): boolean {
-	return message.eventType === "GET_GAME";
+	return message.messageType === "GET_GAME";
 }

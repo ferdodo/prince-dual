@@ -1,5 +1,5 @@
 import { Observable, share } from "rxjs";
-import { Message, Connection } from "link";
+import { Message, Connection } from "connection-types";
 import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
 function * idGenerator(): Iterator<number> {
@@ -43,7 +43,7 @@ export function createConnexion(): Connection {
 	 * inactive sockets by keeping it active.
 	 */
 	waitConnected.then(function() {
-		const keepAliveMessage: Message = { eventType: "KEEP_ALIVE" };
+		const keepAliveMessage: Message = { messageType: "KEEP_ALIVE" };
 		const serialized = JSON.stringify(keepAliveMessage);
 		keepAliveInteval = setInterval(() => socket.send(serialized), 25000);
 		return waitDisconnected;

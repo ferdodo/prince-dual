@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { Observable, share } from "rxjs";
-import { Connection, Message } from "link";
+import { Connection, Message } from "connection-types";
 
 function * idGenerator(): Iterator<number> {
 	while(true) {

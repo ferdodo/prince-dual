@@ -1,8 +1,4 @@
 services:
-  link:
-    build:
-      context: lib/link
-
   ws-server:
     build:
       context: lib/ws-server

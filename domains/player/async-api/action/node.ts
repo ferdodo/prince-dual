@@ -1,4 +1,4 @@
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { Observable, filter, Subscription } from "rxjs";
 import { Game, GameState } from "game";
 import { readGame, saveGame } from "game/node";

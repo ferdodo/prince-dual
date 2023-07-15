@@ -1,4 +1,4 @@
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { filterMessage, GetMyCharacterResponse, getMyCharacterEventType } from "./model";
 import { Observable, filter, Subscription } from "rxjs";
 import { resolveMyCharacter } from "character/node";
@@ -9,7 +9,7 @@ export function getMyCharacter(connexions$: Observable<Connection>): Subscriptio
 			.subscribe({
 				next() {				
 					connection.send(<GetMyCharacterResponse> {
-						eventType: getMyCharacterEventType,
+						messageType: getMyCharacterEventType,
 						content: resolveMyCharacter(connection)
 					});
 				},

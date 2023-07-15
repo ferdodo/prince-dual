@@ -9,7 +9,7 @@ import { getMyCharacter } from "player/async-api/get-my-character";
 import { action } from "player/async-api/action";
 import { fromEvent, throttleTime, merge } from "rxjs";
 import { Character } from "character";
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { computeIndication } from "player/logic/compute-indication";
 import { isTitleShown } from "player/logic/is-title-shown";
 

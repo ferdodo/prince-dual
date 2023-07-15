@@ -8,7 +8,9 @@
     "player": "../domains/player",
     "rxjs": "^7.8.1",
     "typescript": "^5.0.4",
-    "ws-server": "../lib/ws-server",
-    "link": "../lib/link"
+    "ws-server": "../lib/ws-server"
+  },
+  "dependencies": {
+    "connection-types": "^0.1.0"
   }
 }

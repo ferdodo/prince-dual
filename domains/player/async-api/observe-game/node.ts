@@ -1,4 +1,4 @@
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
 import { Game } from "game";
@@ -9,7 +9,7 @@ export function observeGame(connexions$: Observable<Connection>): Subscription {
 		const subscription = watchGame()
 			.subscribe(function(game: Game) {
 				connection.send(<ObserveGameBroadcast> {
-					eventType: "GAME_UPDATE",
+					messageType: "GAME_UPDATE",
 					content: game
 				});
 			});

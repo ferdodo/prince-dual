@@ -3,8 +3,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "game": "file:../game",
-    "link": "file:../../lib/link"
+    "connection-types": "^0.1.0",
+    "game": "file:../game"
   },
   "devDependencies": {
     "@types/node": "^20.2.1",

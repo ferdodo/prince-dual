@@ -1,13 +1,13 @@
 import { Game } from "game";
-import { Message } from "link";
+import { Message } from "connection-types";
 
-export const eventType = "GAME_UPDATE";
+export const messageType = "GAME_UPDATE";
 
 export type ObserveGameBroadcast = {
-	eventType: "GAME_UPDATE",
+	messageType: "GAME_UPDATE",
 	content: Game
 };
 
 export function filterMessage(message: Message) {
-	return message.eventType === "GAME_UPDATE";
+	return message.messageType === "GAME_UPDATE";
 }

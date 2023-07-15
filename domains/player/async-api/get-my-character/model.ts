@@ -1,17 +1,17 @@
-import { Message } from "link";
+import { Message } from "connection-types";
 import { Character } from "character";
 
 export const getMyCharacterEventType = "GET_MY_CHARACTER";
 
 export type GetMyCharacterMessage = {
-	eventType: "GET_MY_CHARACTER"
+	messageType: "GET_MY_CHARACTER"
 }
 
 export type GetMyCharacterResponse =  {
-	eventType: "GET_MY_CHARACTER",
+	messageType: "GET_MY_CHARACTER",
 	content: Character
 }
 
 export function filterMessage(message: Message): boolean {
-	return message.eventType === getMyCharacterEventType;
+	return message.messageType === getMyCharacterEventType;
 }

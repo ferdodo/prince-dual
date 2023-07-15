@@ -1,7 +1,7 @@
 import { filterMessage } from "./model";
 import { Character } from "character";
 import { Observable, filter } from "rxjs";
-import { Connection } from "link";
+import { Connection } from "connection-types";
 
 export function observeMyCharacter(connection: Connection): Observable<Character> {
 	return new Observable(function(subscriber) {

@@ -1,4 +1,4 @@
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
 import { ObserveMyCharacterBroadcast, observeMyCharacterEventType } from "./model";
@@ -9,7 +9,7 @@ export function observeMyCharacter(connexions$: Observable<Connection>): Subscri
 		const subscription = watchGame()
 			.subscribe(function() {
 				connection.send(<ObserveMyCharacterBroadcast> {
-					eventType: observeMyCharacterEventType,
+					messageType: observeMyCharacterEventType,
 					content: resolveMyCharacter(connection)
 				});
 			});

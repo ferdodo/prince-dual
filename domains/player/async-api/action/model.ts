@@ -1,9 +1,9 @@
-import { Message } from "link";
+import { Message } from "connection-types";
 
 export type ActionMessage = {
-	eventType: "ACTION"
+	messageType: "ACTION"
 }
 
 export function filterMessage(message: Message): boolean {
-	return message.eventType === "ACTION";
+	return message.messageType === "ACTION";
 }

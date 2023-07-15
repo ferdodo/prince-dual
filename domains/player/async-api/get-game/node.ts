@@ -1,4 +1,4 @@
-import { Connection } from "link";
+import { Connection } from "connection-types";
 import { filterMessage, GetGameResponse } from "./model";
 import { Observable, filter, Subscription } from "rxjs";
 import { readGame } from "game/node";
@@ -9,7 +9,7 @@ export function getGame(connexions$: Observable<Connection>): Subscription {
 			.subscribe({
 				next() {
 					connection.send(<GetGameResponse> {
-						eventType: "GET_GAME",
+						messageType: "GET_GAME",
 						content: readGame()
 					});
 				},

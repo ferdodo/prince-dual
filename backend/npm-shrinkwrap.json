@@ -4,10 +4,12 @@
   "requires": true,
   "packages": {
     "": {
+      "dependencies": {
+        "connection-types": "^0.1.0"
+      },
       "devDependencies": {
         "@types/node": "^20.2.1",
         "esbuild": "^0.17.19",
-        "link": "../lib/link",
         "player": "../domains/player",
         "rxjs": "^7.8.1",
         "typescript": "^5.0.4",
@@ -18,7 +20,7 @@
       "dev": true
     },
     "../lib/link": {
-      "dev": true
+      "extraneous": true
     },
     "../lib/ws-server": {
       "dev": true
@@ -381,6 +383,41 @@
       "integrity": "sha512-DqJociPbZP1lbZ5SQPk4oag6W7AyaGMO6gSfRwq3PWl4PXTwJpRQJhDq4W0kzrg3w6tJ1SwlvGZ5uKFHY13LIg==",
       "dev": true
     },
+    "node_modules/connection-types": {
+      "version": "0.1.0",
+      "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-0.1.0.tgz",
+      "integrity": "sha512-AL9MI5gBVeETnbyO50T31RpeNBwGF8FapaaAXZqYjcuuOPOT676IC0LpVuIrRdujwncYaMpCryyrM/cb8Qlqwg==",
+      "hasShrinkwrap": true,
+      "dependencies": {
+        "rxjs": "^7.8.1"
+      }
+    },
+    "node_modules/connection-types/node_modules/rxjs": {
+      "version": "7.8.1",
+      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz",
+      "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
+      "dependencies": {
+        "tslib": "^2.1.0"
+      }
+    },
+    "node_modules/connection-types/node_modules/tslib": {
+      "version": "2.5.2",
+      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.2.tgz",
+      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA=="
+    },
+    "node_modules/connection-types/node_modules/typescript": {
+      "version": "5.0.4",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.0.4.tgz",
+      "integrity": "sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==",
+      "extraneous": true,
+      "bin": {
+        "tsc": "bin/tsc",
+        "tsserver": "bin/tsserver"
+      },
+      "engines": {
+        "node": ">=12.20"
+      }
+    },
     "node_modules/esbuild": {
       "version": "0.17.19",
       "resolved": "https://registry.npmjs.org/esbuild/-/esbuild-0.17.19.tgz",
@@ -417,10 +454,6 @@
         "@esbuild/win32-ia32": "0.17.19",
         "@esbuild/win32-x64": "0.17.19"
       }
-    },
-    "node_modules/link": {
-      "resolved": "../lib/link",
-      "link": true
     },
     "node_modules/player": {
       "resolved": "../domains/player",

@@ -1,4 +1,4 @@
-import { Connection, Message } from "link";
+import { Connection, Message } from "connection-types";
 import { Observable, Subject } from "rxjs";
 
 function * idGenerator(): Iterator<number> {
