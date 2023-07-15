@@ -1,7 +1,7 @@
 import { createApp, ref, Ref, onUnmounted, computed } from "vue";
 import { render } from "./template";
 import { Game, GameState } from "game";
-import { createConnexion } from "client";
+import { createConnexion } from "ws-client";
 import { observeGame } from "player/async-api/observe-game";
 import { observeMyCharacter } from "player/async-api/observe-my-character";
 import { getGame } from "player/async-api/get-game";
@@ -12,13 +12,23 @@ import { Character } from "character";
 import { Connection } from "connection-types";
 import { computeIndication } from "player/logic/compute-indication";
 import { isTitleShown } from "player/logic/is-title-shown";
+import { createConnexion as createOfflineConnexion } from "offline";
+import { OFFLINE_MODE, WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
+
+export function resolveConnection(): Connection {
+	if (OFFLINE_MODE) {
+		return createOfflineConnexion();
+	} else {
+		return createConnexion(WS_PROTOCOL, WS_PORT, WEB_DOMAIN);
+	}
+}
 
 export const app = createApp({
 	setup() {
 		const myCharacter: Ref<Character | null> = ref(null);
 		const game: Ref<Game | null> = ref(null);
 		const disconnected: Ref<boolean> = ref(false);
-		const connection: Connection = createConnexion();
+		const connection: Connection = resolveConnection();
 
 		const connexionSub = connection.messages$.subscribe({
 			error: () => disconnected.value = true,

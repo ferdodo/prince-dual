@@ -1,6 +1,5 @@
 import { Observable, share } from "rxjs";
 import { Message, Connection } from "connection-types";
-import { WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
 
 function * idGenerator(): Iterator<number> {
 	while(true) {
@@ -12,8 +11,11 @@ function * idGenerator(): Iterator<number> {
 
 const idIterator = idGenerator();
 
-export function createConnexion(): Connection {
-	const wsUrl = getWsUrl();
+export function createConnexion(wsProtocol: string, wsPort: number, webDomain: string): Connection {
+	const showPort = wsProtocol === 'ws' && wsPort != 80
+		|| wsProtocol === 'wss' && wsPort != 443;
+
+	const wsUrl = `${ wsProtocol }://${ webDomain }${ showPort ? (":"+wsPort) : "" }/ws`;
 	const socket: WebSocket = new WebSocket(wsUrl);
 
 	const waitDisconnected = new Promise(function(resolve) {
@@ -59,11 +61,4 @@ export function createConnexion(): Connection {
 			socket.send(serialized);
 		}
 	}
-}
-
-function getWsUrl(): string {
-	const showPort = WS_PROTOCOL === 'ws' && WS_PORT != "80"
-		|| WS_PROTOCOL === 'wss' && WS_PORT != "443";
-
-	return`${ WS_PROTOCOL }://${ WEB_DOMAIN }${ showPort ? (":"+WS_PORT) : "" }/ws`;
 }

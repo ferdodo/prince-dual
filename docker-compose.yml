@@ -52,12 +52,6 @@ services:
     ports:
       - "3366:80"
 
-  client:
-    build: 
-      context: lib/client
-      tags:
-        - "prince-duals-client"
-
   offline:
     build: 
       context: lib/offline

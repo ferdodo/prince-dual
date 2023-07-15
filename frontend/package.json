@@ -4,7 +4,9 @@
   },
   "devDependencies": {
     "character": "file:../models/character",
-    "client": "file:../lib/client",
+    "ws-client": "file:../lib/ws-client",
+    "config": "file:../lib/config",
+    "offline": "file:../lib/offline",
     "esbuild": "^0.17.19",
     "game": "file:../models/game",
     "player": "file:../domains/player",
