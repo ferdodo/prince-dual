@@ -4,13 +4,15 @@
   "requires": true,
   "packages": {
     "": {
+      "dependencies": {
+        "connection-types": "^0.1.0",
+        "rxjs": "^7.8.1"
+      },
       "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.59.6",
         "@typescript-eslint/parser": "^5.59.6",
-        "connection-types": "^0.1.0",
         "eslint": "^8.41.0",
         "eslint-plugin-rxjs": "^5.0.3",
-        "rxjs": "^7.8.1",
         "typescript": "^5.0.4"
       }
     },
@@ -881,7 +883,6 @@
       "version": "0.1.0",
       "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-0.1.0.tgz",
       "integrity": "sha512-AL9MI5gBVeETnbyO50T31RpeNBwGF8FapaaAXZqYjcuuOPOT676IC0LpVuIrRdujwncYaMpCryyrM/cb8Qlqwg==",
-      "dev": true,
       "hasShrinkwrap": true,
       "dependencies": {
         "rxjs": "^7.8.1"
@@ -891,7 +892,6 @@
       "version": "7.8.1",
       "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz",
       "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
-      "dev": true,
       "dependencies": {
         "tslib": "^2.1.0"
       }
@@ -899,8 +899,7 @@
     "node_modules/connection-types/node_modules/tslib": {
       "version": "2.5.2",
       "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.2.tgz",
-      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==",
-      "dev": true
+      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA=="
     },
     "node_modules/connection-types/node_modules/typescript": {
       "version": "5.0.4",
@@ -1962,7 +1961,6 @@
       "version": "7.8.1",
       "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz",
       "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
-      "dev": true,
       "dependencies": {
         "tslib": "^2.1.0"
       }
@@ -2116,8 +2114,7 @@
     "node_modules/tslib": {
       "version": "2.5.2",
       "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.5.2.tgz",
-      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==",
-      "dev": true
+      "integrity": "sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA=="
     },
     "node_modules/tsutils": {
       "version": "3.21.0",
