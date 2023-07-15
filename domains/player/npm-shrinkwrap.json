@@ -6,10 +6,8 @@
     "": {
       "dependencies": {
         "character": "file:../../models/character",
-        "client": "file:../../lib/client",
         "connection-types": "^0.1.0",
         "game": "file:../../models/game",
-        "link": "file:../../lib/link",
         "rxjs": "^7.8.1"
       },
       "devDependencies": {
@@ -21,8 +19,12 @@
         "typescript": "^5.0.4"
       }
     },
-    "../lib/client": {},
-    "../lib/link": {},
+    "../lib/client": {
+      "extraneous": true
+    },
+    "../lib/link": {
+      "extraneous": true
+    },
     "../lib/ws-client": {
       "extraneous": true
     },
@@ -851,10 +853,6 @@
       "resolved": "../models/character",
       "link": true
     },
-    "node_modules/client": {
-      "resolved": "../lib/client",
-      "link": true
-    },
     "node_modules/cliui": {
       "version": "8.0.1",
       "resolved": "https://registry.npmjs.org/cliui/-/cliui-8.0.1.tgz",
@@ -1661,10 +1659,6 @@
       "engines": {
         "node": ">= 0.8.0"
       }
-    },
-    "node_modules/link": {
-      "resolved": "../lib/link",
-      "link": true
     },
     "node_modules/locate-path": {
       "version": "6.0.0",
