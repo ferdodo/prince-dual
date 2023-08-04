@@ -1,0 +1,45 @@
+name: Build and Deploy
+on: [push]
+permissions:
+  contents: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: current
+
+      - name: Install and Build 🔧
+        run: |
+          npm --prefix lib/ws-server install
+          npm --prefix lib/ws-server run build
+          npm --prefix lib/svelte-compiler-cli install
+          npm --prefix lib/svelte-compiler-cli run build
+          npm --prefix lib/ws-client install
+          npm --prefix lib/ws-client run build
+          npm --prefix lib/offline install
+          npm --prefix lib/offline run build
+          npm --prefix lib/config install
+          npm --prefix lib/config run build -- --domain=ferdodo.github.io --web-protocol=https --web-port=443 --ws-protocol=wss --ws-port=4433 --offline-mode=true
+          npm --prefix models/character install
+          npm --prefix models/character run build
+          npm --prefix models/game install
+          npm --prefix models/game run build
+          npm --prefix domains/user install
+          npm --prefix domains/user run build
+          npm --prefix domains/player install
+          npm --prefix domains/player run build
+          npm --prefix frontend install
+          npm --prefix frontend run build
+          npm --prefix backend install
+          npm --prefix backend run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend/dist
