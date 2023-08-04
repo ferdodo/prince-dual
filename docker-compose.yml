@@ -57,3 +57,15 @@ services:
       context: lib/offline
       tags:
         - "prince-duals-offline"
+
+  svelte-compiler-cli:
+    build:
+      context: lib/svelte-compiler-cli
+      tags:
+        - "prince-duals-svelte-compiler-cli"
+
+  user:
+    build:
+      context: domains/user
+      tags:
+        - "prince-duals-user"

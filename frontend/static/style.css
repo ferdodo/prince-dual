@@ -46,8 +46,11 @@ body {
 	text-align: center;
 	color: white;
 	font-size: 5vw;
-	position: absolute;
+	position: relative;
+	top: -71vw;
 	width: 100vw;
+	height: 0;
+	margin: 0;
 }
 
 
@@ -66,11 +69,14 @@ body {
 	text-align: left;
 	color: #585800;
 	font-size: 5vw;
-	position: absolute;
-	top: 37vw;
+	position: relative;
+	top: -36vw;
+	left: 3vw;
 	width: 100vw;
 	margin-left: 3vw;
 	text-shadow: 2px 2px 2px black;
+	height: 0;
+	margin: 0;
 }
 
 
@@ -78,11 +84,14 @@ body {
 	text-align: left;
 	color: #90451c;
 	font-size: 5vw;
-	position: absolute;
-	top: 37vw;
+	position: relative;
+	top: -36vw;
+	left: 76vw;
 	width: 100vw;
 	margin-left: 77.3vw;
 	text-shadow: 2px 2px 2px black;
+	height: 0;
+	margin: 0;
 }
 
 
@@ -90,20 +99,23 @@ body {
 	text-align: center;
 	color: black;
 	font-size: 5vw;
-	position: absolute;
-	top: 37vw;
+	position: relative;
+	top: -36vw;
 	width: 100vw;
 	text-shadow: 2px 2px 2px black;
+	height: 0;
+	margin: 0;
 }
 
 .main > .arena > .indication{
 	text-align: center;
 	color: white;
 	font-size: 4vw;
-	position: absolute;
-	top: 34vw;
+	position: relative;
+	top: -32vw;
 	width: 100vw;
 	text-shadow: 2px 2px 2px black;
+	height: 0;
 }
 
 

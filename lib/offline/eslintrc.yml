@@ -30,5 +30,7 @@ rules:
   rxjs/no-nested-subscribe: 0
   rxjs/no-unbound-methods: 2
   rxjs/throw-error: 2
+  rxjs/no-ignored-error: 2
+  rxjs/no-implicit-any-catch: 0
 ignorePatterns:
   - "**/dist"

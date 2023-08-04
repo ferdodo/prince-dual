@@ -6,6 +6,7 @@
     "character": "file:../models/character",
     "ws-client": "file:../lib/ws-client",
     "config": "file:../lib/config",
+    "user": "file:../domains/user",
     "offline": "file:../lib/offline",
     "esbuild": "^0.17.19",
     "game": "file:../models/game",

@@ -13,12 +13,12 @@ rules:
   no-unused-vars: 0
   max-lines: 2
   no-constant-condition: 0
+  no-debugger: 2
   no-console:
     - 2
     -
       allow:
         - "error"
-        - "warn"
   newline-per-chained-call:
     - 2
     -

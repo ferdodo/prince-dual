@@ -1,21 +1,4 @@
-<div class="main">
-	<p v-if="disconnected" class="disconnectedFromServer">Disconnected from server.</p>
-	<div class="title" v-if="showTitle"></div>
-	<div class="arena" v-if="!showTitle"> 
-		<p v-if="game.state === GameState.Hajime" class="exclamationPoints">!!</p>
-		<p v-if="myCharacter === Character.PlayerA" class="playerADisplay">Joueur 1</p>
-		<p v-if="myCharacter === Character.PlayerB" class="playerBDisplay">Joueur 2</p>
-		<p v-if="myCharacter === Character.None" class="spectatorDisplay">Spectateur</p>
-
-		<div class="vue-player">
-			<div class="playerA" v-if="game.playerA && !aWins && !bWins"></div>
-			<div class="playerB" v-if="game.playerB && !aWins && !bWins"></div>
-			<div class="playerAwins" v-if="game.playerA && aWins"></div>
-			<div class="playerBloses" v-if="game.playerB && aWins"></div>
-			<div class="playerAloses" v-if="game.playerA && bWins"></div>
-			<div class="playerBwins" v-if="game.playerB && bWins"></div>
-		</div>
-
-		<p class="indication"> {{ indication }} </p>
-	</div>
+<div>
+	<game-component v-if="showGame" :key="gameKey" :connection="connection"></game-component>
 </div>
+

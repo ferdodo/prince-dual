@@ -3,11 +3,9 @@
     "build": "tsc"
   },
   "dependencies": {
-    "connection-types": "^0.1.0",
-    "game": "file:../game"
+    "connection-types": "^0.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.2.1",
     "typescript": "^5.0.4"
   }
 }

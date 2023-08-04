@@ -1,106 +1,69 @@
-import { createApp, ref, Ref, onUnmounted, computed } from "vue";
+import { createApp, onUnmounted, ref, Ref } from "vue";
 import { render } from "./template";
-import { Game, GameState } from "game";
 import { createConnexion } from "ws-client";
-import { observeGame } from "player/async-api/observe-game";
-import { observeMyCharacter } from "player/async-api/observe-my-character";
-import { getGame } from "player/async-api/get-game";
-import { getMyCharacter } from "player/async-api/get-my-character";
-import { action } from "player/async-api/action";
-import { fromEvent, throttleTime, merge } from "rxjs";
-import { Character } from "character";
 import { Connection } from "connection-types";
-import { computeIndication } from "player/logic/compute-indication";
-import { isTitleShown } from "player/logic/is-title-shown";
-import { createConnexion as createOfflineConnexion } from "offline";
+import { connection$, getConnection, connectionState$, ConnectionState, offlineServer$, startOfflineServer, tabIsServer$ } from "offline";
 import { OFFLINE_MODE, WS_PROTOCOL, WS_PORT, WEB_DOMAIN } from "config";
+import ConnectionStatus from "user/components/connection-status";
+import { GameComponent } from "./components/game";
+import { action } from "player/async-api/action/node";
+import { getGame } from "player/async-api/get-game/node";
+import { observeGame } from "player/async-api/observe-game/node";
+import { getMyCharacter } from "player/async-api/get-my-character/node";
+import { observeMyCharacter } from "player/async-api/observe-my-character/node";
+import { firstValueFrom, filter } from "rxjs";
+
+if (OFFLINE_MODE) {
+	const target = document.getElementById("connection-mount-point");
+	new ConnectionStatus({ target });
+}
 
 export function resolveConnection(): Connection {
 	if (OFFLINE_MODE) {
-		return createOfflineConnexion();
+		return getConnection();
 	} else {
 		return createConnexion(WS_PROTOCOL, WS_PORT, WEB_DOMAIN);
 	}
 }
 
 export const app = createApp({
+	components: {
+		GameComponent
+	},
 	setup() {
-		const myCharacter: Ref<Character | null> = ref(null);
-		const game: Ref<Game | null> = ref(null);
-		const disconnected: Ref<boolean> = ref(false);
-		const connection: Connection = resolveConnection();
+		const connection: Ref<Connection> = ref(resolveConnection());
+		let gameKey: Ref<number> = ref(0);
+		const showGame: Ref<boolean> = ref(false);
 
-		const connexionSub = connection.messages$.subscribe({
-			error: () => disconnected.value = true,
-			complete: () => disconnected.value = true
+		connectionState$.subscribe(function(gameState) {
+			showGame.value = gameState === ConnectionState.Connected;
 		});
-	
-		const gameSub = observeGame(connection)
-			.subscribe(value => game.value = value);
 
-		const myCharacterSub = observeMyCharacter(connection)
-			.subscribe(value => myCharacter.value = value);
-
-		getGame(connection)
-			.then(value => game.value = value)
-			.catch(console.error);
-
-		getMyCharacter(connection)
-			.then(value => myCharacter.value = value)
-			.catch(console.error);
-
-		const controlsSub = merge(
-			fromEvent(document, 'click'),
-			fromEvent(document, 'keydown')
-		)
-			.pipe(throttleTime(500))
-			.subscribe(function() {
-				action(connection)
-					.catch(console.error);
+		if (OFFLINE_MODE) {
+			const connectionSub = connection$.subscribe(function(value) {
+				connection.value = value;
+				gameKey.value = gameKey.value + 1;
 			});
 
-		onUnmounted(function() {
-			controlsSub.unsubscribe();
-			gameSub.unsubscribe();
-			myCharacterSub.unsubscribe();
-			connexionSub.unsubscribe();
-		});
+			onUnmounted(connectionSub.unsubscribe);
 
-		const showTitle = computed(() => isTitleShown(myCharacter.value, game.value));
-
-		const aWins = computed(function() {
-			if (game.value === null) {
-				return false;
-			}
-
-			return game.value.state === GameState.AWins
-				|| game.value.state === GameState.AWinsByFault;
-		});
-
-		const bWins = computed(function() {
-			if (game.value === null) {
-				return false;
-			}
-
-			return game.value.state === GameState.BWins
-				|| game.value.state === GameState.BWinsByFault;
-		});
-
-		const indication = computed(() => computeIndication(myCharacter.value, game.value));
+			firstValueFrom(tabIsServer$.pipe(filter(isServer => isServer)))
+				.then(function() {
+					action(offlineServer$);
+					getGame(offlineServer$);
+					observeGame(offlineServer$);
+					getMyCharacter(offlineServer$)
+					observeMyCharacter(offlineServer$);
+					startOfflineServer();		
+				})
+				.catch(console.error);
+		} else {
+			showGame.value = true;
+		}
 		
-		return {
-			myCharacter,
-			game,
-			GameState,
-			Character,
-			showTitle,
-			aWins,
-			bWins,
-			disconnected,
-			indication
-		};
+		return { connection, showGame, gameKey };
 	},
 	render
 });
 
-app.mount("body");
+app.mount("#game-mount-point");

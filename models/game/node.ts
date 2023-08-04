@@ -1,12 +1,11 @@
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Game, GameState } from ".";
-import { EventEmitter } from 'node:events';
 
-let game = {
+let game: Game = {
 	state: GameState.WaitingPlayerA
 };
 
-const gameEventEmitter = new EventEmitter();
+const gameUpdates$ = new Subject<Game>();
 
 export function readGame(): Game {
 	return { ...game };
@@ -14,13 +13,9 @@ export function readGame(): Game {
 
 export function saveGame(update: Partial<Game>) {
 	game = { ...game, ...update };
-	gameEventEmitter.emit('update', game);
+	gameUpdates$.next(game);
 }
 
 export function watchGame(): Observable<Game> {
-	return new Observable(function(subscriber) {
-		gameEventEmitter.on('update', function(game: Game) {
-			subscriber.next(game);
-		});
-	});
+	return gameUpdates$.asObservable();
 }

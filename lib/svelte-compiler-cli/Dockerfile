@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /prince-duals/models/character
+WORKDIR /prince-duals/lib/svelte-compiler-cli
 COPY package.json .
 COPY npm-shrinkwrap.json .
 RUN npm install

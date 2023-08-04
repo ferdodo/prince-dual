@@ -2,11 +2,11 @@ import { Game, GameState } from "game";
 import { Character } from "character";
 
 export function isTitleShown(myCharacter: Character | null, game: Game | null): boolean {
-	if (game === null) {
+	if (game == null) {
 		return true;
 	}
 
-	if (myCharacter === null) {
+	if (myCharacter == null) {
 		return true;
 	}
 
