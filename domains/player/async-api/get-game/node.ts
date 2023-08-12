@@ -1,17 +1,25 @@
 import { Connection } from "connection-types";
-import { filterMessage, GetGameResponse } from "./model";
-import { Observable, filter, Subscription } from "rxjs";
+import { Observable, filter, Subscription, map } from "rxjs";
 import { readGame } from "game/node";
+import { Message } from "../message";
+import { GetGameRequest } from "./model";
 
-export function getGame(connexions$: Observable<Connection>): Subscription {
-	return connexions$.subscribe(function(connection: Connection) {
-		const subscription = connection.messages$.pipe(filter(filterMessage))
+export function getGame(connexions$: Observable<Connection<Message>>): Subscription {
+	return connexions$.subscribe(function(connection: Connection<Message>) {
+		const subscription = connection.messages$.pipe(
+			map(m => m.getGameRequest),
+			filter(Boolean),
+		)
 			.subscribe({
-				next() {
-					connection.send(<GetGameResponse> {
-						messageType: "GET_GAME",
-						content: readGame()
-					});
+				next(request: GetGameRequest) {
+					const response: Message = {
+						getGameResponse: {
+							requestId: request.requestId,
+							game: readGame()
+						}
+					};
+				
+					connection.send(response);
 				},
 				complete() {
 					subscription.unsubscribe();

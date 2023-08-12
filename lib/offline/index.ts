@@ -1,81 +1,34 @@
-import { Connection, Message } from "connection-types";
-import { Observable, Subject, BehaviorSubject, share, filter } from "rxjs";
+import { Connection } from "connection-types";
+import { Observable, Subject, share, filter } from "rxjs";
 import { idIterator } from "./id-iterator";
 import { SignalingEvent, broadcastSignalToOtherTabs, signalIncomingFromOtherTabs$ } from "./signaling";
 
-export enum ConnectionState {
-	NotConnected = "⌛ Not connected",
-	Connected = "✅ Connected",
-	Disconnected = "❌ Disconnected"
-}
+export function createRtcConnection<T>(): [Connection<T>, Observable<Connection<T>>] {
+	const broadcastToServer$ = new Subject<T>();
+	const broadcastToCurrentTabFromServer$ = new Subject<T>();
+	const broadcastToWebRTC$ = new Subject<T>();
+	const broadcastFromWebRTC$ = new Subject<T>();
+	const _offlineServer$ = new Subject<Connection<T>>();
+	const waitServerPrepare = new Promise(r => setTimeout(r, 150));
+	let tabIsServer = false;
+	let acceptedAnswer = false;
 
-const closeCurrentConnection$ = new Subject<void>();
+	const currentTabServerConnection: Connection<T> = {
+		id: 1,
+		messages$: broadcastToServer$.asObservable(),
+		send(message: T) {
+			broadcastToCurrentTabFromServer$.next(message);
+		}
+	};
 
-const _connectionState$ = new BehaviorSubject<ConnectionState>(ConnectionState.NotConnected);
-let acceptedAnswer = false;
+	const peerServerConnection: Connection<T> = {
+		id: 2,
+		messages$: broadcastFromWebRTC$.asObservable(),
+		send(message: T) {
+			broadcastToWebRTC$.next(message);
+		}
+	};
 
-export function getConnectionState(): ConnectionState {
-	return _connectionState$.getValue();
-}
-
-export const connectionState$: Observable<ConnectionState> = _connectionState$.asObservable();
-
-const _tabIsServer$ = new BehaviorSubject(false);
-
-export function isTabServer(): boolean {
-	return _tabIsServer$.getValue();
-}
-
-export const tabIsServer$: Observable<boolean> = _tabIsServer$.asObservable();
-
-const broadcastToServer$ = new Subject<Message>();
-const broadcastToCurrentTabFromServer$ = new Subject<Message>();
-const broadcastToWebRTC$ = new Subject<Message>();
-const broadcastFromWebRTC$ = new Subject<Message>();
-
-const currentTabServerConnection: Connection = {
-	id: 1,
-	messages$: broadcastToServer$.asObservable(),
-	send(message: Message) {
-		broadcastToCurrentTabFromServer$.next(message);
-	}
-};
-
-const peerServerConnection: Connection = {
-	id: 2,
-	messages$: broadcastFromWebRTC$.asObservable(),
-	send(message: Message) {
-		broadcastToWebRTC$.next(message);
-	}
-};
-
-const _offlineServer$ = new Subject<Connection>();
-export const offlineServer$ = _offlineServer$.asObservable();
-
-export function startOfflineServer() {
-	_offlineServer$.next(currentTabServerConnection);
-	_offlineServer$.next(peerServerConnection);
-}
-
-const _connection$ = new BehaviorSubject(createRtcConnection());
-
-export function getConnection(): Connection {
-	return _connection$.getValue();
-}
-
-export const connection$: Observable<Connection> = _connection$.asObservable();
-
-export function resetConnection() {
-	closeCurrentConnection$.next();
-
-	setTimeout(function() {
-		_connection$.next(createRtcConnection());
-	}, 100);
-}
-
-const waitServerPrepare = new Promise(r => setTimeout(r, 150));
-
-function createRtcConnection(): Connection {
 	const peerConnection: RTCPeerConnection = new RTCPeerConnection();
 	let iceCandidateSent = false;
 	let clearCandidateSent = false;
@@ -95,24 +48,22 @@ function createRtcConnection(): Connection {
 		}
 	};
 
-	_connectionState$.next(ConnectionState.NotConnected);
-
 	const signalingSubscription = signalIncomingFromOtherTabs$
 		.subscribe({
 			next(signalingEvent: SignalingEvent) {
-				const connectionState = getConnectionState();
-
-				if (signalingEvent.offer && connectionState === ConnectionState.NotConnected) {
+				if (signalingEvent.offer) {
 					handleOffer(peerConnection, signalingEvent.offer)
+						.then(() => acceptedAnswer = false)
 						.catch(console.error);
 				}
 
-				if (signalingEvent.answer && connectionState === ConnectionState.NotConnected) {
+				if (signalingEvent.answer) {
 					handleAnswer(peerConnection, signalingEvent.answer)
+						.then(() => acceptedAnswer = true)
 						.catch(console.error);
 				}
 
-				if (signalingEvent.candidate && connectionState === ConnectionState.NotConnected) {
+				if (signalingEvent.candidate) {
 					handleCandidate(peerConnection, signalingEvent.candidate)
 						.catch(console.error);
 				}
@@ -128,13 +79,9 @@ function createRtcConnection(): Connection {
 		});
 
 	async function sendOffers() {
-		const _connectionState = getConnectionState();
-
-		if (_connectionState === ConnectionState.NotConnected) {
-			const offer = await peerConnection.createOffer();
-			await peerConnection.setLocalDescription(offer);
-			broadcastSignalToOtherTabs({ offer });
-		}
+		const offer = await peerConnection.createOffer();
+		await peerConnection.setLocalDescription(offer);
+		broadcastSignalToOtherTabs({ offer });
 	}
 
 	sendOffers()
@@ -142,37 +89,29 @@ function createRtcConnection(): Connection {
 
 	peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
 		event.channel.onmessage = function(event: MessageEvent<string>) {
-			const message: Message = JSON.parse(event.data);
+			const message: T = JSON.parse(event.data);
 			broadcastFromWebRTC$.next(message);
 		}
 	};
 
-	const closeConnectionSub = closeCurrentConnection$.subscribe({
-		next() {
-			peerConnection.close();
-		},
-		error(error) {
-			console.error(error);
-		}
-	});
-
 	peerConnection.addEventListener("connectionstatechange", function() {	
 		switch(peerConnection.connectionState) {
 			case "connecting":
-				_connectionState$.next(ConnectionState.NotConnected);
-				_tabIsServer$.next(false);
 				break;
 			case "connected":
-				_connectionState$.next(ConnectionState.Connected);
-				_tabIsServer$.next(acceptedAnswer);
+				tabIsServer = acceptedAnswer;
+			
+				if (tabIsServer) {
+					_offlineServer$.next(currentTabServerConnection);
+					_offlineServer$.next(peerServerConnection);
+				}
+			
 				break;
 			case "closed":
 			case "disconnected":
 			case "failed":
-				_connectionState$.next(ConnectionState.Disconnected);
-				_tabIsServer$.next(false);
 				signalingSubscription.unsubscribe();
-				closeConnectionSub.unsubscribe();
+				_offlineServer$.complete();
 				break;
 			default:
 				throw new Error("Unhandled state change !");
@@ -181,7 +120,7 @@ function createRtcConnection(): Connection {
 
 	const sendChannel = peerConnection.createDataChannel('sendDataChannel');
 
-	async function sendWhenConnected(m: Message) {
+	async function sendWhenConnected(m: T) {
 		while (peerConnection.connectionState !== "connected") {
 			await new Promise(r => setTimeout(r, 50));
 		}
@@ -197,12 +136,12 @@ function createRtcConnection(): Connection {
 		}
 	});
 
-	return {
+	const clientConnection: Connection<T> = {
 		id: idIterator.next().value,
-		messages$: new Observable<Message>(function(subscriber) {
+		messages$: new Observable<T>(function(subscriber) {
 
 			const connMessagesSub1 = broadcastToCurrentTabFromServer$
-				.pipe(filter(() => isTabServer()))
+				.pipe(filter(() => tabIsServer))
 				.subscribe({
 					next(message) {
 						subscriber.next(message);
@@ -214,7 +153,7 @@ function createRtcConnection(): Connection {
 
 
 			const connMessagesSub2 = broadcastFromWebRTC$
-				.pipe(filter(() => !isTabServer()))
+				.pipe(filter(() => !tabIsServer))
 				.subscribe({
 					next(message) {
 						subscriber.next(message);
@@ -226,6 +165,9 @@ function createRtcConnection(): Connection {
 
 			peerConnection.addEventListener("connectionstatechange", function() {
 				switch(peerConnection.connectionState) {
+					case "connecting":
+					case "connected":
+						break;
 					case "closed":
 					case "disconnected":
 					case "failed":
@@ -241,9 +183,7 @@ function createRtcConnection(): Connection {
 			});
 		})
 			.pipe(share()),
-		send(message: Message) {
-			const tabIsServer = isTabServer();
-
+		send(message: T) {
 			if (tabIsServer) {
 				broadcastToServer$.next(message);
 			} else {
@@ -252,6 +192,11 @@ function createRtcConnection(): Connection {
 			}
 		}
 	}
+
+	return [
+		clientConnection,
+		_offlineServer$.asObservable()
+	];
 }
 
 async function handleOffer(peerConnection: RTCPeerConnection, offer: RTCSessionDescriptionInit) {
@@ -259,12 +204,10 @@ async function handleOffer(peerConnection: RTCPeerConnection, offer: RTCSessionD
 	const answer = await peerConnection.createAnswer();
 	broadcastSignalToOtherTabs({ answer });
 	await peerConnection.setLocalDescription(answer);
-	acceptedAnswer = false;
 }
 
 async function handleAnswer(peerConnection: RTCPeerConnection, answer: RTCSessionDescriptionInit) {
   await peerConnection.setRemoteDescription(answer);
-  acceptedAnswer = true;
 }
 
 async function handleCandidate(peerConnection: RTCPeerConnection, candidate: RTCIceCandidateInit) {

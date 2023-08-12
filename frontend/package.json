@@ -4,22 +4,22 @@
   },
   "devDependencies": {
     "character": "file:../models/character",
-    "ws-client": "file:../lib/ws-client",
     "config": "file:../lib/config",
-    "user": "file:../domains/user",
-    "offline": "file:../lib/offline",
     "esbuild": "^0.17.19",
     "game": "file:../models/game",
+    "offline": "file:../lib/offline",
     "player": "file:../domains/player",
     "rxjs": "^7.8.1",
     "shelljs": "^0.8.5",
     "typescript": "^5.0.4",
+    "user": "file:../domains/user",
     "vue": "^3.3.4",
     "vue-compiler-dom-cli": "^0.2.1",
+    "ws-client": "file:../lib/ws-client",
     "zx": "^7.2.2",
     "zx-run-task": "^1.0.2"
   },
   "dependencies": {
-    "connection-types": "^0.1.0"
+    "connection-types": "^1.0.0"
   }
 }

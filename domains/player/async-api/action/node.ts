@@ -3,6 +3,7 @@ import { Observable, filter, Subscription } from "rxjs";
 import { Game, GameState } from "game";
 import { readGame, saveGame } from "game/node";
 import { filterMessage } from "./model";
+import { Message } from "../message";
 
 const {
 	WaitingPlayerA,
@@ -17,10 +18,10 @@ const {
 	PlayerBDisconnected
 } = GameState;
 
-let hajimeTimeout;
+let hajimeTimeout: ReturnType<typeof setTimeout>;
 
-export function action(connexions$: Observable<Connection>): Subscription {
-	return connexions$.subscribe(function(connection: Connection) {
+export function action(connexions$: Observable<Connection<Message>>): Subscription {
+	return connexions$.subscribe(function(connection: Connection<Message>) {
 		const messageSub = connection.messages$.pipe(filter(filterMessage))
 			.subscribe({
 				next() {

@@ -1,18 +1,11 @@
-import { filterMessage } from "./model";
 import { Character } from "character";
-import { Observable, filter } from "rxjs";
+import { Observable, filter, map } from "rxjs";
 import { Connection } from "connection-types";
+import { Message } from "../message";
 
-export function observeMyCharacter(connection: Connection): Observable<Character> {
-	return new Observable(function(subscriber) {
-		const subscription = connection.messages$.pipe(filter(filterMessage))
-			.subscribe({
-				next(message) {
-					subscriber.next(message.content);
-				},
-				complete() {
-					subscription.unsubscribe();
-				}
-			});
-	});
+export function observeMyCharacter(connection: Connection<Message>): Observable<Character> {
+	return connection.messages$.pipe(
+		map(m => m.observeMyCharacterBroadcast?.character),
+		filter(Boolean)
+	);
 }

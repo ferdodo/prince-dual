@@ -5,19 +5,22 @@
   "packages": {
     "": {
       "dependencies": {
-        "connection-types": "^0.1.0"
+        "connection-types": "^1.0.0"
       },
       "devDependencies": {
         "character": "file:../models/character",
-        "client": "file:../lib/client",
+        "config": "file:../lib/config",
         "esbuild": "^0.17.19",
         "game": "file:../models/game",
+        "offline": "file:../lib/offline",
         "player": "file:../domains/player",
         "rxjs": "^7.8.1",
         "shelljs": "^0.8.5",
         "typescript": "^5.0.4",
+        "user": "file:../domains/user",
         "vue": "^3.3.4",
         "vue-compiler-dom-cli": "^0.2.1",
+        "ws-client": "file:../lib/ws-client",
         "zx": "^7.2.2",
         "zx-run-task": "^1.0.2"
       }
@@ -25,17 +28,23 @@
     "../domains/player": {
       "dev": true
     },
-    "../lib/client": {
+    "../domains/user": {
       "dev": true
     },
-    "../lib/config": {
+    "../lib/client": {
       "extraneous": true
+    },
+    "../lib/config": {
+      "dev": true
     },
     "../lib/link": {
       "extraneous": true
     },
+    "../lib/offline": {
+      "dev": true
+    },
     "../lib/ws-client": {
-      "extraneous": true
+      "dev": true
     },
     "../lib/ws-server": {
       "extraneous": true
@@ -650,20 +659,20 @@
       "resolved": "../models/character",
       "link": true
     },
-    "node_modules/client": {
-      "resolved": "../lib/client",
-      "link": true
-    },
     "node_modules/concat-map": {
       "version": "0.0.1",
       "resolved": "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz",
       "integrity": "sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==",
       "dev": true
     },
+    "node_modules/config": {
+      "resolved": "../lib/config",
+      "link": true
+    },
     "node_modules/connection-types": {
-      "version": "0.1.0",
-      "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-0.1.0.tgz",
-      "integrity": "sha512-AL9MI5gBVeETnbyO50T31RpeNBwGF8FapaaAXZqYjcuuOPOT676IC0LpVuIrRdujwncYaMpCryyrM/cb8Qlqwg==",
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-1.0.0.tgz",
+      "integrity": "sha512-GZZ27VVr9CtdPwajufuuKncFN7fGlzOluqiUA8SPeQkv1pPEOdT9eziAB/4cmvAU7hRxOt77qJwR018xSzuVtQ==",
       "hasShrinkwrap": true,
       "dependencies": {
         "rxjs": "^7.8.1"
@@ -1182,6 +1191,10 @@
         "url": "https://opencollective.com/node-fetch"
       }
     },
+    "node_modules/offline": {
+      "resolved": "../lib/offline",
+      "link": true
+    },
     "node_modules/once": {
       "version": "1.4.0",
       "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
@@ -1496,6 +1509,10 @@
       "engines": {
         "node": ">= 10.0.0"
       }
+    },
+    "node_modules/user": {
+      "resolved": "../domains/user",
+      "link": true
     },
     "node_modules/vue": {
       "version": "3.3.4",
@@ -2012,6 +2029,10 @@
       "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==",
       "dev": true
+    },
+    "node_modules/ws-client": {
+      "resolved": "../lib/ws-client",
+      "link": true
     },
     "node_modules/yaml": {
       "version": "2.2.2",

@@ -11,6 +11,6 @@
     "ws-server": "../lib/ws-server"
   },
   "dependencies": {
-    "connection-types": "^0.1.0"
+    "connection-types": "^1.0.0"
   }
 }

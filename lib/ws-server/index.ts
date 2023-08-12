@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { Observable, share } from "rxjs";
-import { Connection, Message } from "connection-types";
+import { Connection } from "connection-types";
 
 function * idGenerator(): Iterator<number> {
 	while(true) {
@@ -10,14 +10,18 @@ function * idGenerator(): Iterator<number> {
 	}
 }
 
-export function startServer(): Observable<Connection> {
-	return new Observable<Connection>(function(connexionSubscriber) {
+export function startServer<T>(): Observable<Connection<T>> {
+	return new Observable<Connection<T>>(function(connexionSubscriber) {
 		const wss = new WebSocketServer({ port: 3000, path: "/ws" });
 		const idIterator = idGenerator();
 
 		wss.on('connection', function connection(ws) {
-			const messages$ = new Observable<Message>(function(messageSubscriber) {
+			const messages$ = new Observable<T>(function(messageSubscriber) {
 				ws.on('message', function message(data) {
+					if (data == "KEEP_ALIVE") {
+						return;
+					}
+
 					const parsed = JSON.parse(data);
 					messageSubscriber.next(parsed);
 				});
@@ -27,7 +31,7 @@ export function startServer(): Observable<Connection> {
 				});
 			})
 
-			const send = function(payload: Message) {
+			const send = function(payload: T) {
 				const serialized = JSON.stringify(payload);
 				ws.send(serialized);
 			};

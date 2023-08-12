@@ -1,17 +1,10 @@
-import { Message } from "connection-types";
 import { Character } from "character";
 
-export const getMyCharacterEventType = "GET_MY_CHARACTER";
-
-export type GetMyCharacterMessage = {
-	messageType: "GET_MY_CHARACTER"
+export interface GetMyCharacterRequest {
+	requestId: string;
 }
 
-export type GetMyCharacterResponse =  {
-	messageType: "GET_MY_CHARACTER",
-	content: Character
-}
-
-export function filterMessage(message: Message): boolean {
-	return message.messageType === getMyCharacterEventType;
+export interface GetMyCharacterResponse {
+	requestId: string;
+	character: Character;
 }

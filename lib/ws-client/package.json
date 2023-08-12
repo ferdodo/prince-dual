@@ -10,7 +10,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "connection-types": "^0.1.0",
+    "connection-types": "^1.0.0",
     "rxjs": "^7.8.1"
   }
 }

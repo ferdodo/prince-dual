@@ -1,5 +1,5 @@
 import { Observable, share } from "rxjs";
-import { Message, Connection } from "connection-types";
+import { Connection } from "connection-types";
 
 function * idGenerator(): Iterator<number> {
 	while(true) {
@@ -11,7 +11,7 @@ function * idGenerator(): Iterator<number> {
 
 const idIterator = idGenerator();
 
-export function createConnexion(wsProtocol: string, wsPort: number, webDomain: string): Connection {
+export function createConnexion<T>(wsProtocol: string, wsPort: number, webDomain: string): Connection<T> {
 	const showPort = wsProtocol === 'ws' && wsPort != 80
 		|| wsProtocol === 'wss' && wsPort != 443;
 
@@ -28,9 +28,9 @@ export function createConnexion(wsProtocol: string, wsPort: number, webDomain: s
 		waitDisconnected.finally(reject);
 	});
 
-	const messages$ = new Observable<Message>(function(subscriber) {
+	const messages$ = new Observable<T>(function(subscriber) {
 		socket.onmessage = function(event) {
-			const deserialized: Message = JSON.parse(event.data);
+			const deserialized: T = JSON.parse(event.data);
 			subscriber.next(deserialized);
 		};
 
@@ -45,9 +45,7 @@ export function createConnexion(wsProtocol: string, wsPort: number, webDomain: s
 	 * inactive sockets by keeping it active.
 	 */
 	waitConnected.then(function() {
-		const keepAliveMessage: Message = { messageType: "KEEP_ALIVE" };
-		const serialized = JSON.stringify(keepAliveMessage);
-		keepAliveInteval = setInterval(() => socket.send(serialized), 25000);
+		keepAliveInteval = setInterval(() => socket.send("KEEP_ALIVE"), 25000);
 		return waitDisconnected;
 	})
 		.finally(() => clearInterval(keepAliveInteval));
@@ -55,7 +53,7 @@ export function createConnexion(wsProtocol: string, wsPort: number, webDomain: s
 	return {
 		id: idIterator.next().value,
 		messages$,
-		async send(message: Message) {
+		async send(message: T) {
 			await waitConnected;
 			const serialized = JSON.stringify(message);
 			socket.send(serialized);

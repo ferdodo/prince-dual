@@ -12,8 +12,9 @@
   },
   "dependencies": {
     "character": "file:../../models/character",
-    "connection-types": "^0.1.0",
+    "connection-types": "^1.0.0",
     "game": "file:../../models/game",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "uid": "^2.0.2"
   }
 }

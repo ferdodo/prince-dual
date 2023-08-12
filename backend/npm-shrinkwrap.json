@@ -5,7 +5,7 @@
   "packages": {
     "": {
       "dependencies": {
-        "connection-types": "^0.1.0"
+        "connection-types": "^1.0.0"
       },
       "devDependencies": {
         "@types/node": "^20.2.1",
@@ -384,9 +384,9 @@
       "dev": true
     },
     "node_modules/connection-types": {
-      "version": "0.1.0",
-      "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-0.1.0.tgz",
-      "integrity": "sha512-AL9MI5gBVeETnbyO50T31RpeNBwGF8FapaaAXZqYjcuuOPOT676IC0LpVuIrRdujwncYaMpCryyrM/cb8Qlqwg==",
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/connection-types/-/connection-types-1.0.0.tgz",
+      "integrity": "sha512-GZZ27VVr9CtdPwajufuuKncFN7fGlzOluqiUA8SPeQkv1pPEOdT9eziAB/4cmvAU7hRxOt77qJwR018xSzuVtQ==",
       "hasShrinkwrap": true,
       "dependencies": {
         "rxjs": "^7.8.1"

@@ -1,16 +1,17 @@
 import { Connection } from "connection-types";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
-import { ObserveMyCharacterBroadcast, observeMyCharacterEventType } from "./model";
 import { resolveMyCharacter } from "../../logic/resolve-my-character";
+import { Message } from "../message"
 
-export function observeMyCharacter(connexions$: Observable<Connection>): Subscription {
-	return connexions$.subscribe(function(connection: Connection) {
+export function observeMyCharacter(connexions$: Observable<Connection<Message>>): Subscription {
+	return connexions$.subscribe(function(connection: Connection<Message>) {
 		const subscription = watchGame()
 			.subscribe(function() {
-				connection.send(<ObserveMyCharacterBroadcast> {
-					messageType: observeMyCharacterEventType,
-					content: resolveMyCharacter(connection)
+				connection.send({
+					observeMyCharacterBroadcast: {
+						character: resolveMyCharacter(connection)
+					}
 				});
 			});
 

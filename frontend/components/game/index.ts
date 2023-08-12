@@ -11,13 +11,14 @@ import { Character } from "character";
 import { Connection } from "connection-types";
 import { computeIndication } from "player/logic/compute-indication";
 import { isTitleShown } from "player/logic/is-title-shown";
+import { Message } from "player/async-api/message";
 
 export const GameComponent = {
 	props: {
 		connection: Object
 	},
 	setup(props) {
-		const connection: Connection = props.connection;
+		const connection: Connection<Message> = props.connection;
 		const myCharacter: Ref<Character | null> = ref(null);
 		const game: Ref<Game | null> = ref(null);
 		const disconnected: Ref<boolean> = ref(false);

@@ -2,15 +2,14 @@ import { Connection } from "connection-types";
 import { Observable, Subscription } from "rxjs";
 import { watchGame } from "game/node";
 import { Game } from "game";
-import { ObserveGameBroadcast } from "./model";
+import { Message } from "../message";
 
-export function observeGame(connexions$: Observable<Connection>): Subscription {
-	return connexions$.subscribe(function(connection: Connection) {
+export function observeGame(connexions$: Observable<Connection<Message>>): Subscription {
+	return connexions$.subscribe(function(connection: Connection<Message>) {
 		const subscription = watchGame()
 			.subscribe(function(game: Game) {
-				connection.send(<ObserveGameBroadcast> {
-					messageType: "GAME_UPDATE",
-					content: game
+				connection.send({
+					observeGameBroadcast: { game }
 				});
 			});
 
