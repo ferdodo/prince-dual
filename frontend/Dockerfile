@@ -11,7 +11,6 @@ FROM prince-duals-game
 FROM prince-duals-character
 FROM prince-duals-config
 FROM prince-duals-offline
-FROM prince-duals-user
 
 FROM node
 COPY --from=0 /prince-duals/frontend/node_modules /prince-duals/frontend/node_modules
@@ -21,11 +20,10 @@ COPY --from=3 /prince-duals/models/game /prince-duals/models/game
 COPY --from=4 /prince-duals/models/character /prince-duals/models/character
 COPY --from=5 /prince-duals/lib/config /prince-duals/lib/config
 COPY --from=6 /prince-duals/lib/offline /prince-duals/lib/offline
-COPY --from=7 /prince-duals/domains/user /prince-duals/domains/user
 
 WORKDIR /prince-duals/frontend
 COPY . .
 RUN npm run build
 
 FROM nginx
-COPY --from=8 /prince-duals/frontend/dist /usr/share/nginx/html
+COPY --from=7 /prince-duals/frontend/dist /usr/share/nginx/html

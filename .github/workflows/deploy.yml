@@ -18,8 +18,6 @@ jobs:
         run: |
           npm --prefix lib/ws-server install
           npm --prefix lib/ws-server run build
-          npm --prefix lib/svelte-compiler-cli install
-          npm --prefix lib/svelte-compiler-cli run build
           npm --prefix lib/ws-client install
           npm --prefix lib/ws-client run build
           npm --prefix lib/offline install
@@ -30,8 +28,6 @@ jobs:
           npm --prefix models/character run build
           npm --prefix models/game install
           npm --prefix models/game run build
-          npm --prefix domains/user install
-          npm --prefix domains/user run build
           npm --prefix domains/player install
           npm --prefix domains/player run build
           npm --prefix frontend install

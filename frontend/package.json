@@ -12,7 +12,6 @@
     "rxjs": "^7.8.1",
     "shelljs": "^0.8.5",
     "typescript": "^5.0.4",
-    "user": "file:../domains/user",
     "vue": "^3.3.4",
     "vue-compiler-dom-cli": "^0.2.1",
     "ws-client": "file:../lib/ws-client",
