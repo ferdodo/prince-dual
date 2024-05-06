@@ -1,12 +1,5404 @@
-"use strict";(()=>{function Gt(e,t){let r=Object.create(null),o=e.split(",");for(let n=0;n<o.length;n++)r[o[n]]=!0;return t?n=>!!r[n.toLowerCase()]:n=>!!r[n]}var Y={},gt=[],_t=()=>{},js=()=>!1,al=/^on[^a-z]/,zt=e=>al.test(e),Ar=e=>e.startsWith("onUpdate:"),Z=Object.assign,Us=(e,t)=>{let r=e.indexOf(t);r>-1&&e.splice(r,1)},cl=Object.prototype.hasOwnProperty,U=(e,t)=>cl.call(e,t),R=Array.isArray,Et=e=>vo(e)==="[object Map]",Gn=e=>vo(e)==="[object Set]";var H=e=>typeof e=="function",re=e=>typeof e=="string",bo=e=>typeof e=="symbol",J=e=>e!==null&&typeof e=="object",zn=e=>J(e)&&H(e.then)&&H(e.catch),Ls=Object.prototype.toString,vo=e=>Ls.call(e),Yn=e=>vo(e).slice(8,-1),$s=e=>vo(e)==="[object Object]",xo=e=>re(e)&&e!=="NaN"&&e[0]!=="-"&&""+parseInt(e,10)===e,Dr=Gt(",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted");var go=e=>{let t=Object.create(null);return r=>t[r]||(t[r]=e(r))},ul=/-(\w)/g,me=go(e=>e.replace(ul,(t,r)=>r?r.toUpperCase():"")),fl=/\B([A-Z])/g,it=go(e=>e.replace(fl,"-$1").toLowerCase()),wt=go(e=>e.charAt(0).toUpperCase()+e.slice(1)),Rr=go(e=>e?`on${wt(e)}`:""),Vr=(e,t)=>!Object.is(e,t),Ir=(e,t)=>{for(let r=0;r<e.length;r++)e[r](t)},Yt=(e,t,r)=>{Object.defineProperty(e,t,{configurable:!0,enumerable:!1,value:r})},Jn=e=>{let t=parseFloat(e);return isNaN(t)?e:t},Zn=e=>{let t=re(e)?Number(e):NaN;return isNaN(t)?e:t},Fs,_o=()=>Fs||(Fs=typeof globalThis<"u"?globalThis:typeof self<"u"?self:typeof window<"u"?window:typeof global<"u"?global:{});function kr(e){if(R(e)){let t={};for(let r=0;r<e.length;r++){let o=e[r],n=re(o)?ml(o):kr(o);if(n)for(let i in n)t[i]=n[i]}return t}else{if(re(e))return e;if(J(e))return e}}var ll=/;(?![^(]*\))/g,pl=/:([^]+)/,dl=/\/\*[^]*?\*\//g;function ml(e){let t={};return e.replace(dl,"").split(ll).forEach(r=>{if(r){let o=r.split(pl);o.length>1&&(t[o[0].trim()]=o[1].trim())}}),t}function Mr(e){let t="";if(re(e))t=e;else if(R(e))for(let r=0;r<e.length;r++){let o=Mr(e[r]);o&&(t+=o+" ")}else if(J(e))for(let r in e)e[r]&&(t+=r+" ");return t.trim()}var Bs="itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly",Ws=Gt(Bs),Lm=Gt(Bs+",async,autofocus,autoplay,controls,default,defer,disabled,hidden,inert,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected");function Xn(e){return!!e||e===""}var Qn=e=>re(e)?e:e==null?"":R(e)||J(e)&&(e.toString===Ls||!H(e.toString))?JSON.stringify(e,Hs,2):String(e),Hs=(e,t)=>t&&t.__v_isRef?Hs(e,t.value):Et(t)?{[`Map(${t.size})`]:[...t.entries()].reduce((r,[o,n])=>(r[`${o} =>`]=n,r),{})}:Gn(t)?{[`Set(${t.size})`]:[...t.values()]}:J(t)&&!R(t)&&!$s(t)?String(t):t;var Be,jr=class{constructor(t=!1){this.detached=t,this._active=!0,this.effects=[],this.cleanups=[],this.parent=Be,!t&&Be&&(this.index=(Be.scopes||(Be.scopes=[])).push(this)-1)}get active(){return this._active}run(t){if(this._active){let r=Be;try{return Be=this,t()}finally{Be=r}}}on(){Be=this}off(){Be=this.parent}stop(t){if(this._active){let r,o;for(r=0,o=this.effects.length;r<o;r++)this.effects[r].stop();for(r=0,o=this.cleanups.length;r<o;r++)this.cleanups[r]();if(this.scopes)for(r=0,o=this.scopes.length;r<o;r++)this.scopes[r].stop(!0);if(!this.detached&&this.parent&&!t){let n=this.parent.scopes.pop();n&&n!==this&&(this.parent.scopes[this.index]=n,n.index=this.index)}this.parent=void 0,this._active=!1}}};function hl(e,t=Be){t&&t.active&&t.effects.push(e)}var si=e=>{let t=new Set(e);return t.w=0,t.n=0,t},Xs=e=>(e.w&ct)>0,Qs=e=>(e.n&ct)>0,yl=({deps:e})=>{if(e.length)for(let t=0;t<e.length;t++)e[t].w|=ct},bl=e=>{let{deps:t}=e;if(t.length){let r=0;for(let o=0;o<t.length;o++){let n=t[o];Xs(n)&&!Qs(n)?n.delete(e):t[r++]=n,n.w&=~ct,n.n&=~ct}t.length=r}},ei=new WeakMap,Fr=0,ct=1,ti=30,Ae,Ot=Symbol(""),ri=Symbol(""),Jt=class{constructor(t,r=null,o){this.fn=t,this.scheduler=r,this.active=!0,this.deps=[],this.parent=void 0,hl(this,o)}run(){if(!this.active)return this.fn();let t=Ae,r=at;for(;t;){if(t===this)return;t=t.parent}try{return this.parent=Ae,Ae=this,at=!0,ct=1<<++Fr,Fr<=ti?yl(this):Ks(this),this.fn()}finally{Fr<=ti&&bl(this),ct=1<<--Fr,Ae=this.parent,at=r,this.parent=void 0,this.deferStop&&this.stop()}}stop(){Ae===this?this.deferStop=!0:this.active&&(Ks(this),this.onStop&&this.onStop(),this.active=!1)}};function Ks(e){let{deps:t}=e;if(t.length){for(let r=0;r<t.length;r++)t[r].delete(e);t.length=0}}var at=!0,ea=[];function Zt(){ea.push(at),at=!1}function Xt(){let e=ea.pop();at=e===void 0?!0:e}function le(e,t,r){if(at&&Ae){let o=ei.get(e);o||ei.set(e,o=new Map);let n=o.get(r);n||o.set(r,n=si()),ta(n,void 0)}}function ta(e,t){let r=!1;Fr<=ti?Qs(e)||(e.n|=ct,r=!Xs(e)):r=!e.has(Ae),r&&(e.add(Ae),Ae.deps.push(e))}function We(e,t,r,o,n,i){let s=ei.get(e);if(!s)return;let a=[];if(t==="clear")a=[...s.values()];else if(r==="length"&&R(e)){let u=Number(o);s.forEach((f,m)=>{(m==="length"||m>=u)&&a.push(f)})}else switch(r!==void 0&&a.push(s.get(r)),t){case"add":R(e)?xo(r)&&a.push(s.get("length")):(a.push(s.get(Ot)),Et(e)&&a.push(s.get(ri)));break;case"delete":R(e)||(a.push(s.get(Ot)),Et(e)&&a.push(s.get(ri)));break;case"set":Et(e)&&a.push(s.get(Ot));break}let c=void 0;if(a.length===1)a[0]&&oi(a[0]);else{let u=[];for(let f of a)f&&u.push(...f);oi(si(u))}}function oi(e,t){let r=R(e)?e:[...e];for(let o of r)o.computed&&qs(o,t);for(let o of r)o.computed||qs(o,t)}function qs(e,t){(e!==Ae||e.allowRecurse)&&(e.scheduler?e.scheduler():e.run())}var vl=Gt("__proto__,__v_isRef,__isVue"),ra=new Set(Object.getOwnPropertyNames(Symbol).filter(e=>e!=="arguments"&&e!=="caller").map(e=>Symbol[e]).filter(bo)),xl=ai(),gl=ai(!1,!0),_l=ai(!0);var Gs=El();function El(){let e={};return["includes","indexOf","lastIndexOf"].forEach(t=>{e[t]=function(...r){let o=j(this);for(let i=0,s=this.length;i<s;i++)le(o,"get",i+"");let n=o[t](...r);return n===-1||n===!1?o[t](...r.map(j)):n}}),["push","pop","shift","unshift","splice"].forEach(t=>{e[t]=function(...r){Zt();let o=j(this)[t].apply(this,r);return Xt(),o}}),e}function wl(e){let t=j(this);return le(t,"has",e),t.hasOwnProperty(e)}function ai(e=!1,t=!1){return function(o,n,i){if(n==="__v_isReactive")return!e;if(n==="__v_isReadonly")return e;if(n==="__v_isShallow")return t;if(n==="__v_raw"&&i===(e?t?Ul:aa:t?sa:ia).get(o))return o;let s=R(o);if(!e){if(s&&U(Gs,n))return Reflect.get(Gs,n,i);if(n==="hasOwnProperty")return wl}let a=Reflect.get(o,n,i);return(bo(n)?ra.has(n):vl(n))||(e||le(o,"get",n),t)?a:he(a)?s&&xo(n)?a:a.value:J(a)?e?li(a):Co(a):a}}var Ol=oa(),Sl=oa(!0);function oa(e=!1){return function(r,o,n,i){let s=r[o];if(ut(s)&&he(s)&&!he(n))return!1;if(!e&&(!Po(n)&&!ut(n)&&(s=j(s),n=j(n)),!R(r)&&he(s)&&!he(n)))return s.value=n,!0;let a=R(r)&&xo(o)?Number(o)<r.length:U(r,o),c=Reflect.set(r,o,n,i);return r===j(i)&&(a?Vr(n,s)&&We(r,"set",o,n,s):We(r,"add",o,n)),c}}function Nl(e,t){let r=U(e,t),o=e[t],n=Reflect.deleteProperty(e,t);return n&&r&&We(e,"delete",t,void 0,o),n}function Tl(e,t){let r=Reflect.has(e,t);return(!bo(t)||!ra.has(t))&&le(e,"has",t),r}function Cl(e){return le(e,"iterate",R(e)?"length":Ot),Reflect.ownKeys(e)}var na={get:xl,set:Ol,deleteProperty:Nl,has:Tl,ownKeys:Cl},Pl={get:_l,set(e,t){return!0},deleteProperty(e,t){return!0}},Al=Z({},na,{get:gl,set:Sl});var ci=e=>e,To=e=>Reflect.getPrototypeOf(e);function Eo(e,t,r=!1,o=!1){e=e.__v_raw;let n=j(e),i=j(t);r||(t!==i&&le(n,"get",t),le(n,"get",i));let{has:s}=To(n),a=o?ci:r?di:Ur;if(s.call(n,t))return a(e.get(t));if(s.call(n,i))return a(e.get(i));e!==n&&e.get(t)}function wo(e,t=!1){let r=this.__v_raw,o=j(r),n=j(e);return t||(e!==n&&le(o,"has",e),le(o,"has",n)),e===n?r.has(e):r.has(e)||r.has(n)}function Oo(e,t=!1){return e=e.__v_raw,!t&&le(j(e),"iterate",Ot),Reflect.get(e,"size",e)}function zs(e){e=j(e);let t=j(this);return To(t).has.call(t,e)||(t.add(e),We(t,"add",e,e)),this}function Ys(e,t){t=j(t);let r=j(this),{has:o,get:n}=To(r),i=o.call(r,e);i||(e=j(e),i=o.call(r,e));let s=n.call(r,e);return r.set(e,t),i?Vr(t,s)&&We(r,"set",e,t,s):We(r,"add",e,t),this}function Js(e){let t=j(this),{has:r,get:o}=To(t),n=r.call(t,e);n||(e=j(e),n=r.call(t,e));let i=o?o.call(t,e):void 0,s=t.delete(e);return n&&We(t,"delete",e,void 0,i),s}function Zs(){let e=j(this),t=e.size!==0,r=void 0,o=e.clear();return t&&We(e,"clear",void 0,void 0,r),o}function So(e,t){return function(o,n){let i=this,s=i.__v_raw,a=j(s),c=t?ci:e?di:Ur;return!e&&le(a,"iterate",Ot),s.forEach((u,f)=>o.call(n,c(u),c(f),i))}}function No(e,t,r){return function(...o){let n=this.__v_raw,i=j(n),s=Et(i),a=e==="entries"||e===Symbol.iterator&&s,c=e==="keys"&&s,u=n[e](...o),f=r?ci:t?di:Ur;return!t&&le(i,"iterate",c?ri:Ot),{next(){let{value:m,done:d}=u.next();return d?{value:m,done:d}:{value:a?[f(m[0]),f(m[1])]:f(m),done:d}},[Symbol.iterator](){return this}}}}function st(e){return function(...t){return e==="delete"?!1:this}}function Dl(){let e={get(i){return Eo(this,i)},get size(){return Oo(this)},has:wo,add:zs,set:Ys,delete:Js,clear:Zs,forEach:So(!1,!1)},t={get(i){return Eo(this,i,!1,!0)},get size(){return Oo(this)},has:wo,add:zs,set:Ys,delete:Js,clear:Zs,forEach:So(!1,!0)},r={get(i){return Eo(this,i,!0)},get size(){return Oo(this,!0)},has(i){return wo.call(this,i,!0)},add:st("add"),set:st("set"),delete:st("delete"),clear:st("clear"),forEach:So(!0,!1)},o={get(i){return Eo(this,i,!0,!0)},get size(){return Oo(this,!0)},has(i){return wo.call(this,i,!0)},add:st("add"),set:st("set"),delete:st("delete"),clear:st("clear"),forEach:So(!0,!0)};return["keys","values","entries",Symbol.iterator].forEach(i=>{e[i]=No(i,!1,!1),r[i]=No(i,!0,!1),t[i]=No(i,!1,!0),o[i]=No(i,!0,!0)}),[e,r,t,o]}var[Rl,Vl,Il,kl]=Dl();function ui(e,t){let r=t?e?kl:Il:e?Vl:Rl;return(o,n,i)=>n==="__v_isReactive"?!e:n==="__v_isReadonly"?e:n==="__v_raw"?o:Reflect.get(U(r,n)&&n in o?r:o,n,i)}var Ml={get:ui(!1,!1)},Fl={get:ui(!1,!0)},jl={get:ui(!0,!1)};var ia=new WeakMap,sa=new WeakMap,aa=new WeakMap,Ul=new WeakMap;function Ll(e){switch(e){case"Object":case"Array":return 1;case"Map":case"Set":case"WeakMap":case"WeakSet":return 2;default:return 0}}function $l(e){return e.__v_skip||!Object.isExtensible(e)?0:Ll(Yn(e))}function Co(e){return ut(e)?e:pi(e,!1,na,Ml,ia)}function fi(e){return pi(e,!1,Al,Fl,sa)}function li(e){return pi(e,!0,Pl,jl,aa)}function pi(e,t,r,o,n){if(!J(e)||e.__v_raw&&!(t&&e.__v_isReactive))return e;let i=n.get(e);if(i)return i;let s=$l(e);if(s===0)return e;let a=new Proxy(e,s===2?o:r);return n.set(e,a),a}function Lr(e){return ut(e)?Lr(e.__v_raw):!!(e&&e.__v_isReactive)}function ut(e){return!!(e&&e.__v_isReadonly)}function Po(e){return!!(e&&e.__v_isShallow)}function Ao(e){return Lr(e)||ut(e)}function j(e){let t=e&&e.__v_raw;return t?j(t):e}function Do(e){return Yt(e,"__v_skip",!0),e}var Ur=e=>J(e)?Co(e):e,di=e=>J(e)?li(e):e;function ca(e){at&&Ae&&(e=j(e),ta(e.dep||(e.dep=si())))}function ua(e,t){e=j(e);let r=e.dep;r&&oi(r)}function he(e){return!!(e&&e.__v_isRef===!0)}function He(e){return Bl(e,!1)}function Bl(e,t){return he(e)?e:new ni(e,t)}var ni=class{constructor(t,r){this.__v_isShallow=r,this.dep=void 0,this.__v_isRef=!0,this._rawValue=r?t:j(t),this._value=r?t:Ur(t)}get value(){return ca(this),this._value}set value(t){let r=this.__v_isShallow||Po(t)||ut(t);t=r?t:j(t),Vr(t,this._rawValue)&&(this._rawValue=t,this._value=r?t:Ur(t),ua(this,t))}};function fa(e){return he(e)?e.value:e}var Wl={get:(e,t,r)=>fa(Reflect.get(e,t,r)),set:(e,t,r,o)=>{let n=e[t];return he(n)&&!he(r)?(n.value=r,!0):Reflect.set(e,t,r,o)}};function Ro(e){return Lr(e)?e:new Proxy(e,Wl)}var ii=class{constructor(t,r,o,n){this._setter=r,this.dep=void 0,this.__v_isRef=!0,this.__v_isReadonly=!1,this._dirty=!0,this.effect=new Jt(t,()=>{this._dirty||(this._dirty=!0,ua(this))}),this.effect.computed=this,this.effect.active=this._cacheable=!n,this.__v_isReadonly=o}get value(){let t=j(this);return ca(t),(t._dirty||!t._cacheable)&&(t._dirty=!1,t._value=t.effect.run()),t._value}set value(t){this._setter(t)}};function la(e,t,r=!1){let o,n,i=H(e);return i?(o=e,n=_t):(o=e.get,n=e.set),new ii(o,n,i||!n,r)}function zr(e,t,r,o){let n;try{n=o?e(...o):e()}catch(i){Uo(i,t,r)}return n}function Xe(e,t,r,o){if(H(e)){let i=zr(e,t,r,o);return i&&zn(i)&&i.catch(s=>{Uo(s,t,r)}),i}let n=[];for(let i=0;i<e.length;i++)n.push(Xe(e[i],t,r,o));return n}function Uo(e,t,r,o=!0){let n=t?t.vnode:null;if(t){let i=t.parent,s=t.proxy,a=r;for(;i;){let u=i.ec;if(u){for(let f=0;f<u.length;f++)if(u[f](e,s,a)===!1)return}i=i.parent}let c=t.appContext.config.errorHandler;if(c){zr(c,null,10,[e,s,a]);return}}Kl(e,r,n,o)}function Kl(e,t,r,o=!0){console.error(e)}var Kr=!1,bi=!1,ae=[],Ge=0,er=[],Ze=null,Tt=0,Aa=Promise.resolve(),Ei=null;function Da(e){let t=Ei||Aa;return e?t.then(this?e.bind(this):e):t}function ql(e){let t=Ge+1,r=ae.length;for(;t<r;){let o=t+r>>>1;qr(ae[o])<e?t=o+1:r=o}return t}function Ra(e){(!ae.length||!ae.includes(e,Kr&&e.allowRecurse?Ge+1:Ge))&&(e.id==null?ae.push(e):ae.splice(ql(e.id),0,e),Va())}function Va(){!Kr&&!bi&&(bi=!0,Ei=Aa.then(ka))}function Gl(e){let t=ae.indexOf(e);t>Ge&&ae.splice(t,1)}function zl(e){R(e)?er.push(...e):(!Ze||!Ze.includes(e,e.allowRecurse?Tt+1:Tt))&&er.push(e),Va()}function pa(e,t=Kr?Ge+1:0){for(;t<ae.length;t++){let r=ae[t];r&&r.pre&&(ae.splice(t,1),t--,r())}}function Ia(e){if(er.length){let t=[...new Set(er)];if(er.length=0,Ze){Ze.push(...t);return}for(Ze=t,Ze.sort((r,o)=>qr(r)-qr(o)),Tt=0;Tt<Ze.length;Tt++)Ze[Tt]();Ze=null,Tt=0}}var qr=e=>e.id==null?1/0:e.id,Yl=(e,t)=>{let r=qr(e)-qr(t);if(r===0){if(e.pre&&!t.pre)return-1;if(t.pre&&!e.pre)return 1}return r};function ka(e){bi=!1,Kr=!0,ae.sort(Yl);let t=_t;try{for(Ge=0;Ge<ae.length;Ge++){let r=ae[Ge];r&&r.active!==!1&&zr(r,null,14)}}finally{Ge=0,ae.length=0,Ia(e),Kr=!1,Ei=null,(ae.length||er.length)&&ka(e)}}function Jl(e,t,...r){if(e.isUnmounted)return;let o=e.vnode.props||Y,n=r,i=t.startsWith("update:"),s=i&&t.slice(7);if(s&&s in o){let f=`${s==="modelValue"?"model":s}Modifiers`,{number:m,trim:d}=o[f]||Y;d&&(n=r.map(b=>re(b)?b.trim():b)),m&&(n=r.map(Jn))}let a,c=o[a=Rr(t)]||o[a=Rr(me(t))];!c&&i&&(c=o[a=Rr(it(t))]),c&&Xe(c,e,6,n);let u=o[a+"Once"];if(u){if(!e.emitted)e.emitted={};else if(e.emitted[a])return;e.emitted[a]=!0,Xe(u,e,6,n)}}function Zl(e,t,r=!1){let o=t.emitsCache,n=o.get(e);if(n!==void 0)return n;let i=e.emits,s={};return!i&&!!1?(J(e)&&o.set(e,null),null):(R(i)?i.forEach(c=>s[c]=null):Z(s,i),J(e)&&o.set(e,s),s)}function Lo(e,t){return!e||!zt(t)?!1:(t=t.slice(2).replace(/Once$/,""),U(e,t[0].toLowerCase()+t.slice(1))||U(e,it(t))||U(e,t))}var De=null,Ma=null;function Mo(e){let t=De;return De=e,Ma=e&&e.type.__scopeId||null,t}function Xl(e,t=De,r){if(!t||e._n)return e;let o=(...n)=>{o._d&&Sa(-1);let i=Mo(t),s;try{s=e(...n)}finally{Mo(i),o._d&&Sa(1)}return s};return o._n=!0,o._c=!0,o._d=!0,o}function mi(e){let{type:t,vnode:r,proxy:o,withProxy:n,props:i,propsOptions:[s],slots:a,attrs:c,emit:u,render:f,renderCache:m,data:d,setupState:b,ctx:S,inheritAttrs:h}=e,M,V,X=Mo(e);try{if(r.shapeFlag&4){let k=n||o;M=qe(f.call(k,k,m,i,b,d,S)),V=c}else{let k=t;M=qe(k.length>1?k(i,{attrs:c,slots:a,emit:u}):k(i,null)),V=t.props?c:Ql(c)}}catch(k){Wr.length=0,Uo(k,e,1),M=de(Ve)}let N=M,G;if(V&&h!==!1){let k=Object.keys(V),{shapeFlag:$}=N;k.length&&$&7&&(s&&k.some(Ar)&&(V=ep(V,s)),N=lt(N,V))}return r.dirs&&(N=lt(N),N.dirs=N.dirs?N.dirs.concat(r.dirs):r.dirs),r.transition&&(N.transition=r.transition),M=N,Mo(X),M}var Ql=e=>{let t;for(let r in e)(r==="class"||r==="style"||zt(r))&&((t||(t={}))[r]=e[r]);return t},ep=(e,t)=>{let r={};for(let o in e)(!Ar(o)||!(o.slice(9)in t))&&(r[o]=e[o]);return r};function tp(e,t,r){let{props:o,children:n,component:i}=e,{props:s,children:a,patchFlag:c}=t,u=i.emitsOptions;if(t.dirs||t.transition)return!0;if(r&&c>=0){if(c&1024)return!0;if(c&16)return o?da(o,s,u):!!s;if(c&8){let f=t.dynamicProps;for(let m=0;m<f.length;m++){let d=f[m];if(s[d]!==o[d]&&!Lo(u,d))return!0}}}else return(n||a)&&(!a||!a.$stable)?!0:o===s?!1:o?s?da(o,s,u):!0:!!s;return!1}function da(e,t,r){let o=Object.keys(t);if(o.length!==Object.keys(e).length)return!0;for(let n=0;n<o.length;n++){let i=o[n];if(t[i]!==e[i]&&!Lo(r,i))return!0}return!1}function rp({vnode:e,parent:t},r){for(;t&&t.subTree===e;)(e=t.vnode).el=r,t=t.parent}var op=e=>e.__isSuspense;function np(e,t){t&&t.pendingBranch?R(e)?t.effects.push(...e):t.effects.push(e):zl(e)}function St(e,t,r,o){let n=e.dirs,i=t&&t.dirs;for(let s=0;s<n.length;s++){let a=n[s];i&&(a.oldValue=i[s].value);let c=a.dir[o];c&&(Zt(),Xe(c,r,8,[e.el,a,e,t]),Xt())}}function wi(){let e={isMounted:!1,isLeaving:!1,isUnmounting:!1,leavingVNodes:new Map};return Ua(()=>{e.isMounted=!0}),ap(()=>{e.isUnmounting=!0}),e}var Ee=[Function,Array],Oi={mode:String,appear:Boolean,persisted:Boolean,onBeforeEnter:Ee,onEnter:Ee,onAfterEnter:Ee,onEnterCancelled:Ee,onBeforeLeave:Ee,onLeave:Ee,onAfterLeave:Ee,onLeaveCancelled:Ee,onBeforeAppear:Ee,onAppear:Ee,onAfterAppear:Ee,onAppearCancelled:Ee},ip={name:"BaseTransition",props:Oi,setup(e,{slots:t}){let r=Pi(),o=wi(),n;return()=>{let i=t.default&&$o(t.default(),!0);if(!i||!i.length)return;let s=i[0];if(i.length>1){let h=!1;for(let M of i)if(M.type!==Ve){s=M,h=!0;break}}let a=j(e),{mode:c}=a;if(o.isLeaving)return hi(s);let u=ma(s);if(!u)return hi(s);let f=tr(u,a,o,r);rr(u,f);let m=r.subTree,d=m&&ma(m),b=!1,{getTransitionKey:S}=u.type;if(S){let h=S();n===void 0?n=h:h!==n&&(n=h,b=!0)}if(d&&d.type!==Ve&&(!Ct(u,d)||b)){let h=tr(d,a,o,r);if(rr(d,h),c==="out-in")return o.isLeaving=!0,h.afterLeave=()=>{o.isLeaving=!1,r.update.active!==!1&&r.update()},hi(s);c==="in-out"&&u.type!==Ve&&(h.delayLeave=(M,V,X)=>{let N=ja(o,d);N[String(d.key)]=d,M._leaveCb=()=>{V(),M._leaveCb=void 0,delete f.delayedLeave},f.delayedLeave=X})}return s}}},Fa=ip;function ja(e,t){let{leavingVNodes:r}=e,o=r.get(t.type);return o||(o=Object.create(null),r.set(t.type,o)),o}function tr(e,t,r,o){let{appear:n,mode:i,persisted:s=!1,onBeforeEnter:a,onEnter:c,onAfterEnter:u,onEnterCancelled:f,onBeforeLeave:m,onLeave:d,onAfterLeave:b,onLeaveCancelled:S,onBeforeAppear:h,onAppear:M,onAfterAppear:V,onAppearCancelled:X}=t,N=String(e.key),G=ja(r,e),k=(L,z)=>{L&&Xe(L,o,9,z)},$=(L,z)=>{let Q=z[1];k(L,z),R(L)?L.every(fe=>fe.length<=1)&&Q():L.length<=1&&Q()},ot={mode:i,persisted:s,beforeEnter(L){let z=a;if(!r.isMounted)if(n)z=h||a;else return;L._leaveCb&&L._leaveCb(!0);let Q=G[N];Q&&Ct(e,Q)&&Q.el._leaveCb&&Q.el._leaveCb(),k(z,[L])},enter(L){let z=c,Q=u,fe=f;if(!r.isMounted)if(n)z=M||c,Q=V||u,fe=X||f;else return;let P=!1,ee=L._enterCb=Ce=>{P||(P=!0,Ce?k(fe,[L]):k(Q,[L]),ot.delayedLeave&&ot.delayedLeave(),L._enterCb=void 0)};z?$(z,[L,ee]):ee()},leave(L,z){let Q=String(e.key);if(L._enterCb&&L._enterCb(!0),r.isUnmounting)return z();k(m,[L]);let fe=!1,P=L._leaveCb=ee=>{fe||(fe=!0,z(),ee?k(S,[L]):k(b,[L]),L._leaveCb=void 0,G[Q]===e&&delete G[Q])};G[Q]=e,d?$(d,[L,P]):P()},clone(L){return tr(L,t,r,o)}};return ot}function hi(e){if(Si(e))return e=lt(e),e.children=null,e}function ma(e){return Si(e)?e.children?e.children[0]:void 0:e}function rr(e,t){e.shapeFlag&6&&e.component?rr(e.component.subTree,t):e.shapeFlag&128?(e.ssContent.transition=t.clone(e.ssContent),e.ssFallback.transition=t.clone(e.ssFallback)):e.transition=t}function $o(e,t=!1,r){let o=[],n=0;for(let i=0;i<e.length;i++){let s=e[i],a=r==null?s.key:String(r)+String(s.key!=null?s.key:i);s.type===Oe?(s.patchFlag&128&&n++,o=o.concat($o(s.children,t,a))):(t||s.type!==Ve)&&o.push(a!=null?lt(s,{key:a}):s)}if(n>1)for(let i=0;i<o.length;i++)o[i].patchFlag=-2;return o}var Vo=e=>!!e.type.__asyncLoader;var Si=e=>e.type.__isKeepAlive;function sp(e,t,r=Pt,o=!1){if(r){let n=r[e]||(r[e]=[]),i=t.__weh||(t.__weh=(...s)=>{if(r.isUnmounted)return;Zt(),Di(r);let a=Xe(t,r,e,s);return Hr(),Xt(),a});return o?n.unshift(i):n.push(i),i}}var Qe=e=>(t,r=Pt)=>(!jo||e==="sp")&&sp(e,(...o)=>t(...o),r),uh=Qe("bm"),Ua=Qe("m"),fh=Qe("bu"),La=Qe("u"),ap=Qe("bum"),Yr=Qe("um"),lh=Qe("sp"),ph=Qe("rtg"),dh=Qe("rtc");var $a="components";function Ba(e,t){return up($a,e,!0,t)||e}var cp=Symbol.for("v-ndc");function up(e,t,r=!0,o=!1){let n=De||Pt;if(n){let i=n.type;if(e===$a){let a=Up(i,!1);if(a&&(a===t||a===me(t)||a===wt(me(t))))return i}let s=ha(n[e]||i[e],t)||ha(n.appContext[e],t);return!s&&o?i:s}}function ha(e,t){return e&&(e[t]||e[me(t)]||e[wt(me(t))])}var vi=e=>e?Xa(e)?Ri(e)||e.proxy:vi(e.parent):null,Br=Z(Object.create(null),{$:e=>e,$el:e=>e.vnode.el,$data:e=>e.data,$props:e=>e.props,$attrs:e=>e.attrs,$slots:e=>e.slots,$refs:e=>e.refs,$parent:e=>vi(e.parent),$root:e=>vi(e.root),$emit:e=>e.emit,$options:e=>e.type,$forceUpdate:e=>e.f||(e.f=()=>Ra(e.update)),$nextTick:e=>e.n||(e.n=Da.bind(e.proxy)),$watch:e=>_t});var yi=(e,t)=>e!==Y&&!e.__isScriptSetup&&U(e,t),fp={get({_:e},t){let{ctx:r,setupState:o,data:n,props:i,accessCache:s,type:a,appContext:c}=e,u;if(t[0]!=="$"){let b=s[t];if(b!==void 0)switch(b){case 1:return o[t];case 2:return n[t];case 4:return r[t];case 3:return i[t]}else{if(yi(o,t))return s[t]=1,o[t];if(n!==Y&&U(n,t))return s[t]=2,n[t];if((u=e.propsOptions[0])&&U(u,t))return s[t]=3,i[t];if(r!==Y&&U(r,t))return s[t]=4,r[t];s[t]=0}}let f=Br[t],m,d;if(f)return t==="$attrs"&&le(e,"get",t),f(e);if((m=a.__cssModules)&&(m=m[t]))return m;if(r!==Y&&U(r,t))return s[t]=4,r[t];if(d=c.config.globalProperties,U(d,t))return d[t]},set({_:e},t,r){let{data:o,setupState:n,ctx:i}=e;return yi(n,t)?(n[t]=r,!0):o!==Y&&U(o,t)?(o[t]=r,!0):U(e.props,t)||t[0]==="$"&&t.slice(1)in e?!1:(i[t]=r,!0)},has({_:{data:e,setupState:t,accessCache:r,ctx:o,appContext:n,propsOptions:i}},s){let a;return!!r[s]||e!==Y&&U(e,s)||yi(t,s)||(a=i[0])&&U(a,s)||U(o,s)||U(Br,s)||U(n.config.globalProperties,s)},defineProperty(e,t,r){return r.get!=null?e._.accessCache[t]=0:U(r,"value")&&this.set(e,t,r.value,null),Reflect.defineProperty(e,t,r)}};function ya(e){return R(e)?e.reduce((t,r)=>(t[r]=null,t),{}):e}function lp(e){let t=e.type,{mixins:r,extends:o}=t,{mixins:n,optionsCache:i,config:{optionMergeStrategies:s}}=e.appContext,a=i.get(t),c;return a?c=a:!n.length&&!r&&!o?c=t:(c={},n.length&&n.forEach(u=>Fo(c,u,s,!0)),Fo(c,t,s)),J(t)&&i.set(t,c),c}function Fo(e,t,r,o=!1){let{mixins:n,extends:i}=t;i&&Fo(e,i,r,!0),n&&n.forEach(s=>Fo(e,s,r,!0));for(let s in t)if(!(o&&s==="expose")){let a=pp[s]||r&&r[s];e[s]=a?a(e[s],t[s]):t[s]}return e}var pp={data:ba,props:xa,emits:xa,methods:$r,computed:$r,beforeCreate:pe,created:pe,beforeMount:pe,mounted:pe,beforeUpdate:pe,updated:pe,beforeDestroy:pe,beforeUnmount:pe,destroyed:pe,unmounted:pe,activated:pe,deactivated:pe,errorCaptured:pe,serverPrefetch:pe,components:$r,directives:$r,watch:mp,provide:ba,inject:dp};function ba(e,t){return t?e?function(){return Z(H(e)?e.call(this,this):e,H(t)?t.call(this,this):t)}:t:e}function dp(e,t){return $r(va(e),va(t))}function va(e){if(R(e)){let t={};for(let r=0;r<e.length;r++)t[e[r]]=e[r];return t}return e}function pe(e,t){return e?[...new Set([].concat(e,t))]:t}function $r(e,t){return e?Z(Object.create(null),e,t):t}function xa(e,t){return e?R(e)&&R(t)?[...new Set([...e,...t])]:Z(Object.create(null),ya(e),ya(t??{})):t}function mp(e,t){if(!e)return t;if(!t)return e;let r=Z(Object.create(null),e);for(let o in t)r[o]=pe(e[o],t[o]);return r}function Wa(){return{app:null,config:{isNativeTag:js,performance:!1,globalProperties:{},optionMergeStrategies:{},errorHandler:void 0,warnHandler:void 0,compilerOptions:{}},mixins:[],components:{},directives:{},provides:Object.create(null),optionsCache:new WeakMap,propsCache:new WeakMap,emitsCache:new WeakMap}}var hp=0;function yp(e,t){return function(o,n=null){H(o)||(o=Z({},o)),n!=null&&!J(n)&&(n=null);let i=Wa(),s=new Set,a=!1,c=i.app={_uid:hp++,_component:o,_props:n,_container:null,_context:i,_instance:null,version:$p,get config(){return i.config},set config(u){},use(u,...f){return s.has(u)||(u&&H(u.install)?(s.add(u),u.install(c,...f)):H(u)&&(s.add(u),u(c,...f))),c},mixin(u){return c},component(u,f){return f?(i.components[u]=f,c):i.components[u]},directive(u,f){return f?(i.directives[u]=f,c):i.directives[u]},mount(u,f,m){if(!a){let d=de(o,n);return d.appContext=i,f&&t?t(d,u):e(d,u,m),a=!0,c._container=u,u.__vue_app__=c,Ri(d.component)||d.component.proxy}},unmount(){a&&(e(null,c._container),delete c._container.__vue_app__)},provide(u,f){return i.provides[u]=f,c},runWithContext(u){ga=c;try{return u()}finally{ga=null}}};return c}}var ga=null;function bp(e,t,r,o=!1){let n={},i={};Yt(i,Wo,1),e.propsDefaults=Object.create(null),Ha(e,t,n,i);for(let s in e.propsOptions[0])s in n||(n[s]=void 0);r?e.props=o?n:fi(n):e.type.props?e.props=n:e.props=i,e.attrs=i}function vp(e,t,r,o){let{props:n,attrs:i,vnode:{patchFlag:s}}=e,a=j(n),[c]=e.propsOptions,u=!1;if((o||s>0)&&!(s&16)){if(s&8){let f=e.vnode.dynamicProps;for(let m=0;m<f.length;m++){let d=f[m];if(Lo(e.emitsOptions,d))continue;let b=t[d];if(c)if(U(i,d))b!==i[d]&&(i[d]=b,u=!0);else{let S=me(d);n[S]=xi(c,a,S,b,e,!1)}else b!==i[d]&&(i[d]=b,u=!0)}}}else{Ha(e,t,n,i)&&(u=!0);let f;for(let m in a)(!t||!U(t,m)&&((f=it(m))===m||!U(t,f)))&&(c?r&&(r[m]!==void 0||r[f]!==void 0)&&(n[m]=xi(c,a,m,void 0,e,!0)):delete n[m]);if(i!==a)for(let m in i)(!t||!U(t,m))&&(delete i[m],u=!0)}u&&We(e,"set","$attrs")}function Ha(e,t,r,o){let[n,i]=e.propsOptions,s=!1,a;if(t)for(let c in t){if(Dr(c))continue;let u=t[c],f;n&&U(n,f=me(c))?!i||!i.includes(f)?r[f]=u:(a||(a={}))[f]=u:Lo(e.emitsOptions,c)||(!(c in o)||u!==o[c])&&(o[c]=u,s=!0)}if(i){let c=j(r),u=a||Y;for(let f=0;f<i.length;f++){let m=i[f];r[m]=xi(n,c,m,u[m],e,!U(u,m))}}return s}function xi(e,t,r,o,n,i){let s=e[r];if(s!=null){let a=U(s,"default");if(a&&o===void 0){let c=s.default;if(s.type!==Function&&!s.skipFactory&&H(c)){let{propsDefaults:u}=n;r in u?o=u[r]:(Di(n),o=u[r]=c.call(null,t),Hr())}else o=c}s[0]&&(i&&!a?o=!1:s[1]&&(o===""||o===it(r))&&(o=!0))}return o}function xp(e,t,r=!1){let o=t.propsCache,n=o.get(e);if(n)return n;let i=e.props,s={},a=[];if(!i&&!!1)return J(e)&&o.set(e,gt),gt;if(R(i))for(let f=0;f<i.length;f++){let m=me(i[f]);_a(m)&&(s[m]=Y)}else if(i)for(let f in i){let m=me(f);if(_a(m)){let d=i[f],b=s[m]=R(d)||H(d)?{type:d}:Z({},d);if(b){let S=Oa(Boolean,b.type),h=Oa(String,b.type);b[0]=S>-1,b[1]=h<0||S<h,(S>-1||U(b,"default"))&&a.push(m)}}}let u=[s,a];return J(e)&&o.set(e,u),u}function _a(e){return e[0]!=="$"}function Ea(e){let t=e&&e.toString().match(/^\s*(function|class) (\w+)/);return t?t[2]:e===null?"null":""}function wa(e,t){return Ea(e)===Ea(t)}function Oa(e,t){return R(t)?t.findIndex(r=>wa(r,e)):H(t)&&wa(t,e)?0:-1}var Ka=e=>e[0]==="_"||e==="$stable",Ni=e=>R(e)?e.map(qe):[qe(e)],gp=(e,t,r)=>{if(t._n)return t;let o=Xl((...n)=>Ni(t(...n)),r);return o._c=!1,o},qa=(e,t,r)=>{let o=e._ctx;for(let n in e){if(Ka(n))continue;let i=e[n];if(H(i))t[n]=gp(n,i,o);else if(i!=null){let s=Ni(i);t[n]=()=>s}}},Ga=(e,t)=>{let r=Ni(t);e.slots.default=()=>r},_p=(e,t)=>{if(e.vnode.shapeFlag&32){let r=t._;r?(e.slots=j(t),Yt(t,"_",r)):qa(t,e.slots={})}else e.slots={},t&&Ga(e,t);Yt(e.slots,Wo,1)},Ep=(e,t,r)=>{let{vnode:o,slots:n}=e,i=!0,s=Y;if(o.shapeFlag&32){let a=t._;a?r&&a===1?i=!1:(Z(n,t),!r&&a===1&&delete n._):(i=!t.$stable,qa(t,n)),s=t}else t&&(Ga(e,t),s={default:1});if(i)for(let a in n)!Ka(a)&&!(a in s)&&delete n[a]};function gi(e,t,r,o,n=!1){if(R(e)){e.forEach((d,b)=>gi(d,t&&(R(t)?t[b]:t),r,o,n));return}if(Vo(o)&&!n)return;let i=o.shapeFlag&4?Ri(o.component)||o.component.proxy:o.el,s=n?null:i,{i:a,r:c}=e,u=t&&t.r,f=a.refs===Y?a.refs={}:a.refs,m=a.setupState;if(u!=null&&u!==c&&(re(u)?(f[u]=null,U(m,u)&&(m[u]=null)):he(u)&&(u.value=null)),H(c))zr(c,a,12,[s,f]);else{let d=re(c),b=he(c);if(d||b){let S=()=>{if(e.f){let h=d?U(m,c)?m[c]:f[c]:c.value;n?R(h)&&Us(h,i):R(h)?h.includes(i)||h.push(i):d?(f[c]=[i],U(m,c)&&(m[c]=f[c])):(c.value=[i],e.k&&(f[e.k]=c.value))}else d?(f[c]=s,U(m,c)&&(m[c]=s)):b&&(c.value=s,e.k&&(f[e.k]=s))};s?(S.id=-1,we(S,r)):S()}}}function wp(){let e=[]}var we=np;function za(e){return Op(e)}function Op(e,t){wp();let r=_o();r.__VUE__=!0;let{insert:o,remove:n,patchProp:i,createElement:s,createText:a,createComment:c,setText:u,setElementText:f,parentNode:m,nextSibling:d,setScopeId:b=_t,insertStaticContent:S}=e,h=(l,p,y,x=null,v=null,E=null,O=!1,_=null,w=!!p.dynamicChildren)=>{if(l===p)return;l&&!Ct(l,p)&&(x=yo(l),nt(l,v,E,!0),l=null),p.patchFlag===-2&&(w=!1,p.dynamicChildren=null);let{type:g,ref:C,shapeFlag:T}=p;switch(g){case Bo:M(l,p,y,x);break;case Ve:V(l,p,y,x);break;case Io:l==null&&X(p,y,x,O);break;case Oe:ee(l,p,y,x,v,E,O,_,w);break;default:T&1?$(l,p,y,x,v,E,O,_,w):T&6?Ce(l,p,y,x,v,E,O,_,w):(T&64||T&128)&&g.process(l,p,y,x,v,E,O,_,w,Kt)}C!=null&&v&&gi(C,l&&l.ref,E,p||l,!p)},M=(l,p,y,x)=>{if(l==null)o(p.el=a(p.children),y,x);else{let v=p.el=l.el;p.children!==l.children&&u(v,p.children)}},V=(l,p,y,x)=>{l==null?o(p.el=c(p.children||""),y,x):p.el=l.el},X=(l,p,y,x)=>{[l.el,l.anchor]=S(l.children,p,y,x,l.el,l.anchor)},N=(l,p,y,x)=>{if(p.children!==l.children){let v=d(l.anchor);k(l),[p.el,p.anchor]=S(p.children,y,v,x)}else p.el=l.el,p.anchor=l.anchor},G=({el:l,anchor:p},y,x)=>{let v;for(;l&&l!==p;)v=d(l),o(l,y,x),l=v;o(p,y,x)},k=({el:l,anchor:p})=>{let y;for(;l&&l!==p;)y=d(l),n(l),l=y;n(p)},$=(l,p,y,x,v,E,O,_,w)=>{O=O||p.type==="svg",l==null?ot(p,y,x,v,E,O,_,w):Q(l,p,v,E,O,_,w)},ot=(l,p,y,x,v,E,O,_)=>{let w,g,{type:C,props:T,shapeFlag:A,transition:D,dirs:F}=l;if(w=l.el=s(l.type,E,T&&T.is,T),A&8?f(w,l.children):A&16&&z(l.children,w,null,x,v,E&&C!=="foreignObject",O,_),F&&St(l,null,x,"created"),L(w,l,l.scopeId,O,x),T){for(let B in T)B!=="value"&&!Dr(B)&&i(w,B,null,T[B],E,l.children,x,v,Je);"value"in T&&i(w,"value",null,T.value),(g=T.onVnodeBeforeMount)&&Ke(g,x,l)}F&&St(l,null,x,"beforeMount");let W=(!v||v&&!v.pendingBranch)&&D&&!D.persisted;W&&D.beforeEnter(w),o(w,p,y),((g=T&&T.onVnodeMounted)||W||F)&&we(()=>{g&&Ke(g,x,l),W&&D.enter(w),F&&St(l,null,x,"mounted")},v)},L=(l,p,y,x,v)=>{if(y&&b(l,y),x)for(let E=0;E<x.length;E++)b(l,x[E]);if(v){let E=v.subTree;if(p===E){let O=v.vnode;L(l,O,O.scopeId,O.slotScopeIds,v.parent)}}},z=(l,p,y,x,v,E,O,_,w=0)=>{for(let g=w;g<l.length;g++){let C=l[g]=_?ft(l[g]):qe(l[g]);h(null,C,p,y,x,v,E,O,_)}},Q=(l,p,y,x,v,E,O)=>{let _=p.el=l.el,{patchFlag:w,dynamicChildren:g,dirs:C}=p;w|=l.patchFlag&16;let T=l.props||Y,A=p.props||Y,D;y&&Nt(y,!1),(D=A.onVnodeBeforeUpdate)&&Ke(D,y,p,l),C&&St(p,l,y,"beforeUpdate"),y&&Nt(y,!0);let F=v&&p.type!=="foreignObject";if(g?fe(l.dynamicChildren,g,_,y,x,F,E):O||Hn(l,p,_,null,y,x,F,E,!1),w>0){if(w&16)P(_,p,T,A,y,x,v);else if(w&2&&T.class!==A.class&&i(_,"class",null,A.class,v),w&4&&i(_,"style",T.style,A.style,v),w&8){let W=p.dynamicProps;for(let B=0;B<W.length;B++){let te=W[B],Pe=T[te],qt=A[te];(qt!==Pe||te==="value")&&i(_,te,Pe,qt,v,l.children,y,x,Je)}}w&1&&l.children!==p.children&&f(_,p.children)}else!O&&g==null&&P(_,p,T,A,y,x,v);((D=A.onVnodeUpdated)||C)&&we(()=>{D&&Ke(D,y,p,l),C&&St(p,l,y,"updated")},x)},fe=(l,p,y,x,v,E,O)=>{for(let _=0;_<p.length;_++){let w=l[_],g=p[_],C=w.el&&(w.type===Oe||!Ct(w,g)||w.shapeFlag&70)?m(w.el):y;h(w,g,C,null,x,v,E,O,!0)}},P=(l,p,y,x,v,E,O)=>{if(y!==x){if(y!==Y)for(let _ in y)!Dr(_)&&!(_ in x)&&i(l,_,y[_],null,O,p.children,v,E,Je);for(let _ in x){if(Dr(_))continue;let w=x[_],g=y[_];w!==g&&_!=="value"&&i(l,_,g,w,O,p.children,v,E,Je)}"value"in x&&i(l,"value",y.value,x.value)}},ee=(l,p,y,x,v,E,O,_,w)=>{let g=p.el=l?l.el:a(""),C=p.anchor=l?l.anchor:a(""),{patchFlag:T,dynamicChildren:A,slotScopeIds:D}=p;D&&(_=_?_.concat(D):D),l==null?(o(g,y,x),o(C,y,x),z(p.children,y,C,v,E,O,_,w)):T>0&&T&64&&A&&l.dynamicChildren?(fe(l.dynamicChildren,A,y,v,E,O,_),(p.key!=null||v&&p===v.subTree)&&Ya(l,p,!0)):Hn(l,p,y,C,v,E,O,_,w)},Ce=(l,p,y,x,v,E,O,_,w)=>{p.slotScopeIds=_,l==null?p.shapeFlag&512?v.ctx.activate(p,y,x,O,w):Cr(p,y,x,v,E,O,w):mo(l,p,w)},Cr=(l,p,y,x,v,E,O)=>{let _=l.component=Ip(l,x,v);if(Si(l)&&(_.ctx.renderer=Kt),kp(_),_.asyncDep){if(v&&v.registerDep(_,Ps),!l.el){let w=_.subTree=de(Ve);V(null,w,p,y)}return}Ps(_,l,p,y,v,E,O)},mo=(l,p,y)=>{let x=p.component=l.component;if(tp(l,p,y))if(x.asyncDep&&!x.asyncResolved){As(x,p,y);return}else x.next=p,Gl(x.update),x.update();else p.el=l.el,x.vnode=p},Ps=(l,p,y,x,v,E,O)=>{let _=()=>{if(l.isMounted){let{next:C,bu:T,u:A,parent:D,vnode:F}=l,W=C,B;Nt(l,!1),C?(C.el=F.el,As(l,C,O)):C=F,T&&Ir(T),(B=C.props&&C.props.onVnodeBeforeUpdate)&&Ke(B,D,C,F),Nt(l,!0);let te=mi(l),Pe=l.subTree;l.subTree=te,h(Pe,te,m(Pe.el),yo(Pe),l,v,E),C.el=te.el,W===null&&rp(l,te.el),A&&we(A,v),(B=C.props&&C.props.onVnodeUpdated)&&we(()=>Ke(B,D,C,F),v)}else{let C,{el:T,props:A}=p,{bm:D,m:F,parent:W}=l,B=Vo(p);if(Nt(l,!1),D&&Ir(D),!B&&(C=A&&A.onVnodeBeforeMount)&&Ke(C,W,p),Nt(l,!0),T&&qn){let te=()=>{l.subTree=mi(l),qn(T,l.subTree,l,v,null)};B?p.type.__asyncLoader().then(()=>!l.isUnmounted&&te()):te()}else{let te=l.subTree=mi(l);h(null,te,y,x,l,v,E),p.el=te.el}if(F&&we(F,v),!B&&(C=A&&A.onVnodeMounted)){let te=p;we(()=>Ke(C,W,te),v)}(p.shapeFlag&256||W&&Vo(W.vnode)&&W.vnode.shapeFlag&256)&&l.a&&we(l.a,v),l.isMounted=!0,p=y=x=null}},w=l.effect=new Jt(_,()=>Ra(g),l.scope),g=l.update=()=>w.run();g.id=l.uid,Nt(l,!0),g()},As=(l,p,y)=>{p.component=l;let x=l.vnode.props;l.vnode=p,l.next=null,vp(l,p.props,x,y),Ep(l,p.children,y),Zt(),pa(),Xt()},Hn=(l,p,y,x,v,E,O,_,w=!1)=>{let g=l&&l.children,C=l?l.shapeFlag:0,T=p.children,{patchFlag:A,shapeFlag:D}=p;if(A>0){if(A&128){Ds(g,T,y,x,v,E,O,_,w);return}else if(A&256){nl(g,T,y,x,v,E,O,_,w);return}}D&8?(C&16&&Je(g,v,E),T!==g&&f(y,T)):C&16?D&16?Ds(g,T,y,x,v,E,O,_,w):Je(g,v,E,!0):(C&8&&f(y,""),D&16&&z(T,y,x,v,E,O,_,w))},nl=(l,p,y,x,v,E,O,_,w)=>{l=l||gt,p=p||gt;let g=l.length,C=p.length,T=Math.min(g,C),A;for(A=0;A<T;A++){let D=p[A]=w?ft(p[A]):qe(p[A]);h(l[A],D,y,null,v,E,O,_,w)}g>C?Je(l,v,E,!0,!1,T):z(p,y,x,v,E,O,_,w,T)},Ds=(l,p,y,x,v,E,O,_,w)=>{let g=0,C=p.length,T=l.length-1,A=C-1;for(;g<=T&&g<=A;){let D=l[g],F=p[g]=w?ft(p[g]):qe(p[g]);if(Ct(D,F))h(D,F,y,null,v,E,O,_,w);else break;g++}for(;g<=T&&g<=A;){let D=l[T],F=p[A]=w?ft(p[A]):qe(p[A]);if(Ct(D,F))h(D,F,y,null,v,E,O,_,w);else break;T--,A--}if(g>T){if(g<=A){let D=A+1,F=D<C?p[D].el:x;for(;g<=A;)h(null,p[g]=w?ft(p[g]):qe(p[g]),y,F,v,E,O,_,w),g++}}else if(g>A)for(;g<=T;)nt(l[g],v,E,!0),g++;else{let D=g,F=g,W=new Map;for(g=F;g<=A;g++){let be=p[g]=w?ft(p[g]):qe(p[g]);be.key!=null&&W.set(be.key,g)}let B,te=0,Pe=A-F+1,qt=!1,Is=0,Pr=new Array(Pe);for(g=0;g<Pe;g++)Pr[g]=0;for(g=D;g<=T;g++){let be=l[g];if(te>=Pe){nt(be,v,E,!0);continue}let $e;if(be.key!=null)$e=W.get(be.key);else for(B=F;B<=A;B++)if(Pr[B-F]===0&&Ct(be,p[B])){$e=B;break}$e===void 0?nt(be,v,E,!0):(Pr[$e-F]=g+1,$e>=Is?Is=$e:qt=!0,h(be,p[$e],y,null,v,E,O,_,w),te++)}let ks=qt?Sp(Pr):gt;for(B=ks.length-1,g=Pe-1;g>=0;g--){let be=F+g,$e=p[be],Ms=be+1<C?p[be+1].el:x;Pr[g]===0?h(null,$e,y,Ms,v,E,O,_,w):qt&&(B<0||g!==ks[B]?ho($e,y,Ms,2):B--)}}},ho=(l,p,y,x,v=null)=>{let{el:E,type:O,transition:_,children:w,shapeFlag:g}=l;if(g&6){ho(l.component.subTree,p,y,x);return}if(g&128){l.suspense.move(p,y,x);return}if(g&64){O.move(l,p,y,Kt);return}if(O===Oe){o(E,p,y);for(let T=0;T<w.length;T++)ho(w[T],p,y,x);o(l.anchor,p,y);return}if(O===Io){G(l,p,y);return}if(x!==2&&g&1&&_)if(x===0)_.beforeEnter(E),o(E,p,y),we(()=>_.enter(E),v);else{let{leave:T,delayLeave:A,afterLeave:D}=_,F=()=>o(E,p,y),W=()=>{T(E,()=>{F(),D&&D()})};A?A(E,F,W):W()}else o(E,p,y)},nt=(l,p,y,x=!1,v=!1)=>{let{type:E,props:O,ref:_,children:w,dynamicChildren:g,shapeFlag:C,patchFlag:T,dirs:A}=l;if(_!=null&&gi(_,null,y,l,!0),C&256){p.ctx.deactivate(l);return}let D=C&1&&A,F=!Vo(l),W;if(F&&(W=O&&O.onVnodeBeforeUnmount)&&Ke(W,p,l),C&6)sl(l.component,y,x);else{if(C&128){l.suspense.unmount(y,x);return}D&&St(l,null,p,"beforeUnmount"),C&64?l.type.remove(l,p,y,v,Kt,x):g&&(E!==Oe||T>0&&T&64)?Je(g,p,y,!1,!0):(E===Oe&&T&384||!v&&C&16)&&Je(w,p,y),x&&Rs(l)}(F&&(W=O&&O.onVnodeUnmounted)||D)&&we(()=>{W&&Ke(W,p,l),D&&St(l,null,p,"unmounted")},y)},Rs=l=>{let{type:p,el:y,anchor:x,transition:v}=l;if(p===Oe){il(y,x);return}if(p===Io){k(l);return}let E=()=>{n(y),v&&!v.persisted&&v.afterLeave&&v.afterLeave()};if(l.shapeFlag&1&&v&&!v.persisted){let{leave:O,delayLeave:_}=v,w=()=>O(y,E);_?_(l.el,E,w):w()}else E()},il=(l,p)=>{let y;for(;l!==p;)y=d(l),n(l),l=y;n(p)},sl=(l,p,y)=>{let{bum:x,scope:v,update:E,subTree:O,um:_}=l;x&&Ir(x),v.stop(),E&&(E.active=!1,nt(O,l,p,y)),_&&we(_,p),we(()=>{l.isUnmounted=!0},p),p&&p.pendingBranch&&!p.isUnmounted&&l.asyncDep&&!l.asyncResolved&&l.suspenseId===p.pendingId&&(p.deps--,p.deps===0&&p.resolve())},Je=(l,p,y,x=!1,v=!1,E=0)=>{for(let O=E;O<l.length;O++)nt(l[O],p,y,x,v)},yo=l=>l.shapeFlag&6?yo(l.component.subTree):l.shapeFlag&128?l.suspense.next():d(l.anchor||l.el),Vs=(l,p,y)=>{l==null?p._vnode&&nt(p._vnode,null,null,!0):h(p._vnode||null,l,p,null,null,null,y),pa(),Ia(),p._vnode=l},Kt={p:h,um:nt,m:ho,r:Rs,mt:Cr,mc:z,pc:Hn,pbc:fe,n:yo,o:e},Kn,qn;return t&&([Kn,qn]=t(Kt)),{render:Vs,hydrate:Kn,createApp:yp(Vs,Kn)}}function Nt({effect:e,update:t},r){e.allowRecurse=t.allowRecurse=r}function Ya(e,t,r=!1){let o=e.children,n=t.children;if(R(o)&&R(n))for(let i=0;i<o.length;i++){let s=o[i],a=n[i];a.shapeFlag&1&&!a.dynamicChildren&&((a.patchFlag<=0||a.patchFlag===32)&&(a=n[i]=ft(n[i]),a.el=s.el),r||Ya(s,a)),a.type===Bo&&(a.el=s.el)}}function Sp(e){let t=e.slice(),r=[0],o,n,i,s,a,c=e.length;for(o=0;o<c;o++){let u=e[o];if(u!==0){if(n=r[r.length-1],e[n]<u){t[o]=n,r.push(o);continue}for(i=0,s=r.length-1;i<s;)a=i+s>>1,e[r[a]]<u?i=a+1:s=a;u<e[r[i]]&&(i>0&&(t[o]=r[i-1]),r[i]=o)}}for(i=r.length,s=r[i-1];i-- >0;)r[i]=s,s=t[s];return r}var Np=e=>e.__isTeleport;var Oe=Symbol.for("v-fgt"),Bo=Symbol.for("v-txt"),Ve=Symbol.for("v-cmt"),Io=Symbol.for("v-stc"),Wr=[],Re=null;function oe(e=!1){Wr.push(Re=e?null:[])}function Tp(){Wr.pop(),Re=Wr[Wr.length-1]||null}var Gr=1;function Sa(e){Gr+=e}function Ja(e){return e.dynamicChildren=Gr>0?Re||gt:null,Tp(),Gr>0&&Re&&Re.push(e),e}function ie(e,t,r,o,n,i){return Ja(Jr(e,t,r,o,n,i,!0))}function Ti(e,t,r,o,n){return Ja(de(e,t,r,o,n,!0))}function _i(e){return e?e.__v_isVNode===!0:!1}function Ct(e,t){return e.type===t.type&&e.key===t.key}var Wo="__vInternal",Za=({key:e})=>e??null,ko=({ref:e,ref_key:t,ref_for:r})=>(typeof e=="number"&&(e=""+e),e!=null?re(e)||he(e)||H(e)?{i:De,r:e,k:t,f:!!r}:e:null);function Jr(e,t=null,r=null,o=0,n=null,i=e===Oe?0:1,s=!1,a=!1){let c={__v_isVNode:!0,__v_skip:!0,type:e,props:t,key:t&&Za(t),ref:t&&ko(t),scopeId:Ma,slotScopeIds:null,children:r,component:null,suspense:null,ssContent:null,ssFallback:null,dirs:null,transition:null,el:null,anchor:null,target:null,targetAnchor:null,staticCount:0,shapeFlag:i,patchFlag:o,dynamicProps:n,dynamicChildren:null,appContext:null,ctx:De};return a?(Ci(c,r),i&128&&e.normalize(c)):r&&(c.shapeFlag|=re(r)?8:16),Gr>0&&!s&&Re&&(c.patchFlag>0||i&6)&&c.patchFlag!==32&&Re.push(c),c}var de=Cp;function Cp(e,t=null,r=null,o=0,n=null,i=!1){if((!e||e===cp)&&(e=Ve),_i(e)){let a=lt(e,t,!0);return r&&Ci(a,r),Gr>0&&!i&&Re&&(a.shapeFlag&6?Re[Re.indexOf(e)]=a:Re.push(a)),a.patchFlag|=-2,a}if(Lp(e)&&(e=e.__vccOpts),t){t=Pp(t);let{class:a,style:c}=t;a&&!re(a)&&(t.class=Mr(a)),J(c)&&(Ao(c)&&!R(c)&&(c=Z({},c)),t.style=kr(c))}let s=re(e)?1:op(e)?128:Np(e)?64:J(e)?4:H(e)?2:0;return Jr(e,t,r,o,n,s,i,!0)}function Pp(e){return e?Ao(e)||Wo in e?Z({},e):e:null}function lt(e,t,r=!1){let{props:o,ref:n,patchFlag:i,children:s}=e,a=t?Dp(o||{},t):o;return{__v_isVNode:!0,__v_skip:!0,type:e.type,props:a,key:a&&Za(a),ref:t&&t.ref?r&&n?R(n)?n.concat(ko(t)):[n,ko(t)]:ko(t):n,scopeId:e.scopeId,slotScopeIds:e.slotScopeIds,children:s,target:e.target,targetAnchor:e.targetAnchor,staticCount:e.staticCount,shapeFlag:e.shapeFlag,patchFlag:t&&e.type!==Oe?i===-1?16:i|16:i,dynamicProps:e.dynamicProps,dynamicChildren:e.dynamicChildren,appContext:e.appContext,dirs:e.dirs,transition:e.transition,component:e.component,suspense:e.suspense,ssContent:e.ssContent&&lt(e.ssContent),ssFallback:e.ssFallback&&lt(e.ssFallback),el:e.el,anchor:e.anchor,ctx:e.ctx,ce:e.ce}}function Ap(e=" ",t=0){return de(Bo,null,e,t)}function ce(e="",t=!1){return t?(oe(),Ti(Ve,null,e)):de(Ve,null,e)}function qe(e){return e==null||typeof e=="boolean"?de(Ve):R(e)?de(Oe,null,e.slice()):typeof e=="object"?ft(e):de(Bo,null,String(e))}function ft(e){return e.el===null&&e.patchFlag!==-1||e.memo?e:lt(e)}function Ci(e,t){let r=0,{shapeFlag:o}=e;if(t==null)t=null;else if(R(t))r=16;else if(typeof t=="object")if(o&65){let n=t.default;n&&(n._c&&(n._d=!1),Ci(e,n()),n._c&&(n._d=!0));return}else{r=32;let n=t._;!n&&!(Wo in t)?t._ctx=De:n===3&&De&&(De.slots._===1?t._=1:(t._=2,e.patchFlag|=1024))}else H(t)?(t={default:t,_ctx:De},r=32):(t=String(t),o&64?(r=16,t=[Ap(t)]):r=8);e.children=t,e.shapeFlag|=r}function Dp(...e){let t={};for(let r=0;r<e.length;r++){let o=e[r];for(let n in o)if(n==="class")t.class!==o.class&&(t.class=Mr([t.class,o.class]));else if(n==="style")t.style=kr([t.style,o.style]);else if(zt(n)){let i=t[n],s=o[n];s&&i!==s&&!(R(i)&&i.includes(s))&&(t[n]=i?[].concat(i,s):s)}else n!==""&&(t[n]=o[n])}return t}function Ke(e,t,r,o=null){Xe(e,t,7,[r,o])}var Rp=Wa(),Vp=0;function Ip(e,t,r){let o=e.type,n=(t?t.appContext:e.appContext)||Rp,i={uid:Vp++,vnode:e,type:o,parent:t,appContext:n,root:null,next:null,subTree:null,effect:null,update:null,scope:new jr(!0),render:null,proxy:null,exposed:null,exposeProxy:null,withProxy:null,provides:t?t.provides:Object.create(n.provides),accessCache:null,renderCache:[],components:null,directives:null,propsOptions:xp(o,n),emitsOptions:Zl(o,n),emit:null,emitted:null,propsDefaults:Y,inheritAttrs:o.inheritAttrs,ctx:Y,data:Y,props:Y,attrs:Y,slots:Y,refs:Y,setupState:Y,setupContext:null,attrsProxy:null,slotsProxy:null,suspense:r,suspenseId:r?r.pendingId:0,asyncDep:null,asyncResolved:!1,isMounted:!1,isUnmounted:!1,isDeactivated:!1,bc:null,c:null,bm:null,m:null,bu:null,u:null,um:null,bum:null,da:null,a:null,rtg:null,rtc:null,ec:null,sp:null};return i.ctx={_:i},i.root=t?t.root:i,i.emit=Jl.bind(null,i),e.ce&&e.ce(i),i}var Pt=null,Pi=()=>Pt||De,Ai,Qt,Na="__VUE_INSTANCE_SETTERS__";(Qt=_o()[Na])||(Qt=_o()[Na]=[]),Qt.push(e=>Pt=e),Ai=e=>{Qt.length>1?Qt.forEach(t=>t(e)):Qt[0](e)};var Di=e=>{Ai(e),e.scope.on()},Hr=()=>{Pt&&Pt.scope.off(),Ai(null)};function Xa(e){return e.vnode.shapeFlag&4}var jo=!1;function kp(e,t=!1){jo=t;let{props:r,children:o}=e.vnode,n=Xa(e);bp(e,r,n,t),_p(e,o);let i=n?Mp(e,t):void 0;return jo=!1,i}function Mp(e,t){var r;let o=e.type;e.accessCache=Object.create(null),e.proxy=Do(new Proxy(e.ctx,fp));let{setup:n}=o;if(n){let i=e.setupContext=n.length>1?jp(e):null;Di(e),Zt();let s=zr(n,e,0,[e.props,i]);if(Xt(),Hr(),zn(s)){if(s.then(Hr,Hr),t)return s.then(a=>{Ta(e,a,t)}).catch(a=>{Uo(a,e,0)});e.asyncDep=s}else Ta(e,s,t)}else Qa(e,t)}function Ta(e,t,r){H(t)?e.type.__ssrInlineRender?e.ssrRender=t:e.render=t:J(t)&&(e.setupState=Ro(t)),Qa(e,r)}var Ca,Pa;function Qa(e,t,r){let o=e.type;if(!e.render){if(!t&&Ca&&!o.render){let n=o.template||lp(e).template;if(n){let{isCustomElement:i,compilerOptions:s}=e.appContext.config,{delimiters:a,compilerOptions:c}=o,u=Z(Z({isCustomElement:i,delimiters:a},s),c);o.render=Ca(n,u)}}e.render=o.render||_t,Pa&&Pa(e)}}function Fp(e){return e.attrsProxy||(e.attrsProxy=new Proxy(e.attrs,{get(t,r){return le(e,"get","$attrs"),t[r]}}))}function jp(e){let t=r=>{e.exposed=r||{}};return{get attrs(){return Fp(e)},slots:e.slots,emit:e.emit,expose:t}}function Ri(e){if(e.exposed)return e.exposeProxy||(e.exposeProxy=new Proxy(Ro(Do(e.exposed)),{get(t,r){if(r in t)return t[r];if(r in Br)return Br[r](e)},has(t,r){return r in t||r in Br}}))}function Up(e,t=!0){return H(e)?e.displayName||e.name:e.name||t&&e.__name}function Lp(e){return H(e)&&"__vccOpts"in e}var Zr=(e,t)=>la(e,t,jo);function ec(e,t,r){let o=arguments.length;return o===2?J(t)&&!R(t)?_i(t)?de(e,null,[t]):de(e,t):de(e,null,t):(o>3?r=Array.prototype.slice.call(arguments,2):o===3&&_i(r)&&(r=[r]),de(e,t,r))}var mh=Symbol.for("v-scx");var $p="3.3.4";var Bp="http://www.w3.org/2000/svg",Dt=typeof document<"u"?document:null,tc=Dt&&Dt.createElement("template"),Wp={insert:(e,t,r)=>{t.insertBefore(e,r||null)},remove:e=>{let t=e.parentNode;t&&t.removeChild(e)},createElement:(e,t,r,o)=>{let n=t?Dt.createElementNS(Bp,e):Dt.createElement(e,r?{is:r}:void 0);return e==="select"&&o&&o.multiple!=null&&n.setAttribute("multiple",o.multiple),n},createText:e=>Dt.createTextNode(e),createComment:e=>Dt.createComment(e),setText:(e,t)=>{e.nodeValue=t},setElementText:(e,t)=>{e.textContent=t},parentNode:e=>e.parentNode,nextSibling:e=>e.nextSibling,querySelector:e=>Dt.querySelector(e),setScopeId(e,t){e.setAttribute(t,"")},insertStaticContent(e,t,r,o,n,i){let s=r?r.previousSibling:t.lastChild;if(n&&(n===i||n.nextSibling))for(;t.insertBefore(n.cloneNode(!0),r),!(n===i||!(n=n.nextSibling)););else{tc.innerHTML=o?`<svg>${e}</svg>`:e;let a=tc.content;if(o){let c=a.firstChild;for(;c.firstChild;)a.appendChild(c.firstChild);a.removeChild(c)}t.insertBefore(a,r)}return[s?s.nextSibling:t.firstChild,r?r.previousSibling:t.lastChild]}};function Hp(e,t,r){let o=e._vtc;o&&(t=(t?[t,...o]:[...o]).join(" ")),t==null?e.removeAttribute("class"):r?e.setAttribute("class",t):e.className=t}function Kp(e,t,r){let o=e.style,n=re(r);if(r&&!n){if(t&&!re(t))for(let i in t)r[i]==null&&Mi(o,i,"");for(let i in r)Mi(o,i,r[i])}else{let i=o.display;n?t!==r&&(o.cssText=r):t&&e.removeAttribute("style"),"_vod"in e&&(o.display=i)}}var rc=/\s*!important$/;function Mi(e,t,r){if(R(r))r.forEach(o=>Mi(e,t,o));else if(r==null&&(r=""),t.startsWith("--"))e.setProperty(t,r);else{let o=qp(e,t);rc.test(r)?e.setProperty(it(o),r.replace(rc,""),"important"):e[o]=r}}var oc=["Webkit","Moz","ms"],Vi={};function qp(e,t){let r=Vi[t];if(r)return r;let o=me(t);if(o!=="filter"&&o in e)return Vi[t]=o;o=wt(o);for(let n=0;n<oc.length;n++){let i=oc[n]+o;if(i in e)return Vi[t]=i}return t}var nc="http://www.w3.org/1999/xlink";function Gp(e,t,r,o,n){if(o&&t.startsWith("xlink:"))r==null?e.removeAttributeNS(nc,t.slice(6,t.length)):e.setAttributeNS(nc,t,r);else{let i=Ws(t);r==null||i&&!Xn(r)?e.removeAttribute(t):e.setAttribute(t,i?"":r)}}function zp(e,t,r,o,n,i,s){if(t==="innerHTML"||t==="textContent"){o&&s(o,n,i),e[t]=r??"";return}let a=e.tagName;if(t==="value"&&a!=="PROGRESS"&&!a.includes("-")){e._value=r;let u=a==="OPTION"?e.getAttribute("value"):e.value,f=r??"";u!==f&&(e.value=f),r==null&&e.removeAttribute(t);return}let c=!1;if(r===""||r==null){let u=typeof e[t];u==="boolean"?r=Xn(r):r==null&&u==="string"?(r="",c=!0):u==="number"&&(r=0,c=!0)}try{e[t]=r}catch{}c&&e.removeAttribute(t)}function Yp(e,t,r,o){e.addEventListener(t,r,o)}function Jp(e,t,r,o){e.removeEventListener(t,r,o)}function Zp(e,t,r,o,n=null){let i=e._vei||(e._vei={}),s=i[t];if(o&&s)s.value=o;else{let[a,c]=Xp(t);if(o){let u=i[t]=td(o,n);Yp(e,a,u,c)}else s&&(Jp(e,a,s,c),i[t]=void 0)}}var ic=/(?:Once|Passive|Capture)$/;function Xp(e){let t;if(ic.test(e)){t={};let o;for(;o=e.match(ic);)e=e.slice(0,e.length-o[0].length),t[o[0].toLowerCase()]=!0}return[e[2]===":"?e.slice(3):it(e.slice(2)),t]}var Ii=0,Qp=Promise.resolve(),ed=()=>Ii||(Qp.then(()=>Ii=0),Ii=Date.now());function td(e,t){let r=o=>{if(!o._vts)o._vts=Date.now();else if(o._vts<=r.attached)return;Xe(rd(o,r.value),t,5,[o])};return r.value=e,r.attached=ed(),r}function rd(e,t){if(R(t)){let r=e.stopImmediatePropagation;return e.stopImmediatePropagation=()=>{r.call(e),e._stopped=!0},t.map(o=>n=>!n._stopped&&o&&o(n))}else return t}var sc=/^on[a-z]/,od=(e,t,r,o,n=!1,i,s,a,c)=>{t==="class"?Hp(e,o,n):t==="style"?Kp(e,r,o):zt(t)?Ar(t)||Zp(e,t,r,o,s):(t[0]==="."?(t=t.slice(1),!0):t[0]==="^"?(t=t.slice(1),!1):nd(e,t,o,n))?zp(e,t,o,i,s,a,c):(t==="true-value"?e._trueValue=o:t==="false-value"&&(e._falseValue=o),Gp(e,t,o,n))};function nd(e,t,r,o){return o?!!(t==="innerHTML"||t==="textContent"||t in e&&sc.test(t)&&H(r)):t==="spellcheck"||t==="draggable"||t==="translate"||t==="form"||t==="list"&&e.tagName==="INPUT"||t==="type"&&e.tagName==="TEXTAREA"||sc.test(t)&&re(r)?!1:t in e}var pt="transition",Xr="animation",dc=(e,{slots:t})=>ec(Fa,hc(e),t);dc.displayName="Transition";var mc={name:String,type:String,css:{type:Boolean,default:!0},duration:[String,Number,Object],enterFromClass:String,enterActiveClass:String,enterToClass:String,appearFromClass:String,appearActiveClass:String,appearToClass:String,leaveFromClass:String,leaveActiveClass:String,leaveToClass:String},id=dc.props=Z({},Oi,mc),At=(e,t=[])=>{R(e)?e.forEach(r=>r(...t)):e&&e(...t)},ac=e=>e?R(e)?e.some(t=>t.length>1):e.length>1:!1;function hc(e){let t={};for(let P in e)P in mc||(t[P]=e[P]);if(e.css===!1)return t;let{name:r="v",type:o,duration:n,enterFromClass:i=`${r}-enter-from`,enterActiveClass:s=`${r}-enter-active`,enterToClass:a=`${r}-enter-to`,appearFromClass:c=i,appearActiveClass:u=s,appearToClass:f=a,leaveFromClass:m=`${r}-leave-from`,leaveActiveClass:d=`${r}-leave-active`,leaveToClass:b=`${r}-leave-to`}=e,S=sd(n),h=S&&S[0],M=S&&S[1],{onBeforeEnter:V,onEnter:X,onEnterCancelled:N,onLeave:G,onLeaveCancelled:k,onBeforeAppear:$=V,onAppear:ot=X,onAppearCancelled:L=N}=t,z=(P,ee,Ce)=>{dt(P,ee?f:a),dt(P,ee?u:s),Ce&&Ce()},Q=(P,ee)=>{P._isLeaving=!1,dt(P,m),dt(P,b),dt(P,d),ee&&ee()},fe=P=>(ee,Ce)=>{let Cr=P?ot:X,mo=()=>z(ee,P,Ce);At(Cr,[ee,mo]),cc(()=>{dt(ee,P?c:i),et(ee,P?f:a),ac(Cr)||uc(ee,o,h,mo)})};return Z(t,{onBeforeEnter(P){At(V,[P]),et(P,i),et(P,s)},onBeforeAppear(P){At($,[P]),et(P,c),et(P,u)},onEnter:fe(!1),onAppear:fe(!0),onLeave(P,ee){P._isLeaving=!0;let Ce=()=>Q(P,ee);et(P,m),bc(),et(P,d),cc(()=>{P._isLeaving&&(dt(P,m),et(P,b),ac(G)||uc(P,o,M,Ce))}),At(G,[P,Ce])},onEnterCancelled(P){z(P,!1),At(N,[P])},onAppearCancelled(P){z(P,!0),At(L,[P])},onLeaveCancelled(P){Q(P),At(k,[P])}})}function sd(e){if(e==null)return null;if(J(e))return[ki(e.enter),ki(e.leave)];{let t=ki(e);return[t,t]}}function ki(e){return Zn(e)}function et(e,t){t.split(/\s+/).forEach(r=>r&&e.classList.add(r)),(e._vtc||(e._vtc=new Set)).add(t)}function dt(e,t){t.split(/\s+/).forEach(o=>o&&e.classList.remove(o));let{_vtc:r}=e;r&&(r.delete(t),r.size||(e._vtc=void 0))}function cc(e){requestAnimationFrame(()=>{requestAnimationFrame(e)})}var ad=0;function uc(e,t,r,o){let n=e._endId=++ad,i=()=>{n===e._endId&&o()};if(r)return setTimeout(i,r);let{type:s,timeout:a,propCount:c}=yc(e,t);if(!s)return o();let u=s+"end",f=0,m=()=>{e.removeEventListener(u,d),i()},d=b=>{b.target===e&&++f>=c&&m()};setTimeout(()=>{f<c&&m()},a+1),e.addEventListener(u,d)}function yc(e,t){let r=window.getComputedStyle(e),o=S=>(r[S]||"").split(", "),n=o(`${pt}Delay`),i=o(`${pt}Duration`),s=fc(n,i),a=o(`${Xr}Delay`),c=o(`${Xr}Duration`),u=fc(a,c),f=null,m=0,d=0;t===pt?s>0&&(f=pt,m=s,d=i.length):t===Xr?u>0&&(f=Xr,m=u,d=c.length):(m=Math.max(s,u),f=m>0?s>u?pt:Xr:null,d=f?f===pt?i.length:c.length:0);let b=f===pt&&/\b(transform|all)(,|$)/.test(o(`${pt}Property`).toString());return{type:f,timeout:m,propCount:d,hasTransform:b}}function fc(e,t){for(;e.length<t.length;)e=e.concat(e);return Math.max(...t.map((r,o)=>lc(r)+lc(e[o])))}function lc(e){return Number(e.slice(0,-1).replace(",","."))*1e3}function bc(){return document.body.offsetHeight}var vc=new WeakMap,xc=new WeakMap,cd={name:"TransitionGroup",props:Z({},id,{tag:String,moveClass:String}),setup(e,{slots:t}){let r=Pi(),o=wi(),n,i;return La(()=>{if(!n.length)return;let s=e.moveClass||`${e.name||"v"}-move`;if(!dd(n[0].el,r.vnode.el,s))return;n.forEach(fd),n.forEach(ld);let a=n.filter(pd);bc(),a.forEach(c=>{let u=c.el,f=u.style;et(u,s),f.transform=f.webkitTransform=f.transitionDuration="";let m=u._moveCb=d=>{d&&d.target!==u||(!d||/transform$/.test(d.propertyName))&&(u.removeEventListener("transitionend",m),u._moveCb=null,dt(u,s))};u.addEventListener("transitionend",m)})}),()=>{let s=j(e),a=hc(s),c=s.tag||Oe;n=i,i=t.default?$o(t.default()):[];for(let u=0;u<i.length;u++){let f=i[u];f.key!=null&&rr(f,tr(f,a,o,r))}if(n)for(let u=0;u<n.length;u++){let f=n[u];rr(f,tr(f,a,o,r)),vc.set(f,f.el.getBoundingClientRect())}return de(c,null,i)}}},ud=e=>delete e.mode;cd.props;function fd(e){let t=e.el;t._moveCb&&t._moveCb(),t._enterCb&&t._enterCb()}function ld(e){xc.set(e,e.el.getBoundingClientRect())}function pd(e){let t=vc.get(e),r=xc.get(e),o=t.left-r.left,n=t.top-r.top;if(o||n){let i=e.el.style;return i.transform=i.webkitTransform=`translate(${o}px,${n}px)`,i.transitionDuration="0s",e}}function dd(e,t,r){let o=e.cloneNode();e._vtc&&e._vtc.forEach(s=>{s.split(/\s+/).forEach(a=>a&&o.classList.remove(a))}),r.split(/\s+/).forEach(s=>s&&o.classList.add(s)),o.style.display="none";let n=t.nodeType===1?t:t.parentNode;n.appendChild(o);let{hasTransform:i}=yc(o);return n.removeChild(o),i}var md=Z({patchProp:od},Wp),pc;function hd(){return pc||(pc=za(md))}var gc=(...e)=>{let t=hd().createApp(...e),{mount:r}=t;return t.mount=o=>{let n=yd(o);if(!n)return;let i=t._component;!H(i)&&!i.render&&!i.template&&(i.template=n.innerHTML),n.innerHTML="";let s=r(n,!1,n instanceof SVGElement);return n instanceof Element&&(n.removeAttribute("v-cloak"),n.setAttribute("data-v-app","")),s},t};function yd(e){return re(e)?document.querySelector(e):e}function _c(e,t){let r=Ba("game-component");return oe(),ie("div",null,[e.showGame?(oe(),Ti(r,{key:e.gameKey,connection:e.connection},null,8,["connection"])):ce("v-if",!0)])}var Fi=function(e,t){return Fi=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,o){r.__proto__=o}||function(r,o){for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(r[n]=o[n])},Fi(e,t)};function or(e,t){if(typeof t!="function"&&t!==null)throw new TypeError("Class extends value "+String(t)+" is not a constructor or null");Fi(e,t);function r(){this.constructor=e}e.prototype=t===null?Object.create(t):(r.prototype=t.prototype,new r)}function Ec(e,t,r,o){function n(i){return i instanceof r?i:new r(function(s){s(i)})}return new(r||(r=Promise))(function(i,s){function a(f){try{u(o.next(f))}catch(m){s(m)}}function c(f){try{u(o.throw(f))}catch(m){s(m)}}function u(f){f.done?i(f.value):n(f.value).then(a,c)}u((o=o.apply(e,t||[])).next())})}function Ho(e,t){var r={label:0,sent:function(){if(i[0]&1)throw i[1];return i[1]},trys:[],ops:[]},o,n,i,s;return s={next:a(0),throw:a(1),return:a(2)},typeof Symbol=="function"&&(s[Symbol.iterator]=function(){return this}),s;function a(u){return function(f){return c([u,f])}}function c(u){if(o)throw new TypeError("Generator is already executing.");for(;s&&(s=0,u[0]&&(r=0)),r;)try{if(o=1,n&&(i=u[0]&2?n.return:u[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,u[1])).done)return i;switch(n=0,i&&(u=[u[0]&2,i.value]),u[0]){case 0:case 1:i=u;break;case 4:return r.label++,{value:u[1],done:!1};case 5:r.label++,n=u[1],u=[0];continue;case 7:u=r.ops.pop(),r.trys.pop();continue;default:if(i=r.trys,!(i=i.length>0&&i[i.length-1])&&(u[0]===6||u[0]===2)){r=0;continue}if(u[0]===3&&(!i||u[1]>i[0]&&u[1]<i[3])){r.label=u[1];break}if(u[0]===6&&r.label<i[1]){r.label=i[1],i=u;break}if(i&&r.label<i[2]){r.label=i[2],r.ops.push(u);break}i[2]&&r.ops.pop(),r.trys.pop();continue}u=t.call(e,r)}catch(f){u=[6,f],n=0}finally{o=i=0}if(u[0]&5)throw u[1];return{value:u[0]?u[1]:void 0,done:!0}}}function tt(e){var t=typeof Symbol=="function"&&Symbol.iterator,r=t&&e[t],o=0;if(r)return r.call(e);if(e&&typeof e.length=="number")return{next:function(){return e&&o>=e.length&&(e=void 0),{value:e&&e[o++],done:!e}}};throw new TypeError(t?"Object is not iterable.":"Symbol.iterator is not defined.")}function mt(e,t){var r=typeof Symbol=="function"&&e[Symbol.iterator];if(!r)return e;var o=r.call(e),n,i=[],s;try{for(;(t===void 0||t-- >0)&&!(n=o.next()).done;)i.push(n.value)}catch(a){s={error:a}}finally{try{n&&!n.done&&(r=o.return)&&r.call(o)}finally{if(s)throw s.error}}return i}function ht(e,t,r){if(r||arguments.length===2)for(var o=0,n=t.length,i;o<n;o++)(i||!(o in t))&&(i||(i=Array.prototype.slice.call(t,0,o)),i[o]=t[o]);return e.concat(i||Array.prototype.slice.call(t))}function Rt(e){return this instanceof Rt?(this.v=e,this):new Rt(e)}function wc(e,t,r){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var o=r.apply(e,t||[]),n,i=[];return n={},s("next"),s("throw"),s("return"),n[Symbol.asyncIterator]=function(){return this},n;function s(d){o[d]&&(n[d]=function(b){return new Promise(function(S,h){i.push([d,b,S,h])>1||a(d,b)})})}function a(d,b){try{c(o[d](b))}catch(S){m(i[0][3],S)}}function c(d){d.value instanceof Rt?Promise.resolve(d.value.v).then(u,f):m(i[0][2],d)}function u(d){a("next",d)}function f(d){a("throw",d)}function m(d,b){d(b),i.shift(),i.length&&a(i[0][0],i[0][1])}}function Oc(e){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var t=e[Symbol.asyncIterator],r;return t?t.call(e):(e=typeof tt=="function"?tt(e):e[Symbol.iterator](),r={},o("next"),o("throw"),o("return"),r[Symbol.asyncIterator]=function(){return this},r);function o(i){r[i]=e[i]&&function(s){return new Promise(function(a,c){s=e[i](s),n(a,c,s.done,s.value)})}}function n(i,s,a,c){Promise.resolve(c).then(function(u){i({value:u,done:a})},s)}}function K(e){return typeof e=="function"}function Ko(e){var t=function(o){Error.call(o),o.stack=new Error().stack},r=e(t);return r.prototype=Object.create(Error.prototype),r.prototype.constructor=r,r}var qo=Ko(function(e){return function(r){e(this),this.message=r?r.length+` errors occurred during unsubscription:
-`+r.map(function(o,n){return n+1+") "+o.toString()}).join(`
-  `):"",this.name="UnsubscriptionError",this.errors=r}});function Qr(e,t){if(e){var r=e.indexOf(t);0<=r&&e.splice(r,1)}}var nr=function(){function e(t){this.initialTeardown=t,this.closed=!1,this._parentage=null,this._finalizers=null}return e.prototype.unsubscribe=function(){var t,r,o,n,i;if(!this.closed){this.closed=!0;var s=this._parentage;if(s)if(this._parentage=null,Array.isArray(s))try{for(var a=tt(s),c=a.next();!c.done;c=a.next()){var u=c.value;u.remove(this)}}catch(h){t={error:h}}finally{try{c&&!c.done&&(r=a.return)&&r.call(a)}finally{if(t)throw t.error}}else s.remove(this);var f=this.initialTeardown;if(K(f))try{f()}catch(h){i=h instanceof qo?h.errors:[h]}var m=this._finalizers;if(m){this._finalizers=null;try{for(var d=tt(m),b=d.next();!b.done;b=d.next()){var S=b.value;try{Sc(S)}catch(h){i=i??[],h instanceof qo?i=ht(ht([],mt(i)),mt(h.errors)):i.push(h)}}}catch(h){o={error:h}}finally{try{b&&!b.done&&(n=d.return)&&n.call(d)}finally{if(o)throw o.error}}}if(i)throw new qo(i)}},e.prototype.add=function(t){var r;if(t&&t!==this)if(this.closed)Sc(t);else{if(t instanceof e){if(t.closed||t._hasParent(this))return;t._addParent(this)}(this._finalizers=(r=this._finalizers)!==null&&r!==void 0?r:[]).push(t)}},e.prototype._hasParent=function(t){var r=this._parentage;return r===t||Array.isArray(r)&&r.includes(t)},e.prototype._addParent=function(t){var r=this._parentage;this._parentage=Array.isArray(r)?(r.push(t),r):r?[r,t]:t},e.prototype._removeParent=function(t){var r=this._parentage;r===t?this._parentage=null:Array.isArray(r)&&Qr(r,t)},e.prototype.remove=function(t){var r=this._finalizers;r&&Qr(r,t),t instanceof e&&t._removeParent(this)},e.EMPTY=function(){var t=new e;return t.closed=!0,t}(),e}();var ji=nr.EMPTY;function Go(e){return e instanceof nr||e&&"closed"in e&&K(e.remove)&&K(e.add)&&K(e.unsubscribe)}function Sc(e){K(e)?e():e.unsubscribe()}var Ie={onUnhandledError:null,onStoppedNotification:null,Promise:void 0,useDeprecatedSynchronousErrorHandling:!1,useDeprecatedNextContext:!1};var ir={setTimeout:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=ir.delegate;return n!=null&&n.setTimeout?n.setTimeout.apply(n,ht([e,t],mt(r))):setTimeout.apply(void 0,ht([e,t],mt(r)))},clearTimeout:function(e){var t=ir.delegate;return((t==null?void 0:t.clearTimeout)||clearTimeout)(e)},delegate:void 0};function zo(e){ir.setTimeout(function(){var t=Ie.onUnhandledError;if(t)t(e);else throw e})}function Ui(){}var Nc=function(){return Li("C",void 0,void 0)}();function Tc(e){return Li("E",void 0,e)}function Cc(e){return Li("N",e,void 0)}function Li(e,t,r){return{kind:e,value:t,error:r}}var Vt=null;function sr(e){if(Ie.useDeprecatedSynchronousErrorHandling){var t=!Vt;if(t&&(Vt={errorThrown:!1,error:null}),e(),t){var r=Vt,o=r.errorThrown,n=r.error;if(Vt=null,o)throw n}}else e()}function Pc(e){Ie.useDeprecatedSynchronousErrorHandling&&Vt&&(Vt.errorThrown=!0,Vt.error=e)}var Wi=function(e){or(t,e);function t(r){var o=e.call(this)||this;return o.isStopped=!1,r?(o.destination=r,Go(r)&&r.add(o)):o.destination=gd,o}return t.create=function(r,o,n){return new It(r,o,n)},t.prototype.next=function(r){this.isStopped?Bi(Cc(r),this):this._next(r)},t.prototype.error=function(r){this.isStopped?Bi(Tc(r),this):(this.isStopped=!0,this._error(r))},t.prototype.complete=function(){this.isStopped?Bi(Nc,this):(this.isStopped=!0,this._complete())},t.prototype.unsubscribe=function(){this.closed||(this.isStopped=!0,e.prototype.unsubscribe.call(this),this.destination=null)},t.prototype._next=function(r){this.destination.next(r)},t.prototype._error=function(r){try{this.destination.error(r)}finally{this.unsubscribe()}},t.prototype._complete=function(){try{this.destination.complete()}finally{this.unsubscribe()}},t}(nr);var bd=Function.prototype.bind;function $i(e,t){return bd.call(e,t)}var vd=function(){function e(t){this.partialObserver=t}return e.prototype.next=function(t){var r=this.partialObserver;if(r.next)try{r.next(t)}catch(o){Yo(o)}},e.prototype.error=function(t){var r=this.partialObserver;if(r.error)try{r.error(t)}catch(o){Yo(o)}else Yo(t)},e.prototype.complete=function(){var t=this.partialObserver;if(t.complete)try{t.complete()}catch(r){Yo(r)}},e}(),It=function(e){or(t,e);function t(r,o,n){var i=e.call(this)||this,s;if(K(r)||!r)s={next:r??void 0,error:o??void 0,complete:n??void 0};else{var a;i&&Ie.useDeprecatedNextContext?(a=Object.create(r),a.unsubscribe=function(){return i.unsubscribe()},s={next:r.next&&$i(r.next,a),error:r.error&&$i(r.error,a),complete:r.complete&&$i(r.complete,a)}):s=r}return i.destination=new vd(s),i}return t}(Wi);function Yo(e){Ie.useDeprecatedSynchronousErrorHandling?Pc(e):zo(e)}function xd(e){throw e}function Bi(e,t){var r=Ie.onStoppedNotification;r&&ir.setTimeout(function(){return r(e,t)})}var gd={closed:!0,next:Ui,error:xd,complete:Ui};var ar=function(){return typeof Symbol=="function"&&Symbol.observable||"@@observable"}();function Ac(e){return e}function Dc(e){return e.length===0?Ac:e.length===1?e[0]:function(r){return e.reduce(function(o,n){return n(o)},r)}}var ve=function(){function e(t){t&&(this._subscribe=t)}return e.prototype.lift=function(t){var r=new e;return r.source=this,r.operator=t,r},e.prototype.subscribe=function(t,r,o){var n=this,i=Ed(t)?t:new It(t,r,o);return sr(function(){var s=n,a=s.operator,c=s.source;i.add(a?a.call(i,c):c?n._subscribe(i):n._trySubscribe(i))}),i},e.prototype._trySubscribe=function(t){try{return this._subscribe(t)}catch(r){t.error(r)}},e.prototype.forEach=function(t,r){var o=this;return r=Rc(r),new r(function(n,i){var s=new It({next:function(a){try{t(a)}catch(c){i(c),s.unsubscribe()}},error:i,complete:n});o.subscribe(s)})},e.prototype._subscribe=function(t){var r;return(r=this.source)===null||r===void 0?void 0:r.subscribe(t)},e.prototype[ar]=function(){return this},e.prototype.pipe=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];return Dc(t)(this)},e.prototype.toPromise=function(t){var r=this;return t=Rc(t),new t(function(o,n){var i;r.subscribe(function(s){return i=s},function(s){return n(s)},function(){return o(i)})})},e.create=function(t){return new e(t)},e}();function Rc(e){var t;return(t=e??Ie.Promise)!==null&&t!==void 0?t:Promise}function _d(e){return e&&K(e.next)&&K(e.error)&&K(e.complete)}function Ed(e){return e&&e instanceof Wi||_d(e)&&Go(e)}function wd(e){return K(e==null?void 0:e.lift)}function Vc(e){return function(t){if(wd(t))return t.lift(function(r){try{return e(r,this)}catch(o){this.error(o)}});throw new TypeError("Unable to lift unknown Observable type")}}var Ic=Ko(function(e){return function(){e(this),this.name="ObjectUnsubscribedError",this.message="object unsubscribed"}});var Hi=function(e){or(t,e);function t(){var r=e.call(this)||this;return r.closed=!1,r.currentObservers=null,r.observers=[],r.isStopped=!1,r.hasError=!1,r.thrownError=null,r}return t.prototype.lift=function(r){var o=new kc(this,this);return o.operator=r,o},t.prototype._throwIfClosed=function(){if(this.closed)throw new Ic},t.prototype.next=function(r){var o=this;sr(function(){var n,i;if(o._throwIfClosed(),!o.isStopped){o.currentObservers||(o.currentObservers=Array.from(o.observers));try{for(var s=tt(o.currentObservers),a=s.next();!a.done;a=s.next()){var c=a.value;c.next(r)}}catch(u){n={error:u}}finally{try{a&&!a.done&&(i=s.return)&&i.call(s)}finally{if(n)throw n.error}}}})},t.prototype.error=function(r){var o=this;sr(function(){if(o._throwIfClosed(),!o.isStopped){o.hasError=o.isStopped=!0,o.thrownError=r;for(var n=o.observers;n.length;)n.shift().error(r)}})},t.prototype.complete=function(){var r=this;sr(function(){if(r._throwIfClosed(),!r.isStopped){r.isStopped=!0;for(var o=r.observers;o.length;)o.shift().complete()}})},t.prototype.unsubscribe=function(){this.isStopped=this.closed=!0,this.observers=this.currentObservers=null},Object.defineProperty(t.prototype,"observed",{get:function(){var r;return((r=this.observers)===null||r===void 0?void 0:r.length)>0},enumerable:!1,configurable:!0}),t.prototype._trySubscribe=function(r){return this._throwIfClosed(),e.prototype._trySubscribe.call(this,r)},t.prototype._subscribe=function(r){return this._throwIfClosed(),this._checkFinalizedStatuses(r),this._innerSubscribe(r)},t.prototype._innerSubscribe=function(r){var o=this,n=this,i=n.hasError,s=n.isStopped,a=n.observers;return i||s?ji:(this.currentObservers=null,a.push(r),new nr(function(){o.currentObservers=null,Qr(a,r)}))},t.prototype._checkFinalizedStatuses=function(r){var o=this,n=o.hasError,i=o.thrownError,s=o.isStopped;n?r.error(i):s&&r.complete()},t.prototype.asObservable=function(){var r=new ve;return r.source=this,r},t.create=function(r,o){return new kc(r,o)},t}(ve);var kc=function(e){or(t,e);function t(r,o){var n=e.call(this)||this;return n.destination=r,n.source=o,n}return t.prototype.next=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.next)===null||n===void 0||n.call(o,r)},t.prototype.error=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.error)===null||n===void 0||n.call(o,r)},t.prototype.complete=function(){var r,o;(o=(r=this.destination)===null||r===void 0?void 0:r.complete)===null||o===void 0||o.call(r)},t.prototype._subscribe=function(r){var o,n;return(n=(o=this.source)===null||o===void 0?void 0:o.subscribe(r))!==null&&n!==void 0?n:ji},t}(Hi);var Mc=function(e){return e&&typeof e.length=="number"&&typeof e!="function"};function Fc(e){return K(e==null?void 0:e.then)}function jc(e){return K(e[ar])}function Uc(e){return Symbol.asyncIterator&&K(e==null?void 0:e[Symbol.asyncIterator])}function Lc(e){return new TypeError("You provided "+(e!==null&&typeof e=="object"?"an invalid object":"'"+e+"'")+" where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.")}function Od(){return typeof Symbol!="function"||!Symbol.iterator?"@@iterator":Symbol.iterator}var $c=Od();function Bc(e){return K(e==null?void 0:e[$c])}function Wc(e){return wc(this,arguments,function(){var r,o,n,i;return Ho(this,function(s){switch(s.label){case 0:r=e.getReader(),s.label=1;case 1:s.trys.push([1,,9,10]),s.label=2;case 2:return[4,Rt(r.read())];case 3:return o=s.sent(),n=o.value,i=o.done,i?[4,Rt(void 0)]:[3,5];case 4:return[2,s.sent()];case 5:return[4,Rt(n)];case 6:return[4,s.sent()];case 7:return s.sent(),[3,2];case 8:return[3,10];case 9:return r.releaseLock(),[7];case 10:return[2]}})})}function Hc(e){return K(e==null?void 0:e.getReader)}function Ki(e){if(e instanceof ve)return e;if(e!=null){if(jc(e))return Sd(e);if(Mc(e))return Nd(e);if(Fc(e))return Td(e);if(Uc(e))return Kc(e);if(Bc(e))return Cd(e);if(Hc(e))return Pd(e)}throw Lc(e)}function Sd(e){return new ve(function(t){var r=e[ar]();if(K(r.subscribe))return r.subscribe(t);throw new TypeError("Provided object does not correctly implement Symbol.observable")})}function Nd(e){return new ve(function(t){for(var r=0;r<e.length&&!t.closed;r++)t.next(e[r]);t.complete()})}function Td(e){return new ve(function(t){e.then(function(r){t.closed||(t.next(r),t.complete())},function(r){return t.error(r)}).then(null,zo)})}function Cd(e){return new ve(function(t){var r,o;try{for(var n=tt(e),i=n.next();!i.done;i=n.next()){var s=i.value;if(t.next(s),t.closed)return}}catch(a){r={error:a}}finally{try{i&&!i.done&&(o=n.return)&&o.call(n)}finally{if(r)throw r.error}}t.complete()})}function Kc(e){return new ve(function(t){Ad(e,t).catch(function(r){return t.error(r)})})}function Pd(e){return Kc(Wc(e))}function Ad(e,t){var r,o,n,i;return Ec(this,void 0,void 0,function(){var s,a;return Ho(this,function(c){switch(c.label){case 0:c.trys.push([0,5,6,11]),r=Oc(e),c.label=1;case 1:return[4,r.next()];case 2:if(o=c.sent(),!!o.done)return[3,4];if(s=o.value,t.next(s),t.closed)return[2];c.label=3;case 3:return[3,1];case 4:return[3,11];case 5:return a=c.sent(),n={error:a},[3,11];case 6:return c.trys.push([6,,9,10]),o&&!o.done&&(i=r.return)?[4,i.call(r)]:[3,8];case 7:c.sent(),c.label=8;case 8:return[3,10];case 9:if(n)throw n.error;return[7];case 10:return[7];case 11:return t.complete(),[2]}})})}function Gi(e){e===void 0&&(e={});var t=e.connector,r=t===void 0?function(){return new Hi}:t,o=e.resetOnError,n=o===void 0?!0:o,i=e.resetOnComplete,s=i===void 0?!0:i,a=e.resetOnRefCountZero,c=a===void 0?!0:a;return function(u){var f,m,d,b=0,S=!1,h=!1,M=function(){m==null||m.unsubscribe(),m=void 0},V=function(){M(),f=d=void 0,S=h=!1},X=function(){var N=f;V(),N==null||N.unsubscribe()};return Vc(function(N,G){b++,!h&&!S&&M();var k=d=d??r();G.add(function(){b--,b===0&&!h&&!S&&(m=qi(X,c))}),k.subscribe(G),!f&&b>0&&(f=new It({next:function($){return k.next($)},error:function($){h=!0,M(),m=qi(V,n,$),k.error($)},complete:function(){S=!0,M(),m=qi(V,s),k.complete()}}),Ki(N).subscribe(f))})(u)}}function qi(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];if(t===!0){e();return}if(t!==!1){var n=new It({next:function(){n.unsubscribe(),e()}});return Ki(t.apply(void 0,ht([],mt(r)))).subscribe(n)}}function*Dd(){for(;;)for(let e=1;e<99999999;e++)yield e}var Rd=Dd();function qc(e,t,r){let o=e==="ws"&&t!=80||e==="wss"&&t!=443,n=`${e}://${r}${o?":"+t:""}/ws`,i=new WebSocket(n),s=new Promise(function(f){i.onclose=()=>f(void 0)}),a=new Promise(function(f,m){i.onopen=()=>f(void 0),s.finally(m)}),c=new ve(function(f){i.onmessage=function(m){let d=JSON.parse(m.data);f.next(d)},s.finally(()=>f.complete())}).pipe(Gi()),u;return a.then(function(){return u=setInterval(()=>i.send("KEEP_ALIVE"),25e3),s}).finally(()=>clearInterval(u)),{id:Rd.next().value,messages$:c,async send(f){await a;let m=JSON.stringify(f);i.send(m)}}}var zi=function(e,t){return zi=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,o){r.__proto__=o}||function(r,o){for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(r[n]=o[n])},zi(e,t)};function yt(e,t){if(typeof t!="function"&&t!==null)throw new TypeError("Class extends value "+String(t)+" is not a constructor or null");zi(e,t);function r(){this.constructor=e}e.prototype=t===null?Object.create(t):(r.prototype=t.prototype,new r)}function Gc(e,t,r,o){function n(i){return i instanceof r?i:new r(function(s){s(i)})}return new(r||(r=Promise))(function(i,s){function a(f){try{u(o.next(f))}catch(m){s(m)}}function c(f){try{u(o.throw(f))}catch(m){s(m)}}function u(f){f.done?i(f.value):n(f.value).then(a,c)}u((o=o.apply(e,t||[])).next())})}function Jo(e,t){var r={label:0,sent:function(){if(i[0]&1)throw i[1];return i[1]},trys:[],ops:[]},o,n,i,s;return s={next:a(0),throw:a(1),return:a(2)},typeof Symbol=="function"&&(s[Symbol.iterator]=function(){return this}),s;function a(u){return function(f){return c([u,f])}}function c(u){if(o)throw new TypeError("Generator is already executing.");for(;s&&(s=0,u[0]&&(r=0)),r;)try{if(o=1,n&&(i=u[0]&2?n.return:u[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,u[1])).done)return i;switch(n=0,i&&(u=[u[0]&2,i.value]),u[0]){case 0:case 1:i=u;break;case 4:return r.label++,{value:u[1],done:!1};case 5:r.label++,n=u[1],u=[0];continue;case 7:u=r.ops.pop(),r.trys.pop();continue;default:if(i=r.trys,!(i=i.length>0&&i[i.length-1])&&(u[0]===6||u[0]===2)){r=0;continue}if(u[0]===3&&(!i||u[1]>i[0]&&u[1]<i[3])){r.label=u[1];break}if(u[0]===6&&r.label<i[1]){r.label=i[1],i=u;break}if(i&&r.label<i[2]){r.label=i[2],r.ops.push(u);break}i[2]&&r.ops.pop(),r.trys.pop();continue}u=t.call(e,r)}catch(f){u=[6,f],n=0}finally{o=i=0}if(u[0]&5)throw u[1];return{value:u[0]?u[1]:void 0,done:!0}}}function rt(e){var t=typeof Symbol=="function"&&Symbol.iterator,r=t&&e[t],o=0;if(r)return r.call(e);if(e&&typeof e.length=="number")return{next:function(){return e&&o>=e.length&&(e=void 0),{value:e&&e[o++],done:!e}}};throw new TypeError(t?"Object is not iterable.":"Symbol.iterator is not defined.")}function bt(e,t){var r=typeof Symbol=="function"&&e[Symbol.iterator];if(!r)return e;var o=r.call(e),n,i=[],s;try{for(;(t===void 0||t-- >0)&&!(n=o.next()).done;)i.push(n.value)}catch(a){s={error:a}}finally{try{n&&!n.done&&(r=o.return)&&r.call(o)}finally{if(s)throw s.error}}return i}function vt(e,t,r){if(r||arguments.length===2)for(var o=0,n=t.length,i;o<n;o++)(i||!(o in t))&&(i||(i=Array.prototype.slice.call(t,0,o)),i[o]=t[o]);return e.concat(i||Array.prototype.slice.call(t))}function kt(e){return this instanceof kt?(this.v=e,this):new kt(e)}function zc(e,t,r){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var o=r.apply(e,t||[]),n,i=[];return n={},s("next"),s("throw"),s("return"),n[Symbol.asyncIterator]=function(){return this},n;function s(d){o[d]&&(n[d]=function(b){return new Promise(function(S,h){i.push([d,b,S,h])>1||a(d,b)})})}function a(d,b){try{c(o[d](b))}catch(S){m(i[0][3],S)}}function c(d){d.value instanceof kt?Promise.resolve(d.value.v).then(u,f):m(i[0][2],d)}function u(d){a("next",d)}function f(d){a("throw",d)}function m(d,b){d(b),i.shift(),i.length&&a(i[0][0],i[0][1])}}function Yc(e){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var t=e[Symbol.asyncIterator],r;return t?t.call(e):(e=typeof rt=="function"?rt(e):e[Symbol.iterator](),r={},o("next"),o("throw"),o("return"),r[Symbol.asyncIterator]=function(){return this},r);function o(i){r[i]=e[i]&&function(s){return new Promise(function(a,c){s=e[i](s),n(a,c,s.done,s.value)})}}function n(i,s,a,c){Promise.resolve(c).then(function(u){i({value:u,done:a})},s)}}function q(e){return typeof e=="function"}function Zo(e){var t=function(o){Error.call(o),o.stack=new Error().stack},r=e(t);return r.prototype=Object.create(Error.prototype),r.prototype.constructor=r,r}var Xo=Zo(function(e){return function(r){e(this),this.message=r?r.length+` errors occurred during unsubscription:
-`+r.map(function(o,n){return n+1+") "+o.toString()}).join(`
-  `):"",this.name="UnsubscriptionError",this.errors=r}});function eo(e,t){if(e){var r=e.indexOf(t);0<=r&&e.splice(r,1)}}var cr=function(){function e(t){this.initialTeardown=t,this.closed=!1,this._parentage=null,this._finalizers=null}return e.prototype.unsubscribe=function(){var t,r,o,n,i;if(!this.closed){this.closed=!0;var s=this._parentage;if(s)if(this._parentage=null,Array.isArray(s))try{for(var a=rt(s),c=a.next();!c.done;c=a.next()){var u=c.value;u.remove(this)}}catch(h){t={error:h}}finally{try{c&&!c.done&&(r=a.return)&&r.call(a)}finally{if(t)throw t.error}}else s.remove(this);var f=this.initialTeardown;if(q(f))try{f()}catch(h){i=h instanceof Xo?h.errors:[h]}var m=this._finalizers;if(m){this._finalizers=null;try{for(var d=rt(m),b=d.next();!b.done;b=d.next()){var S=b.value;try{Jc(S)}catch(h){i=i??[],h instanceof Xo?i=vt(vt([],bt(i)),bt(h.errors)):i.push(h)}}}catch(h){o={error:h}}finally{try{b&&!b.done&&(n=d.return)&&n.call(d)}finally{if(o)throw o.error}}}if(i)throw new Xo(i)}},e.prototype.add=function(t){var r;if(t&&t!==this)if(this.closed)Jc(t);else{if(t instanceof e){if(t.closed||t._hasParent(this))return;t._addParent(this)}(this._finalizers=(r=this._finalizers)!==null&&r!==void 0?r:[]).push(t)}},e.prototype._hasParent=function(t){var r=this._parentage;return r===t||Array.isArray(r)&&r.includes(t)},e.prototype._addParent=function(t){var r=this._parentage;this._parentage=Array.isArray(r)?(r.push(t),r):r?[r,t]:t},e.prototype._removeParent=function(t){var r=this._parentage;r===t?this._parentage=null:Array.isArray(r)&&eo(r,t)},e.prototype.remove=function(t){var r=this._finalizers;r&&eo(r,t),t instanceof e&&t._removeParent(this)},e.EMPTY=function(){var t=new e;return t.closed=!0,t}(),e}();var Yi=cr.EMPTY;function Qo(e){return e instanceof cr||e&&"closed"in e&&q(e.remove)&&q(e.add)&&q(e.unsubscribe)}function Jc(e){q(e)?e():e.unsubscribe()}var ke={onUnhandledError:null,onStoppedNotification:null,Promise:void 0,useDeprecatedSynchronousErrorHandling:!1,useDeprecatedNextContext:!1};var ur={setTimeout:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=ur.delegate;return n!=null&&n.setTimeout?n.setTimeout.apply(n,vt([e,t],bt(r))):setTimeout.apply(void 0,vt([e,t],bt(r)))},clearTimeout:function(e){var t=ur.delegate;return((t==null?void 0:t.clearTimeout)||clearTimeout)(e)},delegate:void 0};function en(e){ur.setTimeout(function(){var t=ke.onUnhandledError;if(t)t(e);else throw e})}function Ji(){}var Zc=function(){return Zi("C",void 0,void 0)}();function Xc(e){return Zi("E",void 0,e)}function Qc(e){return Zi("N",e,void 0)}function Zi(e,t,r){return{kind:e,value:t,error:r}}var Mt=null;function fr(e){if(ke.useDeprecatedSynchronousErrorHandling){var t=!Mt;if(t&&(Mt={errorThrown:!1,error:null}),e(),t){var r=Mt,o=r.errorThrown,n=r.error;if(Mt=null,o)throw n}}else e()}function eu(e){ke.useDeprecatedSynchronousErrorHandling&&Mt&&(Mt.errorThrown=!0,Mt.error=e)}var to=function(e){yt(t,e);function t(r){var o=e.call(this)||this;return o.isStopped=!1,r?(o.destination=r,Qo(r)&&r.add(o)):o.destination=Md,o}return t.create=function(r,o,n){return new Ft(r,o,n)},t.prototype.next=function(r){this.isStopped?Qi(Qc(r),this):this._next(r)},t.prototype.error=function(r){this.isStopped?Qi(Xc(r),this):(this.isStopped=!0,this._error(r))},t.prototype.complete=function(){this.isStopped?Qi(Zc,this):(this.isStopped=!0,this._complete())},t.prototype.unsubscribe=function(){this.closed||(this.isStopped=!0,e.prototype.unsubscribe.call(this),this.destination=null)},t.prototype._next=function(r){this.destination.next(r)},t.prototype._error=function(r){try{this.destination.error(r)}finally{this.unsubscribe()}},t.prototype._complete=function(){try{this.destination.complete()}finally{this.unsubscribe()}},t}(cr);var Vd=Function.prototype.bind;function Xi(e,t){return Vd.call(e,t)}var Id=function(){function e(t){this.partialObserver=t}return e.prototype.next=function(t){var r=this.partialObserver;if(r.next)try{r.next(t)}catch(o){tn(o)}},e.prototype.error=function(t){var r=this.partialObserver;if(r.error)try{r.error(t)}catch(o){tn(o)}else tn(t)},e.prototype.complete=function(){var t=this.partialObserver;if(t.complete)try{t.complete()}catch(r){tn(r)}},e}(),Ft=function(e){yt(t,e);function t(r,o,n){var i=e.call(this)||this,s;if(q(r)||!r)s={next:r??void 0,error:o??void 0,complete:n??void 0};else{var a;i&&ke.useDeprecatedNextContext?(a=Object.create(r),a.unsubscribe=function(){return i.unsubscribe()},s={next:r.next&&Xi(r.next,a),error:r.error&&Xi(r.error,a),complete:r.complete&&Xi(r.complete,a)}):s=r}return i.destination=new Id(s),i}return t}(to);function tn(e){ke.useDeprecatedSynchronousErrorHandling?eu(e):en(e)}function kd(e){throw e}function Qi(e,t){var r=ke.onStoppedNotification;r&&ur.setTimeout(function(){return r(e,t)})}var Md={closed:!0,next:Ji,error:kd,complete:Ji};var lr=function(){return typeof Symbol=="function"&&Symbol.observable||"@@observable"}();function tu(e){return e}function ru(e){return e.length===0?tu:e.length===1?e[0]:function(r){return e.reduce(function(o,n){return n(o)},r)}}var xe=function(){function e(t){t&&(this._subscribe=t)}return e.prototype.lift=function(t){var r=new e;return r.source=this,r.operator=t,r},e.prototype.subscribe=function(t,r,o){var n=this,i=jd(t)?t:new Ft(t,r,o);return fr(function(){var s=n,a=s.operator,c=s.source;i.add(a?a.call(i,c):c?n._subscribe(i):n._trySubscribe(i))}),i},e.prototype._trySubscribe=function(t){try{return this._subscribe(t)}catch(r){t.error(r)}},e.prototype.forEach=function(t,r){var o=this;return r=ou(r),new r(function(n,i){var s=new Ft({next:function(a){try{t(a)}catch(c){i(c),s.unsubscribe()}},error:i,complete:n});o.subscribe(s)})},e.prototype._subscribe=function(t){var r;return(r=this.source)===null||r===void 0?void 0:r.subscribe(t)},e.prototype[lr]=function(){return this},e.prototype.pipe=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];return ru(t)(this)},e.prototype.toPromise=function(t){var r=this;return t=ou(t),new t(function(o,n){var i;r.subscribe(function(s){return i=s},function(s){return n(s)},function(){return o(i)})})},e.create=function(t){return new e(t)},e}();function ou(e){var t;return(t=e??ke.Promise)!==null&&t!==void 0?t:Promise}function Fd(e){return e&&q(e.next)&&q(e.error)&&q(e.complete)}function jd(e){return e&&e instanceof to||Fd(e)&&Qo(e)}function Ud(e){return q(e==null?void 0:e.lift)}function rn(e){return function(t){if(Ud(t))return t.lift(function(r){try{return e(r,this)}catch(o){this.error(o)}});throw new TypeError("Unable to lift unknown Observable type")}}function nu(e,t,r,o,n){return new Ld(e,t,r,o,n)}var Ld=function(e){yt(t,e);function t(r,o,n,i,s,a){var c=e.call(this,r)||this;return c.onFinalize=s,c.shouldUnsubscribe=a,c._next=o?function(u){try{o(u)}catch(f){r.error(f)}}:e.prototype._next,c._error=i?function(u){try{i(u)}catch(f){r.error(f)}finally{this.unsubscribe()}}:e.prototype._error,c._complete=n?function(){try{n()}catch(u){r.error(u)}finally{this.unsubscribe()}}:e.prototype._complete,c}return t.prototype.unsubscribe=function(){var r;if(!this.shouldUnsubscribe||this.shouldUnsubscribe()){var o=this.closed;e.prototype.unsubscribe.call(this),!o&&((r=this.onFinalize)===null||r===void 0||r.call(this))}},t}(to);var iu=Zo(function(e){return function(){e(this),this.name="ObjectUnsubscribedError",this.message="object unsubscribed"}});var Se=function(e){yt(t,e);function t(){var r=e.call(this)||this;return r.closed=!1,r.currentObservers=null,r.observers=[],r.isStopped=!1,r.hasError=!1,r.thrownError=null,r}return t.prototype.lift=function(r){var o=new su(this,this);return o.operator=r,o},t.prototype._throwIfClosed=function(){if(this.closed)throw new iu},t.prototype.next=function(r){var o=this;fr(function(){var n,i;if(o._throwIfClosed(),!o.isStopped){o.currentObservers||(o.currentObservers=Array.from(o.observers));try{for(var s=rt(o.currentObservers),a=s.next();!a.done;a=s.next()){var c=a.value;c.next(r)}}catch(u){n={error:u}}finally{try{a&&!a.done&&(i=s.return)&&i.call(s)}finally{if(n)throw n.error}}}})},t.prototype.error=function(r){var o=this;fr(function(){if(o._throwIfClosed(),!o.isStopped){o.hasError=o.isStopped=!0,o.thrownError=r;for(var n=o.observers;n.length;)n.shift().error(r)}})},t.prototype.complete=function(){var r=this;fr(function(){if(r._throwIfClosed(),!r.isStopped){r.isStopped=!0;for(var o=r.observers;o.length;)o.shift().complete()}})},t.prototype.unsubscribe=function(){this.isStopped=this.closed=!0,this.observers=this.currentObservers=null},Object.defineProperty(t.prototype,"observed",{get:function(){var r;return((r=this.observers)===null||r===void 0?void 0:r.length)>0},enumerable:!1,configurable:!0}),t.prototype._trySubscribe=function(r){return this._throwIfClosed(),e.prototype._trySubscribe.call(this,r)},t.prototype._subscribe=function(r){return this._throwIfClosed(),this._checkFinalizedStatuses(r),this._innerSubscribe(r)},t.prototype._innerSubscribe=function(r){var o=this,n=this,i=n.hasError,s=n.isStopped,a=n.observers;return i||s?Yi:(this.currentObservers=null,a.push(r),new cr(function(){o.currentObservers=null,eo(a,r)}))},t.prototype._checkFinalizedStatuses=function(r){var o=this,n=o.hasError,i=o.thrownError,s=o.isStopped;n?r.error(i):s&&r.complete()},t.prototype.asObservable=function(){var r=new xe;return r.source=this,r},t.create=function(r,o){return new su(r,o)},t}(xe);var su=function(e){yt(t,e);function t(r,o){var n=e.call(this)||this;return n.destination=r,n.source=o,n}return t.prototype.next=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.next)===null||n===void 0||n.call(o,r)},t.prototype.error=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.error)===null||n===void 0||n.call(o,r)},t.prototype.complete=function(){var r,o;(o=(r=this.destination)===null||r===void 0?void 0:r.complete)===null||o===void 0||o.call(r)},t.prototype._subscribe=function(r){var o,n;return(n=(o=this.source)===null||o===void 0?void 0:o.subscribe(r))!==null&&n!==void 0?n:Yi},t}(Se);var au=function(e){return e&&typeof e.length=="number"&&typeof e!="function"};function cu(e){return q(e==null?void 0:e.then)}function uu(e){return q(e[lr])}function fu(e){return Symbol.asyncIterator&&q(e==null?void 0:e[Symbol.asyncIterator])}function lu(e){return new TypeError("You provided "+(e!==null&&typeof e=="object"?"an invalid object":"'"+e+"'")+" where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.")}function $d(){return typeof Symbol!="function"||!Symbol.iterator?"@@iterator":Symbol.iterator}var pu=$d();function du(e){return q(e==null?void 0:e[pu])}function mu(e){return zc(this,arguments,function(){var r,o,n,i;return Jo(this,function(s){switch(s.label){case 0:r=e.getReader(),s.label=1;case 1:s.trys.push([1,,9,10]),s.label=2;case 2:return[4,kt(r.read())];case 3:return o=s.sent(),n=o.value,i=o.done,i?[4,kt(void 0)]:[3,5];case 4:return[2,s.sent()];case 5:return[4,kt(n)];case 6:return[4,s.sent()];case 7:return s.sent(),[3,2];case 8:return[3,10];case 9:return r.releaseLock(),[7];case 10:return[2]}})})}function hu(e){return q(e==null?void 0:e.getReader)}function es(e){if(e instanceof xe)return e;if(e!=null){if(uu(e))return Bd(e);if(au(e))return Wd(e);if(cu(e))return Hd(e);if(fu(e))return yu(e);if(du(e))return Kd(e);if(hu(e))return qd(e)}throw lu(e)}function Bd(e){return new xe(function(t){var r=e[lr]();if(q(r.subscribe))return r.subscribe(t);throw new TypeError("Provided object does not correctly implement Symbol.observable")})}function Wd(e){return new xe(function(t){for(var r=0;r<e.length&&!t.closed;r++)t.next(e[r]);t.complete()})}function Hd(e){return new xe(function(t){e.then(function(r){t.closed||(t.next(r),t.complete())},function(r){return t.error(r)}).then(null,en)})}function Kd(e){return new xe(function(t){var r,o;try{for(var n=rt(e),i=n.next();!i.done;i=n.next()){var s=i.value;if(t.next(s),t.closed)return}}catch(a){r={error:a}}finally{try{i&&!i.done&&(o=n.return)&&o.call(n)}finally{if(r)throw r.error}}t.complete()})}function yu(e){return new xe(function(t){Gd(e,t).catch(function(r){return t.error(r)})})}function qd(e){return yu(mu(e))}function Gd(e,t){var r,o,n,i;return Gc(this,void 0,void 0,function(){var s,a;return Jo(this,function(c){switch(c.label){case 0:c.trys.push([0,5,6,11]),r=Yc(e),c.label=1;case 1:return[4,r.next()];case 2:if(o=c.sent(),!!o.done)return[3,4];if(s=o.value,t.next(s),t.closed)return[2];c.label=3;case 3:return[3,1];case 4:return[3,11];case 5:return a=c.sent(),n={error:a},[3,11];case 6:return c.trys.push([6,,9,10]),o&&!o.done&&(i=r.return)?[4,i.call(r)]:[3,8];case 7:c.sent(),c.label=8;case 8:return[3,10];case 9:if(n)throw n.error;return[7];case 10:return[7];case 11:return t.complete(),[2]}})})}function on(e,t){return rn(function(r,o){var n=0;r.subscribe(nu(o,function(i){return e.call(t,i,n++)&&o.next(i)}))})}function rs(e){e===void 0&&(e={});var t=e.connector,r=t===void 0?function(){return new Se}:t,o=e.resetOnError,n=o===void 0?!0:o,i=e.resetOnComplete,s=i===void 0?!0:i,a=e.resetOnRefCountZero,c=a===void 0?!0:a;return function(u){var f,m,d,b=0,S=!1,h=!1,M=function(){m==null||m.unsubscribe(),m=void 0},V=function(){M(),f=d=void 0,S=h=!1},X=function(){var N=f;V(),N==null||N.unsubscribe()};return rn(function(N,G){b++,!h&&!S&&M();var k=d=d??r();G.add(function(){b--,b===0&&!h&&!S&&(m=ts(X,c))}),k.subscribe(G),!f&&b>0&&(f=new Ft({next:function($){return k.next($)},error:function($){h=!0,M(),m=ts(V,n,$),k.error($)},complete:function(){S=!0,M(),m=ts(V,s),k.complete()}}),es(N).subscribe(f))})(u)}}function ts(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];if(t===!0){e();return}if(t!==!1){var n=new Ft({next:function(){n.unsubscribe(),e()}});return es(t.apply(void 0,vt([],bt(r)))).subscribe(n)}}function*zd(){for(;;)for(let e=1;e<99999999;e++)yield e}var bu=zd();var vu=new BroadcastChannel("webrtc"),xu=new Se;vu.onmessage=function(e){let t=e==null?void 0:e.data;xu.next(t)};function ro(e){vu.postMessage(e)}var gu=xu.asObservable();function _u(){let e=new Se,t=new Se,r=new Se,o=new Se,n=new Se,i=new Promise(N=>setTimeout(N,150)),s=!1,a=!1,c={id:1,messages$:e.asObservable(),send(N){t.next(N)}},u={id:2,messages$:o.asObservable(),send(N){r.next(N)}},f=new RTCPeerConnection,m=!1,d=!1;f.onicecandidate=function(N){let{candidate:G}=N;G&&!m?(m=!1,ro({candidate:G.toJSON()})):d&&(d=!1,ro({clearCandidate:!0}))};let b=gu.subscribe({next(N){N.offer&&Yd(f,N.offer).then(()=>a=!1).catch(console.error),N.answer&&Jd(f,N.answer).then(()=>a=!0).catch(console.error),N.candidate&&Zd(f,N.candidate).catch(console.error),N.clearCandidate&&Xd(f).catch(console.error)},error(N){console.error(N)}});async function S(){let N=await f.createOffer();await f.setLocalDescription(N),ro({offer:N})}S().catch(console.error),f.ondatachannel=function(G){G.channel.onmessage=function(k){let $=JSON.parse(k.data);o.next($)}},f.addEventListener("connectionstatechange",function(){switch(f.connectionState){case"connecting":break;case"connected":s=a,s&&(n.next(c),n.next(u));break;case"closed":case"disconnected":case"failed":b.unsubscribe(),n.complete();break;default:throw new Error("Unhandled state change !")}});let h=f.createDataChannel("sendDataChannel");async function M(N){for(;f.connectionState!=="connected";)await new Promise(G=>setTimeout(G,50));await i,h.send(JSON.stringify(N))}let V=r.subscribe({next:M,error(N){console.error(N)}});return[{id:bu.next().value,messages$:new xe(function(N){let G=t.pipe(on(()=>s)).subscribe({next($){N.next($)},error($){console.error($)}}),k=o.pipe(on(()=>!s)).subscribe({next($){N.next($)},error($){console.error($)}});f.addEventListener("connectionstatechange",function(){switch(f.connectionState){case"connecting":case"connected":break;case"closed":case"disconnected":case"failed":G.unsubscribe(),k.unsubscribe(),V.unsubscribe(),N.complete();break;default:throw new Error("Unhandled state !")}})}).pipe(rs()),send(N){s?e.next(N):M(N).catch(console.error)}},n.asObservable()]}async function Yd(e,t){await e.setRemoteDescription(t);let r=await e.createAnswer();ro({answer:r}),await e.setLocalDescription(r)}async function Jd(e,t){await e.setRemoteDescription(t)}async function Zd(e,t){await e.addIceCandidate(t)}async function Xd(e){await e.addIceCandidate()}var Eu="ferdodo.github.io";var wu="wss";function Ou(e,t){return oe(),ie("div",{class:"main"},[e.disconnected?(oe(),ie("p",{key:0,class:"disconnectedFromServer"},"Disconnected from server.")):ce("v-if",!0),e.showTitle?(oe(),ie("div",{key:1,class:"title"})):ce("v-if",!0),e.showTitle?ce("v-if",!0):(oe(),ie("div",{key:2,class:"arena"},[Jr("div",{class:"vue-player"},[e.game.playerA&&!e.aWins&&!e.bWins?(oe(),ie("div",{key:0,class:"playerA"})):ce("v-if",!0),e.game.playerB&&!e.aWins&&!e.bWins?(oe(),ie("div",{key:1,class:"playerB"})):ce("v-if",!0),e.game.playerA&&e.aWins?(oe(),ie("div",{key:2,class:"playerAwins"})):ce("v-if",!0),e.game.playerB&&e.aWins?(oe(),ie("div",{key:3,class:"playerBloses"})):ce("v-if",!0),e.game.playerA&&e.bWins?(oe(),ie("div",{key:4,class:"playerAloses"})):ce("v-if",!0),e.game.playerB&&e.bWins?(oe(),ie("div",{key:5,class:"playerBwins"})):ce("v-if",!0)]),e.game.state===e.GameState.Hajime?(oe(),ie("p",{key:0,class:"exclamationPoints"},"!!")):ce("v-if",!0),e.myCharacter===e.Character.PlayerA?(oe(),ie("p",{key:1,class:"playerADisplay"},"Joueur 1")):ce("v-if",!0),e.myCharacter===e.Character.PlayerB?(oe(),ie("p",{key:2,class:"playerBDisplay"},"Joueur 2")):ce("v-if",!0),e.myCharacter===e.Character.None?(oe(),ie("p",{key:3,class:"spectatorDisplay"},"Spectateur")):ce("v-if",!0),Jr("p",{class:"indication"},Qn(e.indication),1)]))])}var xt=(f=>(f[f.WaitingPlayerA=0]="WaitingPlayerA",f[f.WaitingPlayerB=1]="WaitingPlayerB",f[f.Matte=2]="Matte",f[f.Hajime=3]="Hajime",f[f.AWins=4]="AWins",f[f.BWins=5]="BWins",f[f.AWinsByFault=6]="AWinsByFault",f[f.BWinsByFault=7]="BWinsByFault",f[f.PlayerADisconnected=8]="PlayerADisconnected",f[f.PlayerBDisconnected=9]="PlayerBDisconnected",f))(xt||{});var os=function(e,t){return os=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,o){r.__proto__=o}||function(r,o){for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(r[n]=o[n])},os(e,t)};function oo(e,t){if(typeof t!="function"&&t!==null)throw new TypeError("Class extends value "+String(t)+" is not a constructor or null");os(e,t);function r(){this.constructor=e}e.prototype=t===null?Object.create(t):(r.prototype=t.prototype,new r)}function ns(e){var t=typeof Symbol=="function"&&Symbol.iterator,r=t&&e[t],o=0;if(r)return r.call(e);if(e&&typeof e.length=="number")return{next:function(){return e&&o>=e.length&&(e=void 0),{value:e&&e[o++],done:!e}}};throw new TypeError(t?"Object is not iterable.":"Symbol.iterator is not defined.")}function pr(e,t){var r=typeof Symbol=="function"&&e[Symbol.iterator];if(!r)return e;var o=r.call(e),n,i=[],s;try{for(;(t===void 0||t-- >0)&&!(n=o.next()).done;)i.push(n.value)}catch(a){s={error:a}}finally{try{n&&!n.done&&(r=o.return)&&r.call(o)}finally{if(s)throw s.error}}return i}function dr(e,t,r){if(r||arguments.length===2)for(var o=0,n=t.length,i;o<n;o++)(i||!(o in t))&&(i||(i=Array.prototype.slice.call(t,0,o)),i[o]=t[o]);return e.concat(i||Array.prototype.slice.call(t))}function ye(e){return typeof e=="function"}function nn(e){var t=function(o){Error.call(o),o.stack=new Error().stack},r=e(t);return r.prototype=Object.create(Error.prototype),r.prototype.constructor=r,r}var sn=nn(function(e){return function(r){e(this),this.message=r?r.length+` errors occurred during unsubscription:
-`+r.map(function(o,n){return n+1+") "+o.toString()}).join(`
-  `):"",this.name="UnsubscriptionError",this.errors=r}});function is(e,t){if(e){var r=e.indexOf(t);0<=r&&e.splice(r,1)}}var an=function(){function e(t){this.initialTeardown=t,this.closed=!1,this._parentage=null,this._finalizers=null}return e.prototype.unsubscribe=function(){var t,r,o,n,i;if(!this.closed){this.closed=!0;var s=this._parentage;if(s)if(this._parentage=null,Array.isArray(s))try{for(var a=ns(s),c=a.next();!c.done;c=a.next()){var u=c.value;u.remove(this)}}catch(h){t={error:h}}finally{try{c&&!c.done&&(r=a.return)&&r.call(a)}finally{if(t)throw t.error}}else s.remove(this);var f=this.initialTeardown;if(ye(f))try{f()}catch(h){i=h instanceof sn?h.errors:[h]}var m=this._finalizers;if(m){this._finalizers=null;try{for(var d=ns(m),b=d.next();!b.done;b=d.next()){var S=b.value;try{Su(S)}catch(h){i=i??[],h instanceof sn?i=dr(dr([],pr(i)),pr(h.errors)):i.push(h)}}}catch(h){o={error:h}}finally{try{b&&!b.done&&(n=d.return)&&n.call(d)}finally{if(o)throw o.error}}}if(i)throw new sn(i)}},e.prototype.add=function(t){var r;if(t&&t!==this)if(this.closed)Su(t);else{if(t instanceof e){if(t.closed||t._hasParent(this))return;t._addParent(this)}(this._finalizers=(r=this._finalizers)!==null&&r!==void 0?r:[]).push(t)}},e.prototype._hasParent=function(t){var r=this._parentage;return r===t||Array.isArray(r)&&r.includes(t)},e.prototype._addParent=function(t){var r=this._parentage;this._parentage=Array.isArray(r)?(r.push(t),r):r?[r,t]:t},e.prototype._removeParent=function(t){var r=this._parentage;r===t?this._parentage=null:Array.isArray(r)&&is(r,t)},e.prototype.remove=function(t){var r=this._finalizers;r&&is(r,t),t instanceof e&&t._removeParent(this)},e.EMPTY=function(){var t=new e;return t.closed=!0,t}(),e}();var Ux=an.EMPTY;function cn(e){return e instanceof an||e&&"closed"in e&&ye(e.remove)&&ye(e.add)&&ye(e.unsubscribe)}function Su(e){ye(e)?e():e.unsubscribe()}var Me={onUnhandledError:null,onStoppedNotification:null,Promise:void 0,useDeprecatedSynchronousErrorHandling:!1,useDeprecatedNextContext:!1};var mr={setTimeout:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=mr.delegate;return n!=null&&n.setTimeout?n.setTimeout.apply(n,dr([e,t],pr(r))):setTimeout.apply(void 0,dr([e,t],pr(r)))},clearTimeout:function(e){var t=mr.delegate;return((t==null?void 0:t.clearTimeout)||clearTimeout)(e)},delegate:void 0};function Nu(e){mr.setTimeout(function(){var t=Me.onUnhandledError;if(t)t(e);else throw e})}function ss(){}var Tu=function(){return as("C",void 0,void 0)}();function Cu(e){return as("E",void 0,e)}function Pu(e){return as("N",e,void 0)}function as(e,t,r){return{kind:e,value:t,error:r}}var jt=null;function Au(e){if(Me.useDeprecatedSynchronousErrorHandling){var t=!jt;if(t&&(jt={errorThrown:!1,error:null}),e(),t){var r=jt,o=r.errorThrown,n=r.error;if(jt=null,o)throw n}}else e()}function Du(e){Me.useDeprecatedSynchronousErrorHandling&&jt&&(jt.errorThrown=!0,jt.error=e)}var no=function(e){oo(t,e);function t(r){var o=e.call(this)||this;return o.isStopped=!1,r?(o.destination=r,cn(r)&&r.add(o)):o.destination=rm,o}return t.create=function(r,o,n){return new hr(r,o,n)},t.prototype.next=function(r){this.isStopped?us(Pu(r),this):this._next(r)},t.prototype.error=function(r){this.isStopped?us(Cu(r),this):(this.isStopped=!0,this._error(r))},t.prototype.complete=function(){this.isStopped?us(Tu,this):(this.isStopped=!0,this._complete())},t.prototype.unsubscribe=function(){this.closed||(this.isStopped=!0,e.prototype.unsubscribe.call(this),this.destination=null)},t.prototype._next=function(r){this.destination.next(r)},t.prototype._error=function(r){try{this.destination.error(r)}finally{this.unsubscribe()}},t.prototype._complete=function(){try{this.destination.complete()}finally{this.unsubscribe()}},t}(an);var Qd=Function.prototype.bind;function cs(e,t){return Qd.call(e,t)}var em=function(){function e(t){this.partialObserver=t}return e.prototype.next=function(t){var r=this.partialObserver;if(r.next)try{r.next(t)}catch(o){un(o)}},e.prototype.error=function(t){var r=this.partialObserver;if(r.error)try{r.error(t)}catch(o){un(o)}else un(t)},e.prototype.complete=function(){var t=this.partialObserver;if(t.complete)try{t.complete()}catch(r){un(r)}},e}(),hr=function(e){oo(t,e);function t(r,o,n){var i=e.call(this)||this,s;if(ye(r)||!r)s={next:r??void 0,error:o??void 0,complete:n??void 0};else{var a;i&&Me.useDeprecatedNextContext?(a=Object.create(r),a.unsubscribe=function(){return i.unsubscribe()},s={next:r.next&&cs(r.next,a),error:r.error&&cs(r.error,a),complete:r.complete&&cs(r.complete,a)}):s=r}return i.destination=new em(s),i}return t}(no);function un(e){Me.useDeprecatedSynchronousErrorHandling?Du(e):Nu(e)}function tm(e){throw e}function us(e,t){var r=Me.onStoppedNotification;r&&mr.setTimeout(function(){return r(e,t)})}var rm={closed:!0,next:ss,error:tm,complete:ss};var Ru=function(){return typeof Symbol=="function"&&Symbol.observable||"@@observable"}();function Vu(e){return e}function Iu(e){return e.length===0?Vu:e.length===1?e[0]:function(r){return e.reduce(function(o,n){return n(o)},r)}}var fs=function(){function e(t){t&&(this._subscribe=t)}return e.prototype.lift=function(t){var r=new e;return r.source=this,r.operator=t,r},e.prototype.subscribe=function(t,r,o){var n=this,i=nm(t)?t:new hr(t,r,o);return Au(function(){var s=n,a=s.operator,c=s.source;i.add(a?a.call(i,c):c?n._subscribe(i):n._trySubscribe(i))}),i},e.prototype._trySubscribe=function(t){try{return this._subscribe(t)}catch(r){t.error(r)}},e.prototype.forEach=function(t,r){var o=this;return r=ku(r),new r(function(n,i){var s=new hr({next:function(a){try{t(a)}catch(c){i(c),s.unsubscribe()}},error:i,complete:n});o.subscribe(s)})},e.prototype._subscribe=function(t){var r;return(r=this.source)===null||r===void 0?void 0:r.subscribe(t)},e.prototype[Ru]=function(){return this},e.prototype.pipe=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];return Iu(t)(this)},e.prototype.toPromise=function(t){var r=this;return t=ku(t),new t(function(o,n){var i;r.subscribe(function(s){return i=s},function(s){return n(s)},function(){return o(i)})})},e.create=function(t){return new e(t)},e}();function ku(e){var t;return(t=e??Me.Promise)!==null&&t!==void 0?t:Promise}function om(e){return e&&ye(e.next)&&ye(e.error)&&ye(e.complete)}function nm(e){return e&&e instanceof no||om(e)&&cn(e)}function im(e){return ye(e==null?void 0:e.lift)}function fn(e){return function(t){if(im(t))return t.lift(function(r){try{return e(r,this)}catch(o){this.error(o)}});throw new TypeError("Unable to lift unknown Observable type")}}function ln(e,t,r,o,n){return new sm(e,t,r,o,n)}var sm=function(e){oo(t,e);function t(r,o,n,i,s,a){var c=e.call(this,r)||this;return c.onFinalize=s,c.shouldUnsubscribe=a,c._next=o?function(u){try{o(u)}catch(f){r.error(f)}}:e.prototype._next,c._error=i?function(u){try{i(u)}catch(f){r.error(f)}finally{this.unsubscribe()}}:e.prototype._error,c._complete=n?function(){try{n()}catch(u){r.error(u)}finally{this.unsubscribe()}}:e.prototype._complete,c}return t.prototype.unsubscribe=function(){var r;if(!this.shouldUnsubscribe||this.shouldUnsubscribe()){var o=this.closed;e.prototype.unsubscribe.call(this),!o&&((r=this.onFinalize)===null||r===void 0||r.call(this))}},t}(no);var Mu=nn(function(e){return function(){e(this),this.name="EmptyError",this.message="no elements in sequence"}});function io(e,t){var r=typeof t=="object";return new Promise(function(o,n){var i=new hr({next:function(s){o(s),i.unsubscribe()},error:n,complete:function(){r?o(t.defaultValue):n(new Mu)}});e.subscribe(i)})}function ge(e,t){return fn(function(r,o){var n=0;r.subscribe(ln(o,function(i){o.next(e.call(t,i,n++))}))})}function se(e,t){return fn(function(r,o){var n=0;r.subscribe(ln(o,function(i){return e.call(t,i,n++)&&o.next(i)}))})}function Fu(e){return new fs(function(t){let r=e.messages$.pipe(ge(o=>o.observeGameBroadcast),se(Boolean)).subscribe({next(o){t.next(o.game)},complete(){r.unsubscribe()}})})}function ju(e){return e.messages$.pipe(ge(t=>{var r;return(r=t.observeMyCharacterBroadcast)==null?void 0:r.character}),se(Boolean))}var Ut=256,Lu=[],Uu=256,pn;for(;Ut--;)Lu[Ut]=(Ut+256).toString(16).substring(1);function dn(e){var t=0,r=e||11;if(!pn||Ut+r>Uu*2)for(pn="",Ut=0;t<Uu;t++)pn+=Lu[Math.random()*256|0];return pn.substring(Ut,Ut+++r)}async function $u(e){let t=dn(),r=e.messages$.pipe(ge(i=>i.getGameResponse),se(Boolean),se(i=>i.requestId===t)),o=io(r),n={getGameRequest:{requestId:t}};return await e.send(n),(await o).game}async function Bu(e){let t=dn(),r=e.messages$.pipe(ge(i=>i.getMyCharacterResponse),se(Boolean),se(i=>i.requestId===t)),o=io(r),n={getMyCharacterRequest:{requestId:t}};return await e.send(n),(await o).character}async function Wu(e){let t={actionEmit:{}};await e.send(t)}var ls=function(e,t){return ls=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,o){r.__proto__=o}||function(r,o){for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(r[n]=o[n])},ls(e,t)};function Fe(e,t){if(typeof t!="function"&&t!==null)throw new TypeError("Class extends value "+String(t)+" is not a constructor or null");ls(e,t);function r(){this.constructor=e}e.prototype=t===null?Object.create(t):(r.prototype=t.prototype,new r)}function Hu(e,t,r,o){function n(i){return i instanceof r?i:new r(function(s){s(i)})}return new(r||(r=Promise))(function(i,s){function a(f){try{u(o.next(f))}catch(m){s(m)}}function c(f){try{u(o.throw(f))}catch(m){s(m)}}function u(f){f.done?i(f.value):n(f.value).then(a,c)}u((o=o.apply(e,t||[])).next())})}function mn(e,t){var r={label:0,sent:function(){if(i[0]&1)throw i[1];return i[1]},trys:[],ops:[]},o,n,i,s;return s={next:a(0),throw:a(1),return:a(2)},typeof Symbol=="function"&&(s[Symbol.iterator]=function(){return this}),s;function a(u){return function(f){return c([u,f])}}function c(u){if(o)throw new TypeError("Generator is already executing.");for(;s&&(s=0,u[0]&&(r=0)),r;)try{if(o=1,n&&(i=u[0]&2?n.return:u[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,u[1])).done)return i;switch(n=0,i&&(u=[u[0]&2,i.value]),u[0]){case 0:case 1:i=u;break;case 4:return r.label++,{value:u[1],done:!1};case 5:r.label++,n=u[1],u=[0];continue;case 7:u=r.ops.pop(),r.trys.pop();continue;default:if(i=r.trys,!(i=i.length>0&&i[i.length-1])&&(u[0]===6||u[0]===2)){r=0;continue}if(u[0]===3&&(!i||u[1]>i[0]&&u[1]<i[3])){r.label=u[1];break}if(u[0]===6&&r.label<i[1]){r.label=i[1],i=u;break}if(i&&r.label<i[2]){r.label=i[2],r.ops.push(u);break}i[2]&&r.ops.pop(),r.trys.pop();continue}u=t.call(e,r)}catch(f){u=[6,f],n=0}finally{o=i=0}if(u[0]&5)throw u[1];return{value:u[0]?u[1]:void 0,done:!0}}}function Lt(e){var t=typeof Symbol=="function"&&Symbol.iterator,r=t&&e[t],o=0;if(r)return r.call(e);if(e&&typeof e.length=="number")return{next:function(){return e&&o>=e.length&&(e=void 0),{value:e&&e[o++],done:!e}}};throw new TypeError(t?"Object is not iterable.":"Symbol.iterator is not defined.")}function _e(e,t){var r=typeof Symbol=="function"&&e[Symbol.iterator];if(!r)return e;var o=r.call(e),n,i=[],s;try{for(;(t===void 0||t-- >0)&&!(n=o.next()).done;)i.push(n.value)}catch(a){s={error:a}}finally{try{n&&!n.done&&(r=o.return)&&r.call(o)}finally{if(s)throw s.error}}return i}function je(e,t,r){if(r||arguments.length===2)for(var o=0,n=t.length,i;o<n;o++)(i||!(o in t))&&(i||(i=Array.prototype.slice.call(t,0,o)),i[o]=t[o]);return e.concat(i||Array.prototype.slice.call(t))}function $t(e){return this instanceof $t?(this.v=e,this):new $t(e)}function Ku(e,t,r){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var o=r.apply(e,t||[]),n,i=[];return n={},s("next"),s("throw"),s("return"),n[Symbol.asyncIterator]=function(){return this},n;function s(d){o[d]&&(n[d]=function(b){return new Promise(function(S,h){i.push([d,b,S,h])>1||a(d,b)})})}function a(d,b){try{c(o[d](b))}catch(S){m(i[0][3],S)}}function c(d){d.value instanceof $t?Promise.resolve(d.value.v).then(u,f):m(i[0][2],d)}function u(d){a("next",d)}function f(d){a("throw",d)}function m(d,b){d(b),i.shift(),i.length&&a(i[0][0],i[0][1])}}function qu(e){if(!Symbol.asyncIterator)throw new TypeError("Symbol.asyncIterator is not defined.");var t=e[Symbol.asyncIterator],r;return t?t.call(e):(e=typeof Lt=="function"?Lt(e):e[Symbol.iterator](),r={},o("next"),o("throw"),o("return"),r[Symbol.asyncIterator]=function(){return this},r);function o(i){r[i]=e[i]&&function(s){return new Promise(function(a,c){s=e[i](s),n(a,c,s.done,s.value)})}}function n(i,s,a,c){Promise.resolve(c).then(function(u){i({value:u,done:a})},s)}}function I(e){return typeof e=="function"}function Gu(e){var t=function(o){Error.call(o),o.stack=new Error().stack},r=e(t);return r.prototype=Object.create(Error.prototype),r.prototype.constructor=r,r}var hn=Gu(function(e){return function(r){e(this),this.message=r?r.length+` errors occurred during unsubscription:
-`+r.map(function(o,n){return n+1+") "+o.toString()}).join(`
-  `):"",this.name="UnsubscriptionError",this.errors=r}});function so(e,t){if(e){var r=e.indexOf(t);0<=r&&e.splice(r,1)}}var yr=function(){function e(t){this.initialTeardown=t,this.closed=!1,this._parentage=null,this._finalizers=null}return e.prototype.unsubscribe=function(){var t,r,o,n,i;if(!this.closed){this.closed=!0;var s=this._parentage;if(s)if(this._parentage=null,Array.isArray(s))try{for(var a=Lt(s),c=a.next();!c.done;c=a.next()){var u=c.value;u.remove(this)}}catch(h){t={error:h}}finally{try{c&&!c.done&&(r=a.return)&&r.call(a)}finally{if(t)throw t.error}}else s.remove(this);var f=this.initialTeardown;if(I(f))try{f()}catch(h){i=h instanceof hn?h.errors:[h]}var m=this._finalizers;if(m){this._finalizers=null;try{for(var d=Lt(m),b=d.next();!b.done;b=d.next()){var S=b.value;try{zu(S)}catch(h){i=i??[],h instanceof hn?i=je(je([],_e(i)),_e(h.errors)):i.push(h)}}}catch(h){o={error:h}}finally{try{b&&!b.done&&(n=d.return)&&n.call(d)}finally{if(o)throw o.error}}}if(i)throw new hn(i)}},e.prototype.add=function(t){var r;if(t&&t!==this)if(this.closed)zu(t);else{if(t instanceof e){if(t.closed||t._hasParent(this))return;t._addParent(this)}(this._finalizers=(r=this._finalizers)!==null&&r!==void 0?r:[]).push(t)}},e.prototype._hasParent=function(t){var r=this._parentage;return r===t||Array.isArray(r)&&r.includes(t)},e.prototype._addParent=function(t){var r=this._parentage;this._parentage=Array.isArray(r)?(r.push(t),r):r?[r,t]:t},e.prototype._removeParent=function(t){var r=this._parentage;r===t?this._parentage=null:Array.isArray(r)&&so(r,t)},e.prototype.remove=function(t){var r=this._finalizers;r&&so(r,t),t instanceof e&&t._removeParent(this)},e.EMPTY=function(){var t=new e;return t.closed=!0,t}(),e}();var p_=yr.EMPTY;function yn(e){return e instanceof yr||e&&"closed"in e&&I(e.remove)&&I(e.add)&&I(e.unsubscribe)}function zu(e){I(e)?e():e.unsubscribe()}var Ue={onUnhandledError:null,onStoppedNotification:null,Promise:void 0,useDeprecatedSynchronousErrorHandling:!1,useDeprecatedNextContext:!1};var br={setTimeout:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=br.delegate;return n!=null&&n.setTimeout?n.setTimeout.apply(n,je([e,t],_e(r))):setTimeout.apply(void 0,je([e,t],_e(r)))},clearTimeout:function(e){var t=br.delegate;return((t==null?void 0:t.clearTimeout)||clearTimeout)(e)},delegate:void 0};function bn(e){br.setTimeout(function(){var t=Ue.onUnhandledError;if(t)t(e);else throw e})}function ps(){}var Yu=function(){return ds("C",void 0,void 0)}();function Ju(e){return ds("E",void 0,e)}function Zu(e){return ds("N",e,void 0)}function ds(e,t,r){return{kind:e,value:t,error:r}}var Bt=null;function Xu(e){if(Ue.useDeprecatedSynchronousErrorHandling){var t=!Bt;if(t&&(Bt={errorThrown:!1,error:null}),e(),t){var r=Bt,o=r.errorThrown,n=r.error;if(Bt=null,o)throw n}}else e()}function Qu(e){Ue.useDeprecatedSynchronousErrorHandling&&Bt&&(Bt.errorThrown=!0,Bt.error=e)}var ao=function(e){Fe(t,e);function t(r){var o=e.call(this)||this;return o.isStopped=!1,r?(o.destination=r,yn(r)&&r.add(o)):o.destination=fm,o}return t.create=function(r,o,n){return new xn(r,o,n)},t.prototype.next=function(r){this.isStopped?hs(Zu(r),this):this._next(r)},t.prototype.error=function(r){this.isStopped?hs(Ju(r),this):(this.isStopped=!0,this._error(r))},t.prototype.complete=function(){this.isStopped?hs(Yu,this):(this.isStopped=!0,this._complete())},t.prototype.unsubscribe=function(){this.closed||(this.isStopped=!0,e.prototype.unsubscribe.call(this),this.destination=null)},t.prototype._next=function(r){this.destination.next(r)},t.prototype._error=function(r){try{this.destination.error(r)}finally{this.unsubscribe()}},t.prototype._complete=function(){try{this.destination.complete()}finally{this.unsubscribe()}},t}(yr);var am=Function.prototype.bind;function ms(e,t){return am.call(e,t)}var cm=function(){function e(t){this.partialObserver=t}return e.prototype.next=function(t){var r=this.partialObserver;if(r.next)try{r.next(t)}catch(o){vn(o)}},e.prototype.error=function(t){var r=this.partialObserver;if(r.error)try{r.error(t)}catch(o){vn(o)}else vn(t)},e.prototype.complete=function(){var t=this.partialObserver;if(t.complete)try{t.complete()}catch(r){vn(r)}},e}(),xn=function(e){Fe(t,e);function t(r,o,n){var i=e.call(this)||this,s;if(I(r)||!r)s={next:r??void 0,error:o??void 0,complete:n??void 0};else{var a;i&&Ue.useDeprecatedNextContext?(a=Object.create(r),a.unsubscribe=function(){return i.unsubscribe()},s={next:r.next&&ms(r.next,a),error:r.error&&ms(r.error,a),complete:r.complete&&ms(r.complete,a)}):s=r}return i.destination=new cm(s),i}return t}(ao);function vn(e){Ue.useDeprecatedSynchronousErrorHandling?Qu(e):bn(e)}function um(e){throw e}function hs(e,t){var r=Ue.onStoppedNotification;r&&br.setTimeout(function(){return r(e,t)})}var fm={closed:!0,next:ps,error:um,complete:ps};var vr=function(){return typeof Symbol=="function"&&Symbol.observable||"@@observable"}();function gn(e){return e}function ef(e){return e.length===0?gn:e.length===1?e[0]:function(r){return e.reduce(function(o,n){return n(o)},r)}}var ne=function(){function e(t){t&&(this._subscribe=t)}return e.prototype.lift=function(t){var r=new e;return r.source=this,r.operator=t,r},e.prototype.subscribe=function(t,r,o){var n=this,i=pm(t)?t:new xn(t,r,o);return Xu(function(){var s=n,a=s.operator,c=s.source;i.add(a?a.call(i,c):c?n._subscribe(i):n._trySubscribe(i))}),i},e.prototype._trySubscribe=function(t){try{return this._subscribe(t)}catch(r){t.error(r)}},e.prototype.forEach=function(t,r){var o=this;return r=tf(r),new r(function(n,i){var s=new xn({next:function(a){try{t(a)}catch(c){i(c),s.unsubscribe()}},error:i,complete:n});o.subscribe(s)})},e.prototype._subscribe=function(t){var r;return(r=this.source)===null||r===void 0?void 0:r.subscribe(t)},e.prototype[vr]=function(){return this},e.prototype.pipe=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];return ef(t)(this)},e.prototype.toPromise=function(t){var r=this;return t=tf(t),new t(function(o,n){var i;r.subscribe(function(s){return i=s},function(s){return n(s)},function(){return o(i)})})},e.create=function(t){return new e(t)},e}();function tf(e){var t;return(t=e??Ue.Promise)!==null&&t!==void 0?t:Promise}function lm(e){return e&&I(e.next)&&I(e.error)&&I(e.complete)}function pm(e){return e&&e instanceof ao||lm(e)&&yn(e)}function dm(e){return I(e==null?void 0:e.lift)}function ze(e){return function(t){if(dm(t))return t.lift(function(r){try{return e(r,this)}catch(o){this.error(o)}});throw new TypeError("Unable to lift unknown Observable type")}}function Ye(e,t,r,o,n){return new mm(e,t,r,o,n)}var mm=function(e){Fe(t,e);function t(r,o,n,i,s,a){var c=e.call(this,r)||this;return c.onFinalize=s,c.shouldUnsubscribe=a,c._next=o?function(u){try{o(u)}catch(f){r.error(f)}}:e.prototype._next,c._error=i?function(u){try{i(u)}catch(f){r.error(f)}finally{this.unsubscribe()}}:e.prototype._error,c._complete=n?function(){try{n()}catch(u){r.error(u)}finally{this.unsubscribe()}}:e.prototype._complete,c}return t.prototype.unsubscribe=function(){var r;if(!this.shouldUnsubscribe||this.shouldUnsubscribe()){var o=this.closed;e.prototype.unsubscribe.call(this),!o&&((r=this.onFinalize)===null||r===void 0||r.call(this))}},t}(ao);var ys={now:function(){return(ys.delegate||Date).now()},delegate:void 0};var rf=function(e){Fe(t,e);function t(r,o){return e.call(this)||this}return t.prototype.schedule=function(r,o){return o===void 0&&(o=0),this},t}(yr);var co={setInterval:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=co.delegate;return n!=null&&n.setInterval?n.setInterval.apply(n,je([e,t],_e(r))):setInterval.apply(void 0,je([e,t],_e(r)))},clearInterval:function(e){var t=co.delegate;return((t==null?void 0:t.clearInterval)||clearInterval)(e)},delegate:void 0};var of=function(e){Fe(t,e);function t(r,o){var n=e.call(this,r,o)||this;return n.scheduler=r,n.work=o,n.pending=!1,n}return t.prototype.schedule=function(r,o){var n;if(o===void 0&&(o=0),this.closed)return this;this.state=r;var i=this.id,s=this.scheduler;return i!=null&&(this.id=this.recycleAsyncId(s,i,o)),this.pending=!0,this.delay=o,this.id=(n=this.id)!==null&&n!==void 0?n:this.requestAsyncId(s,this.id,o),this},t.prototype.requestAsyncId=function(r,o,n){return n===void 0&&(n=0),co.setInterval(r.flush.bind(r,this),n)},t.prototype.recycleAsyncId=function(r,o,n){if(n===void 0&&(n=0),n!=null&&this.delay===n&&this.pending===!1)return o;o!=null&&co.clearInterval(o)},t.prototype.execute=function(r,o){if(this.closed)return new Error("executing a cancelled action");this.pending=!1;var n=this._execute(r,o);if(n)return n;this.pending===!1&&this.id!=null&&(this.id=this.recycleAsyncId(this.scheduler,this.id,null))},t.prototype._execute=function(r,o){var n=!1,i;try{this.work(r)}catch(s){n=!0,i=s||new Error("Scheduled action threw falsy error")}if(n)return this.unsubscribe(),i},t.prototype.unsubscribe=function(){if(!this.closed){var r=this,o=r.id,n=r.scheduler,i=n.actions;this.work=this.state=this.scheduler=null,this.pending=!1,so(i,this),o!=null&&(this.id=this.recycleAsyncId(n,o,null)),this.delay=null,e.prototype.unsubscribe.call(this)}},t}(rf);var bs=function(){function e(t,r){r===void 0&&(r=e.now),this.schedulerActionCtor=t,this.now=r}return e.prototype.schedule=function(t,r,o){return r===void 0&&(r=0),new this.schedulerActionCtor(this,t).schedule(o,r)},e.now=ys.now,e}();var nf=function(e){Fe(t,e);function t(r,o){o===void 0&&(o=bs.now);var n=e.call(this,r,o)||this;return n.actions=[],n._active=!1,n}return t.prototype.flush=function(r){var o=this.actions;if(this._active){o.push(r);return}var n;this._active=!0;do if(n=r.execute(r.state,r.delay))break;while(r=o.shift());if(this._active=!1,n){for(;r=o.shift();)r.unsubscribe();throw n}},t}(bs);var vs=new nf(of),sf=vs;var af=new ne(function(e){return e.complete()});function _n(e){return e&&I(e.schedule)}function cf(e){return e[e.length-1]}function uf(e){return _n(cf(e))?e.pop():void 0}function ff(e,t){return typeof cf(e)=="number"?e.pop():t}var xr=function(e){return e&&typeof e.length=="number"&&typeof e!="function"};function En(e){return I(e==null?void 0:e.then)}function wn(e){return I(e[vr])}function On(e){return Symbol.asyncIterator&&I(e==null?void 0:e[Symbol.asyncIterator])}function Sn(e){return new TypeError("You provided "+(e!==null&&typeof e=="object"?"an invalid object":"'"+e+"'")+" where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.")}function hm(){return typeof Symbol!="function"||!Symbol.iterator?"@@iterator":Symbol.iterator}var Nn=hm();function Tn(e){return I(e==null?void 0:e[Nn])}function Cn(e){return Ku(this,arguments,function(){var r,o,n,i;return mn(this,function(s){switch(s.label){case 0:r=e.getReader(),s.label=1;case 1:s.trys.push([1,,9,10]),s.label=2;case 2:return[4,$t(r.read())];case 3:return o=s.sent(),n=o.value,i=o.done,i?[4,$t(void 0)]:[3,5];case 4:return[2,s.sent()];case 5:return[4,$t(n)];case 6:return[4,s.sent()];case 7:return s.sent(),[3,2];case 8:return[3,10];case 9:return r.releaseLock(),[7];case 10:return[2]}})})}function Pn(e){return I(e==null?void 0:e.getReader)}function ue(e){if(e instanceof ne)return e;if(e!=null){if(wn(e))return ym(e);if(xr(e))return bm(e);if(En(e))return vm(e);if(On(e))return lf(e);if(Tn(e))return xm(e);if(Pn(e))return gm(e)}throw Sn(e)}function ym(e){return new ne(function(t){var r=e[vr]();if(I(r.subscribe))return r.subscribe(t);throw new TypeError("Provided object does not correctly implement Symbol.observable")})}function bm(e){return new ne(function(t){for(var r=0;r<e.length&&!t.closed;r++)t.next(e[r]);t.complete()})}function vm(e){return new ne(function(t){e.then(function(r){t.closed||(t.next(r),t.complete())},function(r){return t.error(r)}).then(null,bn)})}function xm(e){return new ne(function(t){var r,o;try{for(var n=Lt(e),i=n.next();!i.done;i=n.next()){var s=i.value;if(t.next(s),t.closed)return}}catch(a){r={error:a}}finally{try{i&&!i.done&&(o=n.return)&&o.call(n)}finally{if(r)throw r.error}}t.complete()})}function lf(e){return new ne(function(t){_m(e,t).catch(function(r){return t.error(r)})})}function gm(e){return lf(Cn(e))}function _m(e,t){var r,o,n,i;return Hu(this,void 0,void 0,function(){var s,a;return mn(this,function(c){switch(c.label){case 0:c.trys.push([0,5,6,11]),r=qu(e),c.label=1;case 1:return[4,r.next()];case 2:if(o=c.sent(),!!o.done)return[3,4];if(s=o.value,t.next(s),t.closed)return[2];c.label=3;case 3:return[3,1];case 4:return[3,11];case 5:return a=c.sent(),n={error:a},[3,11];case 6:return c.trys.push([6,,9,10]),o&&!o.done&&(i=r.return)?[4,i.call(r)]:[3,8];case 7:c.sent(),c.label=8;case 8:return[3,10];case 9:if(n)throw n.error;return[7];case 10:return[7];case 11:return t.complete(),[2]}})})}function Ne(e,t,r,o,n){o===void 0&&(o=0),n===void 0&&(n=!1);var i=t.schedule(function(){r(),n?e.add(this.schedule(null,o)):this.unsubscribe()},o);if(e.add(i),!n)return i}function An(e,t){return t===void 0&&(t=0),ze(function(r,o){r.subscribe(Ye(o,function(n){return Ne(o,e,function(){return o.next(n)},t)},function(){return Ne(o,e,function(){return o.complete()},t)},function(n){return Ne(o,e,function(){return o.error(n)},t)}))})}function Dn(e,t){return t===void 0&&(t=0),ze(function(r,o){o.add(e.schedule(function(){return r.subscribe(o)},t))})}function pf(e,t){return ue(e).pipe(Dn(t),An(t))}function df(e,t){return ue(e).pipe(Dn(t),An(t))}function mf(e,t){return new ne(function(r){var o=0;return t.schedule(function(){o===e.length?r.complete():(r.next(e[o++]),r.closed||this.schedule())})})}function hf(e,t){return new ne(function(r){var o;return Ne(r,t,function(){o=e[Nn](),Ne(r,t,function(){var n,i,s;try{n=o.next(),i=n.value,s=n.done}catch(a){r.error(a);return}s?r.complete():r.next(i)},0,!0)}),function(){return I(o==null?void 0:o.return)&&o.return()}})}function Rn(e,t){if(!e)throw new Error("Iterable cannot be null");return new ne(function(r){Ne(r,t,function(){var o=e[Symbol.asyncIterator]();Ne(r,t,function(){o.next().then(function(n){n.done?r.complete():r.next(n.value)})},0,!0)})})}function yf(e,t){return Rn(Cn(e),t)}function bf(e,t){if(e!=null){if(wn(e))return pf(e,t);if(xr(e))return mf(e,t);if(En(e))return df(e,t);if(On(e))return Rn(e,t);if(Tn(e))return hf(e,t);if(Pn(e))return yf(e,t)}throw Sn(e)}function vf(e,t){return t?bf(e,t):ue(e)}function xf(e){return e instanceof Date&&!isNaN(e)}function Vn(e,t){return ze(function(r,o){var n=0;r.subscribe(Ye(o,function(i){o.next(e.call(t,i,n++))}))})}var Em=Array.isArray;function wm(e,t){return Em(t)?e.apply(void 0,je([],_e(t))):e(t)}function gf(e){return Vn(function(t){return wm(e,t)})}function _f(e,t,r,o,n,i,s,a){var c=[],u=0,f=0,m=!1,d=function(){m&&!c.length&&!u&&t.complete()},b=function(h){return u<o?S(h):c.push(h)},S=function(h){i&&t.next(h),u++;var M=!1;ue(r(h,f++)).subscribe(Ye(t,function(V){n==null||n(V),i?b(V):t.next(V)},function(){M=!0},void 0,function(){if(M)try{u--;for(var V=function(){var X=c.shift();s?Ne(t,s,function(){return S(X)}):S(X)};c.length&&u<o;)V();d()}catch(X){t.error(X)}}))};return e.subscribe(Ye(t,b,function(){m=!0,d()})),function(){a==null||a()}}function uo(e,t,r){return r===void 0&&(r=1/0),I(t)?uo(function(o,n){return Vn(function(i,s){return t(o,i,n,s)})(ue(e(o,n)))},r):(typeof t=="number"&&(r=t),ze(function(o,n){return _f(o,n,e,r)}))}function Ef(e){return e===void 0&&(e=1/0),uo(gn,e)}var Om=["addListener","removeListener"],Sm=["addEventListener","removeEventListener"],Nm=["on","off"];function gr(e,t,r,o){if(I(r)&&(o=r,r=void 0),o)return gr(e,t,r).pipe(gf(o));var n=_e(Pm(e)?Sm.map(function(a){return function(c){return e[a](t,c,r)}}):Tm(e)?Om.map(wf(e,t)):Cm(e)?Nm.map(wf(e,t)):[],2),i=n[0],s=n[1];if(!i&&xr(e))return uo(function(a){return gr(a,t,r)})(ue(e));if(!i)throw new TypeError("Invalid event target");return new ne(function(a){var c=function(){for(var u=[],f=0;f<arguments.length;f++)u[f]=arguments[f];return a.next(1<u.length?u:u[0])};return i(c),function(){return s(c)}})}function wf(e,t){return function(r){return function(o){return e[r](t,o)}}}function Tm(e){return I(e.addListener)&&I(e.removeListener)}function Cm(e){return I(e.on)&&I(e.off)}function Pm(e){return I(e.addEventListener)&&I(e.removeEventListener)}function Of(e,t,r){e===void 0&&(e=0),r===void 0&&(r=sf);var o=-1;return t!=null&&(_n(t)?r=t:o=t),new ne(function(n){var i=xf(e)?+e-r.now():e;i<0&&(i=0);var s=0;return r.schedule(function(){n.closed||(n.next(s++),0<=o?this.schedule(void 0,o):n.complete())},i)})}function xs(){for(var e=[],t=0;t<arguments.length;t++)e[t]=arguments[t];var r=uf(e),o=ff(e,1/0),n=e;return n.length?n.length===1?ue(n[0]):Ef(o)(vf(n,r)):af}function Sf(e,t){return ze(function(r,o){var n=t??{},i=n.leading,s=i===void 0?!0:i,a=n.trailing,c=a===void 0?!1:a,u=!1,f=null,m=null,d=!1,b=function(){m==null||m.unsubscribe(),m=null,c&&(M(),d&&o.complete())},S=function(){m=null,d&&o.complete()},h=function(V){return m=ue(e(V)).subscribe(Ye(o,b,S))},M=function(){if(u){u=!1;var V=f;f=null,o.next(V),!d&&h(V)}};r.subscribe(Ye(o,function(V){u=!0,f=V,!(m&&!m.closed)&&(s?M():h(V))},function(){d=!0,!(c&&u&&m&&!m.closed)&&o.complete()}))})}function gs(e,t,r){t===void 0&&(t=vs);var o=Of(e,t);return Sf(function(){return o},r)}var _r=(o=>(o[o.PlayerA=0]="PlayerA",o[o.PlayerB=1]="PlayerB",o[o.None=2]="None",o))(_r||{});function Nf(e,t){if(e===null||t===null)return"";switch(t.state){case 1:return"Attente d'un deuxieme joueur";case 2:switch(e){case 0:case 1:return"Attendez...";default:return""}case 4:switch(e){case 0:return"Vous gagnez !";case 1:return"Vous perdez !";default:return""}case 5:switch(e){case 0:return"Vous perdez !";case 1:return"Vous gagnez !";default:return""}case 6:switch(e){case 0:return"Gagn\xE9 ! L'adversaire a frapp\xE9 trop t\xF4t !";case 1:return"Perdu ! vous frappez trop t\xF4t !";default:return""}case 7:switch(e){case 0:return"Perdu ! vous frappez trop t\xF4t !";case 1:return"Gagn\xE9 ! L'adversaire a frapp\xE9 trop t\xF4t !";default:return""}default:return""}}function Tf(e,t){if(t==null||e==null)return!0;switch(t.state){case 0:case 8:case 9:return!0;case 1:return e!==0;default:return!1}}var Cf={props:{connection:Object},setup(e){let t=e.connection,r=He(null),o=He(null),n=He(!1),i=t.messages$.subscribe({error:()=>n.value=!0,complete:()=>n.value=!0}),s=Fu(t).subscribe(b=>o.value=b),a=ju(t).subscribe(b=>r.value=b);$u(t).then(b=>o.value=b).catch(console.error),Bu(t).then(b=>r.value=b).catch(console.error);let c=xs(gr(document,"click"),gr(document,"keydown")).pipe(gs(500)).subscribe(function(){Wu(t).catch(console.error)});Yr(function(){c.unsubscribe(),s.unsubscribe(),a.unsubscribe(),i.unsubscribe()});let u=Zr(()=>Tf(r.value,o.value)),f=Zr(function(){return o.value===null?!1:o.value.state===4||o.value.state===6}),m=Zr(function(){return o.value===null?!1:o.value.state===5||o.value.state===7}),d=Zr(()=>Nf(r.value,o.value));return{myCharacter:r,game:o,GameState:xt,Character:_r,showTitle:u,aWins:f,bWins:m,disconnected:n,indication:d}},render:Ou};var _s=function(e,t){return _s=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,o){r.__proto__=o}||function(r,o){for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(r[n]=o[n])},_s(e,t)};function Er(e,t){if(typeof t!="function"&&t!==null)throw new TypeError("Class extends value "+String(t)+" is not a constructor or null");_s(e,t);function r(){this.constructor=e}e.prototype=t===null?Object.create(t):(r.prototype=t.prototype,new r)}function fo(e){var t=typeof Symbol=="function"&&Symbol.iterator,r=t&&e[t],o=0;if(r)return r.call(e);if(e&&typeof e.length=="number")return{next:function(){return e&&o>=e.length&&(e=void 0),{value:e&&e[o++],done:!e}}};throw new TypeError(t?"Object is not iterable.":"Symbol.iterator is not defined.")}function wr(e,t){var r=typeof Symbol=="function"&&e[Symbol.iterator];if(!r)return e;var o=r.call(e),n,i=[],s;try{for(;(t===void 0||t-- >0)&&!(n=o.next()).done;)i.push(n.value)}catch(a){s={error:a}}finally{try{n&&!n.done&&(r=o.return)&&r.call(o)}finally{if(s)throw s.error}}return i}function Or(e,t,r){if(r||arguments.length===2)for(var o=0,n=t.length,i;o<n;o++)(i||!(o in t))&&(i||(i=Array.prototype.slice.call(t,0,o)),i[o]=t[o]);return e.concat(i||Array.prototype.slice.call(t))}function Te(e){return typeof e=="function"}function In(e){var t=function(o){Error.call(o),o.stack=new Error().stack},r=e(t);return r.prototype=Object.create(Error.prototype),r.prototype.constructor=r,r}var kn=In(function(e){return function(r){e(this),this.message=r?r.length+` errors occurred during unsubscription:
-`+r.map(function(o,n){return n+1+") "+o.toString()}).join(`
-  `):"",this.name="UnsubscriptionError",this.errors=r}});function lo(e,t){if(e){var r=e.indexOf(t);0<=r&&e.splice(r,1)}}var Sr=function(){function e(t){this.initialTeardown=t,this.closed=!1,this._parentage=null,this._finalizers=null}return e.prototype.unsubscribe=function(){var t,r,o,n,i;if(!this.closed){this.closed=!0;var s=this._parentage;if(s)if(this._parentage=null,Array.isArray(s))try{for(var a=fo(s),c=a.next();!c.done;c=a.next()){var u=c.value;u.remove(this)}}catch(h){t={error:h}}finally{try{c&&!c.done&&(r=a.return)&&r.call(a)}finally{if(t)throw t.error}}else s.remove(this);var f=this.initialTeardown;if(Te(f))try{f()}catch(h){i=h instanceof kn?h.errors:[h]}var m=this._finalizers;if(m){this._finalizers=null;try{for(var d=fo(m),b=d.next();!b.done;b=d.next()){var S=b.value;try{Pf(S)}catch(h){i=i??[],h instanceof kn?i=Or(Or([],wr(i)),wr(h.errors)):i.push(h)}}}catch(h){o={error:h}}finally{try{b&&!b.done&&(n=d.return)&&n.call(d)}finally{if(o)throw o.error}}}if(i)throw new kn(i)}},e.prototype.add=function(t){var r;if(t&&t!==this)if(this.closed)Pf(t);else{if(t instanceof e){if(t.closed||t._hasParent(this))return;t._addParent(this)}(this._finalizers=(r=this._finalizers)!==null&&r!==void 0?r:[]).push(t)}},e.prototype._hasParent=function(t){var r=this._parentage;return r===t||Array.isArray(r)&&r.includes(t)},e.prototype._addParent=function(t){var r=this._parentage;this._parentage=Array.isArray(r)?(r.push(t),r):r?[r,t]:t},e.prototype._removeParent=function(t){var r=this._parentage;r===t?this._parentage=null:Array.isArray(r)&&lo(r,t)},e.prototype.remove=function(t){var r=this._finalizers;r&&lo(r,t),t instanceof e&&t._removeParent(this)},e.EMPTY=function(){var t=new e;return t.closed=!0,t}(),e}();var Es=Sr.EMPTY;function Mn(e){return e instanceof Sr||e&&"closed"in e&&Te(e.remove)&&Te(e.add)&&Te(e.unsubscribe)}function Pf(e){Te(e)?e():e.unsubscribe()}var Le={onUnhandledError:null,onStoppedNotification:null,Promise:void 0,useDeprecatedSynchronousErrorHandling:!1,useDeprecatedNextContext:!1};var Nr={setTimeout:function(e,t){for(var r=[],o=2;o<arguments.length;o++)r[o-2]=arguments[o];var n=Nr.delegate;return n!=null&&n.setTimeout?n.setTimeout.apply(n,Or([e,t],wr(r))):setTimeout.apply(void 0,Or([e,t],wr(r)))},clearTimeout:function(e){var t=Nr.delegate;return((t==null?void 0:t.clearTimeout)||clearTimeout)(e)},delegate:void 0};function Af(e){Nr.setTimeout(function(){var t=Le.onUnhandledError;if(t)t(e);else throw e})}function ws(){}var Df=function(){return Os("C",void 0,void 0)}();function Rf(e){return Os("E",void 0,e)}function Vf(e){return Os("N",e,void 0)}function Os(e,t,r){return{kind:e,value:t,error:r}}var Wt=null;function Tr(e){if(Le.useDeprecatedSynchronousErrorHandling){var t=!Wt;if(t&&(Wt={errorThrown:!1,error:null}),e(),t){var r=Wt,o=r.errorThrown,n=r.error;if(Wt=null,o)throw n}}else e()}function If(e){Le.useDeprecatedSynchronousErrorHandling&&Wt&&(Wt.errorThrown=!0,Wt.error=e)}var Ts=function(e){Er(t,e);function t(r){var o=e.call(this)||this;return o.isStopped=!1,r?(o.destination=r,Mn(r)&&r.add(o)):o.destination=Vm,o}return t.create=function(r,o,n){return new jn(r,o,n)},t.prototype.next=function(r){this.isStopped?Ns(Vf(r),this):this._next(r)},t.prototype.error=function(r){this.isStopped?Ns(Rf(r),this):(this.isStopped=!0,this._error(r))},t.prototype.complete=function(){this.isStopped?Ns(Df,this):(this.isStopped=!0,this._complete())},t.prototype.unsubscribe=function(){this.closed||(this.isStopped=!0,e.prototype.unsubscribe.call(this),this.destination=null)},t.prototype._next=function(r){this.destination.next(r)},t.prototype._error=function(r){try{this.destination.error(r)}finally{this.unsubscribe()}},t.prototype._complete=function(){try{this.destination.complete()}finally{this.unsubscribe()}},t}(Sr);var Am=Function.prototype.bind;function Ss(e,t){return Am.call(e,t)}var Dm=function(){function e(t){this.partialObserver=t}return e.prototype.next=function(t){var r=this.partialObserver;if(r.next)try{r.next(t)}catch(o){Fn(o)}},e.prototype.error=function(t){var r=this.partialObserver;if(r.error)try{r.error(t)}catch(o){Fn(o)}else Fn(t)},e.prototype.complete=function(){var t=this.partialObserver;if(t.complete)try{t.complete()}catch(r){Fn(r)}},e}(),jn=function(e){Er(t,e);function t(r,o,n){var i=e.call(this)||this,s;if(Te(r)||!r)s={next:r??void 0,error:o??void 0,complete:n??void 0};else{var a;i&&Le.useDeprecatedNextContext?(a=Object.create(r),a.unsubscribe=function(){return i.unsubscribe()},s={next:r.next&&Ss(r.next,a),error:r.error&&Ss(r.error,a),complete:r.complete&&Ss(r.complete,a)}):s=r}return i.destination=new Dm(s),i}return t}(Ts);function Fn(e){Le.useDeprecatedSynchronousErrorHandling?If(e):Af(e)}function Rm(e){throw e}function Ns(e,t){var r=Le.onStoppedNotification;r&&Nr.setTimeout(function(){return r(e,t)})}var Vm={closed:!0,next:ws,error:Rm,complete:ws};var kf=function(){return typeof Symbol=="function"&&Symbol.observable||"@@observable"}();function Mf(e){return e}function Ff(e){return e.length===0?Mf:e.length===1?e[0]:function(r){return e.reduce(function(o,n){return n(o)},r)}}var Cs=function(){function e(t){t&&(this._subscribe=t)}return e.prototype.lift=function(t){var r=new e;return r.source=this,r.operator=t,r},e.prototype.subscribe=function(t,r,o){var n=this,i=km(t)?t:new jn(t,r,o);return Tr(function(){var s=n,a=s.operator,c=s.source;i.add(a?a.call(i,c):c?n._subscribe(i):n._trySubscribe(i))}),i},e.prototype._trySubscribe=function(t){try{return this._subscribe(t)}catch(r){t.error(r)}},e.prototype.forEach=function(t,r){var o=this;return r=jf(r),new r(function(n,i){var s=new jn({next:function(a){try{t(a)}catch(c){i(c),s.unsubscribe()}},error:i,complete:n});o.subscribe(s)})},e.prototype._subscribe=function(t){var r;return(r=this.source)===null||r===void 0?void 0:r.subscribe(t)},e.prototype[kf]=function(){return this},e.prototype.pipe=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r];return Ff(t)(this)},e.prototype.toPromise=function(t){var r=this;return t=jf(t),new t(function(o,n){var i;r.subscribe(function(s){return i=s},function(s){return n(s)},function(){return o(i)})})},e.create=function(t){return new e(t)},e}();function jf(e){var t;return(t=e??Le.Promise)!==null&&t!==void 0?t:Promise}function Im(e){return e&&Te(e.next)&&Te(e.error)&&Te(e.complete)}function km(e){return e&&e instanceof Ts||Im(e)&&Mn(e)}var Uf=In(function(e){return function(){e(this),this.name="ObjectUnsubscribedError",this.message="object unsubscribed"}});var Un=function(e){Er(t,e);function t(){var r=e.call(this)||this;return r.closed=!1,r.currentObservers=null,r.observers=[],r.isStopped=!1,r.hasError=!1,r.thrownError=null,r}return t.prototype.lift=function(r){var o=new Lf(this,this);return o.operator=r,o},t.prototype._throwIfClosed=function(){if(this.closed)throw new Uf},t.prototype.next=function(r){var o=this;Tr(function(){var n,i;if(o._throwIfClosed(),!o.isStopped){o.currentObservers||(o.currentObservers=Array.from(o.observers));try{for(var s=fo(o.currentObservers),a=s.next();!a.done;a=s.next()){var c=a.value;c.next(r)}}catch(u){n={error:u}}finally{try{a&&!a.done&&(i=s.return)&&i.call(s)}finally{if(n)throw n.error}}}})},t.prototype.error=function(r){var o=this;Tr(function(){if(o._throwIfClosed(),!o.isStopped){o.hasError=o.isStopped=!0,o.thrownError=r;for(var n=o.observers;n.length;)n.shift().error(r)}})},t.prototype.complete=function(){var r=this;Tr(function(){if(r._throwIfClosed(),!r.isStopped){r.isStopped=!0;for(var o=r.observers;o.length;)o.shift().complete()}})},t.prototype.unsubscribe=function(){this.isStopped=this.closed=!0,this.observers=this.currentObservers=null},Object.defineProperty(t.prototype,"observed",{get:function(){var r;return((r=this.observers)===null||r===void 0?void 0:r.length)>0},enumerable:!1,configurable:!0}),t.prototype._trySubscribe=function(r){return this._throwIfClosed(),e.prototype._trySubscribe.call(this,r)},t.prototype._subscribe=function(r){return this._throwIfClosed(),this._checkFinalizedStatuses(r),this._innerSubscribe(r)},t.prototype._innerSubscribe=function(r){var o=this,n=this,i=n.hasError,s=n.isStopped,a=n.observers;return i||s?Es:(this.currentObservers=null,a.push(r),new Sr(function(){o.currentObservers=null,lo(a,r)}))},t.prototype._checkFinalizedStatuses=function(r){var o=this,n=o.hasError,i=o.thrownError,s=o.isStopped;n?r.error(i):s&&r.complete()},t.prototype.asObservable=function(){var r=new Cs;return r.source=this,r},t.create=function(r,o){return new Lf(r,o)},t}(Cs);var Lf=function(e){Er(t,e);function t(r,o){var n=e.call(this)||this;return n.destination=r,n.source=o,n}return t.prototype.next=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.next)===null||n===void 0||n.call(o,r)},t.prototype.error=function(r){var o,n;(n=(o=this.destination)===null||o===void 0?void 0:o.error)===null||n===void 0||n.call(o,r)},t.prototype.complete=function(){var r,o;(o=(r=this.destination)===null||r===void 0?void 0:r.complete)===null||o===void 0||o.call(r)},t.prototype._subscribe=function(r){var o,n;return(n=(o=this.source)===null||o===void 0?void 0:o.subscribe(r))!==null&&n!==void 0?n:Es},t}(Un);var Ln={state:0},$f=new Un;function Ht(){return{...Ln}}function $n(e){Ln={...Ln,...e},$f.next(Ln)}function Bn(){return $f.asObservable()}function Bf(e){return!!e.actionEmit}var{WaitingPlayerA:Wf,WaitingPlayerB:Hf,Matte:Kf,Hajime:qf,AWins:Gf,BWins:zf,AWinsByFault:Yf,BWinsByFault:Jf,PlayerADisconnected:Zf,PlayerBDisconnected:Xf}=xt,po;function Qf(e){return e.subscribe(function(t){let r=t.messages$.pipe(se(Bf)).subscribe({next(){let o=Ht();switch(o.state){case Gf:case zf:case Yf:case Jf:o.state=Wf,o.playerA=void 0,o.playerB=void 0;break;case Zf:case Xf:case Wf:o.playerA=t.id,o.state=Hf;break;case Hf:if(o.playerA!==t.id)o.playerB=t.id,o.state=Kf,po=setTimeout(function(){o.state=qf,$n(o)},2e3+Math.random()*4e3);else return;break;case Kf:t.id===o.playerA?(clearTimeout(po),o.state=Jf):t.id===o.playerB&&(clearTimeout(po),o.state=Yf);break;case qf:t.id===o.playerA?o.state=Gf:t.id===o.playerB&&(o.state=zf);break;default:return}$n(o)},complete(){let o=Ht();switch(t.id){case o.playerA:clearTimeout(po),o.playerA=void 0,o.playerB=void 0,o.state=Zf;break;case o.playerB:clearTimeout(po),o.playerA=void 0,o.playerB=void 0,o.state=Xf;break;default:return}$n(o),r.unsubscribe()}})})}function el(e){return e.subscribe(function(t){let r=t.messages$.pipe(ge(o=>o.getGameRequest),se(Boolean)).subscribe({next(o){let n={getGameResponse:{requestId:o.requestId,game:Ht()}};t.send(n)},complete(){r.unsubscribe()}})})}function tl(e){return e.subscribe(function(t){let r=Bn().subscribe(function(n){t.send({observeGameBroadcast:{game:n}})}),o=t.messages$.subscribe({complete(){r.unsubscribe(),o.unsubscribe()}})})}function Wn(e){let t=Ht();switch(e.id){case t.playerA:return 0;case t.playerB:return 1;default:return 2}}function rl(e){return e.subscribe(function(t){let r=t.messages$.pipe(ge(o=>o.getMyCharacterRequest),se(Boolean)).subscribe({next(o){t.send({getMyCharacterResponse:{requestId:o.requestId,character:Wn(t)}})},complete(){r.unsubscribe()}})})}function ol(e){return e.subscribe(function(t){let r=Bn().subscribe(function(){t.send({observeMyCharacterBroadcast:{character:Wn(t)}})}),o=t.messages$.subscribe({complete(){r.unsubscribe(),o.unsubscribe()}})})}function jm(){if(!0){let[e,t]=_u();return Qf(t),el(t),tl(t),rl(t),ol(t),e}else return qc(wu,4433,Eu)}var Um=gc({components:{GameComponent:Cf},setup(){let e=He(jm()),t=He(0),r=He(!0),o;return Yr(()=>o==null?void 0:o.unsubscribe()),{connection:e,showGame:r,gameKey:t}},render:_c});Um.mount("#game-mount-point");})();
-//# sourceMappingURL=bundle.js.map
+(() => {
+  // ../core/node_modules/svelte/src/runtime/internal/utils.js
+  function noop() {
+  }
+  function run(fn) {
+    return fn();
+  }
+  function blank_object() {
+    return /* @__PURE__ */ Object.create(null);
+  }
+  function run_all(fns) {
+    fns.forEach(run);
+  }
+  function is_function(thing) {
+    return typeof thing === "function";
+  }
+  function safe_not_equal(a, b) {
+    return a != a ? b == b : a !== b || a && typeof a === "object" || typeof a === "function";
+  }
+  function is_empty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  // ../core/node_modules/svelte/src/runtime/internal/globals.js
+  var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
+    // @ts-ignore Node typings have this
+    global
+  );
+
+  // ../core/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  var ResizeObserverSingleton = class {
+    /**
+     * @private
+     * @readonly
+     * @type {WeakMap<Element, import('./private.js').Listener>}
+     */
+    _listeners = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
+    /**
+     * @private
+     * @type {ResizeObserver}
+     */
+    _observer = void 0;
+    /** @type {ResizeObserverOptions} */
+    options;
+    /** @param {ResizeObserverOptions} options */
+    constructor(options) {
+      this.options = options;
+    }
+    /**
+     * @param {Element} element
+     * @param {import('./private.js').Listener} listener
+     * @returns {() => void}
+     */
+    observe(element2, listener) {
+      this._listeners.set(element2, listener);
+      this._getObserver().observe(element2, this.options);
+      return () => {
+        this._listeners.delete(element2);
+        this._observer.unobserve(element2);
+      };
+    }
+    /**
+     * @private
+     */
+    _getObserver() {
+      return this._observer ?? (this._observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          ResizeObserverSingleton.entries.set(entry.target, entry);
+          this._listeners.get(entry.target)?.(entry);
+        }
+      }));
+    }
+  };
+  ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
+
+  // ../core/node_modules/svelte/src/runtime/internal/dom.js
+  var is_hydrating = false;
+  function start_hydrating() {
+    is_hydrating = true;
+  }
+  function end_hydrating() {
+    is_hydrating = false;
+  }
+  function append(target2, node) {
+    target2.appendChild(node);
+  }
+  function insert(target2, node, anchor) {
+    target2.insertBefore(node, anchor || null);
+  }
+  function detach(node) {
+    if (node.parentNode) {
+      node.parentNode.removeChild(node);
+    }
+  }
+  function element(name) {
+    return document.createElement(name);
+  }
+  function text(data) {
+    return document.createTextNode(data);
+  }
+  function space() {
+    return text(" ");
+  }
+  function listen(node, event, handler, options) {
+    node.addEventListener(event, handler, options);
+    return () => node.removeEventListener(event, handler, options);
+  }
+  function attr(node, attribute, value) {
+    if (value == null)
+      node.removeAttribute(attribute);
+    else if (node.getAttribute(attribute) !== value)
+      node.setAttribute(attribute, value);
+  }
+  function children(element2) {
+    return Array.from(element2.childNodes);
+  }
+  function set_data(text2, data) {
+    data = "" + data;
+    if (text2.data === data)
+      return;
+    text2.data = /** @type {string} */
+    data;
+  }
+  function get_custom_elements_slots(element2) {
+    const result = {};
+    element2.childNodes.forEach(
+      /** @param {Element} node */
+      (node) => {
+        result[node.slot || "default"] = true;
+      }
+    );
+    return result;
+  }
+
+  // ../core/node_modules/svelte/src/runtime/internal/lifecycle.js
+  var current_component;
+  function set_current_component(component) {
+    current_component = component;
+  }
+  function get_current_component() {
+    if (!current_component)
+      throw new Error("Function called outside component initialization");
+    return current_component;
+  }
+  function onDestroy(fn) {
+    get_current_component().$$.on_destroy.push(fn);
+  }
+  function getContext(key) {
+    return get_current_component().$$.context.get(key);
+  }
+
+  // ../core/node_modules/svelte/src/runtime/internal/scheduler.js
+  var dirty_components = [];
+  var binding_callbacks = [];
+  var render_callbacks = [];
+  var flush_callbacks = [];
+  var resolved_promise = /* @__PURE__ */ Promise.resolve();
+  var update_scheduled = false;
+  function schedule_update() {
+    if (!update_scheduled) {
+      update_scheduled = true;
+      resolved_promise.then(flush);
+    }
+  }
+  function add_render_callback(fn) {
+    render_callbacks.push(fn);
+  }
+  var seen_callbacks = /* @__PURE__ */ new Set();
+  var flushidx = 0;
+  function flush() {
+    if (flushidx !== 0) {
+      return;
+    }
+    const saved_component = current_component;
+    do {
+      try {
+        while (flushidx < dirty_components.length) {
+          const component = dirty_components[flushidx];
+          flushidx++;
+          set_current_component(component);
+          update(component.$$);
+        }
+      } catch (e) {
+        dirty_components.length = 0;
+        flushidx = 0;
+        throw e;
+      }
+      set_current_component(null);
+      dirty_components.length = 0;
+      flushidx = 0;
+      while (binding_callbacks.length)
+        binding_callbacks.pop()();
+      for (let i = 0; i < render_callbacks.length; i += 1) {
+        const callback = render_callbacks[i];
+        if (!seen_callbacks.has(callback)) {
+          seen_callbacks.add(callback);
+          callback();
+        }
+      }
+      render_callbacks.length = 0;
+    } while (dirty_components.length);
+    while (flush_callbacks.length) {
+      flush_callbacks.pop()();
+    }
+    update_scheduled = false;
+    seen_callbacks.clear();
+    set_current_component(saved_component);
+  }
+  function update($$) {
+    if ($$.fragment !== null) {
+      $$.update();
+      run_all($$.before_update);
+      const dirty = $$.dirty;
+      $$.dirty = [-1];
+      $$.fragment && $$.fragment.p($$.ctx, dirty);
+      $$.after_update.forEach(add_render_callback);
+    }
+  }
+  function flush_render_callbacks(fns) {
+    const filtered = [];
+    const targets = [];
+    render_callbacks.forEach((c) => fns.indexOf(c) === -1 ? filtered.push(c) : targets.push(c));
+    targets.forEach((c) => c());
+    render_callbacks = filtered;
+  }
+
+  // ../core/node_modules/svelte/src/runtime/internal/transitions.js
+  var outroing = /* @__PURE__ */ new Set();
+  function transition_in(block, local) {
+    if (block && block.i) {
+      outroing.delete(block);
+      block.i(local);
+    }
+  }
+
+  // ../core/node_modules/svelte/src/shared/boolean_attributes.js
+  var _boolean_attributes = (
+    /** @type {const} */
+    [
+      "allowfullscreen",
+      "allowpaymentrequest",
+      "async",
+      "autofocus",
+      "autoplay",
+      "checked",
+      "controls",
+      "default",
+      "defer",
+      "disabled",
+      "formnovalidate",
+      "hidden",
+      "inert",
+      "ismap",
+      "loop",
+      "multiple",
+      "muted",
+      "nomodule",
+      "novalidate",
+      "open",
+      "playsinline",
+      "readonly",
+      "required",
+      "reversed",
+      "selected"
+    ]
+  );
+  var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
+
+  // ../core/node_modules/svelte/src/runtime/internal/Component.js
+  function mount_component(component, target2, anchor) {
+    const { fragment, after_update } = component.$$;
+    fragment && fragment.m(target2, anchor);
+    add_render_callback(() => {
+      const new_on_destroy = component.$$.on_mount.map(run).filter(is_function);
+      if (component.$$.on_destroy) {
+        component.$$.on_destroy.push(...new_on_destroy);
+      } else {
+        run_all(new_on_destroy);
+      }
+      component.$$.on_mount = [];
+    });
+    after_update.forEach(add_render_callback);
+  }
+  function destroy_component(component, detaching) {
+    const $$ = component.$$;
+    if ($$.fragment !== null) {
+      flush_render_callbacks($$.after_update);
+      run_all($$.on_destroy);
+      $$.fragment && $$.fragment.d(detaching);
+      $$.on_destroy = $$.fragment = null;
+      $$.ctx = [];
+    }
+  }
+  function make_dirty(component, i) {
+    if (component.$$.dirty[0] === -1) {
+      dirty_components.push(component);
+      schedule_update();
+      component.$$.dirty.fill(0);
+    }
+    component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
+  }
+  function init(component, options, instance2, create_fragment2, not_equal, props, append_styles = null, dirty = [-1]) {
+    const parent_component = current_component;
+    set_current_component(component);
+    const $$ = component.$$ = {
+      fragment: null,
+      ctx: [],
+      // state
+      props,
+      update: noop,
+      not_equal,
+      bound: blank_object(),
+      // lifecycle
+      on_mount: [],
+      on_destroy: [],
+      on_disconnect: [],
+      before_update: [],
+      after_update: [],
+      context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+      // everything else
+      callbacks: blank_object(),
+      dirty,
+      skip_bound: false,
+      root: options.target || parent_component.$$.root
+    };
+    append_styles && append_styles($$.root);
+    let ready = false;
+    $$.ctx = instance2 ? instance2(component, options.props || {}, (i, ret, ...rest) => {
+      const value = rest.length ? rest[0] : ret;
+      if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+        if (!$$.skip_bound && $$.bound[i])
+          $$.bound[i](value);
+        if (ready)
+          make_dirty(component, i);
+      }
+      return ret;
+    }) : [];
+    $$.update();
+    ready = true;
+    run_all($$.before_update);
+    $$.fragment = create_fragment2 ? create_fragment2($$.ctx) : false;
+    if (options.target) {
+      if (options.hydrate) {
+        start_hydrating();
+        const nodes = children(options.target);
+        $$.fragment && $$.fragment.l(nodes);
+        nodes.forEach(detach);
+      } else {
+        $$.fragment && $$.fragment.c();
+      }
+      if (options.intro)
+        transition_in(component.$$.fragment);
+      mount_component(component, options.target, options.anchor);
+      end_hydrating();
+      flush();
+    }
+    set_current_component(parent_component);
+  }
+  var SvelteElement;
+  if (typeof HTMLElement === "function") {
+    SvelteElement = class extends HTMLElement {
+      /** The Svelte component constructor */
+      $$ctor;
+      /** Slots */
+      $$s;
+      /** The Svelte component instance */
+      $$c;
+      /** Whether or not the custom element is connected */
+      $$cn = false;
+      /** Component props data */
+      $$d = {};
+      /** `true` if currently in the process of reflecting component props back to attributes */
+      $$r = false;
+      /** @type {Record<string, CustomElementPropDefinition>} Props definition (name, reflected, type etc) */
+      $$p_d = {};
+      /** @type {Record<string, Function[]>} Event listeners */
+      $$l = {};
+      /** @type {Map<Function, Function>} Event listener unsubscribe functions */
+      $$l_u = /* @__PURE__ */ new Map();
+      constructor($$componentCtor, $$slots, use_shadow_dom) {
+        super();
+        this.$$ctor = $$componentCtor;
+        this.$$s = $$slots;
+        if (use_shadow_dom) {
+          this.attachShadow({ mode: "open" });
+        }
+      }
+      addEventListener(type, listener, options) {
+        this.$$l[type] = this.$$l[type] || [];
+        this.$$l[type].push(listener);
+        if (this.$$c) {
+          const unsub = this.$$c.$on(type, listener);
+          this.$$l_u.set(listener, unsub);
+        }
+        super.addEventListener(type, listener, options);
+      }
+      removeEventListener(type, listener, options) {
+        super.removeEventListener(type, listener, options);
+        if (this.$$c) {
+          const unsub = this.$$l_u.get(listener);
+          if (unsub) {
+            unsub();
+            this.$$l_u.delete(listener);
+          }
+        }
+      }
+      async connectedCallback() {
+        this.$$cn = true;
+        if (!this.$$c) {
+          let create_slot = function(name) {
+            return () => {
+              let node;
+              const obj = {
+                c: function create() {
+                  node = element("slot");
+                  if (name !== "default") {
+                    attr(node, "name", name);
+                  }
+                },
+                /**
+                 * @param {HTMLElement} target
+                 * @param {HTMLElement} [anchor]
+                 */
+                m: function mount(target2, anchor) {
+                  insert(target2, node, anchor);
+                },
+                d: function destroy(detaching) {
+                  if (detaching) {
+                    detach(node);
+                  }
+                }
+              };
+              return obj;
+            };
+          };
+          await Promise.resolve();
+          if (!this.$$cn || this.$$c) {
+            return;
+          }
+          const $$slots = {};
+          const existing_slots = get_custom_elements_slots(this);
+          for (const name of this.$$s) {
+            if (name in existing_slots) {
+              $$slots[name] = [create_slot(name)];
+            }
+          }
+          for (const attribute of this.attributes) {
+            const name = this.$$g_p(attribute.name);
+            if (!(name in this.$$d)) {
+              this.$$d[name] = get_custom_element_value(name, attribute.value, this.$$p_d, "toProp");
+            }
+          }
+          for (const key in this.$$p_d) {
+            if (!(key in this.$$d) && this[key] !== void 0) {
+              this.$$d[key] = this[key];
+              delete this[key];
+            }
+          }
+          this.$$c = new this.$$ctor({
+            target: this.shadowRoot || this,
+            props: {
+              ...this.$$d,
+              $$slots,
+              $$scope: {
+                ctx: []
+              }
+            }
+          });
+          const reflect_attributes = () => {
+            this.$$r = true;
+            for (const key in this.$$p_d) {
+              this.$$d[key] = this.$$c.$$.ctx[this.$$c.$$.props[key]];
+              if (this.$$p_d[key].reflect) {
+                const attribute_value = get_custom_element_value(
+                  key,
+                  this.$$d[key],
+                  this.$$p_d,
+                  "toAttribute"
+                );
+                if (attribute_value == null) {
+                  this.removeAttribute(this.$$p_d[key].attribute || key);
+                } else {
+                  this.setAttribute(this.$$p_d[key].attribute || key, attribute_value);
+                }
+              }
+            }
+            this.$$r = false;
+          };
+          this.$$c.$$.after_update.push(reflect_attributes);
+          reflect_attributes();
+          for (const type in this.$$l) {
+            for (const listener of this.$$l[type]) {
+              const unsub = this.$$c.$on(type, listener);
+              this.$$l_u.set(listener, unsub);
+            }
+          }
+          this.$$l = {};
+        }
+      }
+      // We don't need this when working within Svelte code, but for compatibility of people using this outside of Svelte
+      // and setting attributes through setAttribute etc, this is helpful
+      attributeChangedCallback(attr2, _oldValue, newValue) {
+        if (this.$$r)
+          return;
+        attr2 = this.$$g_p(attr2);
+        this.$$d[attr2] = get_custom_element_value(attr2, newValue, this.$$p_d, "toProp");
+        this.$$c?.$set({ [attr2]: this.$$d[attr2] });
+      }
+      disconnectedCallback() {
+        this.$$cn = false;
+        Promise.resolve().then(() => {
+          if (!this.$$cn) {
+            this.$$c.$destroy();
+            this.$$c = void 0;
+          }
+        });
+      }
+      $$g_p(attribute_name) {
+        return Object.keys(this.$$p_d).find(
+          (key) => this.$$p_d[key].attribute === attribute_name || !this.$$p_d[key].attribute && key.toLowerCase() === attribute_name
+        ) || attribute_name;
+      }
+    };
+  }
+  function get_custom_element_value(prop, value, props_definition, transform) {
+    const type = props_definition[prop]?.type;
+    value = type === "Boolean" && typeof value !== "boolean" ? value != null : value;
+    if (!transform || !props_definition[prop]) {
+      return value;
+    } else if (transform === "toAttribute") {
+      switch (type) {
+        case "Object":
+        case "Array":
+          return value == null ? null : JSON.stringify(value);
+        case "Boolean":
+          return value ? "" : null;
+        case "Number":
+          return value == null ? null : value;
+        default:
+          return value;
+      }
+    } else {
+      switch (type) {
+        case "Object":
+        case "Array":
+          return value && JSON.parse(value);
+        case "Boolean":
+          return value;
+        case "Number":
+          return value != null ? +value : value;
+        default:
+          return value;
+      }
+    }
+  }
+  var SvelteComponent = class {
+    /**
+     * ### PRIVATE API
+     *
+     * Do not use, may change at any time
+     *
+     * @type {any}
+     */
+    $$ = void 0;
+    /**
+     * ### PRIVATE API
+     *
+     * Do not use, may change at any time
+     *
+     * @type {any}
+     */
+    $$set = void 0;
+    /** @returns {void} */
+    $destroy() {
+      destroy_component(this, 1);
+      this.$destroy = noop;
+    }
+    /**
+     * @template {Extract<keyof Events, string>} K
+     * @param {K} type
+     * @param {((e: Events[K]) => void) | null | undefined} callback
+     * @returns {() => void}
+     */
+    $on(type, callback) {
+      if (!is_function(callback)) {
+        return noop;
+      }
+      const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
+      callbacks.push(callback);
+      return () => {
+        const index = callbacks.indexOf(callback);
+        if (index !== -1)
+          callbacks.splice(index, 1);
+      };
+    }
+    /**
+     * @param {Partial<Props>} props
+     * @returns {void}
+     */
+    $set(props) {
+      if (this.$$set && !is_empty(props)) {
+        this.$$.skip_bound = true;
+        this.$$set(props);
+        this.$$.skip_bound = false;
+      }
+    }
+  };
+
+  // ../core/node_modules/svelte/src/shared/version.js
+  var PUBLIC_VERSION = "4";
+
+  // ../core/src/compute-indication.ts
+  function computeIndication(myCharacter, game) {
+    if (myCharacter === null) {
+      return "";
+    }
+    if (game === null) {
+      return "";
+    }
+    switch (game.state) {
+      case "WaitingPlayerB" /* WaitingPlayerB */:
+        return "Attente d'un deuxieme joueur";
+      case "Matte" /* Matte */:
+        switch (myCharacter) {
+          case "PlayerA" /* PlayerA */:
+          case "PlayerB" /* PlayerB */:
+            return "Attendez...";
+          default:
+            return "";
+        }
+      case "AWins" /* AWins */:
+        switch (myCharacter) {
+          case "PlayerA" /* PlayerA */:
+            return "Vous gagnez !";
+          case "PlayerB" /* PlayerB */:
+            return "Vous perdez !";
+          default:
+            return "";
+        }
+      case "BWins" /* BWins */:
+        switch (myCharacter) {
+          case "PlayerA" /* PlayerA */:
+            return "Vous perdez !";
+          case "PlayerB" /* PlayerB */:
+            return "Vous gagnez !";
+          default:
+            return "";
+        }
+      case "AWinsByFault" /* AWinsByFault */:
+        switch (myCharacter) {
+          case "PlayerA" /* PlayerA */:
+            return "Gagn\xE9 ! L'adversaire a frapp\xE9 trop t\xF4t !";
+          case "PlayerB" /* PlayerB */:
+            return "Perdu ! vous frappez trop t\xF4t !";
+          default:
+            return "";
+        }
+      case "BWinsByFault" /* BWinsByFault */:
+        switch (myCharacter) {
+          case "PlayerA" /* PlayerA */:
+            return "Perdu ! vous frappez trop t\xF4t !";
+          case "PlayerB" /* PlayerB */:
+            return "Gagn\xE9 ! L'adversaire a frapp\xE9 trop t\xF4t !";
+          default:
+            return "";
+        }
+      default:
+        return "";
+    }
+  }
+
+  // ../core/node_modules/tslib/tslib.es6.mjs
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p))
+          d2[p] = b2[p];
+    };
+    return extendStatics(d, b);
+  };
+  function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+  function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P ? value : new P(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() {
+      if (t[0] & 1)
+        throw t[1];
+      return t[1];
+    }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+      return this;
+    }), g;
+    function verb(n) {
+      return function(v) {
+        return step([n, v]);
+      };
+    }
+    function step(op) {
+      if (f)
+        throw new TypeError("Generator is already executing.");
+      while (g && (g = 0, op[0] && (_ = 0)), _)
+        try {
+          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+            return t;
+          if (y = 0, t)
+            op = [op[0] & 2, t.value];
+          switch (op[0]) {
+            case 0:
+            case 1:
+              t = op;
+              break;
+            case 4:
+              _.label++;
+              return { value: op[1], done: false };
+            case 5:
+              _.label++;
+              y = op[1];
+              op = [0];
+              continue;
+            case 7:
+              op = _.ops.pop();
+              _.trys.pop();
+              continue;
+            default:
+              if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _ = 0;
+                continue;
+              }
+              if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                _.label = op[1];
+                break;
+              }
+              if (op[0] === 6 && _.label < t[1]) {
+                _.label = t[1];
+                t = op;
+                break;
+              }
+              if (t && _.label < t[2]) {
+                _.label = t[2];
+                _.ops.push(op);
+                break;
+              }
+              if (t[2])
+                _.ops.pop();
+              _.trys.pop();
+              continue;
+          }
+          op = body.call(thisArg, _);
+        } catch (e) {
+          op = [6, e];
+          y = 0;
+        } finally {
+          f = t = 0;
+        }
+      if (op[0] & 5)
+        throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  }
+  function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m)
+      return m.call(o);
+    if (o && typeof o.length === "number")
+      return {
+        next: function() {
+          if (o && i >= o.length)
+            o = void 0;
+          return { value: o && o[i++], done: !o };
+        }
+      };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+  function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m)
+      return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+      while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+        ar.push(r.value);
+    } catch (error) {
+      e = { error };
+    } finally {
+      try {
+        if (r && !r.done && (m = i["return"]))
+          m.call(i);
+      } finally {
+        if (e)
+          throw e.error;
+      }
+    }
+    return ar;
+  }
+  function __spreadArray(to, from2, pack) {
+    if (pack || arguments.length === 2)
+      for (var i = 0, l = from2.length, ar; i < l; i++) {
+        if (ar || !(i in from2)) {
+          if (!ar)
+            ar = Array.prototype.slice.call(from2, 0, i);
+          ar[i] = from2[i];
+        }
+      }
+    return to.concat(ar || Array.prototype.slice.call(from2));
+  }
+  function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+  }
+  function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i;
+    function verb(n) {
+      if (g[n])
+        i[n] = function(v) {
+          return new Promise(function(a, b) {
+            q.push([n, v, a, b]) > 1 || resume(n, v);
+          });
+        };
+    }
+    function resume(n, v) {
+      try {
+        step(g[n](v));
+      } catch (e) {
+        settle(q[0][3], e);
+      }
+    }
+    function step(r) {
+      r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    }
+    function fulfill(value) {
+      resume("next", value);
+    }
+    function reject(value) {
+      resume("throw", value);
+    }
+    function settle(f, v) {
+      if (f(v), q.shift(), q.length)
+        resume(q[0][0], q[0][1]);
+    }
+  }
+  function __asyncValues(o) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i);
+    function verb(n) {
+      i[n] = o[n] && function(v) {
+        return new Promise(function(resolve, reject) {
+          v = o[n](v), settle(resolve, reject, v.done, v.value);
+        });
+      };
+    }
+    function settle(resolve, reject, d, v) {
+      Promise.resolve(v).then(function(v2) {
+        resolve({ value: v2, done: d });
+      }, reject);
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isFunction.js
+  function isFunction(value) {
+    return typeof value === "function";
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
+  function createErrorClass(createImpl) {
+    var _super = function(instance2) {
+      Error.call(instance2);
+      instance2.stack = new Error().stack;
+    };
+    var ctorFunc = createImpl(_super);
+    ctorFunc.prototype = Object.create(Error.prototype);
+    ctorFunc.prototype.constructor = ctorFunc;
+    return ctorFunc;
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/UnsubscriptionError.js
+  var UnsubscriptionError = createErrorClass(function(_super) {
+    return function UnsubscriptionErrorImpl(errors) {
+      _super(this);
+      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
+        return i + 1 + ") " + err.toString();
+      }).join("\n  ") : "";
+      this.name = "UnsubscriptionError";
+      this.errors = errors;
+    };
+  });
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/arrRemove.js
+  function arrRemove(arr, item) {
+    if (arr) {
+      var index = arr.indexOf(item);
+      0 <= index && arr.splice(index, 1);
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/Subscription.js
+  var Subscription = function() {
+    function Subscription6(initialTeardown) {
+      this.initialTeardown = initialTeardown;
+      this.closed = false;
+      this._parentage = null;
+      this._finalizers = null;
+    }
+    Subscription6.prototype.unsubscribe = function() {
+      var e_1, _a, e_2, _b;
+      var errors;
+      if (!this.closed) {
+        this.closed = true;
+        var _parentage = this._parentage;
+        if (_parentage) {
+          this._parentage = null;
+          if (Array.isArray(_parentage)) {
+            try {
+              for (var _parentage_1 = __values(_parentage), _parentage_1_1 = _parentage_1.next(); !_parentage_1_1.done; _parentage_1_1 = _parentage_1.next()) {
+                var parent_1 = _parentage_1_1.value;
+                parent_1.remove(this);
+              }
+            } catch (e_1_1) {
+              e_1 = { error: e_1_1 };
+            } finally {
+              try {
+                if (_parentage_1_1 && !_parentage_1_1.done && (_a = _parentage_1.return))
+                  _a.call(_parentage_1);
+              } finally {
+                if (e_1)
+                  throw e_1.error;
+              }
+            }
+          } else {
+            _parentage.remove(this);
+          }
+        }
+        var initialFinalizer = this.initialTeardown;
+        if (isFunction(initialFinalizer)) {
+          try {
+            initialFinalizer();
+          } catch (e) {
+            errors = e instanceof UnsubscriptionError ? e.errors : [e];
+          }
+        }
+        var _finalizers = this._finalizers;
+        if (_finalizers) {
+          this._finalizers = null;
+          try {
+            for (var _finalizers_1 = __values(_finalizers), _finalizers_1_1 = _finalizers_1.next(); !_finalizers_1_1.done; _finalizers_1_1 = _finalizers_1.next()) {
+              var finalizer = _finalizers_1_1.value;
+              try {
+                execFinalizer(finalizer);
+              } catch (err) {
+                errors = errors !== null && errors !== void 0 ? errors : [];
+                if (err instanceof UnsubscriptionError) {
+                  errors = __spreadArray(__spreadArray([], __read(errors)), __read(err.errors));
+                } else {
+                  errors.push(err);
+                }
+              }
+            }
+          } catch (e_2_1) {
+            e_2 = { error: e_2_1 };
+          } finally {
+            try {
+              if (_finalizers_1_1 && !_finalizers_1_1.done && (_b = _finalizers_1.return))
+                _b.call(_finalizers_1);
+            } finally {
+              if (e_2)
+                throw e_2.error;
+            }
+          }
+        }
+        if (errors) {
+          throw new UnsubscriptionError(errors);
+        }
+      }
+    };
+    Subscription6.prototype.add = function(teardown) {
+      var _a;
+      if (teardown && teardown !== this) {
+        if (this.closed) {
+          execFinalizer(teardown);
+        } else {
+          if (teardown instanceof Subscription6) {
+            if (teardown.closed || teardown._hasParent(this)) {
+              return;
+            }
+            teardown._addParent(this);
+          }
+          (this._finalizers = (_a = this._finalizers) !== null && _a !== void 0 ? _a : []).push(teardown);
+        }
+      }
+    };
+    Subscription6.prototype._hasParent = function(parent) {
+      var _parentage = this._parentage;
+      return _parentage === parent || Array.isArray(_parentage) && _parentage.includes(parent);
+    };
+    Subscription6.prototype._addParent = function(parent) {
+      var _parentage = this._parentage;
+      this._parentage = Array.isArray(_parentage) ? (_parentage.push(parent), _parentage) : _parentage ? [_parentage, parent] : parent;
+    };
+    Subscription6.prototype._removeParent = function(parent) {
+      var _parentage = this._parentage;
+      if (_parentage === parent) {
+        this._parentage = null;
+      } else if (Array.isArray(_parentage)) {
+        arrRemove(_parentage, parent);
+      }
+    };
+    Subscription6.prototype.remove = function(teardown) {
+      var _finalizers = this._finalizers;
+      _finalizers && arrRemove(_finalizers, teardown);
+      if (teardown instanceof Subscription6) {
+        teardown._removeParent(this);
+      }
+    };
+    Subscription6.EMPTY = function() {
+      var empty = new Subscription6();
+      empty.closed = true;
+      return empty;
+    }();
+    return Subscription6;
+  }();
+  var EMPTY_SUBSCRIPTION = Subscription.EMPTY;
+  function isSubscription(value) {
+    return value instanceof Subscription || value && "closed" in value && isFunction(value.remove) && isFunction(value.add) && isFunction(value.unsubscribe);
+  }
+  function execFinalizer(finalizer) {
+    if (isFunction(finalizer)) {
+      finalizer();
+    } else {
+      finalizer.unsubscribe();
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/config.js
+  var config = {
+    onUnhandledError: null,
+    onStoppedNotification: null,
+    Promise: void 0,
+    useDeprecatedSynchronousErrorHandling: false,
+    useDeprecatedNextContext: false
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/timeoutProvider.js
+  var timeoutProvider = {
+    setTimeout: function(handler, timeout) {
+      var args = [];
+      for (var _i = 2; _i < arguments.length; _i++) {
+        args[_i - 2] = arguments[_i];
+      }
+      var delegate = timeoutProvider.delegate;
+      if (delegate === null || delegate === void 0 ? void 0 : delegate.setTimeout) {
+        return delegate.setTimeout.apply(delegate, __spreadArray([handler, timeout], __read(args)));
+      }
+      return setTimeout.apply(void 0, __spreadArray([handler, timeout], __read(args)));
+    },
+    clearTimeout: function(handle) {
+      var delegate = timeoutProvider.delegate;
+      return ((delegate === null || delegate === void 0 ? void 0 : delegate.clearTimeout) || clearTimeout)(handle);
+    },
+    delegate: void 0
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/reportUnhandledError.js
+  function reportUnhandledError(err) {
+    timeoutProvider.setTimeout(function() {
+      var onUnhandledError = config.onUnhandledError;
+      if (onUnhandledError) {
+        onUnhandledError(err);
+      } else {
+        throw err;
+      }
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/noop.js
+  function noop2() {
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/NotificationFactories.js
+  var COMPLETE_NOTIFICATION = function() {
+    return createNotification("C", void 0, void 0);
+  }();
+  function errorNotification(error) {
+    return createNotification("E", void 0, error);
+  }
+  function nextNotification(value) {
+    return createNotification("N", value, void 0);
+  }
+  function createNotification(kind, value, error) {
+    return {
+      kind,
+      value,
+      error
+    };
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/errorContext.js
+  var context = null;
+  function errorContext(cb) {
+    if (config.useDeprecatedSynchronousErrorHandling) {
+      var isRoot = !context;
+      if (isRoot) {
+        context = { errorThrown: false, error: null };
+      }
+      cb();
+      if (isRoot) {
+        var _a = context, errorThrown = _a.errorThrown, error = _a.error;
+        context = null;
+        if (errorThrown) {
+          throw error;
+        }
+      }
+    } else {
+      cb();
+    }
+  }
+  function captureError(err) {
+    if (config.useDeprecatedSynchronousErrorHandling && context) {
+      context.errorThrown = true;
+      context.error = err;
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/Subscriber.js
+  var Subscriber = function(_super) {
+    __extends(Subscriber3, _super);
+    function Subscriber3(destination) {
+      var _this = _super.call(this) || this;
+      _this.isStopped = false;
+      if (destination) {
+        _this.destination = destination;
+        if (isSubscription(destination)) {
+          destination.add(_this);
+        }
+      } else {
+        _this.destination = EMPTY_OBSERVER;
+      }
+      return _this;
+    }
+    Subscriber3.create = function(next, error, complete) {
+      return new SafeSubscriber(next, error, complete);
+    };
+    Subscriber3.prototype.next = function(value) {
+      if (this.isStopped) {
+        handleStoppedNotification(nextNotification(value), this);
+      } else {
+        this._next(value);
+      }
+    };
+    Subscriber3.prototype.error = function(err) {
+      if (this.isStopped) {
+        handleStoppedNotification(errorNotification(err), this);
+      } else {
+        this.isStopped = true;
+        this._error(err);
+      }
+    };
+    Subscriber3.prototype.complete = function() {
+      if (this.isStopped) {
+        handleStoppedNotification(COMPLETE_NOTIFICATION, this);
+      } else {
+        this.isStopped = true;
+        this._complete();
+      }
+    };
+    Subscriber3.prototype.unsubscribe = function() {
+      if (!this.closed) {
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+        this.destination = null;
+      }
+    };
+    Subscriber3.prototype._next = function(value) {
+      this.destination.next(value);
+    };
+    Subscriber3.prototype._error = function(err) {
+      try {
+        this.destination.error(err);
+      } finally {
+        this.unsubscribe();
+      }
+    };
+    Subscriber3.prototype._complete = function() {
+      try {
+        this.destination.complete();
+      } finally {
+        this.unsubscribe();
+      }
+    };
+    return Subscriber3;
+  }(Subscription);
+  var _bind = Function.prototype.bind;
+  function bind(fn, thisArg) {
+    return _bind.call(fn, thisArg);
+  }
+  var ConsumerObserver = function() {
+    function ConsumerObserver3(partialObserver) {
+      this.partialObserver = partialObserver;
+    }
+    ConsumerObserver3.prototype.next = function(value) {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.next) {
+        try {
+          partialObserver.next(value);
+        } catch (error) {
+          handleUnhandledError(error);
+        }
+      }
+    };
+    ConsumerObserver3.prototype.error = function(err) {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.error) {
+        try {
+          partialObserver.error(err);
+        } catch (error) {
+          handleUnhandledError(error);
+        }
+      } else {
+        handleUnhandledError(err);
+      }
+    };
+    ConsumerObserver3.prototype.complete = function() {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.complete) {
+        try {
+          partialObserver.complete();
+        } catch (error) {
+          handleUnhandledError(error);
+        }
+      }
+    };
+    return ConsumerObserver3;
+  }();
+  var SafeSubscriber = function(_super) {
+    __extends(SafeSubscriber3, _super);
+    function SafeSubscriber3(observerOrNext, error, complete) {
+      var _this = _super.call(this) || this;
+      var partialObserver;
+      if (isFunction(observerOrNext) || !observerOrNext) {
+        partialObserver = {
+          next: observerOrNext !== null && observerOrNext !== void 0 ? observerOrNext : void 0,
+          error: error !== null && error !== void 0 ? error : void 0,
+          complete: complete !== null && complete !== void 0 ? complete : void 0
+        };
+      } else {
+        var context_1;
+        if (_this && config.useDeprecatedNextContext) {
+          context_1 = Object.create(observerOrNext);
+          context_1.unsubscribe = function() {
+            return _this.unsubscribe();
+          };
+          partialObserver = {
+            next: observerOrNext.next && bind(observerOrNext.next, context_1),
+            error: observerOrNext.error && bind(observerOrNext.error, context_1),
+            complete: observerOrNext.complete && bind(observerOrNext.complete, context_1)
+          };
+        } else {
+          partialObserver = observerOrNext;
+        }
+      }
+      _this.destination = new ConsumerObserver(partialObserver);
+      return _this;
+    }
+    return SafeSubscriber3;
+  }(Subscriber);
+  function handleUnhandledError(error) {
+    if (config.useDeprecatedSynchronousErrorHandling) {
+      captureError(error);
+    } else {
+      reportUnhandledError(error);
+    }
+  }
+  function defaultErrorHandler(err) {
+    throw err;
+  }
+  function handleStoppedNotification(notification, subscriber) {
+    var onStoppedNotification = config.onStoppedNotification;
+    onStoppedNotification && timeoutProvider.setTimeout(function() {
+      return onStoppedNotification(notification, subscriber);
+    });
+  }
+  var EMPTY_OBSERVER = {
+    closed: true,
+    next: noop2,
+    error: defaultErrorHandler,
+    complete: noop2
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/symbol/observable.js
+  var observable = function() {
+    return typeof Symbol === "function" && Symbol.observable || "@@observable";
+  }();
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/identity.js
+  function identity2(x) {
+    return x;
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/pipe.js
+  function pipeFromArray(fns) {
+    if (fns.length === 0) {
+      return identity2;
+    }
+    if (fns.length === 1) {
+      return fns[0];
+    }
+    return function piped(input) {
+      return fns.reduce(function(prev, fn) {
+        return fn(prev);
+      }, input);
+    };
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/Observable.js
+  var Observable = function() {
+    function Observable10(subscribe) {
+      if (subscribe) {
+        this._subscribe = subscribe;
+      }
+    }
+    Observable10.prototype.lift = function(operator) {
+      var observable3 = new Observable10();
+      observable3.source = this;
+      observable3.operator = operator;
+      return observable3;
+    };
+    Observable10.prototype.subscribe = function(observerOrNext, error, complete) {
+      var _this = this;
+      var subscriber = isSubscriber(observerOrNext) ? observerOrNext : new SafeSubscriber(observerOrNext, error, complete);
+      errorContext(function() {
+        var _a = _this, operator = _a.operator, source = _a.source;
+        subscriber.add(operator ? operator.call(subscriber, source) : source ? _this._subscribe(subscriber) : _this._trySubscribe(subscriber));
+      });
+      return subscriber;
+    };
+    Observable10.prototype._trySubscribe = function(sink) {
+      try {
+        return this._subscribe(sink);
+      } catch (err) {
+        sink.error(err);
+      }
+    };
+    Observable10.prototype.forEach = function(next, promiseCtor) {
+      var _this = this;
+      promiseCtor = getPromiseCtor(promiseCtor);
+      return new promiseCtor(function(resolve, reject) {
+        var subscriber = new SafeSubscriber({
+          next: function(value) {
+            try {
+              next(value);
+            } catch (err) {
+              reject(err);
+              subscriber.unsubscribe();
+            }
+          },
+          error: reject,
+          complete: resolve
+        });
+        _this.subscribe(subscriber);
+      });
+    };
+    Observable10.prototype._subscribe = function(subscriber) {
+      var _a;
+      return (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber);
+    };
+    Observable10.prototype[observable] = function() {
+      return this;
+    };
+    Observable10.prototype.pipe = function() {
+      var operations = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+        operations[_i] = arguments[_i];
+      }
+      return pipeFromArray(operations)(this);
+    };
+    Observable10.prototype.toPromise = function(promiseCtor) {
+      var _this = this;
+      promiseCtor = getPromiseCtor(promiseCtor);
+      return new promiseCtor(function(resolve, reject) {
+        var value;
+        _this.subscribe(function(x) {
+          return value = x;
+        }, function(err) {
+          return reject(err);
+        }, function() {
+          return resolve(value);
+        });
+      });
+    };
+    Observable10.create = function(subscribe) {
+      return new Observable10(subscribe);
+    };
+    return Observable10;
+  }();
+  function getPromiseCtor(promiseCtor) {
+    var _a;
+    return (_a = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config.Promise) !== null && _a !== void 0 ? _a : Promise;
+  }
+  function isObserver(value) {
+    return value && isFunction(value.next) && isFunction(value.error) && isFunction(value.complete);
+  }
+  function isSubscriber(value) {
+    return value && value instanceof Subscriber || isObserver(value) && isSubscription(value);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/lift.js
+  function hasLift(source) {
+    return isFunction(source === null || source === void 0 ? void 0 : source.lift);
+  }
+  function operate(init2) {
+    return function(source) {
+      if (hasLift(source)) {
+        return source.lift(function(liftedSource) {
+          try {
+            return init2(liftedSource, this);
+          } catch (err) {
+            this.error(err);
+          }
+        });
+      }
+      throw new TypeError("Unable to lift unknown Observable type");
+    };
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/OperatorSubscriber.js
+  function createOperatorSubscriber(destination, onNext, onComplete, onError, onFinalize) {
+    return new OperatorSubscriber(destination, onNext, onComplete, onError, onFinalize);
+  }
+  var OperatorSubscriber = function(_super) {
+    __extends(OperatorSubscriber3, _super);
+    function OperatorSubscriber3(destination, onNext, onComplete, onError, onFinalize, shouldUnsubscribe) {
+      var _this = _super.call(this, destination) || this;
+      _this.onFinalize = onFinalize;
+      _this.shouldUnsubscribe = shouldUnsubscribe;
+      _this._next = onNext ? function(value) {
+        try {
+          onNext(value);
+        } catch (err) {
+          destination.error(err);
+        }
+      } : _super.prototype._next;
+      _this._error = onError ? function(err) {
+        try {
+          onError(err);
+        } catch (err2) {
+          destination.error(err2);
+        } finally {
+          this.unsubscribe();
+        }
+      } : _super.prototype._error;
+      _this._complete = onComplete ? function() {
+        try {
+          onComplete();
+        } catch (err) {
+          destination.error(err);
+        } finally {
+          this.unsubscribe();
+        }
+      } : _super.prototype._complete;
+      return _this;
+    }
+    OperatorSubscriber3.prototype.unsubscribe = function() {
+      var _a;
+      if (!this.shouldUnsubscribe || this.shouldUnsubscribe()) {
+        var closed_1 = this.closed;
+        _super.prototype.unsubscribe.call(this);
+        !closed_1 && ((_a = this.onFinalize) === null || _a === void 0 ? void 0 : _a.call(this));
+      }
+    };
+    return OperatorSubscriber3;
+  }(Subscriber);
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/ObjectUnsubscribedError.js
+  var ObjectUnsubscribedError = createErrorClass(function(_super) {
+    return function ObjectUnsubscribedErrorImpl() {
+      _super(this);
+      this.name = "ObjectUnsubscribedError";
+      this.message = "object unsubscribed";
+    };
+  });
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/Subject.js
+  var Subject = function(_super) {
+    __extends(Subject3, _super);
+    function Subject3() {
+      var _this = _super.call(this) || this;
+      _this.closed = false;
+      _this.currentObservers = null;
+      _this.observers = [];
+      _this.isStopped = false;
+      _this.hasError = false;
+      _this.thrownError = null;
+      return _this;
+    }
+    Subject3.prototype.lift = function(operator) {
+      var subject = new AnonymousSubject(this, this);
+      subject.operator = operator;
+      return subject;
+    };
+    Subject3.prototype._throwIfClosed = function() {
+      if (this.closed) {
+        throw new ObjectUnsubscribedError();
+      }
+    };
+    Subject3.prototype.next = function(value) {
+      var _this = this;
+      errorContext(function() {
+        var e_1, _a;
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          if (!_this.currentObservers) {
+            _this.currentObservers = Array.from(_this.observers);
+          }
+          try {
+            for (var _b = __values(_this.currentObservers), _c = _b.next(); !_c.done; _c = _b.next()) {
+              var observer = _c.value;
+              observer.next(value);
+            }
+          } catch (e_1_1) {
+            e_1 = { error: e_1_1 };
+          } finally {
+            try {
+              if (_c && !_c.done && (_a = _b.return))
+                _a.call(_b);
+            } finally {
+              if (e_1)
+                throw e_1.error;
+            }
+          }
+        }
+      });
+    };
+    Subject3.prototype.error = function(err) {
+      var _this = this;
+      errorContext(function() {
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          _this.hasError = _this.isStopped = true;
+          _this.thrownError = err;
+          var observers = _this.observers;
+          while (observers.length) {
+            observers.shift().error(err);
+          }
+        }
+      });
+    };
+    Subject3.prototype.complete = function() {
+      var _this = this;
+      errorContext(function() {
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          _this.isStopped = true;
+          var observers = _this.observers;
+          while (observers.length) {
+            observers.shift().complete();
+          }
+        }
+      });
+    };
+    Subject3.prototype.unsubscribe = function() {
+      this.isStopped = this.closed = true;
+      this.observers = this.currentObservers = null;
+    };
+    Object.defineProperty(Subject3.prototype, "observed", {
+      get: function() {
+        var _a;
+        return ((_a = this.observers) === null || _a === void 0 ? void 0 : _a.length) > 0;
+      },
+      enumerable: false,
+      configurable: true
+    });
+    Subject3.prototype._trySubscribe = function(subscriber) {
+      this._throwIfClosed();
+      return _super.prototype._trySubscribe.call(this, subscriber);
+    };
+    Subject3.prototype._subscribe = function(subscriber) {
+      this._throwIfClosed();
+      this._checkFinalizedStatuses(subscriber);
+      return this._innerSubscribe(subscriber);
+    };
+    Subject3.prototype._innerSubscribe = function(subscriber) {
+      var _this = this;
+      var _a = this, hasError = _a.hasError, isStopped = _a.isStopped, observers = _a.observers;
+      if (hasError || isStopped) {
+        return EMPTY_SUBSCRIPTION;
+      }
+      this.currentObservers = null;
+      observers.push(subscriber);
+      return new Subscription(function() {
+        _this.currentObservers = null;
+        arrRemove(observers, subscriber);
+      });
+    };
+    Subject3.prototype._checkFinalizedStatuses = function(subscriber) {
+      var _a = this, hasError = _a.hasError, thrownError = _a.thrownError, isStopped = _a.isStopped;
+      if (hasError) {
+        subscriber.error(thrownError);
+      } else if (isStopped) {
+        subscriber.complete();
+      }
+    };
+    Subject3.prototype.asObservable = function() {
+      var observable3 = new Observable();
+      observable3.source = this;
+      return observable3;
+    };
+    Subject3.create = function(destination, source) {
+      return new AnonymousSubject(destination, source);
+    };
+    return Subject3;
+  }(Observable);
+  var AnonymousSubject = function(_super) {
+    __extends(AnonymousSubject3, _super);
+    function AnonymousSubject3(destination, source) {
+      var _this = _super.call(this) || this;
+      _this.destination = destination;
+      _this.source = source;
+      return _this;
+    }
+    AnonymousSubject3.prototype.next = function(value) {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.next) === null || _b === void 0 ? void 0 : _b.call(_a, value);
+    };
+    AnonymousSubject3.prototype.error = function(err) {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.error) === null || _b === void 0 ? void 0 : _b.call(_a, err);
+    };
+    AnonymousSubject3.prototype.complete = function() {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.complete) === null || _b === void 0 ? void 0 : _b.call(_a);
+    };
+    AnonymousSubject3.prototype._subscribe = function(subscriber) {
+      var _a, _b;
+      return (_b = (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber)) !== null && _b !== void 0 ? _b : EMPTY_SUBSCRIPTION;
+    };
+    return AnonymousSubject3;
+  }(Subject);
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/dateTimestampProvider.js
+  var dateTimestampProvider = {
+    now: function() {
+      return (dateTimestampProvider.delegate || Date).now();
+    },
+    delegate: void 0
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/Action.js
+  var Action = function(_super) {
+    __extends(Action2, _super);
+    function Action2(scheduler, work) {
+      return _super.call(this) || this;
+    }
+    Action2.prototype.schedule = function(state, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      return this;
+    };
+    return Action2;
+  }(Subscription);
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/intervalProvider.js
+  var intervalProvider = {
+    setInterval: function(handler, timeout) {
+      var args = [];
+      for (var _i = 2; _i < arguments.length; _i++) {
+        args[_i - 2] = arguments[_i];
+      }
+      var delegate = intervalProvider.delegate;
+      if (delegate === null || delegate === void 0 ? void 0 : delegate.setInterval) {
+        return delegate.setInterval.apply(delegate, __spreadArray([handler, timeout], __read(args)));
+      }
+      return setInterval.apply(void 0, __spreadArray([handler, timeout], __read(args)));
+    },
+    clearInterval: function(handle) {
+      var delegate = intervalProvider.delegate;
+      return ((delegate === null || delegate === void 0 ? void 0 : delegate.clearInterval) || clearInterval)(handle);
+    },
+    delegate: void 0
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/AsyncAction.js
+  var AsyncAction = function(_super) {
+    __extends(AsyncAction2, _super);
+    function AsyncAction2(scheduler, work) {
+      var _this = _super.call(this, scheduler, work) || this;
+      _this.scheduler = scheduler;
+      _this.work = work;
+      _this.pending = false;
+      return _this;
+    }
+    AsyncAction2.prototype.schedule = function(state, delay) {
+      var _a;
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (this.closed) {
+        return this;
+      }
+      this.state = state;
+      var id = this.id;
+      var scheduler = this.scheduler;
+      if (id != null) {
+        this.id = this.recycleAsyncId(scheduler, id, delay);
+      }
+      this.pending = true;
+      this.delay = delay;
+      this.id = (_a = this.id) !== null && _a !== void 0 ? _a : this.requestAsyncId(scheduler, this.id, delay);
+      return this;
+    };
+    AsyncAction2.prototype.requestAsyncId = function(scheduler, _id, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      return intervalProvider.setInterval(scheduler.flush.bind(scheduler, this), delay);
+    };
+    AsyncAction2.prototype.recycleAsyncId = function(_scheduler, id, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (delay != null && this.delay === delay && this.pending === false) {
+        return id;
+      }
+      if (id != null) {
+        intervalProvider.clearInterval(id);
+      }
+      return void 0;
+    };
+    AsyncAction2.prototype.execute = function(state, delay) {
+      if (this.closed) {
+        return new Error("executing a cancelled action");
+      }
+      this.pending = false;
+      var error = this._execute(state, delay);
+      if (error) {
+        return error;
+      } else if (this.pending === false && this.id != null) {
+        this.id = this.recycleAsyncId(this.scheduler, this.id, null);
+      }
+    };
+    AsyncAction2.prototype._execute = function(state, _delay) {
+      var errored = false;
+      var errorValue;
+      try {
+        this.work(state);
+      } catch (e) {
+        errored = true;
+        errorValue = e ? e : new Error("Scheduled action threw falsy error");
+      }
+      if (errored) {
+        this.unsubscribe();
+        return errorValue;
+      }
+    };
+    AsyncAction2.prototype.unsubscribe = function() {
+      if (!this.closed) {
+        var _a = this, id = _a.id, scheduler = _a.scheduler;
+        var actions = scheduler.actions;
+        this.work = this.state = this.scheduler = null;
+        this.pending = false;
+        arrRemove(actions, this);
+        if (id != null) {
+          this.id = this.recycleAsyncId(scheduler, id, null);
+        }
+        this.delay = null;
+        _super.prototype.unsubscribe.call(this);
+      }
+    };
+    return AsyncAction2;
+  }(Action);
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/Scheduler.js
+  var Scheduler = function() {
+    function Scheduler2(schedulerActionCtor, now2) {
+      if (now2 === void 0) {
+        now2 = Scheduler2.now;
+      }
+      this.schedulerActionCtor = schedulerActionCtor;
+      this.now = now2;
+    }
+    Scheduler2.prototype.schedule = function(work, delay, state) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      return new this.schedulerActionCtor(this, work).schedule(state, delay);
+    };
+    Scheduler2.now = dateTimestampProvider.now;
+    return Scheduler2;
+  }();
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/AsyncScheduler.js
+  var AsyncScheduler = function(_super) {
+    __extends(AsyncScheduler2, _super);
+    function AsyncScheduler2(SchedulerAction, now2) {
+      if (now2 === void 0) {
+        now2 = Scheduler.now;
+      }
+      var _this = _super.call(this, SchedulerAction, now2) || this;
+      _this.actions = [];
+      _this._active = false;
+      return _this;
+    }
+    AsyncScheduler2.prototype.flush = function(action) {
+      var actions = this.actions;
+      if (this._active) {
+        actions.push(action);
+        return;
+      }
+      var error;
+      this._active = true;
+      do {
+        if (error = action.execute(action.state, action.delay)) {
+          break;
+        }
+      } while (action = actions.shift());
+      this._active = false;
+      if (error) {
+        while (action = actions.shift()) {
+          action.unsubscribe();
+        }
+        throw error;
+      }
+    };
+    return AsyncScheduler2;
+  }(Scheduler);
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/async.js
+  var asyncScheduler = new AsyncScheduler(AsyncAction);
+  var async = asyncScheduler;
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/empty.js
+  var EMPTY = new Observable(function(subscriber) {
+    return subscriber.complete();
+  });
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isScheduler.js
+  function isScheduler(value) {
+    return value && isFunction(value.schedule);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/args.js
+  function last(arr) {
+    return arr[arr.length - 1];
+  }
+  function popResultSelector(args) {
+    return isFunction(last(args)) ? args.pop() : void 0;
+  }
+  function popScheduler(args) {
+    return isScheduler(last(args)) ? args.pop() : void 0;
+  }
+  function popNumber(args, defaultValue) {
+    return typeof last(args) === "number" ? args.pop() : defaultValue;
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js
+  var isArrayLike = function(x) {
+    return x && typeof x.length === "number" && typeof x !== "function";
+  };
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isPromise.js
+  function isPromise(value) {
+    return isFunction(value === null || value === void 0 ? void 0 : value.then);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isInteropObservable.js
+  function isInteropObservable(input) {
+    return isFunction(input[observable]);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isAsyncIterable.js
+  function isAsyncIterable(obj) {
+    return Symbol.asyncIterator && isFunction(obj === null || obj === void 0 ? void 0 : obj[Symbol.asyncIterator]);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/throwUnobservableError.js
+  function createInvalidObservableTypeError(input) {
+    return new TypeError("You provided " + (input !== null && typeof input === "object" ? "an invalid object" : "'" + input + "'") + " where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.");
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/symbol/iterator.js
+  function getSymbolIterator() {
+    if (typeof Symbol !== "function" || !Symbol.iterator) {
+      return "@@iterator";
+    }
+    return Symbol.iterator;
+  }
+  var iterator = getSymbolIterator();
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isIterable.js
+  function isIterable(input) {
+    return isFunction(input === null || input === void 0 ? void 0 : input[iterator]);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isReadableStreamLike.js
+  function readableStreamLikeToAsyncGenerator(readableStream) {
+    return __asyncGenerator(this, arguments, function readableStreamLikeToAsyncGenerator_1() {
+      var reader, _a, value, done;
+      return __generator(this, function(_b) {
+        switch (_b.label) {
+          case 0:
+            reader = readableStream.getReader();
+            _b.label = 1;
+          case 1:
+            _b.trys.push([1, , 9, 10]);
+            _b.label = 2;
+          case 2:
+            if (false)
+              return [3, 8];
+            return [4, __await(reader.read())];
+          case 3:
+            _a = _b.sent(), value = _a.value, done = _a.done;
+            if (!done)
+              return [3, 5];
+            return [4, __await(void 0)];
+          case 4:
+            return [2, _b.sent()];
+          case 5:
+            return [4, __await(value)];
+          case 6:
+            return [4, _b.sent()];
+          case 7:
+            _b.sent();
+            return [3, 2];
+          case 8:
+            return [3, 10];
+          case 9:
+            reader.releaseLock();
+            return [7];
+          case 10:
+            return [2];
+        }
+      });
+    });
+  }
+  function isReadableStreamLike(obj) {
+    return isFunction(obj === null || obj === void 0 ? void 0 : obj.getReader);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/innerFrom.js
+  function innerFrom(input) {
+    if (input instanceof Observable) {
+      return input;
+    }
+    if (input != null) {
+      if (isInteropObservable(input)) {
+        return fromInteropObservable(input);
+      }
+      if (isArrayLike(input)) {
+        return fromArrayLike(input);
+      }
+      if (isPromise(input)) {
+        return fromPromise(input);
+      }
+      if (isAsyncIterable(input)) {
+        return fromAsyncIterable(input);
+      }
+      if (isIterable(input)) {
+        return fromIterable(input);
+      }
+      if (isReadableStreamLike(input)) {
+        return fromReadableStreamLike(input);
+      }
+    }
+    throw createInvalidObservableTypeError(input);
+  }
+  function fromInteropObservable(obj) {
+    return new Observable(function(subscriber) {
+      var obs = obj[observable]();
+      if (isFunction(obs.subscribe)) {
+        return obs.subscribe(subscriber);
+      }
+      throw new TypeError("Provided object does not correctly implement Symbol.observable");
+    });
+  }
+  function fromArrayLike(array) {
+    return new Observable(function(subscriber) {
+      for (var i = 0; i < array.length && !subscriber.closed; i++) {
+        subscriber.next(array[i]);
+      }
+      subscriber.complete();
+    });
+  }
+  function fromPromise(promise) {
+    return new Observable(function(subscriber) {
+      promise.then(function(value) {
+        if (!subscriber.closed) {
+          subscriber.next(value);
+          subscriber.complete();
+        }
+      }, function(err) {
+        return subscriber.error(err);
+      }).then(null, reportUnhandledError);
+    });
+  }
+  function fromIterable(iterable) {
+    return new Observable(function(subscriber) {
+      var e_1, _a;
+      try {
+        for (var iterable_1 = __values(iterable), iterable_1_1 = iterable_1.next(); !iterable_1_1.done; iterable_1_1 = iterable_1.next()) {
+          var value = iterable_1_1.value;
+          subscriber.next(value);
+          if (subscriber.closed) {
+            return;
+          }
+        }
+      } catch (e_1_1) {
+        e_1 = { error: e_1_1 };
+      } finally {
+        try {
+          if (iterable_1_1 && !iterable_1_1.done && (_a = iterable_1.return))
+            _a.call(iterable_1);
+        } finally {
+          if (e_1)
+            throw e_1.error;
+        }
+      }
+      subscriber.complete();
+    });
+  }
+  function fromAsyncIterable(asyncIterable) {
+    return new Observable(function(subscriber) {
+      process(asyncIterable, subscriber).catch(function(err) {
+        return subscriber.error(err);
+      });
+    });
+  }
+  function fromReadableStreamLike(readableStream) {
+    return fromAsyncIterable(readableStreamLikeToAsyncGenerator(readableStream));
+  }
+  function process(asyncIterable, subscriber) {
+    var asyncIterable_1, asyncIterable_1_1;
+    var e_2, _a;
+    return __awaiter(this, void 0, void 0, function() {
+      var value, e_2_1;
+      return __generator(this, function(_b) {
+        switch (_b.label) {
+          case 0:
+            _b.trys.push([0, 5, 6, 11]);
+            asyncIterable_1 = __asyncValues(asyncIterable);
+            _b.label = 1;
+          case 1:
+            return [4, asyncIterable_1.next()];
+          case 2:
+            if (!(asyncIterable_1_1 = _b.sent(), !asyncIterable_1_1.done))
+              return [3, 4];
+            value = asyncIterable_1_1.value;
+            subscriber.next(value);
+            if (subscriber.closed) {
+              return [2];
+            }
+            _b.label = 3;
+          case 3:
+            return [3, 1];
+          case 4:
+            return [3, 11];
+          case 5:
+            e_2_1 = _b.sent();
+            e_2 = { error: e_2_1 };
+            return [3, 11];
+          case 6:
+            _b.trys.push([6, , 9, 10]);
+            if (!(asyncIterable_1_1 && !asyncIterable_1_1.done && (_a = asyncIterable_1.return)))
+              return [3, 8];
+            return [4, _a.call(asyncIterable_1)];
+          case 7:
+            _b.sent();
+            _b.label = 8;
+          case 8:
+            return [3, 10];
+          case 9:
+            if (e_2)
+              throw e_2.error;
+            return [7];
+          case 10:
+            return [7];
+          case 11:
+            subscriber.complete();
+            return [2];
+        }
+      });
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/executeSchedule.js
+  function executeSchedule(parentSubscription, scheduler, work, delay, repeat) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+    if (repeat === void 0) {
+      repeat = false;
+    }
+    var scheduleSubscription = scheduler.schedule(function() {
+      work();
+      if (repeat) {
+        parentSubscription.add(this.schedule(null, delay));
+      } else {
+        this.unsubscribe();
+      }
+    }, delay);
+    parentSubscription.add(scheduleSubscription);
+    if (!repeat) {
+      return scheduleSubscription;
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/observeOn.js
+  function observeOn(scheduler, delay) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+    return operate(function(source, subscriber) {
+      source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+        return executeSchedule(subscriber, scheduler, function() {
+          return subscriber.next(value);
+        }, delay);
+      }, function() {
+        return executeSchedule(subscriber, scheduler, function() {
+          return subscriber.complete();
+        }, delay);
+      }, function(err) {
+        return executeSchedule(subscriber, scheduler, function() {
+          return subscriber.error(err);
+        }, delay);
+      }));
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/subscribeOn.js
+  function subscribeOn(scheduler, delay) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+    return operate(function(source, subscriber) {
+      subscriber.add(scheduler.schedule(function() {
+        return source.subscribe(subscriber);
+      }, delay));
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleObservable.js
+  function scheduleObservable(input, scheduler) {
+    return innerFrom(input).pipe(subscribeOn(scheduler), observeOn(scheduler));
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/schedulePromise.js
+  function schedulePromise(input, scheduler) {
+    return innerFrom(input).pipe(subscribeOn(scheduler), observeOn(scheduler));
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleArray.js
+  function scheduleArray(input, scheduler) {
+    return new Observable(function(subscriber) {
+      var i = 0;
+      return scheduler.schedule(function() {
+        if (i === input.length) {
+          subscriber.complete();
+        } else {
+          subscriber.next(input[i++]);
+          if (!subscriber.closed) {
+            this.schedule();
+          }
+        }
+      });
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleIterable.js
+  function scheduleIterable(input, scheduler) {
+    return new Observable(function(subscriber) {
+      var iterator3;
+      executeSchedule(subscriber, scheduler, function() {
+        iterator3 = input[iterator]();
+        executeSchedule(subscriber, scheduler, function() {
+          var _a;
+          var value;
+          var done;
+          try {
+            _a = iterator3.next(), value = _a.value, done = _a.done;
+          } catch (err) {
+            subscriber.error(err);
+            return;
+          }
+          if (done) {
+            subscriber.complete();
+          } else {
+            subscriber.next(value);
+          }
+        }, 0, true);
+      });
+      return function() {
+        return isFunction(iterator3 === null || iterator3 === void 0 ? void 0 : iterator3.return) && iterator3.return();
+      };
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleAsyncIterable.js
+  function scheduleAsyncIterable(input, scheduler) {
+    if (!input) {
+      throw new Error("Iterable cannot be null");
+    }
+    return new Observable(function(subscriber) {
+      executeSchedule(subscriber, scheduler, function() {
+        var iterator3 = input[Symbol.asyncIterator]();
+        executeSchedule(subscriber, scheduler, function() {
+          iterator3.next().then(function(result) {
+            if (result.done) {
+              subscriber.complete();
+            } else {
+              subscriber.next(result.value);
+            }
+          });
+        }, 0, true);
+      });
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleReadableStreamLike.js
+  function scheduleReadableStreamLike(input, scheduler) {
+    return scheduleAsyncIterable(readableStreamLikeToAsyncGenerator(input), scheduler);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduled.js
+  function scheduled(input, scheduler) {
+    if (input != null) {
+      if (isInteropObservable(input)) {
+        return scheduleObservable(input, scheduler);
+      }
+      if (isArrayLike(input)) {
+        return scheduleArray(input, scheduler);
+      }
+      if (isPromise(input)) {
+        return schedulePromise(input, scheduler);
+      }
+      if (isAsyncIterable(input)) {
+        return scheduleAsyncIterable(input, scheduler);
+      }
+      if (isIterable(input)) {
+        return scheduleIterable(input, scheduler);
+      }
+      if (isReadableStreamLike(input)) {
+        return scheduleReadableStreamLike(input, scheduler);
+      }
+    }
+    throw createInvalidObservableTypeError(input);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/from.js
+  function from(input, scheduler) {
+    return scheduler ? scheduled(input, scheduler) : innerFrom(input);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/EmptyError.js
+  var EmptyError = createErrorClass(function(_super) {
+    return function EmptyErrorImpl() {
+      _super(this);
+      this.name = "EmptyError";
+      this.message = "no elements in sequence";
+    };
+  });
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/firstValueFrom.js
+  function firstValueFrom(source, config3) {
+    var hasConfig = typeof config3 === "object";
+    return new Promise(function(resolve, reject) {
+      var subscriber = new SafeSubscriber({
+        next: function(value) {
+          resolve(value);
+          subscriber.unsubscribe();
+        },
+        error: reject,
+        complete: function() {
+          if (hasConfig) {
+            resolve(config3.defaultValue);
+          } else {
+            reject(new EmptyError());
+          }
+        }
+      });
+      source.subscribe(subscriber);
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/isDate.js
+  function isValidDate(value) {
+    return value instanceof Date && !isNaN(value);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/map.js
+  function map(project, thisArg) {
+    return operate(function(source, subscriber) {
+      var index = 0;
+      source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+        subscriber.next(project.call(thisArg, value, index++));
+      }));
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/mapOneOrManyArgs.js
+  var isArray = Array.isArray;
+  function callOrApply(fn, args) {
+    return isArray(args) ? fn.apply(void 0, __spreadArray([], __read(args))) : fn(args);
+  }
+  function mapOneOrManyArgs(fn) {
+    return map(function(args) {
+      return callOrApply(fn, args);
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/argsArgArrayOrObject.js
+  var isArray2 = Array.isArray;
+  var getPrototypeOf = Object.getPrototypeOf;
+  var objectProto = Object.prototype;
+  var getKeys = Object.keys;
+  function argsArgArrayOrObject(args) {
+    if (args.length === 1) {
+      var first_1 = args[0];
+      if (isArray2(first_1)) {
+        return { args: first_1, keys: null };
+      }
+      if (isPOJO(first_1)) {
+        var keys = getKeys(first_1);
+        return {
+          args: keys.map(function(key) {
+            return first_1[key];
+          }),
+          keys
+        };
+      }
+    }
+    return { args, keys: null };
+  }
+  function isPOJO(obj) {
+    return obj && typeof obj === "object" && getPrototypeOf(obj) === objectProto;
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/util/createObject.js
+  function createObject(keys, values) {
+    return keys.reduce(function(result, key, i) {
+      return result[key] = values[i], result;
+    }, {});
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/combineLatest.js
+  function combineLatest() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    var scheduler = popScheduler(args);
+    var resultSelector = popResultSelector(args);
+    var _a = argsArgArrayOrObject(args), observables = _a.args, keys = _a.keys;
+    if (observables.length === 0) {
+      return from([], scheduler);
+    }
+    var result = new Observable(combineLatestInit(observables, scheduler, keys ? function(values) {
+      return createObject(keys, values);
+    } : identity2));
+    return resultSelector ? result.pipe(mapOneOrManyArgs(resultSelector)) : result;
+  }
+  function combineLatestInit(observables, scheduler, valueTransform) {
+    if (valueTransform === void 0) {
+      valueTransform = identity2;
+    }
+    return function(subscriber) {
+      maybeSchedule(scheduler, function() {
+        var length = observables.length;
+        var values = new Array(length);
+        var active = length;
+        var remainingFirstValues = length;
+        var _loop_1 = function(i2) {
+          maybeSchedule(scheduler, function() {
+            var source = from(observables[i2], scheduler);
+            var hasFirstValue = false;
+            source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+              values[i2] = value;
+              if (!hasFirstValue) {
+                hasFirstValue = true;
+                remainingFirstValues--;
+              }
+              if (!remainingFirstValues) {
+                subscriber.next(valueTransform(values.slice()));
+              }
+            }, function() {
+              if (!--active) {
+                subscriber.complete();
+              }
+            }));
+          }, subscriber);
+        };
+        for (var i = 0; i < length; i++) {
+          _loop_1(i);
+        }
+      }, subscriber);
+    };
+  }
+  function maybeSchedule(scheduler, execute, subscription) {
+    if (scheduler) {
+      executeSchedule(subscription, scheduler, execute);
+    } else {
+      execute();
+    }
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/mergeInternals.js
+  function mergeInternals(source, subscriber, project, concurrent, onBeforeNext, expand, innerSubScheduler, additionalFinalizer) {
+    var buffer = [];
+    var active = 0;
+    var index = 0;
+    var isComplete = false;
+    var checkComplete = function() {
+      if (isComplete && !buffer.length && !active) {
+        subscriber.complete();
+      }
+    };
+    var outerNext = function(value) {
+      return active < concurrent ? doInnerSub(value) : buffer.push(value);
+    };
+    var doInnerSub = function(value) {
+      expand && subscriber.next(value);
+      active++;
+      var innerComplete = false;
+      innerFrom(project(value, index++)).subscribe(createOperatorSubscriber(subscriber, function(innerValue) {
+        onBeforeNext === null || onBeforeNext === void 0 ? void 0 : onBeforeNext(innerValue);
+        if (expand) {
+          outerNext(innerValue);
+        } else {
+          subscriber.next(innerValue);
+        }
+      }, function() {
+        innerComplete = true;
+      }, void 0, function() {
+        if (innerComplete) {
+          try {
+            active--;
+            var _loop_1 = function() {
+              var bufferedValue = buffer.shift();
+              if (innerSubScheduler) {
+                executeSchedule(subscriber, innerSubScheduler, function() {
+                  return doInnerSub(bufferedValue);
+                });
+              } else {
+                doInnerSub(bufferedValue);
+              }
+            };
+            while (buffer.length && active < concurrent) {
+              _loop_1();
+            }
+            checkComplete();
+          } catch (err) {
+            subscriber.error(err);
+          }
+        }
+      }));
+    };
+    source.subscribe(createOperatorSubscriber(subscriber, outerNext, function() {
+      isComplete = true;
+      checkComplete();
+    }));
+    return function() {
+      additionalFinalizer === null || additionalFinalizer === void 0 ? void 0 : additionalFinalizer();
+    };
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/mergeMap.js
+  function mergeMap(project, resultSelector, concurrent) {
+    if (concurrent === void 0) {
+      concurrent = Infinity;
+    }
+    if (isFunction(resultSelector)) {
+      return mergeMap(function(a, i) {
+        return map(function(b, ii) {
+          return resultSelector(a, b, i, ii);
+        })(innerFrom(project(a, i)));
+      }, concurrent);
+    } else if (typeof resultSelector === "number") {
+      concurrent = resultSelector;
+    }
+    return operate(function(source, subscriber) {
+      return mergeInternals(source, subscriber, project, concurrent);
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/mergeAll.js
+  function mergeAll(concurrent) {
+    if (concurrent === void 0) {
+      concurrent = Infinity;
+    }
+    return mergeMap(identity2, concurrent);
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/timer.js
+  function timer(dueTime, intervalOrScheduler, scheduler) {
+    if (dueTime === void 0) {
+      dueTime = 0;
+    }
+    if (scheduler === void 0) {
+      scheduler = async;
+    }
+    var intervalDuration = -1;
+    if (intervalOrScheduler != null) {
+      if (isScheduler(intervalOrScheduler)) {
+        scheduler = intervalOrScheduler;
+      } else {
+        intervalDuration = intervalOrScheduler;
+      }
+    }
+    return new Observable(function(subscriber) {
+      var due = isValidDate(dueTime) ? +dueTime - scheduler.now() : dueTime;
+      if (due < 0) {
+        due = 0;
+      }
+      var n = 0;
+      return scheduler.schedule(function() {
+        if (!subscriber.closed) {
+          subscriber.next(n++);
+          if (0 <= intervalDuration) {
+            this.schedule(void 0, intervalDuration);
+          } else {
+            subscriber.complete();
+          }
+        }
+      }, due);
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/observable/merge.js
+  function merge() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    var scheduler = popScheduler(args);
+    var concurrent = popNumber(args, Infinity);
+    var sources = args;
+    return !sources.length ? EMPTY : sources.length === 1 ? innerFrom(sources[0]) : mergeAll(concurrent)(from(sources, scheduler));
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/filter.js
+  function filter(predicate, thisArg) {
+    return operate(function(source, subscriber) {
+      var index = 0;
+      source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+        return predicate.call(thisArg, value, index++) && subscriber.next(value);
+      }));
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/tap.js
+  function tap(observerOrNext, error, complete) {
+    var tapObserver = isFunction(observerOrNext) || error || complete ? { next: observerOrNext, error, complete } : observerOrNext;
+    return tapObserver ? operate(function(source, subscriber) {
+      var _a;
+      (_a = tapObserver.subscribe) === null || _a === void 0 ? void 0 : _a.call(tapObserver);
+      var isUnsub = true;
+      source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+        var _a2;
+        (_a2 = tapObserver.next) === null || _a2 === void 0 ? void 0 : _a2.call(tapObserver, value);
+        subscriber.next(value);
+      }, function() {
+        var _a2;
+        isUnsub = false;
+        (_a2 = tapObserver.complete) === null || _a2 === void 0 ? void 0 : _a2.call(tapObserver);
+        subscriber.complete();
+      }, function(err) {
+        var _a2;
+        isUnsub = false;
+        (_a2 = tapObserver.error) === null || _a2 === void 0 ? void 0 : _a2.call(tapObserver, err);
+        subscriber.error(err);
+      }, function() {
+        var _a2, _b;
+        if (isUnsub) {
+          (_a2 = tapObserver.unsubscribe) === null || _a2 === void 0 ? void 0 : _a2.call(tapObserver);
+        }
+        (_b = tapObserver.finalize) === null || _b === void 0 ? void 0 : _b.call(tapObserver);
+      }));
+    }) : identity2;
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/throttle.js
+  function throttle(durationSelector, config3) {
+    return operate(function(source, subscriber) {
+      var _a = config3 !== null && config3 !== void 0 ? config3 : {}, _b = _a.leading, leading = _b === void 0 ? true : _b, _c = _a.trailing, trailing = _c === void 0 ? false : _c;
+      var hasValue = false;
+      var sendValue = null;
+      var throttled = null;
+      var isComplete = false;
+      var endThrottling = function() {
+        throttled === null || throttled === void 0 ? void 0 : throttled.unsubscribe();
+        throttled = null;
+        if (trailing) {
+          send();
+          isComplete && subscriber.complete();
+        }
+      };
+      var cleanupThrottling = function() {
+        throttled = null;
+        isComplete && subscriber.complete();
+      };
+      var startThrottle = function(value) {
+        return throttled = innerFrom(durationSelector(value)).subscribe(createOperatorSubscriber(subscriber, endThrottling, cleanupThrottling));
+      };
+      var send = function() {
+        if (hasValue) {
+          hasValue = false;
+          var value = sendValue;
+          sendValue = null;
+          subscriber.next(value);
+          !isComplete && startThrottle(value);
+        }
+      };
+      source.subscribe(createOperatorSubscriber(subscriber, function(value) {
+        hasValue = true;
+        sendValue = value;
+        !(throttled && !throttled.closed) && (leading ? send() : startThrottle(value));
+      }, function() {
+        isComplete = true;
+        !(trailing && hasValue && throttled && !throttled.closed) && subscriber.complete();
+      }));
+    });
+  }
+
+  // ../core/node_modules/rxjs/dist/esm5/internal/operators/throttleTime.js
+  function throttleTime(duration, scheduler, config3) {
+    if (scheduler === void 0) {
+      scheduler = asyncScheduler;
+    }
+    var duration$ = timer(duration, scheduler);
+    return throttle(function() {
+      return duration$;
+    }, config3);
+  }
+
+  // ../core/node_modules/uid/dist/index.mjs
+  var IDX = 256;
+  var HEX = [];
+  var SIZE = 256;
+  var BUFFER;
+  while (IDX--)
+    HEX[IDX] = (IDX + 256).toString(16).substring(1);
+  function uid(len) {
+    var i = 0, tmp = len || 11;
+    if (!BUFFER || IDX + tmp > SIZE * 2) {
+      for (BUFFER = "", IDX = 0; i < SIZE; i++) {
+        BUFFER += HEX[Math.random() * 256 | 0];
+      }
+    }
+    return BUFFER.substring(IDX, IDX++ + tmp);
+  }
+
+  // ../core/src/create-client-connection.ts
+  function createClientConnection(context4) {
+    if (context4.config.offlineMode) {
+      context4.offlineModeGameStorage = createGameStorage2();
+      const [createConnection, serverConnection$] = context4.createRtcConnection();
+      initiateBackendHandlers2(context4.offlineModeGameStorage, serverConnection$);
+      return createConnection();
+    } else {
+      return context4.createWsClientConnection(
+        context4.config.wsProtocol,
+        context4.config.wsPort,
+        context4.config.webDomain
+      );
+    }
+  }
+
+  // ../core/src/create-game-storage.ts
+  function createGameStorage2() {
+    let game = {
+      state: "WaitingPlayerA" /* WaitingPlayerA */
+    };
+    const _game$ = new Subject();
+    return {
+      read() {
+        return { ...game };
+      },
+      save(update2) {
+        game = {
+          ...game,
+          ...update2
+        };
+        _game$.next(game);
+      },
+      watch() {
+        return _game$.asObservable();
+      }
+    };
+  }
+
+  // ../core/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  if (typeof window !== "undefined")
+    (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
+
+  // ../core/src/playground.svelte.js
+  function create_if_block_13(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "Disconnected from server.";
+        attr(p, "class", "disconnectedFromServer");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_if_block_12(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "Attente d'une connexion.";
+        attr(p, "class", "disconnectedFromServer");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_if_block_11(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "aria-label", "title");
+        attr(div, "class", "title");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block(ctx) {
+    let div1;
+    let div0;
+    let t0;
+    let t1;
+    let t2;
+    let t3;
+    let t4;
+    let t5;
+    let t6;
+    let t7;
+    let t8;
+    let t9;
+    let p;
+    let t10;
+    let if_block0 = (
+      /*game*/
+      ctx[2].playerA && !/*aWins*/
+      ctx[6] && !/*bWins*/
+      ctx[5] && create_if_block_10(ctx)
+    );
+    let if_block1 = (
+      /*game*/
+      ctx[2].playerB && !/*aWins*/
+      ctx[6] && !/*bWins*/
+      ctx[5] && create_if_block_9(ctx)
+    );
+    let if_block2 = (
+      /*game*/
+      ctx[2].playerA && /*aWins*/
+      ctx[6] && create_if_block_8(ctx)
+    );
+    let if_block3 = (
+      /*game*/
+      ctx[2].playerB && /*aWins*/
+      ctx[6] && create_if_block_7(ctx)
+    );
+    let if_block4 = (
+      /*game*/
+      ctx[2].playerA && /*bWins*/
+      ctx[5] && create_if_block_6(ctx)
+    );
+    let if_block5 = (
+      /*game*/
+      ctx[2].playerB && /*bWins*/
+      ctx[5] && create_if_block_5(ctx)
+    );
+    let if_block6 = (
+      /*game*/
+      ctx[2].state === "Hajime" /* Hajime */ && create_if_block_4(ctx)
+    );
+    let if_block7 = (
+      /*myCharacter*/
+      ctx[1] === "PlayerA" /* PlayerA */ && create_if_block_3(ctx)
+    );
+    let if_block8 = (
+      /*myCharacter*/
+      ctx[1] === "PlayerB" /* PlayerB */ && create_if_block_2(ctx)
+    );
+    let if_block9 = (
+      /*myCharacter*/
+      ctx[1] === "None" /* None */ && create_if_block_1(ctx)
+    );
+    return {
+      c() {
+        div1 = element("div");
+        div0 = element("div");
+        if (if_block0)
+          if_block0.c();
+        t0 = space();
+        if (if_block1)
+          if_block1.c();
+        t1 = space();
+        if (if_block2)
+          if_block2.c();
+        t2 = space();
+        if (if_block3)
+          if_block3.c();
+        t3 = space();
+        if (if_block4)
+          if_block4.c();
+        t4 = space();
+        if (if_block5)
+          if_block5.c();
+        t5 = space();
+        if (if_block6)
+          if_block6.c();
+        t6 = space();
+        if (if_block7)
+          if_block7.c();
+        t7 = space();
+        if (if_block8)
+          if_block8.c();
+        t8 = space();
+        if (if_block9)
+          if_block9.c();
+        t9 = space();
+        p = element("p");
+        t10 = text(
+          /*indication*/
+          ctx[4]
+        );
+        attr(div0, "aria-label", "player");
+        attr(div0, "class", "vue-player");
+        attr(p, "aria-label", "indication");
+        attr(p, "class", "indication");
+        attr(div1, "aria-label", "arena");
+        attr(div1, "class", "arena");
+      },
+      m(target2, anchor) {
+        insert(target2, div1, anchor);
+        append(div1, div0);
+        if (if_block0)
+          if_block0.m(div0, null);
+        append(div0, t0);
+        if (if_block1)
+          if_block1.m(div0, null);
+        append(div0, t1);
+        if (if_block2)
+          if_block2.m(div0, null);
+        append(div0, t2);
+        if (if_block3)
+          if_block3.m(div0, null);
+        append(div0, t3);
+        if (if_block4)
+          if_block4.m(div0, null);
+        append(div0, t4);
+        if (if_block5)
+          if_block5.m(div0, null);
+        append(div1, t5);
+        if (if_block6)
+          if_block6.m(div1, null);
+        append(div1, t6);
+        if (if_block7)
+          if_block7.m(div1, null);
+        append(div1, t7);
+        if (if_block8)
+          if_block8.m(div1, null);
+        append(div1, t8);
+        if (if_block9)
+          if_block9.m(div1, null);
+        append(div1, t9);
+        append(div1, p);
+        append(p, t10);
+      },
+      p(ctx2, dirty) {
+        if (
+          /*game*/
+          ctx2[2].playerA && !/*aWins*/
+          ctx2[6] && !/*bWins*/
+          ctx2[5]
+        ) {
+          if (if_block0) {
+          } else {
+            if_block0 = create_if_block_10(ctx2);
+            if_block0.c();
+            if_block0.m(div0, t0);
+          }
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].playerB && !/*aWins*/
+          ctx2[6] && !/*bWins*/
+          ctx2[5]
+        ) {
+          if (if_block1) {
+          } else {
+            if_block1 = create_if_block_9(ctx2);
+            if_block1.c();
+            if_block1.m(div0, t1);
+          }
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].playerA && /*aWins*/
+          ctx2[6]
+        ) {
+          if (if_block2) {
+          } else {
+            if_block2 = create_if_block_8(ctx2);
+            if_block2.c();
+            if_block2.m(div0, t2);
+          }
+        } else if (if_block2) {
+          if_block2.d(1);
+          if_block2 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].playerB && /*aWins*/
+          ctx2[6]
+        ) {
+          if (if_block3) {
+          } else {
+            if_block3 = create_if_block_7(ctx2);
+            if_block3.c();
+            if_block3.m(div0, t3);
+          }
+        } else if (if_block3) {
+          if_block3.d(1);
+          if_block3 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].playerA && /*bWins*/
+          ctx2[5]
+        ) {
+          if (if_block4) {
+          } else {
+            if_block4 = create_if_block_6(ctx2);
+            if_block4.c();
+            if_block4.m(div0, t4);
+          }
+        } else if (if_block4) {
+          if_block4.d(1);
+          if_block4 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].playerB && /*bWins*/
+          ctx2[5]
+        ) {
+          if (if_block5) {
+          } else {
+            if_block5 = create_if_block_5(ctx2);
+            if_block5.c();
+            if_block5.m(div0, null);
+          }
+        } else if (if_block5) {
+          if_block5.d(1);
+          if_block5 = null;
+        }
+        if (
+          /*game*/
+          ctx2[2].state === "Hajime" /* Hajime */
+        ) {
+          if (if_block6) {
+          } else {
+            if_block6 = create_if_block_4(ctx2);
+            if_block6.c();
+            if_block6.m(div1, t6);
+          }
+        } else if (if_block6) {
+          if_block6.d(1);
+          if_block6 = null;
+        }
+        if (
+          /*myCharacter*/
+          ctx2[1] === "PlayerA" /* PlayerA */
+        ) {
+          if (if_block7) {
+          } else {
+            if_block7 = create_if_block_3(ctx2);
+            if_block7.c();
+            if_block7.m(div1, t7);
+          }
+        } else if (if_block7) {
+          if_block7.d(1);
+          if_block7 = null;
+        }
+        if (
+          /*myCharacter*/
+          ctx2[1] === "PlayerB" /* PlayerB */
+        ) {
+          if (if_block8) {
+          } else {
+            if_block8 = create_if_block_2(ctx2);
+            if_block8.c();
+            if_block8.m(div1, t8);
+          }
+        } else if (if_block8) {
+          if_block8.d(1);
+          if_block8 = null;
+        }
+        if (
+          /*myCharacter*/
+          ctx2[1] === "None" /* None */
+        ) {
+          if (if_block9) {
+          } else {
+            if_block9 = create_if_block_1(ctx2);
+            if_block9.c();
+            if_block9.m(div1, t9);
+          }
+        } else if (if_block9) {
+          if_block9.d(1);
+          if_block9 = null;
+        }
+        if (dirty & /*indication*/
+        16)
+          set_data(
+            t10,
+            /*indication*/
+            ctx2[4]
+          );
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div1);
+        }
+        if (if_block0)
+          if_block0.d();
+        if (if_block1)
+          if_block1.d();
+        if (if_block2)
+          if_block2.d();
+        if (if_block3)
+          if_block3.d();
+        if (if_block4)
+          if_block4.d();
+        if (if_block5)
+          if_block5.d();
+        if (if_block6)
+          if_block6.d();
+        if (if_block7)
+          if_block7.d();
+        if (if_block8)
+          if_block8.d();
+        if (if_block9)
+          if_block9.d();
+      }
+    };
+  }
+  function create_if_block_10(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "aria-label", "playerA");
+        attr(div, "class", "playerA");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_9(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "aria-label", "playerB");
+        attr(div, "class", "playerB");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_8(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "class", "playerAwins");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_7(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "class", "playerBloses");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_6(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "class", "playerAloses");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_5(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "class", "playerBwins");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_4(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "!!";
+        attr(p, "aria-label", "exclamationPoints");
+        attr(p, "class", "exclamationPoints");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_if_block_3(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "Joueur 1";
+        attr(p, "class", "playerADisplay");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_if_block_2(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "Joueur 2";
+        attr(p, "class", "playerBDisplay");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_if_block_1(ctx) {
+    let p;
+    return {
+      c() {
+        p = element("p");
+        p.textContent = "Spectateur";
+        attr(p, "class", "spectatorDisplay");
+      },
+      m(target2, anchor) {
+        insert(target2, p, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(p);
+        }
+      }
+    };
+  }
+  function create_fragment(ctx) {
+    let div;
+    let t0;
+    let t1;
+    let t2;
+    let mounted;
+    let dispose;
+    let if_block0 = (
+      /*disconnected*/
+      ctx[3] && create_if_block_13(ctx)
+    );
+    let if_block1 = !/*disconnected*/
+    ctx[3] && !/*game*/
+    ctx[2] && create_if_block_12(ctx);
+    let if_block2 = (
+      /*showTitle*/
+      ctx[7] && /*game*/
+      ctx[2] && create_if_block_11(ctx)
+    );
+    let if_block3 = !/*showTitle*/
+    ctx[7] && create_if_block(ctx);
+    return {
+      c() {
+        div = element("div");
+        if (if_block0)
+          if_block0.c();
+        t0 = space();
+        if (if_block1)
+          if_block1.c();
+        t1 = space();
+        if (if_block2)
+          if_block2.c();
+        t2 = space();
+        if (if_block3)
+          if_block3.c();
+        attr(div, "class", "main");
+        attr(
+          div,
+          "data-testid",
+          /*dataTestid*/
+          ctx[0]
+        );
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+        if (if_block0)
+          if_block0.m(div, null);
+        append(div, t0);
+        if (if_block1)
+          if_block1.m(div, null);
+        append(div, t1);
+        if (if_block2)
+          if_block2.m(div, null);
+        append(div, t2);
+        if (if_block3)
+          if_block3.m(div, null);
+        if (!mounted) {
+          dispose = [
+            listen(
+              div,
+              "click",
+              /*click_handler*/
+              ctx[10]
+            ),
+            listen(
+              div,
+              "keydown",
+              /*keydown_handler*/
+              ctx[11]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (
+          /*disconnected*/
+          ctx2[3]
+        ) {
+          if (if_block0) {
+          } else {
+            if_block0 = create_if_block_13(ctx2);
+            if_block0.c();
+            if_block0.m(div, t0);
+          }
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
+        }
+        if (!/*disconnected*/
+        ctx2[3] && !/*game*/
+        ctx2[2]) {
+          if (if_block1) {
+          } else {
+            if_block1 = create_if_block_12(ctx2);
+            if_block1.c();
+            if_block1.m(div, t1);
+          }
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
+        }
+        if (
+          /*showTitle*/
+          ctx2[7] && /*game*/
+          ctx2[2]
+        ) {
+          if (if_block2) {
+          } else {
+            if_block2 = create_if_block_11(ctx2);
+            if_block2.c();
+            if_block2.m(div, t2);
+          }
+        } else if (if_block2) {
+          if_block2.d(1);
+          if_block2 = null;
+        }
+        if (!/*showTitle*/
+        ctx2[7]) {
+          if (if_block3) {
+            if_block3.p(ctx2, dirty);
+          } else {
+            if_block3 = create_if_block(ctx2);
+            if_block3.c();
+            if_block3.m(div, null);
+          }
+        } else if (if_block3) {
+          if_block3.d(1);
+          if_block3 = null;
+        }
+        if (dirty & /*dataTestid*/
+        1) {
+          attr(
+            div,
+            "data-testid",
+            /*dataTestid*/
+            ctx2[0]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        if (if_block0)
+          if_block0.d();
+        if (if_block1)
+          if_block1.d();
+        if (if_block2)
+          if_block2.d();
+        if (if_block3)
+          if_block3.d();
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance($$self, $$props, $$invalidate) {
+    let showTitle;
+    let aWins;
+    let bWins;
+    let indication;
+    let { contextId = defaultContextId } = $$props;
+    let { dataTestid = void 0 } = $$props;
+    const context4 = getContext(contextId);
+    const connection = createClientConnection(context4);
+    let myCharacter = null;
+    let game = null;
+    let disconnected = false;
+    const sub = combineLatest(merge(from(getGame(connection)), observeGame(connection)), merge(from(getMyCharacter(connection)), observeMyCharacter(connection))).pipe(throttleTime(15, void 0, { leading: true, trailing: true })).subscribe(function([_game, _myCharacter]) {
+      $$invalidate(2, game = _game);
+      $$invalidate(1, myCharacter = _myCharacter);
+    });
+    const connexionSub = connection.messages$.subscribe({
+      error: () => $$invalidate(3, disconnected = true),
+      complete: () => $$invalidate(3, disconnected = true)
+    });
+    const interaction$ = new Subject();
+    const controlsSub = interaction$.subscribe(function() {
+      interact(connection).catch(console.error);
+    });
+    onDestroy(function() {
+      sub.unsubscribe();
+      connexionSub.unsubscribe();
+      controlsSub.unsubscribe();
+    });
+    const click_handler = () => interaction$.next(void 0);
+    const keydown_handler = () => interaction$.next(void 0);
+    $$self.$$set = ($$props2) => {
+      if ("contextId" in $$props2)
+        $$invalidate(9, contextId = $$props2.contextId);
+      if ("dataTestid" in $$props2)
+        $$invalidate(0, dataTestid = $$props2.dataTestid);
+    };
+    $$self.$$.update = () => {
+      if ($$self.$$.dirty & /*myCharacter, game*/
+      6) {
+        $:
+          $$invalidate(7, showTitle = isTitleShown(myCharacter, game));
+      }
+      if ($$self.$$.dirty & /*game*/
+      4) {
+        $:
+          $$invalidate(6, aWins = game !== null && (game.state === "AWins" /* AWins */ || game.state === "AWinsByFault" /* AWinsByFault */));
+      }
+      if ($$self.$$.dirty & /*game*/
+      4) {
+        $:
+          $$invalidate(5, bWins = game !== null && (game.state === "BWins" /* BWins */ || game.state === "BWinsByFault" /* BWinsByFault */));
+      }
+      if ($$self.$$.dirty & /*myCharacter, game*/
+      6) {
+        $:
+          $$invalidate(4, indication = computeIndication(myCharacter, game));
+      }
+    };
+    return [
+      dataTestid,
+      myCharacter,
+      game,
+      disconnected,
+      indication,
+      bWins,
+      aWins,
+      showTitle,
+      interaction$,
+      contextId,
+      click_handler,
+      keydown_handler
+    ];
+  }
+  var Playground = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance, create_fragment, safe_not_equal, { contextId: 9, dataTestid: 0 });
+    }
+  };
+  var playground_svelte_default = Playground;
+
+  // ../core/src/default-context-id.ts
+  var defaultContextId = "prince-duals-context";
+
+  // ../core/src/game-state.ts
+  var GameState = /* @__PURE__ */ ((GameState2) => {
+    GameState2["WaitingPlayerA"] = "WaitingPlayerA";
+    GameState2["WaitingPlayerB"] = "WaitingPlayerB";
+    GameState2["Matte"] = "Matte";
+    GameState2["Hajime"] = "Hajime";
+    GameState2["AWins"] = "AWins";
+    GameState2["BWins"] = "BWins";
+    GameState2["AWinsByFault"] = "AWinsByFault";
+    GameState2["BWinsByFault"] = "BWinsByFault";
+    GameState2["PlayerADisconnected"] = "PlayerADisconnected";
+    GameState2["PlayerBDisconnected"] = "PlayerBDisconnected";
+    return GameState2;
+  })(GameState || {});
+
+  // ../core/src/get-game.ts
+  async function getGame(connection) {
+    const requestId = uid();
+    const response$ = connection.messages$.pipe(
+      map((m) => m.getGameResponse),
+      filter(Boolean),
+      filter((response2) => response2.requestId === requestId)
+    );
+    const response = firstValueFrom(response$);
+    const request = { getGameRequest: { requestId } };
+    await connection.send(request);
+    const game = (await response).game;
+    return game;
+  }
+
+  // ../core/src/get-game-handle.ts
+  function getGameHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const subscription = connection.messages$.pipe(
+        map((m) => m.getGameRequest),
+        filter(Boolean)
+      ).subscribe({
+        next(request) {
+          const response = {
+            getGameResponse: {
+              requestId: request.requestId,
+              game: gameStorage.read()
+            }
+          };
+          connection.send(response);
+        },
+        complete() {
+          subscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/get-my-character.ts
+  async function getMyCharacter(connection) {
+    const requestId = uid();
+    const response$ = connection.messages$.pipe(
+      map((m) => m.getMyCharacterResponse),
+      filter(Boolean),
+      filter((r) => r.requestId === requestId)
+    );
+    const response = firstValueFrom(response$);
+    const request = { getMyCharacterRequest: { requestId } };
+    await connection.send(request);
+    return (await response).character;
+  }
+
+  // ../core/src/get-my-character-handle.ts
+  function getMyCharacterHandle(gameStorage, connexions$) {
+    return connexions$.pipe(
+      mergeMap((connection) => connection.messages$.pipe(
+        map((m) => m.getMyCharacterRequest),
+        filter(Boolean),
+        tap(function(request) {
+          connection.send({
+            getMyCharacterResponse: {
+              requestId: request.requestId,
+              character: resolveMyCharacter(gameStorage, connection)
+            }
+          });
+        })
+      ))
+    ).subscribe();
+  }
+
+  // ../core/src/initiate-backend-handlers.ts
+  function initiateBackendHandlers2(gameStorage, connexion$) {
+    interactHandle(gameStorage, connexion$);
+    getGameHandle(gameStorage, connexion$);
+    observeGameHandle(gameStorage, connexion$);
+    getMyCharacterHandle(gameStorage, connexion$);
+    observeMyCharacterHandle(gameStorage, connexion$);
+  }
+
+  // ../core/src/interact.ts
+  async function interact(connection) {
+    const message = { interactEmit: {} };
+    await connection.send(message);
+  }
+
+  // ../core/src/interact-handle.ts
+  var {
+    WaitingPlayerA,
+    WaitingPlayerB,
+    Matte,
+    Hajime,
+    AWins,
+    BWins,
+    AWinsByFault,
+    BWinsByFault,
+    PlayerADisconnected,
+    PlayerBDisconnected
+  } = GameState;
+  var hajimeTimeout;
+  function interactHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const messageSub = connection.messages$.pipe(filter((message) => Boolean(message.interactEmit))).subscribe({
+        next() {
+          const game = gameStorage.read();
+          switch (game.state) {
+            case AWins:
+            case BWins:
+            case AWinsByFault:
+            case BWinsByFault:
+              game.state = WaitingPlayerA;
+              game.playerA = void 0;
+              game.playerB = void 0;
+              break;
+            case PlayerADisconnected:
+            case PlayerBDisconnected:
+            case WaitingPlayerA:
+              game.playerA = connection.id;
+              game.state = WaitingPlayerB;
+              break;
+            case WaitingPlayerB:
+              if (game.playerA !== connection.id) {
+                game.playerB = connection.id;
+                game.state = Matte;
+                hajimeTimeout = setTimeout(function() {
+                  game.state = Hajime;
+                  gameStorage.save(game);
+                }, 2e3 + Math.random() * 4e3);
+              } else {
+                return;
+              }
+              break;
+            case Matte:
+              if (connection.id === game.playerA) {
+                clearTimeout(hajimeTimeout);
+                game.state = BWinsByFault;
+              } else if (connection.id === game.playerB) {
+                clearTimeout(hajimeTimeout);
+                game.state = AWinsByFault;
+              }
+              break;
+            case Hajime:
+              if (connection.id === game.playerA) {
+                game.state = AWins;
+              } else if (connection.id === game.playerB) {
+                game.state = BWins;
+              }
+              break;
+            default:
+              return;
+          }
+          gameStorage.save(game);
+        },
+        complete() {
+          const game = gameStorage.read();
+          switch (connection.id) {
+            case game.playerA:
+              clearTimeout(hajimeTimeout);
+              game.playerA = void 0;
+              game.playerB = void 0;
+              game.state = PlayerADisconnected;
+              break;
+            case game.playerB:
+              clearTimeout(hajimeTimeout);
+              game.playerA = void 0;
+              game.playerB = void 0;
+              game.state = PlayerBDisconnected;
+              break;
+            default:
+              return;
+          }
+          gameStorage.save(game);
+          messageSub.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/is-title-shown.ts
+  function isTitleShown(myCharacter, game) {
+    if (game == null) {
+      return true;
+    }
+    if (myCharacter == null) {
+      return true;
+    }
+    switch (game.state) {
+      case "WaitingPlayerA" /* WaitingPlayerA */:
+      case "PlayerADisconnected" /* PlayerADisconnected */:
+      case "PlayerBDisconnected" /* PlayerBDisconnected */:
+        return true;
+      case "WaitingPlayerB" /* WaitingPlayerB */:
+        return myCharacter !== "PlayerA" /* PlayerA */;
+      default:
+        return false;
+    }
+  }
+
+  // ../core/src/observe-game.ts
+  function observeGame(connection) {
+    return new Observable(function(subscriber) {
+      const subscription = connection.messages$.pipe(
+        map((m) => m.observeGameBroadcast),
+        filter(Boolean)
+      ).subscribe({
+        next(broadcast) {
+          subscriber.next(broadcast.game);
+        },
+        complete() {
+          subscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/observe-game-handle.ts
+  function observeGameHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const subscription = gameStorage.watch().subscribe(function(game) {
+        connection.send({
+          observeGameBroadcast: { game }
+        });
+      });
+      const messageSubscription = connection.messages$.subscribe({
+        complete() {
+          subscription.unsubscribe();
+          messageSubscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/observe-my-character.ts
+  function observeMyCharacter(connection) {
+    return connection.messages$.pipe(
+      map((m) => m.observeMyCharacterBroadcast?.character),
+      filter(Boolean)
+    );
+  }
+
+  // ../core/src/observe-my-character-handle.ts
+  function observeMyCharacterHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const subscription = gameStorage.watch().subscribe(function() {
+        connection.send({
+          observeMyCharacterBroadcast: {
+            character: resolveMyCharacter(gameStorage, connection)
+          }
+        });
+      });
+      const messageSubscription = connection.messages$.subscribe({
+        complete() {
+          subscription.unsubscribe();
+          messageSubscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/resolve-my-character.ts
+  function resolveMyCharacter(gameStorage, connection) {
+    const game = gameStorage.read();
+    switch (connection.id) {
+      case game.playerA:
+        return "PlayerA" /* PlayerA */;
+      case game.playerB:
+        return "PlayerB" /* PlayerB */;
+      default:
+        return "None" /* None */;
+    }
+  }
+
+  // node_modules/tslib/tslib.es6.mjs
+  var extendStatics2 = function(d, b) {
+    extendStatics2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p in b2)
+        if (Object.prototype.hasOwnProperty.call(b2, p))
+          d2[p] = b2[p];
+    };
+    return extendStatics2(d, b);
+  };
+  function __extends2(d, b) {
+    if (typeof b !== "function" && b !== null)
+      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics2(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+  function __awaiter2(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P ? value : new P(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __generator2(thisArg, body) {
+    var _ = { label: 0, sent: function() {
+      if (t[0] & 1)
+        throw t[1];
+      return t[1];
+    }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+      return this;
+    }), g;
+    function verb(n) {
+      return function(v) {
+        return step([n, v]);
+      };
+    }
+    function step(op) {
+      if (f)
+        throw new TypeError("Generator is already executing.");
+      while (g && (g = 0, op[0] && (_ = 0)), _)
+        try {
+          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+            return t;
+          if (y = 0, t)
+            op = [op[0] & 2, t.value];
+          switch (op[0]) {
+            case 0:
+            case 1:
+              t = op;
+              break;
+            case 4:
+              _.label++;
+              return { value: op[1], done: false };
+            case 5:
+              _.label++;
+              y = op[1];
+              op = [0];
+              continue;
+            case 7:
+              op = _.ops.pop();
+              _.trys.pop();
+              continue;
+            default:
+              if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _ = 0;
+                continue;
+              }
+              if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                _.label = op[1];
+                break;
+              }
+              if (op[0] === 6 && _.label < t[1]) {
+                _.label = t[1];
+                t = op;
+                break;
+              }
+              if (t && _.label < t[2]) {
+                _.label = t[2];
+                _.ops.push(op);
+                break;
+              }
+              if (t[2])
+                _.ops.pop();
+              _.trys.pop();
+              continue;
+          }
+          op = body.call(thisArg, _);
+        } catch (e) {
+          op = [6, e];
+          y = 0;
+        } finally {
+          f = t = 0;
+        }
+      if (op[0] & 5)
+        throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  }
+  function __values2(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m)
+      return m.call(o);
+    if (o && typeof o.length === "number")
+      return {
+        next: function() {
+          if (o && i >= o.length)
+            o = void 0;
+          return { value: o && o[i++], done: !o };
+        }
+      };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+  function __read2(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m)
+      return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+      while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+        ar.push(r.value);
+    } catch (error) {
+      e = { error };
+    } finally {
+      try {
+        if (r && !r.done && (m = i["return"]))
+          m.call(i);
+      } finally {
+        if (e)
+          throw e.error;
+      }
+    }
+    return ar;
+  }
+  function __spreadArray2(to, from2, pack) {
+    if (pack || arguments.length === 2)
+      for (var i = 0, l = from2.length, ar; i < l; i++) {
+        if (ar || !(i in from2)) {
+          if (!ar)
+            ar = Array.prototype.slice.call(from2, 0, i);
+          ar[i] = from2[i];
+        }
+      }
+    return to.concat(ar || Array.prototype.slice.call(from2));
+  }
+  function __await2(v) {
+    return this instanceof __await2 ? (this.v = v, this) : new __await2(v);
+  }
+  function __asyncGenerator2(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i;
+    function verb(n) {
+      if (g[n])
+        i[n] = function(v) {
+          return new Promise(function(a, b) {
+            q.push([n, v, a, b]) > 1 || resume(n, v);
+          });
+        };
+    }
+    function resume(n, v) {
+      try {
+        step(g[n](v));
+      } catch (e) {
+        settle(q[0][3], e);
+      }
+    }
+    function step(r) {
+      r.value instanceof __await2 ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    }
+    function fulfill(value) {
+      resume("next", value);
+    }
+    function reject(value) {
+      resume("throw", value);
+    }
+    function settle(f, v) {
+      if (f(v), q.shift(), q.length)
+        resume(q[0][0], q[0][1]);
+    }
+  }
+  function __asyncValues2(o) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values2 === "function" ? __values2(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i);
+    function verb(n) {
+      i[n] = o[n] && function(v) {
+        return new Promise(function(resolve, reject) {
+          v = o[n](v), settle(resolve, reject, v.done, v.value);
+        });
+      };
+    }
+    function settle(resolve, reject, d, v) {
+      Promise.resolve(v).then(function(v2) {
+        resolve({ value: v2, done: d });
+      }, reject);
+    }
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/isFunction.js
+  function isFunction2(value) {
+    return typeof value === "function";
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
+  function createErrorClass2(createImpl) {
+    var _super = function(instance2) {
+      Error.call(instance2);
+      instance2.stack = new Error().stack;
+    };
+    var ctorFunc = createImpl(_super);
+    ctorFunc.prototype = Object.create(Error.prototype);
+    ctorFunc.prototype.constructor = ctorFunc;
+    return ctorFunc;
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/UnsubscriptionError.js
+  var UnsubscriptionError2 = createErrorClass2(function(_super) {
+    return function UnsubscriptionErrorImpl(errors) {
+      _super(this);
+      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
+        return i + 1 + ") " + err.toString();
+      }).join("\n  ") : "";
+      this.name = "UnsubscriptionError";
+      this.errors = errors;
+    };
+  });
+
+  // node_modules/rxjs/dist/esm5/internal/util/arrRemove.js
+  function arrRemove2(arr, item) {
+    if (arr) {
+      var index = arr.indexOf(item);
+      0 <= index && arr.splice(index, 1);
+    }
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/Subscription.js
+  var Subscription5 = function() {
+    function Subscription6(initialTeardown) {
+      this.initialTeardown = initialTeardown;
+      this.closed = false;
+      this._parentage = null;
+      this._finalizers = null;
+    }
+    Subscription6.prototype.unsubscribe = function() {
+      var e_1, _a, e_2, _b;
+      var errors;
+      if (!this.closed) {
+        this.closed = true;
+        var _parentage = this._parentage;
+        if (_parentage) {
+          this._parentage = null;
+          if (Array.isArray(_parentage)) {
+            try {
+              for (var _parentage_1 = __values2(_parentage), _parentage_1_1 = _parentage_1.next(); !_parentage_1_1.done; _parentage_1_1 = _parentage_1.next()) {
+                var parent_1 = _parentage_1_1.value;
+                parent_1.remove(this);
+              }
+            } catch (e_1_1) {
+              e_1 = { error: e_1_1 };
+            } finally {
+              try {
+                if (_parentage_1_1 && !_parentage_1_1.done && (_a = _parentage_1.return))
+                  _a.call(_parentage_1);
+              } finally {
+                if (e_1)
+                  throw e_1.error;
+              }
+            }
+          } else {
+            _parentage.remove(this);
+          }
+        }
+        var initialFinalizer = this.initialTeardown;
+        if (isFunction2(initialFinalizer)) {
+          try {
+            initialFinalizer();
+          } catch (e) {
+            errors = e instanceof UnsubscriptionError2 ? e.errors : [e];
+          }
+        }
+        var _finalizers = this._finalizers;
+        if (_finalizers) {
+          this._finalizers = null;
+          try {
+            for (var _finalizers_1 = __values2(_finalizers), _finalizers_1_1 = _finalizers_1.next(); !_finalizers_1_1.done; _finalizers_1_1 = _finalizers_1.next()) {
+              var finalizer = _finalizers_1_1.value;
+              try {
+                execFinalizer2(finalizer);
+              } catch (err) {
+                errors = errors !== null && errors !== void 0 ? errors : [];
+                if (err instanceof UnsubscriptionError2) {
+                  errors = __spreadArray2(__spreadArray2([], __read2(errors)), __read2(err.errors));
+                } else {
+                  errors.push(err);
+                }
+              }
+            }
+          } catch (e_2_1) {
+            e_2 = { error: e_2_1 };
+          } finally {
+            try {
+              if (_finalizers_1_1 && !_finalizers_1_1.done && (_b = _finalizers_1.return))
+                _b.call(_finalizers_1);
+            } finally {
+              if (e_2)
+                throw e_2.error;
+            }
+          }
+        }
+        if (errors) {
+          throw new UnsubscriptionError2(errors);
+        }
+      }
+    };
+    Subscription6.prototype.add = function(teardown) {
+      var _a;
+      if (teardown && teardown !== this) {
+        if (this.closed) {
+          execFinalizer2(teardown);
+        } else {
+          if (teardown instanceof Subscription6) {
+            if (teardown.closed || teardown._hasParent(this)) {
+              return;
+            }
+            teardown._addParent(this);
+          }
+          (this._finalizers = (_a = this._finalizers) !== null && _a !== void 0 ? _a : []).push(teardown);
+        }
+      }
+    };
+    Subscription6.prototype._hasParent = function(parent) {
+      var _parentage = this._parentage;
+      return _parentage === parent || Array.isArray(_parentage) && _parentage.includes(parent);
+    };
+    Subscription6.prototype._addParent = function(parent) {
+      var _parentage = this._parentage;
+      this._parentage = Array.isArray(_parentage) ? (_parentage.push(parent), _parentage) : _parentage ? [_parentage, parent] : parent;
+    };
+    Subscription6.prototype._removeParent = function(parent) {
+      var _parentage = this._parentage;
+      if (_parentage === parent) {
+        this._parentage = null;
+      } else if (Array.isArray(_parentage)) {
+        arrRemove2(_parentage, parent);
+      }
+    };
+    Subscription6.prototype.remove = function(teardown) {
+      var _finalizers = this._finalizers;
+      _finalizers && arrRemove2(_finalizers, teardown);
+      if (teardown instanceof Subscription6) {
+        teardown._removeParent(this);
+      }
+    };
+    Subscription6.EMPTY = function() {
+      var empty = new Subscription6();
+      empty.closed = true;
+      return empty;
+    }();
+    return Subscription6;
+  }();
+  var EMPTY_SUBSCRIPTION2 = Subscription5.EMPTY;
+  function isSubscription2(value) {
+    return value instanceof Subscription5 || value && "closed" in value && isFunction2(value.remove) && isFunction2(value.add) && isFunction2(value.unsubscribe);
+  }
+  function execFinalizer2(finalizer) {
+    if (isFunction2(finalizer)) {
+      finalizer();
+    } else {
+      finalizer.unsubscribe();
+    }
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/config.js
+  var config2 = {
+    onUnhandledError: null,
+    onStoppedNotification: null,
+    Promise: void 0,
+    useDeprecatedSynchronousErrorHandling: false,
+    useDeprecatedNextContext: false
+  };
+
+  // node_modules/rxjs/dist/esm5/internal/scheduler/timeoutProvider.js
+  var timeoutProvider2 = {
+    setTimeout: function(handler, timeout) {
+      var args = [];
+      for (var _i = 2; _i < arguments.length; _i++) {
+        args[_i - 2] = arguments[_i];
+      }
+      var delegate = timeoutProvider2.delegate;
+      if (delegate === null || delegate === void 0 ? void 0 : delegate.setTimeout) {
+        return delegate.setTimeout.apply(delegate, __spreadArray2([handler, timeout], __read2(args)));
+      }
+      return setTimeout.apply(void 0, __spreadArray2([handler, timeout], __read2(args)));
+    },
+    clearTimeout: function(handle) {
+      var delegate = timeoutProvider2.delegate;
+      return ((delegate === null || delegate === void 0 ? void 0 : delegate.clearTimeout) || clearTimeout)(handle);
+    },
+    delegate: void 0
+  };
+
+  // node_modules/rxjs/dist/esm5/internal/util/reportUnhandledError.js
+  function reportUnhandledError2(err) {
+    timeoutProvider2.setTimeout(function() {
+      var onUnhandledError = config2.onUnhandledError;
+      if (onUnhandledError) {
+        onUnhandledError(err);
+      } else {
+        throw err;
+      }
+    });
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/noop.js
+  function noop3() {
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/NotificationFactories.js
+  var COMPLETE_NOTIFICATION2 = function() {
+    return createNotification2("C", void 0, void 0);
+  }();
+  function errorNotification2(error) {
+    return createNotification2("E", void 0, error);
+  }
+  function nextNotification2(value) {
+    return createNotification2("N", value, void 0);
+  }
+  function createNotification2(kind, value, error) {
+    return {
+      kind,
+      value,
+      error
+    };
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/errorContext.js
+  var context2 = null;
+  function errorContext2(cb) {
+    if (config2.useDeprecatedSynchronousErrorHandling) {
+      var isRoot = !context2;
+      if (isRoot) {
+        context2 = { errorThrown: false, error: null };
+      }
+      cb();
+      if (isRoot) {
+        var _a = context2, errorThrown = _a.errorThrown, error = _a.error;
+        context2 = null;
+        if (errorThrown) {
+          throw error;
+        }
+      }
+    } else {
+      cb();
+    }
+  }
+  function captureError2(err) {
+    if (config2.useDeprecatedSynchronousErrorHandling && context2) {
+      context2.errorThrown = true;
+      context2.error = err;
+    }
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/Subscriber.js
+  var Subscriber2 = function(_super) {
+    __extends2(Subscriber3, _super);
+    function Subscriber3(destination) {
+      var _this = _super.call(this) || this;
+      _this.isStopped = false;
+      if (destination) {
+        _this.destination = destination;
+        if (isSubscription2(destination)) {
+          destination.add(_this);
+        }
+      } else {
+        _this.destination = EMPTY_OBSERVER2;
+      }
+      return _this;
+    }
+    Subscriber3.create = function(next, error, complete) {
+      return new SafeSubscriber2(next, error, complete);
+    };
+    Subscriber3.prototype.next = function(value) {
+      if (this.isStopped) {
+        handleStoppedNotification2(nextNotification2(value), this);
+      } else {
+        this._next(value);
+      }
+    };
+    Subscriber3.prototype.error = function(err) {
+      if (this.isStopped) {
+        handleStoppedNotification2(errorNotification2(err), this);
+      } else {
+        this.isStopped = true;
+        this._error(err);
+      }
+    };
+    Subscriber3.prototype.complete = function() {
+      if (this.isStopped) {
+        handleStoppedNotification2(COMPLETE_NOTIFICATION2, this);
+      } else {
+        this.isStopped = true;
+        this._complete();
+      }
+    };
+    Subscriber3.prototype.unsubscribe = function() {
+      if (!this.closed) {
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+        this.destination = null;
+      }
+    };
+    Subscriber3.prototype._next = function(value) {
+      this.destination.next(value);
+    };
+    Subscriber3.prototype._error = function(err) {
+      try {
+        this.destination.error(err);
+      } finally {
+        this.unsubscribe();
+      }
+    };
+    Subscriber3.prototype._complete = function() {
+      try {
+        this.destination.complete();
+      } finally {
+        this.unsubscribe();
+      }
+    };
+    return Subscriber3;
+  }(Subscription5);
+  var _bind2 = Function.prototype.bind;
+  function bind2(fn, thisArg) {
+    return _bind2.call(fn, thisArg);
+  }
+  var ConsumerObserver2 = function() {
+    function ConsumerObserver3(partialObserver) {
+      this.partialObserver = partialObserver;
+    }
+    ConsumerObserver3.prototype.next = function(value) {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.next) {
+        try {
+          partialObserver.next(value);
+        } catch (error) {
+          handleUnhandledError2(error);
+        }
+      }
+    };
+    ConsumerObserver3.prototype.error = function(err) {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.error) {
+        try {
+          partialObserver.error(err);
+        } catch (error) {
+          handleUnhandledError2(error);
+        }
+      } else {
+        handleUnhandledError2(err);
+      }
+    };
+    ConsumerObserver3.prototype.complete = function() {
+      var partialObserver = this.partialObserver;
+      if (partialObserver.complete) {
+        try {
+          partialObserver.complete();
+        } catch (error) {
+          handleUnhandledError2(error);
+        }
+      }
+    };
+    return ConsumerObserver3;
+  }();
+  var SafeSubscriber2 = function(_super) {
+    __extends2(SafeSubscriber3, _super);
+    function SafeSubscriber3(observerOrNext, error, complete) {
+      var _this = _super.call(this) || this;
+      var partialObserver;
+      if (isFunction2(observerOrNext) || !observerOrNext) {
+        partialObserver = {
+          next: observerOrNext !== null && observerOrNext !== void 0 ? observerOrNext : void 0,
+          error: error !== null && error !== void 0 ? error : void 0,
+          complete: complete !== null && complete !== void 0 ? complete : void 0
+        };
+      } else {
+        var context_1;
+        if (_this && config2.useDeprecatedNextContext) {
+          context_1 = Object.create(observerOrNext);
+          context_1.unsubscribe = function() {
+            return _this.unsubscribe();
+          };
+          partialObserver = {
+            next: observerOrNext.next && bind2(observerOrNext.next, context_1),
+            error: observerOrNext.error && bind2(observerOrNext.error, context_1),
+            complete: observerOrNext.complete && bind2(observerOrNext.complete, context_1)
+          };
+        } else {
+          partialObserver = observerOrNext;
+        }
+      }
+      _this.destination = new ConsumerObserver2(partialObserver);
+      return _this;
+    }
+    return SafeSubscriber3;
+  }(Subscriber2);
+  function handleUnhandledError2(error) {
+    if (config2.useDeprecatedSynchronousErrorHandling) {
+      captureError2(error);
+    } else {
+      reportUnhandledError2(error);
+    }
+  }
+  function defaultErrorHandler2(err) {
+    throw err;
+  }
+  function handleStoppedNotification2(notification, subscriber) {
+    var onStoppedNotification = config2.onStoppedNotification;
+    onStoppedNotification && timeoutProvider2.setTimeout(function() {
+      return onStoppedNotification(notification, subscriber);
+    });
+  }
+  var EMPTY_OBSERVER2 = {
+    closed: true,
+    next: noop3,
+    error: defaultErrorHandler2,
+    complete: noop3
+  };
+
+  // node_modules/rxjs/dist/esm5/internal/symbol/observable.js
+  var observable2 = function() {
+    return typeof Symbol === "function" && Symbol.observable || "@@observable";
+  }();
+
+  // node_modules/rxjs/dist/esm5/internal/util/identity.js
+  function identity3(x) {
+    return x;
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/pipe.js
+  function pipeFromArray2(fns) {
+    if (fns.length === 0) {
+      return identity3;
+    }
+    if (fns.length === 1) {
+      return fns[0];
+    }
+    return function piped(input) {
+      return fns.reduce(function(prev, fn) {
+        return fn(prev);
+      }, input);
+    };
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/Observable.js
+  var Observable8 = function() {
+    function Observable10(subscribe) {
+      if (subscribe) {
+        this._subscribe = subscribe;
+      }
+    }
+    Observable10.prototype.lift = function(operator) {
+      var observable3 = new Observable10();
+      observable3.source = this;
+      observable3.operator = operator;
+      return observable3;
+    };
+    Observable10.prototype.subscribe = function(observerOrNext, error, complete) {
+      var _this = this;
+      var subscriber = isSubscriber2(observerOrNext) ? observerOrNext : new SafeSubscriber2(observerOrNext, error, complete);
+      errorContext2(function() {
+        var _a = _this, operator = _a.operator, source = _a.source;
+        subscriber.add(operator ? operator.call(subscriber, source) : source ? _this._subscribe(subscriber) : _this._trySubscribe(subscriber));
+      });
+      return subscriber;
+    };
+    Observable10.prototype._trySubscribe = function(sink) {
+      try {
+        return this._subscribe(sink);
+      } catch (err) {
+        sink.error(err);
+      }
+    };
+    Observable10.prototype.forEach = function(next, promiseCtor) {
+      var _this = this;
+      promiseCtor = getPromiseCtor2(promiseCtor);
+      return new promiseCtor(function(resolve, reject) {
+        var subscriber = new SafeSubscriber2({
+          next: function(value) {
+            try {
+              next(value);
+            } catch (err) {
+              reject(err);
+              subscriber.unsubscribe();
+            }
+          },
+          error: reject,
+          complete: resolve
+        });
+        _this.subscribe(subscriber);
+      });
+    };
+    Observable10.prototype._subscribe = function(subscriber) {
+      var _a;
+      return (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber);
+    };
+    Observable10.prototype[observable2] = function() {
+      return this;
+    };
+    Observable10.prototype.pipe = function() {
+      var operations = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+        operations[_i] = arguments[_i];
+      }
+      return pipeFromArray2(operations)(this);
+    };
+    Observable10.prototype.toPromise = function(promiseCtor) {
+      var _this = this;
+      promiseCtor = getPromiseCtor2(promiseCtor);
+      return new promiseCtor(function(resolve, reject) {
+        var value;
+        _this.subscribe(function(x) {
+          return value = x;
+        }, function(err) {
+          return reject(err);
+        }, function() {
+          return resolve(value);
+        });
+      });
+    };
+    Observable10.create = function(subscribe) {
+      return new Observable10(subscribe);
+    };
+    return Observable10;
+  }();
+  function getPromiseCtor2(promiseCtor) {
+    var _a;
+    return (_a = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config2.Promise) !== null && _a !== void 0 ? _a : Promise;
+  }
+  function isObserver2(value) {
+    return value && isFunction2(value.next) && isFunction2(value.error) && isFunction2(value.complete);
+  }
+  function isSubscriber2(value) {
+    return value && value instanceof Subscriber2 || isObserver2(value) && isSubscription2(value);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/lift.js
+  function hasLift2(source) {
+    return isFunction2(source === null || source === void 0 ? void 0 : source.lift);
+  }
+  function operate2(init2) {
+    return function(source) {
+      if (hasLift2(source)) {
+        return source.lift(function(liftedSource) {
+          try {
+            return init2(liftedSource, this);
+          } catch (err) {
+            this.error(err);
+          }
+        });
+      }
+      throw new TypeError("Unable to lift unknown Observable type");
+    };
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/operators/OperatorSubscriber.js
+  function createOperatorSubscriber2(destination, onNext, onComplete, onError, onFinalize) {
+    return new OperatorSubscriber2(destination, onNext, onComplete, onError, onFinalize);
+  }
+  var OperatorSubscriber2 = function(_super) {
+    __extends2(OperatorSubscriber3, _super);
+    function OperatorSubscriber3(destination, onNext, onComplete, onError, onFinalize, shouldUnsubscribe) {
+      var _this = _super.call(this, destination) || this;
+      _this.onFinalize = onFinalize;
+      _this.shouldUnsubscribe = shouldUnsubscribe;
+      _this._next = onNext ? function(value) {
+        try {
+          onNext(value);
+        } catch (err) {
+          destination.error(err);
+        }
+      } : _super.prototype._next;
+      _this._error = onError ? function(err) {
+        try {
+          onError(err);
+        } catch (err2) {
+          destination.error(err2);
+        } finally {
+          this.unsubscribe();
+        }
+      } : _super.prototype._error;
+      _this._complete = onComplete ? function() {
+        try {
+          onComplete();
+        } catch (err) {
+          destination.error(err);
+        } finally {
+          this.unsubscribe();
+        }
+      } : _super.prototype._complete;
+      return _this;
+    }
+    OperatorSubscriber3.prototype.unsubscribe = function() {
+      var _a;
+      if (!this.shouldUnsubscribe || this.shouldUnsubscribe()) {
+        var closed_1 = this.closed;
+        _super.prototype.unsubscribe.call(this);
+        !closed_1 && ((_a = this.onFinalize) === null || _a === void 0 ? void 0 : _a.call(this));
+      }
+    };
+    return OperatorSubscriber3;
+  }(Subscriber2);
+
+  // node_modules/rxjs/dist/esm5/internal/util/ObjectUnsubscribedError.js
+  var ObjectUnsubscribedError2 = createErrorClass2(function(_super) {
+    return function ObjectUnsubscribedErrorImpl() {
+      _super(this);
+      this.name = "ObjectUnsubscribedError";
+      this.message = "object unsubscribed";
+    };
+  });
+
+  // node_modules/rxjs/dist/esm5/internal/Subject.js
+  var Subject2 = function(_super) {
+    __extends2(Subject3, _super);
+    function Subject3() {
+      var _this = _super.call(this) || this;
+      _this.closed = false;
+      _this.currentObservers = null;
+      _this.observers = [];
+      _this.isStopped = false;
+      _this.hasError = false;
+      _this.thrownError = null;
+      return _this;
+    }
+    Subject3.prototype.lift = function(operator) {
+      var subject = new AnonymousSubject2(this, this);
+      subject.operator = operator;
+      return subject;
+    };
+    Subject3.prototype._throwIfClosed = function() {
+      if (this.closed) {
+        throw new ObjectUnsubscribedError2();
+      }
+    };
+    Subject3.prototype.next = function(value) {
+      var _this = this;
+      errorContext2(function() {
+        var e_1, _a;
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          if (!_this.currentObservers) {
+            _this.currentObservers = Array.from(_this.observers);
+          }
+          try {
+            for (var _b = __values2(_this.currentObservers), _c = _b.next(); !_c.done; _c = _b.next()) {
+              var observer = _c.value;
+              observer.next(value);
+            }
+          } catch (e_1_1) {
+            e_1 = { error: e_1_1 };
+          } finally {
+            try {
+              if (_c && !_c.done && (_a = _b.return))
+                _a.call(_b);
+            } finally {
+              if (e_1)
+                throw e_1.error;
+            }
+          }
+        }
+      });
+    };
+    Subject3.prototype.error = function(err) {
+      var _this = this;
+      errorContext2(function() {
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          _this.hasError = _this.isStopped = true;
+          _this.thrownError = err;
+          var observers = _this.observers;
+          while (observers.length) {
+            observers.shift().error(err);
+          }
+        }
+      });
+    };
+    Subject3.prototype.complete = function() {
+      var _this = this;
+      errorContext2(function() {
+        _this._throwIfClosed();
+        if (!_this.isStopped) {
+          _this.isStopped = true;
+          var observers = _this.observers;
+          while (observers.length) {
+            observers.shift().complete();
+          }
+        }
+      });
+    };
+    Subject3.prototype.unsubscribe = function() {
+      this.isStopped = this.closed = true;
+      this.observers = this.currentObservers = null;
+    };
+    Object.defineProperty(Subject3.prototype, "observed", {
+      get: function() {
+        var _a;
+        return ((_a = this.observers) === null || _a === void 0 ? void 0 : _a.length) > 0;
+      },
+      enumerable: false,
+      configurable: true
+    });
+    Subject3.prototype._trySubscribe = function(subscriber) {
+      this._throwIfClosed();
+      return _super.prototype._trySubscribe.call(this, subscriber);
+    };
+    Subject3.prototype._subscribe = function(subscriber) {
+      this._throwIfClosed();
+      this._checkFinalizedStatuses(subscriber);
+      return this._innerSubscribe(subscriber);
+    };
+    Subject3.prototype._innerSubscribe = function(subscriber) {
+      var _this = this;
+      var _a = this, hasError = _a.hasError, isStopped = _a.isStopped, observers = _a.observers;
+      if (hasError || isStopped) {
+        return EMPTY_SUBSCRIPTION2;
+      }
+      this.currentObservers = null;
+      observers.push(subscriber);
+      return new Subscription5(function() {
+        _this.currentObservers = null;
+        arrRemove2(observers, subscriber);
+      });
+    };
+    Subject3.prototype._checkFinalizedStatuses = function(subscriber) {
+      var _a = this, hasError = _a.hasError, thrownError = _a.thrownError, isStopped = _a.isStopped;
+      if (hasError) {
+        subscriber.error(thrownError);
+      } else if (isStopped) {
+        subscriber.complete();
+      }
+    };
+    Subject3.prototype.asObservable = function() {
+      var observable3 = new Observable8();
+      observable3.source = this;
+      return observable3;
+    };
+    Subject3.create = function(destination, source) {
+      return new AnonymousSubject2(destination, source);
+    };
+    return Subject3;
+  }(Observable8);
+  var AnonymousSubject2 = function(_super) {
+    __extends2(AnonymousSubject3, _super);
+    function AnonymousSubject3(destination, source) {
+      var _this = _super.call(this) || this;
+      _this.destination = destination;
+      _this.source = source;
+      return _this;
+    }
+    AnonymousSubject3.prototype.next = function(value) {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.next) === null || _b === void 0 ? void 0 : _b.call(_a, value);
+    };
+    AnonymousSubject3.prototype.error = function(err) {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.error) === null || _b === void 0 ? void 0 : _b.call(_a, err);
+    };
+    AnonymousSubject3.prototype.complete = function() {
+      var _a, _b;
+      (_b = (_a = this.destination) === null || _a === void 0 ? void 0 : _a.complete) === null || _b === void 0 ? void 0 : _b.call(_a);
+    };
+    AnonymousSubject3.prototype._subscribe = function(subscriber) {
+      var _a, _b;
+      return (_b = (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber)) !== null && _b !== void 0 ? _b : EMPTY_SUBSCRIPTION2;
+    };
+    return AnonymousSubject3;
+  }(Subject2);
+
+  // node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js
+  var isArrayLike2 = function(x) {
+    return x && typeof x.length === "number" && typeof x !== "function";
+  };
+
+  // node_modules/rxjs/dist/esm5/internal/util/isPromise.js
+  function isPromise2(value) {
+    return isFunction2(value === null || value === void 0 ? void 0 : value.then);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/isInteropObservable.js
+  function isInteropObservable2(input) {
+    return isFunction2(input[observable2]);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/isAsyncIterable.js
+  function isAsyncIterable2(obj) {
+    return Symbol.asyncIterator && isFunction2(obj === null || obj === void 0 ? void 0 : obj[Symbol.asyncIterator]);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/throwUnobservableError.js
+  function createInvalidObservableTypeError2(input) {
+    return new TypeError("You provided " + (input !== null && typeof input === "object" ? "an invalid object" : "'" + input + "'") + " where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.");
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/symbol/iterator.js
+  function getSymbolIterator2() {
+    if (typeof Symbol !== "function" || !Symbol.iterator) {
+      return "@@iterator";
+    }
+    return Symbol.iterator;
+  }
+  var iterator2 = getSymbolIterator2();
+
+  // node_modules/rxjs/dist/esm5/internal/util/isIterable.js
+  function isIterable2(input) {
+    return isFunction2(input === null || input === void 0 ? void 0 : input[iterator2]);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/util/isReadableStreamLike.js
+  function readableStreamLikeToAsyncGenerator2(readableStream) {
+    return __asyncGenerator2(this, arguments, function readableStreamLikeToAsyncGenerator_1() {
+      var reader, _a, value, done;
+      return __generator2(this, function(_b) {
+        switch (_b.label) {
+          case 0:
+            reader = readableStream.getReader();
+            _b.label = 1;
+          case 1:
+            _b.trys.push([1, , 9, 10]);
+            _b.label = 2;
+          case 2:
+            if (false)
+              return [3, 8];
+            return [4, __await2(reader.read())];
+          case 3:
+            _a = _b.sent(), value = _a.value, done = _a.done;
+            if (!done)
+              return [3, 5];
+            return [4, __await2(void 0)];
+          case 4:
+            return [2, _b.sent()];
+          case 5:
+            return [4, __await2(value)];
+          case 6:
+            return [4, _b.sent()];
+          case 7:
+            _b.sent();
+            return [3, 2];
+          case 8:
+            return [3, 10];
+          case 9:
+            reader.releaseLock();
+            return [7];
+          case 10:
+            return [2];
+        }
+      });
+    });
+  }
+  function isReadableStreamLike2(obj) {
+    return isFunction2(obj === null || obj === void 0 ? void 0 : obj.getReader);
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/observable/innerFrom.js
+  function innerFrom2(input) {
+    if (input instanceof Observable8) {
+      return input;
+    }
+    if (input != null) {
+      if (isInteropObservable2(input)) {
+        return fromInteropObservable2(input);
+      }
+      if (isArrayLike2(input)) {
+        return fromArrayLike2(input);
+      }
+      if (isPromise2(input)) {
+        return fromPromise2(input);
+      }
+      if (isAsyncIterable2(input)) {
+        return fromAsyncIterable2(input);
+      }
+      if (isIterable2(input)) {
+        return fromIterable2(input);
+      }
+      if (isReadableStreamLike2(input)) {
+        return fromReadableStreamLike2(input);
+      }
+    }
+    throw createInvalidObservableTypeError2(input);
+  }
+  function fromInteropObservable2(obj) {
+    return new Observable8(function(subscriber) {
+      var obs = obj[observable2]();
+      if (isFunction2(obs.subscribe)) {
+        return obs.subscribe(subscriber);
+      }
+      throw new TypeError("Provided object does not correctly implement Symbol.observable");
+    });
+  }
+  function fromArrayLike2(array) {
+    return new Observable8(function(subscriber) {
+      for (var i = 0; i < array.length && !subscriber.closed; i++) {
+        subscriber.next(array[i]);
+      }
+      subscriber.complete();
+    });
+  }
+  function fromPromise2(promise) {
+    return new Observable8(function(subscriber) {
+      promise.then(function(value) {
+        if (!subscriber.closed) {
+          subscriber.next(value);
+          subscriber.complete();
+        }
+      }, function(err) {
+        return subscriber.error(err);
+      }).then(null, reportUnhandledError2);
+    });
+  }
+  function fromIterable2(iterable) {
+    return new Observable8(function(subscriber) {
+      var e_1, _a;
+      try {
+        for (var iterable_1 = __values2(iterable), iterable_1_1 = iterable_1.next(); !iterable_1_1.done; iterable_1_1 = iterable_1.next()) {
+          var value = iterable_1_1.value;
+          subscriber.next(value);
+          if (subscriber.closed) {
+            return;
+          }
+        }
+      } catch (e_1_1) {
+        e_1 = { error: e_1_1 };
+      } finally {
+        try {
+          if (iterable_1_1 && !iterable_1_1.done && (_a = iterable_1.return))
+            _a.call(iterable_1);
+        } finally {
+          if (e_1)
+            throw e_1.error;
+        }
+      }
+      subscriber.complete();
+    });
+  }
+  function fromAsyncIterable2(asyncIterable) {
+    return new Observable8(function(subscriber) {
+      process2(asyncIterable, subscriber).catch(function(err) {
+        return subscriber.error(err);
+      });
+    });
+  }
+  function fromReadableStreamLike2(readableStream) {
+    return fromAsyncIterable2(readableStreamLikeToAsyncGenerator2(readableStream));
+  }
+  function process2(asyncIterable, subscriber) {
+    var asyncIterable_1, asyncIterable_1_1;
+    var e_2, _a;
+    return __awaiter2(this, void 0, void 0, function() {
+      var value, e_2_1;
+      return __generator2(this, function(_b) {
+        switch (_b.label) {
+          case 0:
+            _b.trys.push([0, 5, 6, 11]);
+            asyncIterable_1 = __asyncValues2(asyncIterable);
+            _b.label = 1;
+          case 1:
+            return [4, asyncIterable_1.next()];
+          case 2:
+            if (!(asyncIterable_1_1 = _b.sent(), !asyncIterable_1_1.done))
+              return [3, 4];
+            value = asyncIterable_1_1.value;
+            subscriber.next(value);
+            if (subscriber.closed) {
+              return [2];
+            }
+            _b.label = 3;
+          case 3:
+            return [3, 1];
+          case 4:
+            return [3, 11];
+          case 5:
+            e_2_1 = _b.sent();
+            e_2 = { error: e_2_1 };
+            return [3, 11];
+          case 6:
+            _b.trys.push([6, , 9, 10]);
+            if (!(asyncIterable_1_1 && !asyncIterable_1_1.done && (_a = asyncIterable_1.return)))
+              return [3, 8];
+            return [4, _a.call(asyncIterable_1)];
+          case 7:
+            _b.sent();
+            _b.label = 8;
+          case 8:
+            return [3, 10];
+          case 9:
+            if (e_2)
+              throw e_2.error;
+            return [7];
+          case 10:
+            return [7];
+          case 11:
+            subscriber.complete();
+            return [2];
+        }
+      });
+    });
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/operators/filter.js
+  function filter2(predicate, thisArg) {
+    return operate2(function(source, subscriber) {
+      var index = 0;
+      source.subscribe(createOperatorSubscriber2(subscriber, function(value) {
+        return predicate.call(thisArg, value, index++) && subscriber.next(value);
+      }));
+    });
+  }
+
+  // node_modules/rxjs/dist/esm5/internal/operators/share.js
+  function share(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var _a = options.connector, connector = _a === void 0 ? function() {
+      return new Subject2();
+    } : _a, _b = options.resetOnError, resetOnError = _b === void 0 ? true : _b, _c = options.resetOnComplete, resetOnComplete = _c === void 0 ? true : _c, _d = options.resetOnRefCountZero, resetOnRefCountZero = _d === void 0 ? true : _d;
+    return function(wrapperSource) {
+      var connection;
+      var resetConnection;
+      var subject;
+      var refCount = 0;
+      var hasCompleted = false;
+      var hasErrored = false;
+      var cancelReset = function() {
+        resetConnection === null || resetConnection === void 0 ? void 0 : resetConnection.unsubscribe();
+        resetConnection = void 0;
+      };
+      var reset = function() {
+        cancelReset();
+        connection = subject = void 0;
+        hasCompleted = hasErrored = false;
+      };
+      var resetAndUnsubscribe = function() {
+        var conn = connection;
+        reset();
+        conn === null || conn === void 0 ? void 0 : conn.unsubscribe();
+      };
+      return operate2(function(source, subscriber) {
+        refCount++;
+        if (!hasErrored && !hasCompleted) {
+          cancelReset();
+        }
+        var dest = subject = subject !== null && subject !== void 0 ? subject : connector();
+        subscriber.add(function() {
+          refCount--;
+          if (refCount === 0 && !hasErrored && !hasCompleted) {
+            resetConnection = handleReset(resetAndUnsubscribe, resetOnRefCountZero);
+          }
+        });
+        dest.subscribe(subscriber);
+        if (!connection && refCount > 0) {
+          connection = new SafeSubscriber2({
+            next: function(value) {
+              return dest.next(value);
+            },
+            error: function(err) {
+              hasErrored = true;
+              cancelReset();
+              resetConnection = handleReset(reset, resetOnError, err);
+              dest.error(err);
+            },
+            complete: function() {
+              hasCompleted = true;
+              cancelReset();
+              resetConnection = handleReset(reset, resetOnComplete);
+              dest.complete();
+            }
+          });
+          innerFrom2(source).subscribe(connection);
+        }
+      })(wrapperSource);
+    };
+  }
+  function handleReset(reset, on) {
+    var args = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+      args[_i - 2] = arguments[_i];
+    }
+    if (on === true) {
+      reset();
+      return;
+    }
+    if (on === false) {
+      return;
+    }
+    var onSubscriber = new SafeSubscriber2({
+      next: function() {
+        onSubscriber.unsubscribe();
+        reset();
+      }
+    });
+    return innerFrom2(on.apply(void 0, __spreadArray2([], __read2(args)))).subscribe(onSubscriber);
+  }
+
+  // src/create-ws-client-connection.ts
+  function* idGenerator() {
+    while (true) {
+      for (let id = 1; id < 99999999; id++) {
+        yield id;
+      }
+    }
+  }
+  var idIterator = idGenerator();
+  function createWsClientConnection(wsProtocol, wsPort, webDomain) {
+    const showPort = wsProtocol === "ws" && wsPort != 80 || wsProtocol === "wss" && wsPort != 443;
+    const wsUrl = `${wsProtocol}://${webDomain}${showPort ? ":" + wsPort : ""}/ws`;
+    const socket = new WebSocket(wsUrl);
+    const waitDisconnected = new Promise(function(resolve) {
+      socket.onclose = () => resolve(void 0);
+    });
+    const waitConnected = new Promise(function(resolve, reject) {
+      socket.onopen = () => resolve(void 0);
+      waitDisconnected.finally(reject);
+    });
+    const messages$ = new Observable8(function(subscriber) {
+      socket.onmessage = function(event) {
+        const deserialized = JSON.parse(event.data);
+        subscriber.next(deserialized);
+      };
+      waitDisconnected.finally(() => subscriber.complete());
+    }).pipe(share());
+    let keepAliveInteval;
+    waitConnected.then(function() {
+      keepAliveInteval = setInterval(() => socket.send("KEEP_ALIVE"), 25e3);
+      return waitDisconnected;
+    }).finally(() => clearInterval(keepAliveInteval));
+    return {
+      id: idIterator.next().value,
+      messages$,
+      async send(message) {
+        await waitConnected;
+        const serialized = JSON.stringify(message);
+        socket.send(serialized);
+      }
+    };
+  }
+
+  // src/signaling.ts
+  var signaling = new BroadcastChannel("webrtc");
+  var signalingMessage$ = new Subject2();
+  signaling.onmessage = function(e) {
+    const data = e?.data;
+    signalingMessage$.next(data);
+  };
+  function broadcastSignalToOtherTabs(signal) {
+    signaling.postMessage(signal);
+  }
+  var signalIncomingFromOtherTabs$ = signalingMessage$.asObservable();
+
+  // src/create-rtc-connection.ts
+  function createRtcConnection() {
+    const broadcastToServer$ = new Subject2();
+    const broadcastToCurrentTabFromServer$ = new Subject2();
+    const broadcastToWebRTC$ = new Subject2();
+    const broadcastFromWebRTC$ = new Subject2();
+    const _offlineServer$ = new Subject2();
+    const waitServerPrepare = new Promise((r) => setTimeout(r, 150));
+    let tabIsServer = false;
+    let acceptedAnswer = false;
+    const currentTabServerConnection = {
+      id: 1,
+      messages$: broadcastToServer$.asObservable(),
+      send(message) {
+        broadcastToCurrentTabFromServer$.next(message);
+      }
+    };
+    const peerServerConnection = {
+      id: 2,
+      messages$: broadcastFromWebRTC$.asObservable(),
+      send(message) {
+        broadcastToWebRTC$.next(message);
+      }
+    };
+    const peerConnection = new RTCPeerConnection();
+    let iceCandidateSent = false;
+    let clearCandidateSent = false;
+    peerConnection.onicecandidate = function(e) {
+      const { candidate } = e;
+      if (candidate && !iceCandidateSent) {
+        iceCandidateSent = false;
+        broadcastSignalToOtherTabs({
+          candidate: candidate.toJSON()
+        });
+      } else if (clearCandidateSent) {
+        clearCandidateSent = false;
+        broadcastSignalToOtherTabs({ clearCandidate: true });
+      }
+    };
+    const signalingSubscription = signalIncomingFromOtherTabs$.subscribe({
+      next(signalingEvent) {
+        if (signalingEvent.offer) {
+          handleOffer(peerConnection, signalingEvent.offer).then(() => acceptedAnswer = false).catch(console.error);
+        }
+        if (signalingEvent.answer) {
+          handleAnswer(peerConnection, signalingEvent.answer).then(() => acceptedAnswer = true).catch(console.error);
+        }
+        if (signalingEvent.candidate) {
+          handleCandidate(peerConnection, signalingEvent.candidate).catch(console.error);
+        }
+        if (signalingEvent.clearCandidate) {
+          handleClearCandidate(peerConnection).catch(console.error);
+        }
+      },
+      error(error) {
+        console.error(error);
+      }
+    });
+    async function sendOffers() {
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
+      broadcastSignalToOtherTabs({ offer });
+    }
+    sendOffers().catch(console.error);
+    peerConnection.ondatachannel = function receiveChannelCallback(event) {
+      event.channel.onmessage = function(event2) {
+        const message = JSON.parse(event2.data);
+        broadcastFromWebRTC$.next(message);
+      };
+    };
+    peerConnection.addEventListener("connectionstatechange", function() {
+      switch (peerConnection.connectionState) {
+        case "connecting":
+          break;
+        case "connected":
+          tabIsServer = acceptedAnswer;
+          if (tabIsServer) {
+            _offlineServer$.next(currentTabServerConnection);
+            _offlineServer$.next(peerServerConnection);
+          }
+          break;
+        case "closed":
+        case "disconnected":
+        case "failed":
+          signalingSubscription.unsubscribe();
+          _offlineServer$.complete();
+          break;
+        default:
+          throw new Error("Unhandled state change !");
+      }
+    });
+    const sendChannel = peerConnection.createDataChannel("sendDataChannel");
+    async function sendWhenConnected(m) {
+      while (peerConnection.connectionState !== "connected") {
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      await waitServerPrepare;
+      sendChannel.send(JSON.stringify(m));
+    }
+    const subscriptionToSendToWebRTC = broadcastToWebRTC$.subscribe({
+      next: sendWhenConnected,
+      error(error) {
+        console.error(error);
+      }
+    });
+    function createClientConnection2() {
+      return {
+        id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+        messages$: new Observable8(function(subscriber) {
+          const connMessagesSub1 = broadcastToCurrentTabFromServer$.pipe(filter2(() => tabIsServer)).subscribe({
+            next(message) {
+              subscriber.next(message);
+            },
+            error(error) {
+              console.error(error);
+            }
+          });
+          const connMessagesSub2 = broadcastFromWebRTC$.pipe(filter2(() => !tabIsServer)).subscribe({
+            next(message) {
+              subscriber.next(message);
+            },
+            error(error) {
+              console.error(error);
+            }
+          });
+          peerConnection.addEventListener("connectionstatechange", function() {
+            switch (peerConnection.connectionState) {
+              case "connecting":
+              case "connected":
+                break;
+              case "closed":
+              case "disconnected":
+              case "failed":
+                connMessagesSub1.unsubscribe();
+                connMessagesSub2.unsubscribe();
+                subscriptionToSendToWebRTC.unsubscribe();
+                subscriber.complete();
+                break;
+              default:
+                throw new Error("Unhandled state !");
+            }
+          });
+        }).pipe(share()),
+        send(message) {
+          if (tabIsServer) {
+            broadcastToServer$.next(message);
+          } else {
+            sendWhenConnected(message).catch(console.error);
+          }
+        }
+      };
+    }
+    return [
+      createClientConnection2,
+      _offlineServer$.asObservable()
+    ];
+  }
+  async function handleOffer(peerConnection, offer) {
+    await peerConnection.setRemoteDescription(offer);
+    const answer = await peerConnection.createAnswer();
+    broadcastSignalToOtherTabs({ answer });
+    await peerConnection.setLocalDescription(answer);
+  }
+  async function handleAnswer(peerConnection, answer) {
+    await peerConnection.setRemoteDescription(answer);
+  }
+  async function handleCandidate(peerConnection, candidate) {
+    await peerConnection.addIceCandidate(candidate);
+  }
+  async function handleClearCandidate(peerConnection) {
+    await peerConnection.addIceCandidate();
+  }
+
+  // src/index.ts
+  var _context = {
+    config: {
+      webProtocol: "http",
+      webDomain: "localhost",
+      webPort: 3377,
+      wsProtocol: "ws",
+      wsPort: 3377,
+      offlineMode: true
+    },
+    createRtcConnection,
+    createWsClientConnection
+  };
+  var context3 = (/* @__PURE__ */ new Map()).set(defaultContextId, _context);
+  var target = document.getElementById("game-mount-point");
+  if (target) {
+    new playground_svelte_default({ target, context: context3 });
+  }
+})();
