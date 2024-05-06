@@ -3473,7 +3473,9 @@
     });
     const interaction$ = new Subject();
     const controlsSub = interaction$.subscribe(function() {
-      interact(connection).catch(console.error);
+      if (game) {
+        interact(connection).catch(console.error);
+      }
     });
     onDestroy(function() {
       sub.unsubscribe();
