@@ -17,11 +17,11 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm --prefix core install
-          npm --prefix core build
+          npm --prefix core run build
           npm --prefix front install
-          npm --prefix front build
+          npm --prefix front run build
           npm --prefix back install
-          npm --prefix back build
+          npm --prefix back run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
