@@ -1,59 +1,16 @@
 services:
-  ws-server:
-    build:
-      context: lib/ws-server
-      tags:
-        - "prince-duals-ws-server"
-
-  config:
-    build:
-      context: lib/config
-      tags:
-        - "prince-duals-config"
-      args:
-        PRINCE_DUALS_WS_PROTOCOL: ws
-        PRINCE_DUALS_WS_PORT: 3377
-        PRINCE_DUALS_WEB_DOMAIN: localhost
-        PRINCE_DUALS_WEB_PROTOCOL: http
-        PRINCE_DUALS_WEB_PORT: 3366
-        PRINCE_DUALS_OFFLINE_MODE: false
-
-  ws-client:
-    build:
-      context: lib/ws-client
-      tags:
-        - "prince-duals-ws-client"
-
-  game:
-    build:
-      context: models/game
-      tags:
-        - "prince-duals-game"
-
-  character:
-    build:
-      context: models/character
-      tags:
-        - "prince-duals-character"
-
-  player:
-    build:
-      context: domains/player
-      tags:
-        - "prince-duals-player"
-
-  backend:
-    build: backend
-    ports:
-      - "3377:3000"
-
-  frontend:
-    build: frontend
+  front:
+    build: front
     ports:
       - "3366:80"
 
-  offline:
-    build: 
-      context: lib/offline
+  back:
+    build: back
+    ports:
+      - "3377:3000"
+
+  core:
+    build:
+      context: core
       tags:
-        - "prince-duals-offline"
+        - "prince-duals-core"

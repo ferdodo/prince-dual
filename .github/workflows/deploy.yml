@@ -16,26 +16,14 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm --prefix lib/ws-server install
-          npm --prefix lib/ws-server run build
-          npm --prefix lib/ws-client install
-          npm --prefix lib/ws-client run build
-          npm --prefix lib/offline install
-          npm --prefix lib/offline run build
-          npm --prefix lib/config install
-          npm --prefix lib/config run build -- --domain=ferdodo.github.io --web-protocol=https --web-port=443 --ws-protocol=wss --ws-port=4433 --offline-mode=true
-          npm --prefix models/character install
-          npm --prefix models/character run build
-          npm --prefix models/game install
-          npm --prefix models/game run build
-          npm --prefix domains/player install
-          npm --prefix domains/player run build
-          npm --prefix frontend install
-          npm --prefix frontend run build
-          npm --prefix backend install
-          npm --prefix backend run build
+          npm --prefix core install
+          npm --prefix core build
+          npm --prefix front install
+          npm --prefix front build
+          npm --prefix back install
+          npm --prefix back build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: frontend/dist
+          folder: front/public
