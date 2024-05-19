@@ -84,6 +84,36 @@
   function append(target2, node) {
     target2.appendChild(node);
   }
+  function append_styles(target2, style_sheet_id, styles) {
+    const append_styles_to = get_root_for_style(target2);
+    if (!append_styles_to.getElementById(style_sheet_id)) {
+      const style = element("style");
+      style.id = style_sheet_id;
+      style.textContent = styles;
+      append_stylesheet(append_styles_to, style);
+    }
+  }
+  function get_root_for_style(node) {
+    if (!node)
+      return document;
+    const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+    if (root && /** @type {ShadowRoot} */
+    root.host) {
+      return (
+        /** @type {ShadowRoot} */
+        root
+      );
+    }
+    return node.ownerDocument;
+  }
+  function append_stylesheet(node, style) {
+    append(
+      /** @type {Document} */
+      node.head || node,
+      style
+    );
+    return style.sheet;
+  }
   function insert(target2, node, anchor) {
     target2.insertBefore(node, anchor || null);
   }
@@ -120,6 +150,16 @@
       return;
     text2.data = /** @type {string} */
     data;
+  }
+  function set_input_value(input, value) {
+    input.value = value == null ? "" : value;
+  }
+  function set_style(node, key, value, important) {
+    if (value == null) {
+      node.style.removeProperty(key);
+    } else {
+      node.style.setProperty(key, value, important ? "important" : "");
+    }
   }
   function get_custom_elements_slots(element2) {
     const result = {};
@@ -299,7 +339,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance2, create_fragment2, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance3, create_fragment3, not_equal, props, append_styles2 = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -323,9 +363,9 @@
       skip_bound: false,
       root: options.target || parent_component.$$.root
     };
-    append_styles && append_styles($$.root);
+    append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance2 ? instance2(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance3 ? instance3(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -338,7 +378,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment2 ? create_fragment2($$.ctx) : false;
+    $$.fragment = create_fragment3 ? create_fragment3($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -509,7 +549,7 @@
       disconnectedCallback() {
         this.$$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$$cn) {
+          if (!this.$$cn && this.$$c) {
             this.$$c.$destroy();
             this.$$c = void 0;
           }
@@ -905,9 +945,9 @@
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
   function createErrorClass(createImpl) {
-    var _super = function(instance2) {
-      Error.call(instance2);
-      instance2.stack = new Error().stack;
+    var _super = function(instance3) {
+      Error.call(instance3);
+      instance3.stack = new Error().stack;
     };
     var ctorFunc = createImpl(_super);
     ctorFunc.prototype = Object.create(Error.prototype);
@@ -2731,6 +2771,450 @@
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
+  // ../core/src/manual-rtc.svelte.js
+  function add_css(target2) {
+    append_styles(target2, "svelte-6cb979", ".container.svelte-6cb979{padding:1rem;border:1px solid black;margin:1rem}");
+  }
+  function create_fragment(ctx) {
+    let div5;
+    let h1;
+    let t0;
+    let t1;
+    let t2;
+    let t3;
+    let div0;
+    let textarea0;
+    let textarea0_value_value;
+    let t4;
+    let br0;
+    let t5;
+    let button0;
+    let t7;
+    let div1;
+    let textarea1;
+    let t8;
+    let br1;
+    let t9;
+    let button1;
+    let t11;
+    let br2;
+    let t12;
+    let textarea2;
+    let textarea2_value_value;
+    let t13;
+    let br3;
+    let t14;
+    let button2;
+    let t16;
+    let div2;
+    let textarea3;
+    let t17;
+    let br4;
+    let t18;
+    let button3;
+    let t20;
+    let div4;
+    let div3;
+    let textarea4;
+    let textarea4_value_value;
+    let t21;
+    let br5;
+    let t22;
+    let textarea5;
+    let t23;
+    let button4;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div5 = element("div");
+        h1 = element("h1");
+        t0 = text("Connexion RTC manuelle (");
+        t1 = text(
+          /*connectionState*/
+          ctx[4]
+        );
+        t2 = text(")");
+        t3 = space();
+        div0 = element("div");
+        textarea0 = element("textarea");
+        t4 = space();
+        br0 = element("br");
+        t5 = space();
+        button0 = element("button");
+        button0.textContent = "Creer une demande de connexion.";
+        t7 = space();
+        div1 = element("div");
+        textarea1 = element("textarea");
+        t8 = space();
+        br1 = element("br");
+        t9 = space();
+        button1 = element("button");
+        button1.textContent = "Repondre a une demande de connexion.";
+        t11 = space();
+        br2 = element("br");
+        t12 = space();
+        textarea2 = element("textarea");
+        t13 = space();
+        br3 = element("br");
+        t14 = space();
+        button2 = element("button");
+        button2.textContent = "Finaliser la reponse de demande de connexion.";
+        t16 = space();
+        div2 = element("div");
+        textarea3 = element("textarea");
+        t17 = space();
+        br4 = element("br");
+        t18 = space();
+        button3 = element("button");
+        button3.textContent = "Accepter une reponse de demande connexion.";
+        t20 = space();
+        div4 = element("div");
+        div3 = element("div");
+        textarea4 = element("textarea");
+        t21 = space();
+        br5 = element("br");
+        t22 = space();
+        textarea5 = element("textarea");
+        t23 = space();
+        button4 = element("button");
+        button4.textContent = "Ajouter un candidat ICE.";
+        textarea0.disabled = true;
+        textarea0.value = textarea0_value_value = " " + JSON.stringify(
+          /*offer*/
+          ctx[0],
+          null,
+          4
+        ) + " ";
+        attr(div0, "class", "container svelte-6cb979");
+        textarea2.disabled = true;
+        textarea2.value = textarea2_value_value = " " + JSON.stringify(
+          /*answer*/
+          ctx[2],
+          null,
+          4
+        ) + " ";
+        attr(div1, "class", "container svelte-6cb979");
+        attr(div2, "class", "container svelte-6cb979");
+        textarea4.disabled = true;
+        textarea4.value = textarea4_value_value = " " + JSON.stringify(
+          /*iceCandidates*/
+          ctx[5],
+          null,
+          4
+        ) + " ";
+        attr(div4, "class", "container svelte-6cb979");
+        set_style(div5, "background-color", "white");
+      },
+      m(target2, anchor) {
+        insert(target2, div5, anchor);
+        append(div5, h1);
+        append(h1, t0);
+        append(h1, t1);
+        append(h1, t2);
+        append(div5, t3);
+        append(div5, div0);
+        append(div0, textarea0);
+        append(div0, t4);
+        append(div0, br0);
+        append(div0, t5);
+        append(div0, button0);
+        append(div5, t7);
+        append(div5, div1);
+        append(div1, textarea1);
+        set_input_value(
+          textarea1,
+          /*receivedOffer*/
+          ctx[1]
+        );
+        append(div1, t8);
+        append(div1, br1);
+        append(div1, t9);
+        append(div1, button1);
+        append(div1, t11);
+        append(div1, br2);
+        append(div1, t12);
+        append(div1, textarea2);
+        append(div1, t13);
+        append(div1, br3);
+        append(div1, t14);
+        append(div1, button2);
+        append(div5, t16);
+        append(div5, div2);
+        append(div2, textarea3);
+        set_input_value(
+          textarea3,
+          /*receivedAnswer*/
+          ctx[3]
+        );
+        append(div2, t17);
+        append(div2, br4);
+        append(div2, t18);
+        append(div2, button3);
+        append(div5, t20);
+        append(div5, div4);
+        append(div4, div3);
+        append(div3, textarea4);
+        append(div4, t21);
+        append(div4, br5);
+        append(div4, t22);
+        append(div4, textarea5);
+        set_input_value(
+          textarea5,
+          /*receivedIceCandidates*/
+          ctx[6]
+        );
+        append(div4, t23);
+        append(div4, button4);
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*createOffer*/
+              ctx[7]
+            ),
+            listen(
+              textarea1,
+              "input",
+              /*textarea1_input_handler*/
+              ctx[12]
+            ),
+            listen(
+              button1,
+              "click",
+              /*answerOffer*/
+              ctx[8]
+            ),
+            listen(
+              button2,
+              "click",
+              /*setLocalAnswer*/
+              ctx[9]
+            ),
+            listen(
+              textarea3,
+              "input",
+              /*textarea3_input_handler*/
+              ctx[13]
+            ),
+            listen(
+              button3,
+              "click",
+              /*acceptAnswer*/
+              ctx[10]
+            ),
+            listen(
+              textarea5,
+              "input",
+              /*textarea5_input_handler*/
+              ctx[14]
+            ),
+            listen(
+              button4,
+              "click",
+              /*addIceCandidate*/
+              ctx[11]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*connectionState*/
+        16)
+          set_data(
+            t1,
+            /*connectionState*/
+            ctx2[4]
+          );
+        if (dirty & /*offer*/
+        1 && textarea0_value_value !== (textarea0_value_value = " " + JSON.stringify(
+          /*offer*/
+          ctx2[0],
+          null,
+          4
+        ) + " ")) {
+          textarea0.value = textarea0_value_value;
+        }
+        if (dirty & /*receivedOffer*/
+        2) {
+          set_input_value(
+            textarea1,
+            /*receivedOffer*/
+            ctx2[1]
+          );
+        }
+        if (dirty & /*answer*/
+        4 && textarea2_value_value !== (textarea2_value_value = " " + JSON.stringify(
+          /*answer*/
+          ctx2[2],
+          null,
+          4
+        ) + " ")) {
+          textarea2.value = textarea2_value_value;
+        }
+        if (dirty & /*receivedAnswer*/
+        8) {
+          set_input_value(
+            textarea3,
+            /*receivedAnswer*/
+            ctx2[3]
+          );
+        }
+        if (dirty & /*iceCandidates*/
+        32 && textarea4_value_value !== (textarea4_value_value = " " + JSON.stringify(
+          /*iceCandidates*/
+          ctx2[5],
+          null,
+          4
+        ) + " ")) {
+          textarea4.value = textarea4_value_value;
+        }
+        if (dirty & /*receivedIceCandidates*/
+        64) {
+          set_input_value(
+            textarea5,
+            /*receivedIceCandidates*/
+            ctx2[6]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div5);
+        }
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance($$self, $$props, $$invalidate) {
+    var __awaiter3 = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+          resolve(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    const peerConnection = new RTCPeerConnection();
+    let offer;
+    let receivedOffer;
+    let answer;
+    let receivedAnswer;
+    let connectionState;
+    let iceCandidates = [];
+    let receivedIceCandidates;
+    let sendChannel;
+    peerConnection.onicecandidate = (event) => {
+      var _a;
+      const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
+      if (candidate) {
+        $$invalidate(5, iceCandidates = [...iceCandidates, candidate]);
+        console.log("New ICE candidate: ", candidate);
+      }
+    };
+    peerConnection.addEventListener("connectionstatechange", function() {
+      $$invalidate(4, connectionState = peerConnection.connectionState);
+    });
+    function createOffer() {
+      return __awaiter3(this, void 0, void 0, function* () {
+        sendChannel = peerConnection.createDataChannel("sendDataChannel");
+        $$invalidate(0, offer = yield peerConnection.createOffer());
+        yield peerConnection.setLocalDescription(offer);
+      });
+    }
+    function answerOffer() {
+      return __awaiter3(this, void 0, void 0, function* () {
+        if (receivedOffer) {
+          yield peerConnection.setRemoteDescription(JSON.parse(receivedOffer));
+          $$invalidate(2, answer = yield peerConnection.createAnswer());
+        }
+      });
+    }
+    function setLocalAnswer() {
+      return __awaiter3(this, void 0, void 0, function* () {
+        if (answer) {
+          yield peerConnection.setLocalDescription(answer);
+        }
+      });
+    }
+    function acceptAnswer() {
+      return __awaiter3(this, void 0, void 0, function* () {
+        if (receivedAnswer) {
+          yield peerConnection.setRemoteDescription(JSON.parse(receivedAnswer));
+        }
+      });
+    }
+    function addIceCandidate() {
+      return __awaiter3(this, void 0, void 0, function* () {
+        if (receivedIceCandidates) {
+          for (const candidate of JSON.parse(receivedIceCandidates)) {
+            yield peerConnection.addIceCandidate(candidate);
+          }
+        }
+      });
+    }
+    function textarea1_input_handler() {
+      receivedOffer = this.value;
+      $$invalidate(1, receivedOffer);
+    }
+    function textarea3_input_handler() {
+      receivedAnswer = this.value;
+      $$invalidate(3, receivedAnswer);
+    }
+    function textarea5_input_handler() {
+      receivedIceCandidates = this.value;
+      $$invalidate(6, receivedIceCandidates);
+    }
+    return [
+      offer,
+      receivedOffer,
+      answer,
+      receivedAnswer,
+      connectionState,
+      iceCandidates,
+      receivedIceCandidates,
+      createOffer,
+      answerOffer,
+      setLocalAnswer,
+      acceptAnswer,
+      addIceCandidate,
+      textarea1_input_handler,
+      textarea3_input_handler,
+      textarea5_input_handler
+    ];
+  }
+  var Manual_rtc = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance, create_fragment, safe_not_equal, {}, add_css);
+    }
+  };
+  var manual_rtc_svelte_default = Manual_rtc;
+
   // ../core/src/playground.svelte.js
   function create_if_block_13(ctx) {
     let p;
@@ -3292,7 +3776,7 @@
       }
     };
   }
-  function create_fragment(ctx) {
+  function create_fragment2(ctx) {
     let div;
     let t0;
     let t1;
@@ -3451,7 +3935,7 @@
       }
     };
   }
-  function instance($$self, $$props, $$invalidate) {
+  function instance2($$self, $$props, $$invalidate) {
     let showTitle;
     let aWins;
     let bWins;
@@ -3530,7 +4014,7 @@
   var Playground = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment, safe_not_equal, { contextId: 9, dataTestid: 0 });
+      init(this, options, instance2, create_fragment2, safe_not_equal, { contextId: 9, dataTestid: 0 });
     }
   };
   var playground_svelte_default = Playground;
@@ -4060,9 +4544,9 @@
 
   // node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
   function createErrorClass2(createImpl) {
-    var _super = function(instance2) {
-      Error.call(instance2);
-      instance2.stack = new Error().stack;
+    var _super = function(instance3) {
+      Error.call(instance3);
+      instance3.stack = new Error().stack;
     };
     var ctorFunc = createImpl(_super);
     ctorFunc.prototype = Object.create(Error.prototype);
@@ -5393,7 +5877,7 @@
       webPort: 3377,
       wsProtocol: "ws",
       wsPort: 3377,
-      offlineMode: true
+      offlineMode: false
     },
     createRtcConnection,
     createWsClientConnection
@@ -5402,5 +5886,9 @@
   var target = document.getElementById("game-mount-point");
   if (target) {
     new playground_svelte_default({ target, context: context3 });
+  }
+  var connTarget = document.getElementById("connection-mount-point");
+  if (connTarget) {
+    new manual_rtc_svelte_default({ target: connTarget });
   }
 })();
