@@ -1,6 +1,7 @@
 import { Connection } from "connection-types";
 import { Observable, Subject, share, filter } from "rxjs";
-import { SignalingEvent, broadcastSignalToOtherTabs, signalIncomingFromOtherTabs$ } from "./signaling";
+import { broadcastSignalToOtherTabs, signalIncomingFromOtherTabs$ } from "./signaling";
+import { SignalingEvent } from "core";
 
 export function createRtcConnection<T>(): [() => Connection<T>, Observable<Connection<T>>] {
 	const broadcastToServer$ = new Subject<T>();

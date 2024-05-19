@@ -1,11 +1,5 @@
 import { Observable, Subject } from "rxjs";
-
-export interface SignalingEvent {
-	offer?: RTCSessionDescriptionInit,
-	answer?: RTCSessionDescriptionInit,
-	candidate?: RTCIceCandidateInit,
-	clearCandidate?: boolean
-}
+import { SignalingEvent } from "core";
 
 const signaling = new BroadcastChannel('webrtc');
 

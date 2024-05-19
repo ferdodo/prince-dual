@@ -4,7 +4,8 @@
 		"moduleResolution": "Bundler",
 		"skipLibCheck": true,
 		"lib": [
-			"ESNext"
+			"ESNext",
+			"DOM"
 		]
 	}
 }

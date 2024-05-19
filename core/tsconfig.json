@@ -6,6 +6,10 @@
 		"downlevelIteration": true,
 		"paths": {
 			"core": ["src/index"]
-		}
+		},
+		"lib": [
+			"ESNext",
+			"DOM"
+		]
 	}	
 }
