@@ -2777,45 +2777,72 @@
   }
   function create_if_block_2(ctx) {
     let div;
+    let textarea;
+    let t0;
     let button0;
-    let t1;
+    let t2;
     let button1;
     let mounted;
     let dispose;
     return {
       c() {
         div = element("div");
+        textarea = element("textarea");
+        t0 = space();
         button0 = element("button");
         button0.textContent = "Initier la connexion WebRTC";
-        t1 = space();
+        t2 = space();
         button1 = element("button");
         button1.textContent = "Accepter la connextion WebRTC";
+        attr(textarea, "placeholder", "Entrez les serveurs STUN");
         attr(div, "class", "container svelte-1r147i5");
       },
       m(target2, anchor) {
         insert(target2, div, anchor);
+        append(div, textarea);
+        set_input_value(
+          textarea,
+          /*stunServer*/
+          ctx[0]
+        );
+        append(div, t0);
         append(div, button0);
-        append(div, t1);
+        append(div, t2);
         append(div, button1);
         if (!mounted) {
           dispose = [
             listen(
+              textarea,
+              "input",
+              /*textarea_input_handler*/
+              ctx[11]
+            ),
+            listen(
               button0,
               "click",
               /*initiateConnection*/
-              ctx[7]
+              ctx[8]
             ),
             listen(
               button1,
               "click",
               /*acceptConnection*/
-              ctx[6]
+              ctx[7]
             )
           ];
           mounted = true;
         }
       },
-      p: noop,
+      p(ctx2, dirty) {
+        if (dirty & /*stunServer*/
+        1) {
+          set_input_value(
+            textarea,
+            /*stunServer*/
+            ctx2[0]
+          );
+        }
+      },
       d(detaching) {
         if (detaching) {
           detach(div);
@@ -2845,7 +2872,7 @@
             button,
             "click",
             /*copySignalingEventToClipBoard*/
-            ctx[9]
+            ctx[10]
           );
           mounted = true;
         }
@@ -2878,7 +2905,7 @@
         set_input_value(
           textarea,
           /*receivedSignalingEvents*/
-          ctx[4]
+          ctx[5]
         );
         if (!mounted) {
           dispose = [
@@ -2886,13 +2913,13 @@
               textarea,
               "change",
               /*receiveSignalingEvents*/
-              ctx[8]
+              ctx[9]
             ),
             listen(
               textarea,
               "input",
-              /*textarea_input_handler*/
-              ctx[10]
+              /*textarea_input_handler_1*/
+              ctx[12]
             )
           ];
           mounted = true;
@@ -2900,11 +2927,11 @@
       },
       p(ctx2, dirty) {
         if (dirty & /*receivedSignalingEvents*/
-        16) {
+        32) {
           set_input_value(
             textarea,
             /*receivedSignalingEvents*/
-            ctx2[4]
+            ctx2[5]
           );
         }
       },
@@ -2927,17 +2954,17 @@
     let t4;
     let t5;
     let if_block0 = !/*type*/
-    ctx[5] && create_if_block_2(ctx);
+    ctx[6] && create_if_block_2(ctx);
     let if_block1 = (
       /*offer*/
-      (ctx[0] || /*answer*/
-      ctx[1] || /*iceCandidates*/
-      ctx[3].length) && create_if_block_1(ctx)
+      (ctx[1] || /*answer*/
+      ctx[2] || /*iceCandidates*/
+      ctx[4].length) && create_if_block_1(ctx)
     );
     let if_block2 = (
       /*type*/
-      ctx[5] && /*connectionState*/
-      ctx[2] !== "connected" && create_if_block(ctx)
+      ctx[6] && /*connectionState*/
+      ctx[3] !== "connected" && create_if_block(ctx)
     );
     return {
       c() {
@@ -2946,7 +2973,7 @@
         t0 = text("Connexion RTC manuelle (");
         t1 = text(
           /*connectionState*/
-          ctx[2]
+          ctx[3]
         );
         t2 = text(")");
         t3 = space();
@@ -2978,14 +3005,14 @@
       },
       p(ctx2, [dirty]) {
         if (dirty & /*connectionState*/
-        4)
+        8)
           set_data(
             t1,
             /*connectionState*/
-            ctx2[2]
+            ctx2[3]
           );
         if (!/*type*/
-        ctx2[5]) {
+        ctx2[6]) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
           } else {
@@ -2999,9 +3026,9 @@
         }
         if (
           /*offer*/
-          ctx2[0] || /*answer*/
-          ctx2[1] || /*iceCandidates*/
-          ctx2[3].length
+          ctx2[1] || /*answer*/
+          ctx2[2] || /*iceCandidates*/
+          ctx2[4].length
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
@@ -3016,8 +3043,8 @@
         }
         if (
           /*type*/
-          ctx2[5] && /*connectionState*/
-          ctx2[2] !== "connected"
+          ctx2[6] && /*connectionState*/
+          ctx2[3] !== "connected"
         ) {
           if (if_block2) {
             if_block2.p(ctx2, dirty);
@@ -3074,6 +3101,7 @@
         step((generator = generator.apply(thisArg, _arguments || [])).next());
       });
     };
+    let stunServer;
     let peerConnection;
     let offer;
     let answer;
@@ -3083,51 +3111,59 @@
     let sendChannel;
     let type;
     function acceptConnection() {
-      $$invalidate(5, type = "b");
+      $$invalidate(6, type = "b");
       if (peerConnection) {
         peerConnection.close();
       }
-      $$invalidate(0, offer = void 0);
-      $$invalidate(1, answer = void 0);
-      $$invalidate(2, connectionState = void 0);
-      $$invalidate(3, iceCandidates = []);
+      $$invalidate(1, offer = void 0);
+      $$invalidate(2, answer = void 0);
+      $$invalidate(3, connectionState = void 0);
+      $$invalidate(4, iceCandidates = []);
       sendChannel = void 0;
-      peerConnection = new RTCPeerConnection();
+      peerConnection = new RTCPeerConnection(stunServer && { iceServers: [{ urls: stunServer }] });
       peerConnection.addEventListener("connectionstatechange", function() {
-        $$invalidate(2, connectionState = peerConnection.connectionState);
+        $$invalidate(3, connectionState = peerConnection.connectionState);
       });
       peerConnection.onicecandidate = (event) => {
         var _a;
         const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
         if (candidate) {
-          $$invalidate(3, iceCandidates = [...iceCandidates, candidate]);
+          $$invalidate(4, iceCandidates = [...iceCandidates, candidate]);
+        } else {
+          for (const line of peerConnection.localDescription.sdp.split("\n")) {
+            console.log(line);
+          }
         }
       };
     }
     function initiateConnection() {
       return __awaiter3(this, void 0, void 0, function* () {
-        $$invalidate(5, type = "a");
+        $$invalidate(6, type = "a");
         if (peerConnection) {
           peerConnection.close();
         }
-        $$invalidate(0, offer = void 0);
-        $$invalidate(1, answer = void 0);
-        $$invalidate(2, connectionState = void 0);
-        $$invalidate(3, iceCandidates = []);
+        $$invalidate(1, offer = void 0);
+        $$invalidate(2, answer = void 0);
+        $$invalidate(3, connectionState = void 0);
+        $$invalidate(4, iceCandidates = []);
         sendChannel = void 0;
-        peerConnection = new RTCPeerConnection();
+        peerConnection = new RTCPeerConnection(stunServer && { iceServers: [{ urls: stunServer }] });
         peerConnection.onicecandidate = (event) => {
           var _a;
           const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
           if (candidate) {
-            $$invalidate(3, iceCandidates = [...iceCandidates, candidate]);
+            $$invalidate(4, iceCandidates = [...iceCandidates, candidate]);
+          } else {
+            for (const line of peerConnection.localDescription.sdp.split("\n")) {
+              console.log(line);
+            }
           }
         };
         peerConnection.addEventListener("connectionstatechange", function() {
-          $$invalidate(2, connectionState = peerConnection.connectionState);
+          $$invalidate(3, connectionState = peerConnection.connectionState);
         });
         sendChannel = peerConnection.createDataChannel("sendDataChannel");
-        $$invalidate(0, offer = yield peerConnection.createOffer());
+        $$invalidate(1, offer = yield peerConnection.createOffer());
         yield peerConnection.setLocalDescription(offer);
       });
     }
@@ -3146,11 +3182,11 @@
             yield peerConnection.addIceCandidate(signalingEvent.candidate);
           }
           if (type === "b" && !answer && signalingEvent.offer) {
-            $$invalidate(1, answer = yield peerConnection.createAnswer());
+            $$invalidate(2, answer = yield peerConnection.createAnswer());
             yield peerConnection.setLocalDescription(answer);
           }
         }
-        $$invalidate(4, receivedSignalingEvents = void 0);
+        $$invalidate(5, receivedSignalingEvents = void 0);
       });
     }
     function createSignalingEvents() {
@@ -3159,9 +3195,9 @@
         ...offer ? [{ offer }] : [],
         ...answer ? [{ answer }] : []
       ];
-      $$invalidate(0, offer = void 0);
-      $$invalidate(1, answer = void 0);
-      $$invalidate(3, iceCandidates = []);
+      $$invalidate(1, offer = void 0);
+      $$invalidate(2, answer = void 0);
+      $$invalidate(4, iceCandidates = []);
       return signalingEvents;
     }
     function copySignalingEventToClipBoard() {
@@ -3169,10 +3205,15 @@
       navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
     }
     function textarea_input_handler() {
+      stunServer = this.value;
+      $$invalidate(0, stunServer);
+    }
+    function textarea_input_handler_1() {
       receivedSignalingEvents = this.value;
-      $$invalidate(4, receivedSignalingEvents);
+      $$invalidate(5, receivedSignalingEvents);
     }
     return [
+      stunServer,
       offer,
       answer,
       connectionState,
@@ -3183,7 +3224,8 @@
       initiateConnection,
       receiveSignalingEvents,
       copySignalingEventToClipBoard,
-      textarea_input_handler
+      textarea_input_handler,
+      textarea_input_handler_1
     ];
   }
   var Manual_rtc = class extends SvelteComponent {
