@@ -27,8 +27,16 @@
 			iceServers: [{ urls: stunServer }]
 		});
 
+		sendChannel = peerConnection.createDataChannel('sendDataChannel');
+
 		peerConnection.addEventListener("connectionstatechange", function() {
 			connectionState = peerConnection.connectionState;
+
+			if (connectionState === "connected") {
+				setTimeout(function() {
+					sendChannel.send("Ping!");
+				}, 200);
+			}
 		});
 
 		peerConnection.onicecandidate = (event) => {
@@ -36,12 +44,17 @@
 
 			if (candidate) {
 				iceCandidates = [...iceCandidates, candidate];
-			} else {
-				for (const line of peerConnection.localDescription.sdp.split("\n")) {
-					console.log(line);
-				}
 			}
 		}
+
+		peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
+			event.channel.onmessage = function(event: MessageEvent<string>) {
+				console.log("Received Message: " + event.data);
+				setTimeout(function() {
+					sendChannel.send(event.data === "Ping!" ? "Pong!" : "Ping!");
+				}, 10);
+			}
+		};
 	}
 
 	async function initiateConnection() {
@@ -66,18 +79,30 @@
 
 			if (candidate) {
 				iceCandidates = [...iceCandidates, candidate];
-			} else {
-				for (const line of peerConnection.localDescription.sdp.split("\n")) {
-					console.log(line);
-				}
 			}
 		}
 
+		sendChannel = peerConnection.createDataChannel('sendDataChannel');
+
+		peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
+			event.channel.onmessage = function(event: MessageEvent<string>) {
+				console.log("Received Message: " + event.data);
+				setTimeout(function() {
+					sendChannel.send(event.data === "Ping!" ? "Pong!" : "Ping!");
+				}, 10);
+			}
+		};
+
 		peerConnection.addEventListener("connectionstatechange", function() {
 			connectionState = peerConnection.connectionState;
+
+			if (connectionState === "connected") {
+				setTimeout(function() {
+					sendChannel.send("Ping!");
+				}, 200);
+			}
 		});
 
-		sendChannel = peerConnection.createDataChannel('sendDataChannel');
 		offer = await peerConnection.createOffer();
 		await peerConnection.setLocalDescription(offer);
 	}
