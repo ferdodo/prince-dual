@@ -1,103 +1,150 @@
 <script lang="ts">
-    const peerConnection: RTCPeerConnection = new RTCPeerConnection();
-    let offer;
-    let receivedOffer;
-    let answer;
-    let receivedAnswer;
-    let connectionState;
-    let iceCandidates = [];
-    let receivedIceCandidates;
-    let sendChannel;
+	import { SignalingEvent } from "core";
 
-    peerConnection.onicecandidate = (event) => {
+	let peerConnection;
+	let offer;
+	let answer;
+	let connectionState;
+	let iceCandidates = [];
+	let receivedSignalingEvents;
+	let sendChannel;
+	let type;
 
-        const candidate = event?.candidate?.toJSON();
+	function acceptConnection() {
+		type = "b";
 
-        if (candidate) {
-            iceCandidates = [...iceCandidates, candidate];
-            console.log('New ICE candidate: ', candidate);
-        }
-    }
+		if (peerConnection) {
+			peerConnection.close();
+		}
 
-    peerConnection.addEventListener("connectionstatechange", function() {
-        connectionState = peerConnection.connectionState;
-    });
+		offer = undefined;
+		answer = undefined;
+		connectionState = undefined;
+		iceCandidates = [];
+		sendChannel = undefined;
+		peerConnection = new RTCPeerConnection();
 
-    async function createOffer() {
-        sendChannel = peerConnection.createDataChannel('sendDataChannel');
-        offer = await peerConnection.createOffer();
-        await peerConnection.setLocalDescription(offer);
-    }
+		peerConnection.addEventListener("connectionstatechange", function() {
+			connectionState = peerConnection.connectionState;
+		});
 
-    async function answerOffer() {
-        if (receivedOffer) {
-            await peerConnection.setRemoteDescription(JSON.parse(receivedOffer));
-            answer = await peerConnection.createAnswer();
-        }
-    }
+		peerConnection.onicecandidate = (event) => {
+			const candidate = event?.candidate?.toJSON();
 
-    async function setLocalAnswer() {
-        if (answer) {
-            await peerConnection.setLocalDescription(answer);
-        }
-    }
+			if (candidate) {
+				iceCandidates = [...iceCandidates, candidate];
+			}
+		}
+	}
 
-    async function acceptAnswer() {
-        if (receivedAnswer) {
-            await peerConnection.setRemoteDescription(JSON.parse(receivedAnswer));
-        }
-    }
+	async function initiateConnection() {
+		type = "a";
 
-    async function addIceCandidate() {
-        if (receivedIceCandidates) {
+		if (peerConnection) {
+			peerConnection.close();
+		}
 
-            for (const candidate of JSON.parse(receivedIceCandidates)) {
-                await peerConnection.addIceCandidate(candidate);
-            }
-        }
-    }
+		offer = undefined;
+		answer = undefined;
+		connectionState = undefined;
+		iceCandidates = [];
+		sendChannel = undefined;
+
+		peerConnection = new RTCPeerConnection();
+
+		peerConnection.onicecandidate = (event) => {
+			const candidate = event?.candidate?.toJSON();
+
+			if (candidate) {
+				iceCandidates = [...iceCandidates, candidate];
+			}
+		}
+
+		peerConnection.addEventListener("connectionstatechange", function() {
+			connectionState = peerConnection.connectionState;
+		});
+
+		sendChannel = peerConnection.createDataChannel('sendDataChannel');
+		offer = await peerConnection.createOffer();
+		await peerConnection.setLocalDescription(offer);
+	}
+
+	async function receiveSignalingEvents() {
+		for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
+			if (type === "b" && !answer && signalingEvent.offer) {
+				await peerConnection.setRemoteDescription(signalingEvent.offer);
+			}
+
+			if (type === "a" && signalingEvent.answer) {
+				await peerConnection.setRemoteDescription(signalingEvent.answer);
+			}
+		}
+
+		for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
+			if (signalingEvent.candidate) {
+				await peerConnection.addIceCandidate(signalingEvent.candidate);
+			}
+
+			if (type === "b" && !answer && signalingEvent.offer) {
+				answer = await peerConnection.createAnswer();
+				await peerConnection.setLocalDescription(answer);
+			}
+		}
+
+		receivedSignalingEvents = undefined;
+	}
+
+	function createSignalingEvents(): SignalingEvent[] {
+		const signalingEvents = [
+			...iceCandidates.map(candidate => ({ candidate })),
+			...offer ? [{ offer }] : [],
+			...answer ? [{ answer }] : []
+		];
+
+		offer = undefined;
+		answer = undefined;
+		iceCandidates = [];
+
+		return signalingEvents;
+	}
+
+	function copySignalingEventToClipBoard() {
+		const signalingEvents = createSignalingEvents();
+		navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
+	}
 </script>
 
 <div style="background-color: white;">
-    <h1> Connexion RTC manuelle ({connectionState}) </h1>
+	<h1> Connexion RTC manuelle ({connectionState}) </h1>
 
-    <div class="container">
-        <textarea disabled> { JSON.stringify(offer, null, 4) } </textarea>
-        <br>
-        <button on:click={createOffer}> Creer une demande de connexion. </button>
-    </div>
+	{#if !type}
+		<div class="container">
+			<button on:click={initiateConnection}> Initier la connexion WebRTC </button>
+			<button on:click={acceptConnection}> Accepter la connextion WebRTC </button>
+		</div>
+	{/if}
 
-    <div class="container">
-        <textarea bind:value={ receivedOffer }/> 
-        <br>
-        <button on:click={answerOffer}> Repondre a une demande de connexion. </button>
-        <br>
-        <textarea disabled> { JSON.stringify(answer, null, 4) } </textarea>
-        <br>
-        <button on:click={setLocalAnswer}> Finaliser la reponse de demande de connexion. </button>
-    </div>
+	{#if offer || answer || iceCandidates.length}
+		<div class="container">
+			<button on:click={copySignalingEventToClipBoard}> Copier le message de signalement </button>
+		</div>
+	{/if}
 
-    <div class="container">
-        <textarea bind:value={ receivedAnswer }/> 
-        <br>
-        <button on:click={acceptAnswer}> Accepter une reponse de demande connexion. </button>
-    </div>
-
-    <div class="container">
-        <div>
-            <textarea disabled> { JSON.stringify(iceCandidates, null, 4) } </textarea>
-        </div>
-
-        <br>
-        <textarea bind:value={ receivedIceCandidates }/>
-        <button on:click={addIceCandidate}> Ajouter un candidat ICE. </button>
-    </div>
+	{#if type && connectionState !== "connected"}
+		<div class="container">
+			<textarea
+				placeholder="Recevoir un message du partenaire."
+				on:change={receiveSignalingEvents}
+				bind:value={ receivedSignalingEvents }
+			/> 
+		</div>
+	{/if}
 </div>
 
 <style>
-    .container {
-        padding: 1rem;
-        border: 1px solid black;
-        margin: 1rem;
-    }
+	.container {
+		padding: 1rem;
+		border: 1px solid black;
+		margin: 1rem;
+	}
 </style>
