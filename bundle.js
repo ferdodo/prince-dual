@@ -2773,321 +2773,276 @@
 
   // ../core/src/manual-rtc.svelte.js
   function add_css(target2) {
-    append_styles(target2, "svelte-6cb979", ".container.svelte-6cb979{padding:1rem;border:1px solid black;margin:1rem}");
+    append_styles(target2, "svelte-1r147i5", ".container.svelte-1r147i5{padding:1rem;border:1px solid black;margin:1rem}");
   }
-  function create_fragment(ctx) {
-    let div5;
-    let h1;
-    let t0;
-    let t1;
-    let t2;
-    let t3;
-    let div0;
-    let textarea0;
-    let textarea0_value_value;
-    let t4;
-    let br0;
-    let t5;
+  function create_if_block_2(ctx) {
+    let div;
     let button0;
-    let t7;
-    let div1;
-    let textarea1;
-    let t8;
-    let br1;
-    let t9;
+    let t1;
     let button1;
-    let t11;
-    let br2;
-    let t12;
-    let textarea2;
-    let textarea2_value_value;
-    let t13;
-    let br3;
-    let t14;
-    let button2;
-    let t16;
-    let div2;
-    let textarea3;
-    let t17;
-    let br4;
-    let t18;
-    let button3;
-    let t20;
-    let div4;
-    let div3;
-    let textarea4;
-    let textarea4_value_value;
-    let t21;
-    let br5;
-    let t22;
-    let textarea5;
-    let t23;
-    let button4;
     let mounted;
     let dispose;
     return {
       c() {
-        div5 = element("div");
-        h1 = element("h1");
-        t0 = text("Connexion RTC manuelle (");
-        t1 = text(
-          /*connectionState*/
-          ctx[4]
-        );
-        t2 = text(")");
-        t3 = space();
-        div0 = element("div");
-        textarea0 = element("textarea");
-        t4 = space();
-        br0 = element("br");
-        t5 = space();
+        div = element("div");
         button0 = element("button");
-        button0.textContent = "Creer une demande de connexion.";
-        t7 = space();
-        div1 = element("div");
-        textarea1 = element("textarea");
-        t8 = space();
-        br1 = element("br");
-        t9 = space();
+        button0.textContent = "Initier la connexion WebRTC";
+        t1 = space();
         button1 = element("button");
-        button1.textContent = "Repondre a une demande de connexion.";
-        t11 = space();
-        br2 = element("br");
-        t12 = space();
-        textarea2 = element("textarea");
-        t13 = space();
-        br3 = element("br");
-        t14 = space();
-        button2 = element("button");
-        button2.textContent = "Finaliser la reponse de demande de connexion.";
-        t16 = space();
-        div2 = element("div");
-        textarea3 = element("textarea");
-        t17 = space();
-        br4 = element("br");
-        t18 = space();
-        button3 = element("button");
-        button3.textContent = "Accepter une reponse de demande connexion.";
-        t20 = space();
-        div4 = element("div");
-        div3 = element("div");
-        textarea4 = element("textarea");
-        t21 = space();
-        br5 = element("br");
-        t22 = space();
-        textarea5 = element("textarea");
-        t23 = space();
-        button4 = element("button");
-        button4.textContent = "Ajouter un candidat ICE.";
-        textarea0.disabled = true;
-        textarea0.value = textarea0_value_value = " " + JSON.stringify(
-          /*offer*/
-          ctx[0],
-          null,
-          4
-        ) + " ";
-        attr(div0, "class", "container svelte-6cb979");
-        textarea2.disabled = true;
-        textarea2.value = textarea2_value_value = " " + JSON.stringify(
-          /*answer*/
-          ctx[2],
-          null,
-          4
-        ) + " ";
-        attr(div1, "class", "container svelte-6cb979");
-        attr(div2, "class", "container svelte-6cb979");
-        textarea4.disabled = true;
-        textarea4.value = textarea4_value_value = " " + JSON.stringify(
-          /*iceCandidates*/
-          ctx[5],
-          null,
-          4
-        ) + " ";
-        attr(div4, "class", "container svelte-6cb979");
-        set_style(div5, "background-color", "white");
+        button1.textContent = "Accepter la connextion WebRTC";
+        attr(div, "class", "container svelte-1r147i5");
       },
       m(target2, anchor) {
-        insert(target2, div5, anchor);
-        append(div5, h1);
-        append(h1, t0);
-        append(h1, t1);
-        append(h1, t2);
-        append(div5, t3);
-        append(div5, div0);
-        append(div0, textarea0);
-        append(div0, t4);
-        append(div0, br0);
-        append(div0, t5);
-        append(div0, button0);
-        append(div5, t7);
-        append(div5, div1);
-        append(div1, textarea1);
-        set_input_value(
-          textarea1,
-          /*receivedOffer*/
-          ctx[1]
-        );
-        append(div1, t8);
-        append(div1, br1);
-        append(div1, t9);
-        append(div1, button1);
-        append(div1, t11);
-        append(div1, br2);
-        append(div1, t12);
-        append(div1, textarea2);
-        append(div1, t13);
-        append(div1, br3);
-        append(div1, t14);
-        append(div1, button2);
-        append(div5, t16);
-        append(div5, div2);
-        append(div2, textarea3);
-        set_input_value(
-          textarea3,
-          /*receivedAnswer*/
-          ctx[3]
-        );
-        append(div2, t17);
-        append(div2, br4);
-        append(div2, t18);
-        append(div2, button3);
-        append(div5, t20);
-        append(div5, div4);
-        append(div4, div3);
-        append(div3, textarea4);
-        append(div4, t21);
-        append(div4, br5);
-        append(div4, t22);
-        append(div4, textarea5);
-        set_input_value(
-          textarea5,
-          /*receivedIceCandidates*/
-          ctx[6]
-        );
-        append(div4, t23);
-        append(div4, button4);
+        insert(target2, div, anchor);
+        append(div, button0);
+        append(div, t1);
+        append(div, button1);
         if (!mounted) {
           dispose = [
             listen(
               button0,
               "click",
-              /*createOffer*/
+              /*initiateConnection*/
               ctx[7]
-            ),
-            listen(
-              textarea1,
-              "input",
-              /*textarea1_input_handler*/
-              ctx[12]
             ),
             listen(
               button1,
               "click",
-              /*answerOffer*/
-              ctx[8]
-            ),
-            listen(
-              button2,
-              "click",
-              /*setLocalAnswer*/
-              ctx[9]
-            ),
-            listen(
-              textarea3,
-              "input",
-              /*textarea3_input_handler*/
-              ctx[13]
-            ),
-            listen(
-              button3,
-              "click",
-              /*acceptAnswer*/
-              ctx[10]
-            ),
-            listen(
-              textarea5,
-              "input",
-              /*textarea5_input_handler*/
-              ctx[14]
-            ),
-            listen(
-              button4,
-              "click",
-              /*addIceCandidate*/
-              ctx[11]
+              /*acceptConnection*/
+              ctx[6]
             )
           ];
           mounted = true;
         }
       },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function create_if_block_1(ctx) {
+    let div;
+    let button;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        button = element("button");
+        button.textContent = "Copier le message de signalement";
+        attr(div, "class", "container svelte-1r147i5");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+        append(div, button);
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*copySignalingEventToClipBoard*/
+            ctx[9]
+          );
+          mounted = true;
+        }
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block(ctx) {
+    let div;
+    let textarea;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        textarea = element("textarea");
+        attr(textarea, "placeholder", "Recevoir un message du partenaire.");
+        attr(div, "class", "container svelte-1r147i5");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+        append(div, textarea);
+        set_input_value(
+          textarea,
+          /*receivedSignalingEvents*/
+          ctx[4]
+        );
+        if (!mounted) {
+          dispose = [
+            listen(
+              textarea,
+              "change",
+              /*receiveSignalingEvents*/
+              ctx[8]
+            ),
+            listen(
+              textarea,
+              "input",
+              /*textarea_input_handler*/
+              ctx[10]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*receivedSignalingEvents*/
+        16) {
+          set_input_value(
+            textarea,
+            /*receivedSignalingEvents*/
+            ctx2[4]
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function create_fragment(ctx) {
+    let div;
+    let h1;
+    let t0;
+    let t1;
+    let t2;
+    let t3;
+    let t4;
+    let t5;
+    let if_block0 = !/*type*/
+    ctx[5] && create_if_block_2(ctx);
+    let if_block1 = (
+      /*offer*/
+      (ctx[0] || /*answer*/
+      ctx[1] || /*iceCandidates*/
+      ctx[3].length) && create_if_block_1(ctx)
+    );
+    let if_block2 = (
+      /*type*/
+      ctx[5] && /*connectionState*/
+      ctx[2] !== "connected" && create_if_block(ctx)
+    );
+    return {
+      c() {
+        div = element("div");
+        h1 = element("h1");
+        t0 = text("Connexion RTC manuelle (");
+        t1 = text(
+          /*connectionState*/
+          ctx[2]
+        );
+        t2 = text(")");
+        t3 = space();
+        if (if_block0)
+          if_block0.c();
+        t4 = space();
+        if (if_block1)
+          if_block1.c();
+        t5 = space();
+        if (if_block2)
+          if_block2.c();
+        set_style(div, "background-color", "white");
+      },
+      m(target2, anchor) {
+        insert(target2, div, anchor);
+        append(div, h1);
+        append(h1, t0);
+        append(h1, t1);
+        append(h1, t2);
+        append(div, t3);
+        if (if_block0)
+          if_block0.m(div, null);
+        append(div, t4);
+        if (if_block1)
+          if_block1.m(div, null);
+        append(div, t5);
+        if (if_block2)
+          if_block2.m(div, null);
+      },
       p(ctx2, [dirty]) {
         if (dirty & /*connectionState*/
-        16)
+        4)
           set_data(
             t1,
             /*connectionState*/
-            ctx2[4]
+            ctx2[2]
           );
-        if (dirty & /*offer*/
-        1 && textarea0_value_value !== (textarea0_value_value = " " + JSON.stringify(
+        if (!/*type*/
+        ctx2[5]) {
+          if (if_block0) {
+            if_block0.p(ctx2, dirty);
+          } else {
+            if_block0 = create_if_block_2(ctx2);
+            if_block0.c();
+            if_block0.m(div, t4);
+          }
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
+        }
+        if (
           /*offer*/
-          ctx2[0],
-          null,
-          4
-        ) + " ")) {
-          textarea0.value = textarea0_value_value;
+          ctx2[0] || /*answer*/
+          ctx2[1] || /*iceCandidates*/
+          ctx2[3].length
+        ) {
+          if (if_block1) {
+            if_block1.p(ctx2, dirty);
+          } else {
+            if_block1 = create_if_block_1(ctx2);
+            if_block1.c();
+            if_block1.m(div, t5);
+          }
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
         }
-        if (dirty & /*receivedOffer*/
-        2) {
-          set_input_value(
-            textarea1,
-            /*receivedOffer*/
-            ctx2[1]
-          );
-        }
-        if (dirty & /*answer*/
-        4 && textarea2_value_value !== (textarea2_value_value = " " + JSON.stringify(
-          /*answer*/
-          ctx2[2],
-          null,
-          4
-        ) + " ")) {
-          textarea2.value = textarea2_value_value;
-        }
-        if (dirty & /*receivedAnswer*/
-        8) {
-          set_input_value(
-            textarea3,
-            /*receivedAnswer*/
-            ctx2[3]
-          );
-        }
-        if (dirty & /*iceCandidates*/
-        32 && textarea4_value_value !== (textarea4_value_value = " " + JSON.stringify(
-          /*iceCandidates*/
-          ctx2[5],
-          null,
-          4
-        ) + " ")) {
-          textarea4.value = textarea4_value_value;
-        }
-        if (dirty & /*receivedIceCandidates*/
-        64) {
-          set_input_value(
-            textarea5,
-            /*receivedIceCandidates*/
-            ctx2[6]
-          );
+        if (
+          /*type*/
+          ctx2[5] && /*connectionState*/
+          ctx2[2] !== "connected"
+        ) {
+          if (if_block2) {
+            if_block2.p(ctx2, dirty);
+          } else {
+            if_block2 = create_if_block(ctx2);
+            if_block2.c();
+            if_block2.m(div, null);
+          }
+        } else if (if_block2) {
+          if_block2.d(1);
+          if_block2 = null;
         }
       },
       i: noop,
       o: noop,
       d(detaching) {
         if (detaching) {
-          detach(div5);
+          detach(div);
         }
-        mounted = false;
-        run_all(dispose);
+        if (if_block0)
+          if_block0.d();
+        if (if_block1)
+          if_block1.d();
+        if (if_block2)
+          if_block2.d();
       }
     };
   }
@@ -3119,92 +3074,116 @@
         step((generator = generator.apply(thisArg, _arguments || [])).next());
       });
     };
-    const peerConnection = new RTCPeerConnection();
+    let peerConnection;
     let offer;
-    let receivedOffer;
     let answer;
-    let receivedAnswer;
     let connectionState;
     let iceCandidates = [];
-    let receivedIceCandidates;
+    let receivedSignalingEvents;
     let sendChannel;
-    peerConnection.onicecandidate = (event) => {
-      var _a;
-      const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
-      if (candidate) {
-        $$invalidate(5, iceCandidates = [...iceCandidates, candidate]);
-        console.log("New ICE candidate: ", candidate);
+    let type;
+    function acceptConnection() {
+      $$invalidate(5, type = "b");
+      if (peerConnection) {
+        peerConnection.close();
       }
-    };
-    peerConnection.addEventListener("connectionstatechange", function() {
-      $$invalidate(4, connectionState = peerConnection.connectionState);
-    });
-    function createOffer() {
+      $$invalidate(0, offer = void 0);
+      $$invalidate(1, answer = void 0);
+      $$invalidate(2, connectionState = void 0);
+      $$invalidate(3, iceCandidates = []);
+      sendChannel = void 0;
+      peerConnection = new RTCPeerConnection();
+      peerConnection.addEventListener("connectionstatechange", function() {
+        $$invalidate(2, connectionState = peerConnection.connectionState);
+      });
+      peerConnection.onicecandidate = (event) => {
+        var _a;
+        const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
+        if (candidate) {
+          $$invalidate(3, iceCandidates = [...iceCandidates, candidate]);
+        }
+      };
+    }
+    function initiateConnection() {
       return __awaiter3(this, void 0, void 0, function* () {
+        $$invalidate(5, type = "a");
+        if (peerConnection) {
+          peerConnection.close();
+        }
+        $$invalidate(0, offer = void 0);
+        $$invalidate(1, answer = void 0);
+        $$invalidate(2, connectionState = void 0);
+        $$invalidate(3, iceCandidates = []);
+        sendChannel = void 0;
+        peerConnection = new RTCPeerConnection();
+        peerConnection.onicecandidate = (event) => {
+          var _a;
+          const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
+          if (candidate) {
+            $$invalidate(3, iceCandidates = [...iceCandidates, candidate]);
+          }
+        };
+        peerConnection.addEventListener("connectionstatechange", function() {
+          $$invalidate(2, connectionState = peerConnection.connectionState);
+        });
         sendChannel = peerConnection.createDataChannel("sendDataChannel");
         $$invalidate(0, offer = yield peerConnection.createOffer());
         yield peerConnection.setLocalDescription(offer);
       });
     }
-    function answerOffer() {
+    function receiveSignalingEvents() {
       return __awaiter3(this, void 0, void 0, function* () {
-        if (receivedOffer) {
-          yield peerConnection.setRemoteDescription(JSON.parse(receivedOffer));
-          $$invalidate(2, answer = yield peerConnection.createAnswer());
-        }
-      });
-    }
-    function setLocalAnswer() {
-      return __awaiter3(this, void 0, void 0, function* () {
-        if (answer) {
-          yield peerConnection.setLocalDescription(answer);
-        }
-      });
-    }
-    function acceptAnswer() {
-      return __awaiter3(this, void 0, void 0, function* () {
-        if (receivedAnswer) {
-          yield peerConnection.setRemoteDescription(JSON.parse(receivedAnswer));
-        }
-      });
-    }
-    function addIceCandidate() {
-      return __awaiter3(this, void 0, void 0, function* () {
-        if (receivedIceCandidates) {
-          for (const candidate of JSON.parse(receivedIceCandidates)) {
-            yield peerConnection.addIceCandidate(candidate);
+        for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
+          if (type === "b" && !answer && signalingEvent.offer) {
+            yield peerConnection.setRemoteDescription(signalingEvent.offer);
+          }
+          if (type === "a" && signalingEvent.answer) {
+            yield peerConnection.setRemoteDescription(signalingEvent.answer);
           }
         }
+        for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
+          if (signalingEvent.candidate) {
+            yield peerConnection.addIceCandidate(signalingEvent.candidate);
+          }
+          if (type === "b" && !answer && signalingEvent.offer) {
+            $$invalidate(1, answer = yield peerConnection.createAnswer());
+            yield peerConnection.setLocalDescription(answer);
+          }
+        }
+        $$invalidate(4, receivedSignalingEvents = void 0);
       });
     }
-    function textarea1_input_handler() {
-      receivedOffer = this.value;
-      $$invalidate(1, receivedOffer);
+    function createSignalingEvents() {
+      const signalingEvents = [
+        ...iceCandidates.map((candidate) => ({ candidate })),
+        ...offer ? [{ offer }] : [],
+        ...answer ? [{ answer }] : []
+      ];
+      $$invalidate(0, offer = void 0);
+      $$invalidate(1, answer = void 0);
+      $$invalidate(3, iceCandidates = []);
+      return signalingEvents;
     }
-    function textarea3_input_handler() {
-      receivedAnswer = this.value;
-      $$invalidate(3, receivedAnswer);
+    function copySignalingEventToClipBoard() {
+      const signalingEvents = createSignalingEvents();
+      navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
     }
-    function textarea5_input_handler() {
-      receivedIceCandidates = this.value;
-      $$invalidate(6, receivedIceCandidates);
+    function textarea_input_handler() {
+      receivedSignalingEvents = this.value;
+      $$invalidate(4, receivedSignalingEvents);
     }
     return [
       offer,
-      receivedOffer,
       answer,
-      receivedAnswer,
       connectionState,
       iceCandidates,
-      receivedIceCandidates,
-      createOffer,
-      answerOffer,
-      setLocalAnswer,
-      acceptAnswer,
-      addIceCandidate,
-      textarea1_input_handler,
-      textarea3_input_handler,
-      textarea5_input_handler
+      receivedSignalingEvents,
+      type,
+      acceptConnection,
+      initiateConnection,
+      receiveSignalingEvents,
+      copySignalingEventToClipBoard,
+      textarea_input_handler
     ];
   }
   var Manual_rtc = class extends SvelteComponent {
@@ -3270,7 +3249,7 @@
       }
     };
   }
-  function create_if_block(ctx) {
+  function create_if_block2(ctx) {
     let div1;
     let div0;
     let t0;
@@ -3327,11 +3306,11 @@
     );
     let if_block8 = (
       /*myCharacter*/
-      ctx[1] === "PlayerB" /* PlayerB */ && create_if_block_2(ctx)
+      ctx[1] === "PlayerB" /* PlayerB */ && create_if_block_22(ctx)
     );
     let if_block9 = (
       /*myCharacter*/
-      ctx[1] === "None" /* None */ && create_if_block_1(ctx)
+      ctx[1] === "None" /* None */ && create_if_block_14(ctx)
     );
     return {
       c() {
@@ -3542,7 +3521,7 @@
         ) {
           if (if_block8) {
           } else {
-            if_block8 = create_if_block_2(ctx2);
+            if_block8 = create_if_block_22(ctx2);
             if_block8.c();
             if_block8.m(div1, t8);
           }
@@ -3556,7 +3535,7 @@
         ) {
           if (if_block9) {
           } else {
-            if_block9 = create_if_block_1(ctx2);
+            if_block9 = create_if_block_14(ctx2);
             if_block9.c();
             if_block9.m(div1, t9);
           }
@@ -3740,7 +3719,7 @@
       }
     };
   }
-  function create_if_block_2(ctx) {
+  function create_if_block_22(ctx) {
     let p;
     return {
       c() {
@@ -3758,7 +3737,7 @@
       }
     };
   }
-  function create_if_block_1(ctx) {
+  function create_if_block_14(ctx) {
     let p;
     return {
       c() {
@@ -3796,7 +3775,7 @@
       ctx[2] && create_if_block_11(ctx)
     );
     let if_block3 = !/*showTitle*/
-    ctx[7] && create_if_block(ctx);
+    ctx[7] && create_if_block2(ctx);
     return {
       c() {
         div = element("div");
@@ -3898,7 +3877,7 @@
           if (if_block3) {
             if_block3.p(ctx2, dirty);
           } else {
-            if_block3 = create_if_block(ctx2);
+            if_block3 = create_if_block2(ctx2);
             if_block3.c();
             if_block3.m(div, null);
           }
