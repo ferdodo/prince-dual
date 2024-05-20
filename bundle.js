@@ -3121,19 +3121,35 @@
       $$invalidate(4, iceCandidates = []);
       sendChannel = void 0;
       peerConnection = new RTCPeerConnection(stunServer && { iceServers: [{ urls: stunServer }] });
+      sendChannel = peerConnection.createDataChannel("sendDataChannel");
       peerConnection.addEventListener("connectionstatechange", function() {
         $$invalidate(3, connectionState = peerConnection.connectionState);
+        if (connectionState === "connected") {
+          setTimeout(
+            function() {
+              sendChannel.send("Ping!");
+            },
+            200
+          );
+        }
       });
       peerConnection.onicecandidate = (event) => {
         var _a;
         const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
         if (candidate) {
           $$invalidate(4, iceCandidates = [...iceCandidates, candidate]);
-        } else {
-          for (const line of peerConnection.localDescription.sdp.split("\n")) {
-            console.log(line);
-          }
         }
+      };
+      peerConnection.ondatachannel = function receiveChannelCallback(event) {
+        event.channel.onmessage = function(event2) {
+          console.log("Received Message: " + event2.data);
+          setTimeout(
+            function() {
+              sendChannel.send(event2.data === "Ping!" ? "Pong!" : "Ping!");
+            },
+            10
+          );
+        };
       };
     }
     function initiateConnection() {
@@ -3153,16 +3169,31 @@
           const candidate = (_a = event === null || event === void 0 ? void 0 : event.candidate) === null || _a === void 0 ? void 0 : _a.toJSON();
           if (candidate) {
             $$invalidate(4, iceCandidates = [...iceCandidates, candidate]);
-          } else {
-            for (const line of peerConnection.localDescription.sdp.split("\n")) {
-              console.log(line);
-            }
           }
+        };
+        sendChannel = peerConnection.createDataChannel("sendDataChannel");
+        peerConnection.ondatachannel = function receiveChannelCallback(event) {
+          event.channel.onmessage = function(event2) {
+            console.log("Received Message: " + event2.data);
+            setTimeout(
+              function() {
+                sendChannel.send(event2.data === "Ping!" ? "Pong!" : "Ping!");
+              },
+              10
+            );
+          };
         };
         peerConnection.addEventListener("connectionstatechange", function() {
           $$invalidate(3, connectionState = peerConnection.connectionState);
+          if (connectionState === "connected") {
+            setTimeout(
+              function() {
+                sendChannel.send("Ping!");
+              },
+              200
+            );
+          }
         });
-        sendChannel = peerConnection.createDataChannel("sendDataChannel");
         $$invalidate(1, offer = yield peerConnection.createOffer());
         yield peerConnection.setLocalDescription(offer);
       });
