@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SignalingEvent } from "core";
 
+	let stunServer;
 	let peerConnection;
 	let offer;
 	let answer;
@@ -22,7 +23,9 @@
 		connectionState = undefined;
 		iceCandidates = [];
 		sendChannel = undefined;
-		peerConnection = new RTCPeerConnection();
+		peerConnection = new RTCPeerConnection(stunServer && {
+			iceServers: [{ urls: stunServer }]
+		});
 
 		peerConnection.addEventListener("connectionstatechange", function() {
 			connectionState = peerConnection.connectionState;
@@ -33,6 +36,10 @@
 
 			if (candidate) {
 				iceCandidates = [...iceCandidates, candidate];
+			} else {
+				for (const line of peerConnection.localDescription.sdp.split("\n")) {
+					console.log(line);
+				}
 			}
 		}
 	}
@@ -50,13 +57,19 @@
 		iceCandidates = [];
 		sendChannel = undefined;
 
-		peerConnection = new RTCPeerConnection();
+		peerConnection = new RTCPeerConnection(stunServer && {
+			iceServers: [{ urls: stunServer }]
+		});
 
 		peerConnection.onicecandidate = (event) => {
 			const candidate = event?.candidate?.toJSON();
 
 			if (candidate) {
 				iceCandidates = [...iceCandidates, candidate];
+			} else {
+				for (const line of peerConnection.localDescription.sdp.split("\n")) {
+					console.log(line);
+				}
 			}
 		}
 
@@ -119,6 +132,10 @@
 
 	{#if !type}
 		<div class="container">
+			<textarea
+				placeholder="Entrez les serveurs STUN"
+				bind:value={ stunServer }
+			/>
 			<button on:click={initiateConnection}> Initier la connexion WebRTC </button>
 			<button on:click={acceptConnection}> Accepter la connextion WebRTC </button>
 		</div>
