@@ -24,6 +24,7 @@ export { observeGameHandle } from "./observe-game-handle";
 export { observeMyCharacter } from "./observe-my-character";
 export { observeMyCharacterHandle } from "./observe-my-character-handle";
 export { resolveMyCharacter } from "./resolve-my-character";
+export { signaling$, broadcastSignaling } from "./signaling";
 export type { Config } from "./types/config";
 export type { ConfigStorage } from "./types/config-storage";
 export type { Context, SvelteContext } from "./types/context";
