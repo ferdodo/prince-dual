@@ -2730,22 +2730,44 @@
 
   // ../core/src/create-client-connection.ts
   function createClientConnection(context4) {
-    if (context4.config.offlineMode) {
-      context4.offlineModeGameStorage = createGameStorage2();
+    const config3 = context4.configStorage.read();
+    if (config3.offlineMode) {
+      context4.offlineModeGameStorage = createGameStorage();
       const [createConnection, serverConnection$] = context4.createRtcConnection();
-      initiateBackendHandlers2(context4.offlineModeGameStorage, serverConnection$);
+      initiateBackendHandlers(context4.offlineModeGameStorage, serverConnection$);
       return createConnection();
     } else {
       return context4.createWsClientConnection(
-        context4.config.wsProtocol,
-        context4.config.wsPort,
-        context4.config.webDomain
+        config3.wsProtocol,
+        config3.wsPort,
+        config3.webDomain
       );
     }
   }
 
+  // ../core/src/create-config-storage.ts
+  function createConfigStorage(_config) {
+    let config3 = { ..._config };
+    const _config$ = new Subject();
+    return {
+      read() {
+        return { ...config3 };
+      },
+      save(update2) {
+        config3 = {
+          ...config3,
+          ...update2
+        };
+        _config$.next(config3);
+      },
+      watch() {
+        return _config$.asObservable();
+      }
+    };
+  }
+
   // ../core/src/create-game-storage.ts
-  function createGameStorage2() {
+  function createGameStorage() {
     let game = {
       state: "WaitingPlayerA" /* WaitingPlayerA */
     };
@@ -4160,7 +4182,7 @@
   }
 
   // ../core/src/initiate-backend-handlers.ts
-  function initiateBackendHandlers2(gameStorage, connexion$) {
+  function initiateBackendHandlers(gameStorage, connexion$) {
     interactHandle(gameStorage, connexion$);
     getGameHandle(gameStorage, connexion$);
     observeGameHandle(gameStorage, connexion$);
@@ -5922,15 +5944,16 @@
   }
 
   // src/index.ts
+  var configStorage = createConfigStorage({
+    webProtocol: "http",
+    webDomain: "localhost",
+    webPort: 3366,
+    wsProtocol: "ws",
+    wsPort: 3377,
+    offlineMode: false
+  });
   var _context = {
-    config: {
-      webProtocol: "http",
-      webDomain: "localhost",
-      webPort: 3377,
-      wsProtocol: "ws",
-      wsPort: 3377,
-      offlineMode: false
-    },
+    configStorage,
     createRtcConnection,
     createWsClientConnection
   };
