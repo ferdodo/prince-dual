@@ -1,7 +1,16 @@
-import { Context, SvelteContext, ConfigFactory, Message, Config, initiateBackendHandlers, createGameStorage, GameStorage, createBidirectionalConnectionMock } from "core";
 import { Subject, Observable, NEVER } from "rxjs";
 import { Connection } from "connection-types";
 import { uid } from "uid";
+
+import {
+    Context,
+    SvelteContext,
+    ConfigFactory,
+    Message,
+    ConfigStorage,
+    createBidirectionalConnectionMock,
+    createConfigStorage
+} from "core";
 
 let _rtcServerConnetion$: Subject<Connection<Message>> | null = null;
 
@@ -9,22 +18,25 @@ export class ContextFactory {
     rtcServer = false;
     _serverConnexion$: Subject<Connection<Message>>;
     serverConnexion$: Observable<Connection<Message>>;
-    config: Config;
+    configStorage: ConfigStorage;
     context: Context;
 	contextId: string = uid();
 
     constructor() {
         this._serverConnexion$ = new Subject();
         const configFactory = new ConfigFactory();
-        this.config = configFactory.build();
+        this.configStorage = createConfigStorage(
+            configFactory.build()
+        );
 
         this.serverConnexion$ = this._serverConnexion$.asObservable();
 
-
         this.context = {
-            config: this.config,
+            configStorage: this.configStorage,
             createRtcConnection: () => {
-                if (!this.config.offlineMode) {
+                const config = this.configStorage.read();
+
+                if (!config.offlineMode) {
                     throw new Error("Shall only create RTC connections in offline mode !");
                 }
 
@@ -46,7 +58,9 @@ export class ContextFactory {
                 return [createConnection, rtcServerConnextion$];
             },
             createWsClientConnection:() => {
-                if (this.config.offlineMode) {
+                const config = this.configStorage.read();
+
+                if (config.offlineMode) {
                     throw new Error("Shall only create connection to server in online mode !");
                 }
 
@@ -59,7 +73,7 @@ export class ContextFactory {
     }
 
     setOffline() {
-        this.config.offlineMode = true;
+        this.configStorage.save({ offlineMode: true });
     }
 
     build(): SvelteContext {
