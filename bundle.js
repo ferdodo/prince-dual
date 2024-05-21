@@ -4382,6 +4382,10 @@
     }
   }
 
+  // ../core/src/signaling.ts
+  var _signaling$ = new Subject();
+  var signaling$ = _signaling$.asObservable();
+
   // node_modules/tslib/tslib.es6.mjs
   var extendStatics2 = function(d, b) {
     extendStatics2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
