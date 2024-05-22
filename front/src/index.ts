@@ -1,6 +1,15 @@
-import { Playground, SvelteContext, Context, defaultContextId, ManualRtc, createConfigStorage } from "core";
 import { createWsClientConnection } from "./create-ws-client-connection";
 import { createRtcConnection } from "./create-rtc-connection";
+
+import {
+	Playground,
+	SvelteContext,
+	Context,
+	defaultContextId,
+	ManualRtc,
+	createConfigStorage,
+	Character
+} from "core";
 
 const configStorage = createConfigStorage({
 	webProtocol: "http",
@@ -8,7 +17,8 @@ const configStorage = createConfigStorage({
 	webPort: 3366,
 	wsProtocol: "ws",
 	wsPort: 3377,
-	offlineMode: false
+	offlineMode: true,
+	offlineModeCharacter: Character.None
 });
 
 const _context: Context = {
@@ -30,5 +40,5 @@ if (target) {
 const connTarget = document.getElementById("connection-mount-point");
 
 if (connTarget) {
-	new ManualRtc({ target: connTarget });
+	new ManualRtc({ target: connTarget, context });
 }

@@ -1,4 +1,4 @@
-import { Config } from "core";
+import { Config, Character } from "core";
 
 export class ConfigFactory {
     build(): Config {
@@ -8,7 +8,8 @@ export class ConfigFactory {
             webPort: 80,
             wsProtocol: "ws",
             wsPort: 8080,
-            offlineMode: false
+            offlineMode: false,
+            offlineModeCharacter: Character.None
         };
     }
 }

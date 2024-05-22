@@ -1,3 +1,5 @@
+import { Character } from "core";
+
 export interface Config {
     webProtocol: string;
 	webDomain: string;
@@ -5,4 +7,6 @@ export interface Config {
 	wsProtocol: string;
 	wsPort: number;
 	offlineMode: boolean;
+	stunServer?: string;
+	offlineModeCharacter: Character;
 }

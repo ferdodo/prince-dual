@@ -1,192 +1,85 @@
 <script lang="ts">
-	import { SignalingEvent } from "core";
+	import { outcomingSignaling$, broadcastIncomingSignaling, defaultContextId, Context, Character } from "core";
+	import { getContext } from "svelte";
 
-	let stunServer;
-	let peerConnection;
-	let offer;
-	let answer;
-	let connectionState;
-	let iceCandidates = [];
 	let receivedSignalingEvents;
-	let sendChannel;
-	let type;
+	let signalingEvents = [];
+	const context = getContext(defaultContextId) as Context;
+	const config = context.configStorage.read();
+	let offlineModeCharacter = config.offlineModeCharacter;
+	$: context.configStorage.save({ offlineModeCharacter });
+	let manualRtcCompleted = false;
 
-	function acceptConnection() {
-		type = "b";
-
-		if (peerConnection) {
-			peerConnection.close();
-		}
-
-		offer = undefined;
-		answer = undefined;
-		connectionState = undefined;
-		iceCandidates = [];
-		sendChannel = undefined;
-		peerConnection = new RTCPeerConnection(stunServer && {
-			iceServers: [{ urls: stunServer }]
-		});
-
-		sendChannel = peerConnection.createDataChannel('sendDataChannel');
-
-		peerConnection.addEventListener("connectionstatechange", function() {
-			connectionState = peerConnection.connectionState;
-
-			if (connectionState === "connected") {
-				setTimeout(function() {
-					sendChannel.send("Ping!");
-				}, 200);
-			}
-		});
-
-		peerConnection.onicecandidate = (event) => {
-			const candidate = event?.candidate?.toJSON();
-
-			if (candidate) {
-				iceCandidates = [...iceCandidates, candidate];
-			}
-		}
-
-		peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
-			event.channel.onmessage = function(event: MessageEvent<string>) {
-				console.log("Received Message: " + event.data);
-				setTimeout(function() {
-					sendChannel.send(event.data === "Ping!" ? "Pong!" : "Ping!");
-				}, 10);
-			}
-		};
+	function updateStunServer(event) {
+		context.configStorage.save({ stunServer: (event.target.value as string) });
 	}
 
-	async function initiateConnection() {
-		type = "a";
-
-		if (peerConnection) {
-			peerConnection.close();
-		}
-
-		offer = undefined;
-		answer = undefined;
-		connectionState = undefined;
-		iceCandidates = [];
-		sendChannel = undefined;
-
-		peerConnection = new RTCPeerConnection(stunServer && {
-			iceServers: [{ urls: stunServer }]
-		});
-
-		peerConnection.onicecandidate = (event) => {
-			const candidate = event?.candidate?.toJSON();
-
-			if (candidate) {
-				iceCandidates = [...iceCandidates, candidate];
-			}
-		}
-
-		sendChannel = peerConnection.createDataChannel('sendDataChannel');
-
-		peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
-			event.channel.onmessage = function(event: MessageEvent<string>) {
-				console.log("Received Message: " + event.data);
-				setTimeout(function() {
-					sendChannel.send(event.data === "Ping!" ? "Pong!" : "Ping!");
-				}, 10);
-			}
-		};
-
-		peerConnection.addEventListener("connectionstatechange", function() {
-			connectionState = peerConnection.connectionState;
-
-			if (connectionState === "connected") {
-				setTimeout(function() {
-					sendChannel.send("Ping!");
-				}, 200);
-			}
-		});
-
-		offer = await peerConnection.createOffer();
-		await peerConnection.setLocalDescription(offer);
-	}
+	outcomingSignaling$.subscribe(signalingEvent => signalingEvents = [...signalingEvents, signalingEvent]);
 
 	async function receiveSignalingEvents() {
-		for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
-			if (type === "b" && !answer && signalingEvent.offer) {
-				await peerConnection.setRemoteDescription(signalingEvent.offer);
+		setTimeout(function() {
+			broadcastIncomingSignaling(JSON.parse(receivedSignalingEvents));
+			receivedSignalingEvents = undefined;
+
+			if (offlineModeCharacter === Character.PlayerA) {
+				manualRtcCompleted = true;
 			}
-
-			if (type === "a" && signalingEvent.answer) {
-				await peerConnection.setRemoteDescription(signalingEvent.answer);
-			}
-		}
-
-		for (const signalingEvent of JSON.parse(receivedSignalingEvents)) {
-			if (signalingEvent.candidate) {
-				await peerConnection.addIceCandidate(signalingEvent.candidate);
-			}
-
-			if (type === "b" && !answer && signalingEvent.offer) {
-				answer = await peerConnection.createAnswer();
-				await peerConnection.setLocalDescription(answer);
-			}
-		}
-
-		receivedSignalingEvents = undefined;
-	}
-
-	function createSignalingEvents(): SignalingEvent[] {
-		const signalingEvents = [
-			...iceCandidates.map(candidate => ({ candidate })),
-			...offer ? [{ offer }] : [],
-			...answer ? [{ answer }] : []
-		];
-
-		offer = undefined;
-		answer = undefined;
-		iceCandidates = [];
-
-		return signalingEvents;
+		}, 10);
 	}
 
 	function copySignalingEventToClipBoard() {
-		const signalingEvents = createSignalingEvents();
 		navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
+		signalingEvents = [];
+
+		if (offlineModeCharacter === Character.PlayerB) {
+			manualRtcCompleted = true;
+		}
 	}
 </script>
 
-<div style="background-color: white;">
-	<h1> Connexion RTC manuelle ({connectionState}) </h1>
+{#if !manualRtcCompleted}
+	<div style="background-color: white;">
+		<fieldset>
+			<legend> Connexion WebRTC </legend>
 
-	{#if !type}
-		<div class="container">
-			<textarea
-				placeholder="Entrez les serveurs STUN"
-				bind:value={ stunServer }
-			/>
-			<button on:click={initiateConnection}> Initier la connexion WebRTC </button>
-			<button on:click={acceptConnection}> Accepter la connextion WebRTC </button>
-		</div>
-	{/if}
+			{#if offlineModeCharacter === Character.None}
 
-	{#if offer || answer || iceCandidates.length}
-		<div class="container">
-			<button on:click={copySignalingEventToClipBoard}> Copier le message de signalement </button>
-		</div>
-	{/if}
+				<fieldset>
+					<legend> Serveur STUN (Si connexion via internet) </legend>
+					<input placeholder="stun:<serveur>:<port>" on:change={updateStunServer}/>
+				</fieldset>
 
-	{#if type && connectionState !== "connected"}
-		<div class="container">
-			<textarea
-				placeholder="Recevoir un message du partenaire."
-				on:change={receiveSignalingEvents}
-				bind:value={ receivedSignalingEvents }
-			/> 
-		</div>
-	{/if}
-</div>
+				<fieldset>
+					<legend> Choix de votre joueur </legend>
+					<button on:click={() => offlineModeCharacter = Character.PlayerA}> Joueur 1 </button>
+					<button on:click={() => offlineModeCharacter = Character.PlayerB}> Joueur 2 </button>
+				</fieldset>
+
+			{/if}
+
+			{#if offlineModeCharacter !== Character.None}
+				{#if signalingEvents.length}
+					<div class="container">
+						<button on:click={copySignalingEventToClipBoard} style="width: 10rem;">
+							Copier mon signalement (⚠️&nbsp;CONFIDENTIEL&nbsp;⚠️, Adresse IP, routage réseau, ...)
+						</button>
+					</div>
+				{/if}
+
+				<textarea
+					placeholder="Recevoir le signalement de l'autre joueur."
+					on:paste={receiveSignalingEvents}
+					bind:value={receivedSignalingEvents}
+					style="width: 10rem;"
+				/> 
+			{/if}
+		</fieldset>
+	</div>
+{/if}
 
 <style>
-	.container {
-		padding: 1rem;
-		border: 1px solid black;
-		margin: 1rem;
+	fieldset {
+		display: inline;
+		margin: 0.2rem;
 	}
 </style>

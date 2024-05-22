@@ -6,10 +6,7 @@ RUN npm install
 RUN npm audit --audit-level=moderate
 
 FROM prince-duals-core
-
-FROM node
 COPY --from=0 /prince-duals/backend/node_modules /prince-duals/backend/node_modules
-COPY --from=1 /prince-duals/core /prince-duals/core
 
 WORKDIR /prince-duals/backend
 COPY . .

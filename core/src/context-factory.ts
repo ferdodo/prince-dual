@@ -33,8 +33,8 @@ export class ContextFactory {
 
         this.context = {
             configStorage: this.configStorage,
-            createRtcConnection: () => {
-                const config = this.configStorage.read();
+            createRtcConnection: (configStorage) => {
+                const config = configStorage.read();
 
                 if (!config.offlineMode) {
                     throw new Error("Shall only create RTC connections in offline mode !");
@@ -55,7 +55,7 @@ export class ContextFactory {
                     ? _rtcServerConnetion$.asObservable()
                     : NEVER;
 
-                return [createConnection, rtcServerConnextion$];
+                return Promise.resolve([createConnection, rtcServerConnextion$]);
             },
             createWsClientConnection:() => {
                 const config = this.configStorage.read();

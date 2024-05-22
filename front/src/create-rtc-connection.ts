@@ -1,15 +1,24 @@
 import { Connection } from "connection-types";
-import { Observable, Subject, share, filter } from "rxjs";
-import { broadcastSignalToOtherTabs, signalIncomingFromOtherTabs$ } from "./signaling";
-import { SignalingEvent } from "core";
+import { Observable, Subject, share, filter, firstValueFrom } from "rxjs";
 
-export function createRtcConnection<T>(): [() => Connection<T>, Observable<Connection<T>>] {
+import {
+	SignalingEvent,
+	ConfigStorage,
+	broadcastOutcomingSignaling,
+	incomingSignaling$,
+	Character
+} from "core";
+
+export async function createRtcConnection<T>(
+	configStorage: ConfigStorage
+): Promise<[() => Connection<T>, Observable<Connection<T>>]> {
 	const broadcastToServer$ = new Subject<T>();
 	const broadcastToCurrentTabFromServer$ = new Subject<T>();
 	const broadcastToWebRTC$ = new Subject<T>();
 	const broadcastFromWebRTC$ = new Subject<T>();
 	const _offlineServer$ = new Subject<Connection<T>>();
-	const waitServerPrepare = new Promise(r => setTimeout(r, 150));
+	let waitServerPrepare = new Promise(r => setTimeout(r, 150));
+	let _connected$ = new Subject<void>();
 	let tabIsServer = false;
 	let acceptedAnswer = false;
 
@@ -29,49 +38,56 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
 		}
 	};
 
-	const peerConnection: RTCPeerConnection = new RTCPeerConnection();
-	let iceCandidateSent = false;
-	let clearCandidateSent = false;
+	let config = configStorage.read();
+
+	const peerConnection: RTCPeerConnection = new RTCPeerConnection(config.stunServer && {
+		iceServers: [{ urls: config.stunServer }]
+	});
+
+	configStorage.watch()
+		.subscribe(function(c) {
+			config = c;
+
+			peerConnection.setConfiguration(c.stunServer && {
+				iceServers: [{ urls: c.stunServer }]
+			});
+		});
 
 	peerConnection.onicecandidate = function(e: RTCPeerConnectionIceEvent) {
-		const { candidate } = e;
+		const candidate = e?.candidate?.toJSON();
 
-		if (candidate && !iceCandidateSent) {
-			iceCandidateSent = false;
-
-			broadcastSignalToOtherTabs({
-				candidate: candidate.toJSON()
-			});
-		} else if (clearCandidateSent) {
-			clearCandidateSent = false;
-			broadcastSignalToOtherTabs({ clearCandidate: true });
+		if (candidate) {
+			broadcastOutcomingSignaling({ candidate });
 		}
 	};
 
-	const signalingSubscription = signalIncomingFromOtherTabs$
+	const signalingSubscription = incomingSignaling$
 		.subscribe({
-			next(signalingEvent: SignalingEvent) {
-				if (signalingEvent.offer) {
-					handleOffer(peerConnection, signalingEvent.offer)
-						.then(() => acceptedAnswer = false)
-						.catch(console.error);
+			async next(signalingEvents: SignalingEvent[]) {
+				for (const signalingEvent of signalingEvents) {
+					if (signalingEvent.offer) {
+						await peerConnection.setRemoteDescription(signalingEvent.offer);
+					}
+	
+					if (signalingEvent.answer) {
+						await peerConnection.setRemoteDescription(signalingEvent.answer);
+						acceptedAnswer = true;
+					}
 				}
 
-				if (signalingEvent.answer) {
-					handleAnswer(peerConnection, signalingEvent.answer)
-						.then(() => acceptedAnswer = true)
-						.catch(console.error);
+				for (const signalingEvent of signalingEvents) {
+					if (signalingEvent.candidate) {
+						await peerConnection.addIceCandidate(signalingEvent.candidate);
+					}
+
+					if (signalingEvent.offer) {
+						const answer = await peerConnection.createAnswer()
+						await peerConnection.setLocalDescription(answer);
+						broadcastOutcomingSignaling({ answer });
+					}
 				}
 
-				if (signalingEvent.candidate) {
-					handleCandidate(peerConnection, signalingEvent.candidate)
-						.catch(console.error);
-				}
 
-				if (signalingEvent.clearCandidate) {
-					handleClearCandidate(peerConnection)
-						.catch(console.error);
-				}
 			},
 			error(error) {
 				console.error(error);
@@ -81,11 +97,16 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
 	async function sendOffers() {
 		const offer = await peerConnection.createOffer();
 		await peerConnection.setLocalDescription(offer);
-		broadcastSignalToOtherTabs({ offer });
+		broadcastOutcomingSignaling({ offer });
 	}
 
-	sendOffers()
-		.catch(console.error);
+	firstValueFrom(
+		configStorage.watch()
+			.pipe(
+				filter(config => config.offlineModeCharacter === Character.PlayerA),
+			)
+	)
+		.then(sendOffers, console.error);
 
 	peerConnection.ondatachannel = function receiveChannelCallback(event: RTCDataChannelEvent) {
 		event.channel.onmessage = function(event: MessageEvent<string>) {
@@ -99,11 +120,15 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
 			case "connecting":
 				break;
 			case "connected":
+				_connected$.next();
+				waitServerPrepare = new Promise(r => setTimeout(r, 200));
 				tabIsServer = acceptedAnswer;
 			
 				if (tabIsServer) {
-					_offlineServer$.next(currentTabServerConnection);
-					_offlineServer$.next(peerServerConnection);
+					waitServerPrepare.then(() => {
+						_offlineServer$.next(currentTabServerConnection);
+						_offlineServer$.next(peerServerConnection);
+					});
 				}
 			
 				break;
@@ -129,6 +154,15 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
 		sendChannel.send(JSON.stringify(m));
 	}
 
+	async function sendWhenConnectedInternal(m: T) {
+		while (peerConnection.connectionState !== "connected") {
+			await new Promise(r => setTimeout(r, 50));
+		}
+
+		await waitServerPrepare;
+		broadcastToServer$.next(m);
+	}
+
 	const subscriptionToSendToWebRTC = broadcastToWebRTC$.subscribe({
 		next: sendWhenConnected,
 		error(error) {
@@ -136,7 +170,7 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
 		}
 	});
 
-    function createClientConnection() {
+    function createClientConnection(): Connection<T> {
         return {
             id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
             messages$: new Observable<T>(function(subscriber) {
@@ -166,8 +200,8 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
     
                 peerConnection.addEventListener("connectionstatechange", function() {
                     switch(peerConnection.connectionState) {
-                        case "connecting":
                         case "connected":
+						case "connecting":
                             break;
                         case "closed":
                         case "disconnected":
@@ -186,7 +220,8 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
                 .pipe(share()),
             send(message: T) {
                 if (tabIsServer) {
-                    broadcastToServer$.next(message);
+					sendWhenConnectedInternal(message)
+						.catch(console.error);
                 } else {
                     sendWhenConnected(message)
                         .catch(console.error);
@@ -195,27 +230,10 @@ export function createRtcConnection<T>(): [() => Connection<T>, Observable<Conne
         }
     }
 
-	return [
+	await firstValueFrom(_connected$);
+
+	return <[() => Connection<T>, Observable<Connection<T>>]> [
 		createClientConnection,
 		_offlineServer$.asObservable()
 	];
-}
-
-async function handleOffer(peerConnection: RTCPeerConnection, offer: RTCSessionDescriptionInit) {
-	await peerConnection.setRemoteDescription(offer);
-	const answer = await peerConnection.createAnswer();
-	broadcastSignalToOtherTabs({ answer });
-	await peerConnection.setLocalDescription(answer);
-}
-
-async function handleAnswer(peerConnection: RTCPeerConnection, answer: RTCSessionDescriptionInit) {
-  await peerConnection.setRemoteDescription(answer);
-}
-
-async function handleCandidate(peerConnection: RTCPeerConnection, candidate: RTCIceCandidateInit) {
-    await peerConnection.addIceCandidate(candidate);
-}
-
-async function handleClearCandidate(peerConnection: RTCPeerConnection) {
-    await peerConnection.addIceCandidate();
 }
