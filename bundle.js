@@ -1,43 +1,43 @@
 (() => {
   // node_modules/tslib/tslib.es6.mjs
-  var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
-      d2.__proto__ = b2;
-    } || function(d2, b2) {
-      for (var p in b2)
-        if (Object.prototype.hasOwnProperty.call(b2, p))
-          d2[p] = b2[p];
+  var extendStatics = function(d3, b3) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b4) {
+      d4.__proto__ = b4;
+    } || function(d4, b4) {
+      for (var p4 in b4)
+        if (Object.prototype.hasOwnProperty.call(b4, p4))
+          d4[p4] = b4[p4];
     };
-    return extendStatics(d, b);
+    return extendStatics(d3, b3);
   };
-  function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
+  function __extends(d3, b3) {
+    if (typeof b3 !== "function" && b3 !== null)
+      throw new TypeError("Class extends value " + String(b3) + " is not a constructor or null");
+    extendStatics(d3, b3);
     function __() {
-      this.constructor = d;
+      this.constructor = d3;
     }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    d3.prototype = b3 === null ? Object.create(b3) : (__.prototype = b3.prototype, new __());
   }
-  function __awaiter(thisArg, _arguments, P, generator) {
+  function __awaiter(thisArg, _arguments, P3, generator) {
     function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve) {
+      return value instanceof P3 ? value : new P3(function(resolve) {
         resolve(value);
       });
     }
-    return new (P || (P = Promise))(function(resolve, reject) {
+    return new (P3 || (P3 = Promise))(function(resolve, reject) {
       function fulfilled(value) {
         try {
           step(generator.next(value));
-        } catch (e) {
-          reject(e);
+        } catch (e4) {
+          reject(e4);
         }
       }
       function rejected(value) {
         try {
           step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
+        } catch (e4) {
+          reject(e4);
         }
       }
       function step(result) {
@@ -47,154 +47,154 @@
     });
   }
   function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() {
-      if (t[0] & 1)
-        throw t[1];
-      return t[1];
-    }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    var _3 = { label: 0, sent: function() {
+      if (t5[0] & 1)
+        throw t5[1];
+      return t5[1];
+    }, trys: [], ops: [] }, f3, y3, t5, g2;
+    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
       return this;
-    }), g;
-    function verb(n) {
-      return function(v) {
-        return step([n, v]);
+    }), g2;
+    function verb(n4) {
+      return function(v3) {
+        return step([n4, v3]);
       };
     }
     function step(op) {
-      if (f)
+      if (f3)
         throw new TypeError("Generator is already executing.");
-      while (g && (g = 0, op[0] && (_ = 0)), _)
+      while (g2 && (g2 = 0, op[0] && (_3 = 0)), _3)
         try {
-          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-            return t;
-          if (y = 0, t)
-            op = [op[0] & 2, t.value];
+          if (f3 = 1, y3 && (t5 = op[0] & 2 ? y3["return"] : op[0] ? y3["throw"] || ((t5 = y3["return"]) && t5.call(y3), 0) : y3.next) && !(t5 = t5.call(y3, op[1])).done)
+            return t5;
+          if (y3 = 0, t5)
+            op = [op[0] & 2, t5.value];
           switch (op[0]) {
             case 0:
             case 1:
-              t = op;
+              t5 = op;
               break;
             case 4:
-              _.label++;
+              _3.label++;
               return { value: op[1], done: false };
             case 5:
-              _.label++;
-              y = op[1];
+              _3.label++;
+              y3 = op[1];
               op = [0];
               continue;
             case 7:
-              op = _.ops.pop();
-              _.trys.pop();
+              op = _3.ops.pop();
+              _3.trys.pop();
               continue;
             default:
-              if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                _ = 0;
+              if (!(t5 = _3.trys, t5 = t5.length > 0 && t5[t5.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _3 = 0;
                 continue;
               }
-              if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-                _.label = op[1];
+              if (op[0] === 3 && (!t5 || op[1] > t5[0] && op[1] < t5[3])) {
+                _3.label = op[1];
                 break;
               }
-              if (op[0] === 6 && _.label < t[1]) {
-                _.label = t[1];
-                t = op;
+              if (op[0] === 6 && _3.label < t5[1]) {
+                _3.label = t5[1];
+                t5 = op;
                 break;
               }
-              if (t && _.label < t[2]) {
-                _.label = t[2];
-                _.ops.push(op);
+              if (t5 && _3.label < t5[2]) {
+                _3.label = t5[2];
+                _3.ops.push(op);
                 break;
               }
-              if (t[2])
-                _.ops.pop();
-              _.trys.pop();
+              if (t5[2])
+                _3.ops.pop();
+              _3.trys.pop();
               continue;
           }
-          op = body.call(thisArg, _);
-        } catch (e) {
-          op = [6, e];
-          y = 0;
+          op = body.call(thisArg, _3);
+        } catch (e4) {
+          op = [6, e4];
+          y3 = 0;
         } finally {
-          f = t = 0;
+          f3 = t5 = 0;
         }
       if (op[0] & 5)
         throw op[1];
       return { value: op[0] ? op[1] : void 0, done: true };
     }
   }
-  function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m)
-      return m.call(o);
-    if (o && typeof o.length === "number")
+  function __values(o4) {
+    var s4 = typeof Symbol === "function" && Symbol.iterator, m3 = s4 && o4[s4], i4 = 0;
+    if (m3)
+      return m3.call(o4);
+    if (o4 && typeof o4.length === "number")
       return {
         next: function() {
-          if (o && i >= o.length)
-            o = void 0;
-          return { value: o && o[i++], done: !o };
+          if (o4 && i4 >= o4.length)
+            o4 = void 0;
+          return { value: o4 && o4[i4++], done: !o4 };
         }
       };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    throw new TypeError(s4 ? "Object is not iterable." : "Symbol.iterator is not defined.");
   }
-  function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m)
-      return o;
-    var i = m.call(o), r, ar = [], e;
+  function __read(o4, n4) {
+    var m3 = typeof Symbol === "function" && o4[Symbol.iterator];
+    if (!m3)
+      return o4;
+    var i4 = m3.call(o4), r3, ar = [], e4;
     try {
-      while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-        ar.push(r.value);
+      while ((n4 === void 0 || n4-- > 0) && !(r3 = i4.next()).done)
+        ar.push(r3.value);
     } catch (error) {
-      e = { error };
+      e4 = { error };
     } finally {
       try {
-        if (r && !r.done && (m = i["return"]))
-          m.call(i);
+        if (r3 && !r3.done && (m3 = i4["return"]))
+          m3.call(i4);
       } finally {
-        if (e)
-          throw e.error;
+        if (e4)
+          throw e4.error;
       }
     }
     return ar;
   }
   function __spreadArray(to, from2, pack) {
     if (pack || arguments.length === 2)
-      for (var i = 0, l = from2.length, ar; i < l; i++) {
-        if (ar || !(i in from2)) {
+      for (var i4 = 0, l4 = from2.length, ar; i4 < l4; i4++) {
+        if (ar || !(i4 in from2)) {
           if (!ar)
-            ar = Array.prototype.slice.call(from2, 0, i);
-          ar[i] = from2[i];
+            ar = Array.prototype.slice.call(from2, 0, i4);
+          ar[i4] = from2[i4];
         }
       }
     return to.concat(ar || Array.prototype.slice.call(from2));
   }
-  function __await(v) {
-    return this instanceof __await ? (this.v = v, this) : new __await(v);
+  function __await(v3) {
+    return this instanceof __await ? (this.v = v3, this) : new __await(v3);
   }
   function __asyncGenerator(thisArg, _arguments, generator) {
     if (!Symbol.asyncIterator)
       throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+    var g2 = generator.apply(thisArg, _arguments || []), i4, q3 = [];
+    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
       return this;
-    }, i;
-    function verb(n) {
-      if (g[n])
-        i[n] = function(v) {
-          return new Promise(function(a, b) {
-            q.push([n, v, a, b]) > 1 || resume(n, v);
+    }, i4;
+    function verb(n4) {
+      if (g2[n4])
+        i4[n4] = function(v3) {
+          return new Promise(function(a4, b3) {
+            q3.push([n4, v3, a4, b3]) > 1 || resume(n4, v3);
           });
         };
     }
-    function resume(n, v) {
+    function resume(n4, v3) {
       try {
-        step(g[n](v));
-      } catch (e) {
-        settle(q[0][3], e);
+        step(g2[n4](v3));
+      } catch (e4) {
+        settle(q3[0][3], e4);
       }
     }
-    function step(r) {
-      r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    function step(r3) {
+      r3.value instanceof __await ? Promise.resolve(r3.value.v).then(fulfill, reject) : settle(q3[0][2], r3);
     }
     function fulfill(value) {
       resume("next", value);
@@ -202,28 +202,28 @@
     function reject(value) {
       resume("throw", value);
     }
-    function settle(f, v) {
-      if (f(v), q.shift(), q.length)
-        resume(q[0][0], q[0][1]);
+    function settle(f3, v3) {
+      if (f3(v3), q3.shift(), q3.length)
+        resume(q3[0][0], q3[0][1]);
     }
   }
-  function __asyncValues(o) {
+  function __asyncValues(o4) {
     if (!Symbol.asyncIterator)
       throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+    var m3 = o4[Symbol.asyncIterator], i4;
+    return m3 ? m3.call(o4) : (o4 = typeof __values === "function" ? __values(o4) : o4[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
       return this;
-    }, i);
-    function verb(n) {
-      i[n] = o[n] && function(v) {
+    }, i4);
+    function verb(n4) {
+      i4[n4] = o4[n4] && function(v3) {
         return new Promise(function(resolve, reject) {
-          v = o[n](v), settle(resolve, reject, v.done, v.value);
+          v3 = o4[n4](v3), settle(resolve, reject, v3.done, v3.value);
         });
       };
     }
-    function settle(resolve, reject, d, v) {
-      Promise.resolve(v).then(function(v2) {
-        resolve({ value: v2, done: d });
+    function settle(resolve, reject, d3, v3) {
+      Promise.resolve(v3).then(function(v4) {
+        resolve({ value: v4, done: d3 });
       }, reject);
     }
   }
@@ -235,9 +235,9 @@
 
   // node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
   function createErrorClass(createImpl) {
-    var _super = function(instance3) {
-      Error.call(instance3);
-      instance3.stack = new Error().stack;
+    var _super = function(instance) {
+      Error.call(instance);
+      instance.stack = new Error().stack;
     };
     var ctorFunc = createImpl(_super);
     ctorFunc.prototype = Object.create(Error.prototype);
@@ -249,8 +249,8 @@
   var UnsubscriptionError = createErrorClass(function(_super) {
     return function UnsubscriptionErrorImpl(errors) {
       _super(this);
-      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
-        return i + 1 + ") " + err.toString();
+      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i4) {
+        return i4 + 1 + ") " + err.toString();
       }).join("\n  ") : "";
       this.name = "UnsubscriptionError";
       this.errors = errors;
@@ -306,8 +306,8 @@
         if (isFunction(initialFinalizer)) {
           try {
             initialFinalizer();
-          } catch (e) {
-            errors = e instanceof UnsubscriptionError ? e.errors : [e];
+          } catch (e4) {
+            errors = e4 instanceof UnsubscriptionError ? e4.errors : [e4];
           }
         }
         var _finalizers = this._finalizers;
@@ -384,9 +384,9 @@
       }
     };
     Subscription6.EMPTY = function() {
-      var empty2 = new Subscription6();
-      empty2.closed = true;
-      return empty2;
+      var empty = new Subscription6();
+      empty.closed = true;
+      return empty;
     }();
     return Subscription6;
   }();
@@ -663,8 +663,8 @@
   }();
 
   // node_modules/rxjs/dist/esm5/internal/util/identity.js
-  function identity(x) {
-    return x;
+  function identity(x2) {
+    return x2;
   }
 
   // node_modules/rxjs/dist/esm5/internal/util/pipe.js
@@ -749,8 +749,8 @@
       promiseCtor = getPromiseCtor(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
         var value;
-        _this.subscribe(function(x) {
-          return value = x;
+        _this.subscribe(function(x2) {
+          return value = x2;
         }, function(err) {
           return reject(err);
         }, function() {
@@ -778,12 +778,12 @@
   function hasLift(source) {
     return isFunction(source === null || source === void 0 ? void 0 : source.lift);
   }
-  function operate(init2) {
+  function operate(init) {
     return function(source) {
       if (hasLift(source)) {
         return source.lift(function(liftedSource) {
           try {
-            return init2(liftedSource, this);
+            return init(liftedSource, this);
           } catch (err) {
             this.error(err);
           }
@@ -1008,8 +1008,8 @@
   }(Subject);
 
   // node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js
-  var isArrayLike = function(x) {
-    return x && typeof x.length === "number" && typeof x !== "function";
+  var isArrayLike = function(x2) {
+    return x2 && typeof x2.length === "number" && typeof x2 !== "function";
   };
 
   // node_modules/rxjs/dist/esm5/internal/util/isPromise.js
@@ -1129,8 +1129,8 @@
   }
   function fromArrayLike(array) {
     return new Observable(function(subscriber) {
-      for (var i = 0; i < array.length && !subscriber.closed; i++) {
-        subscriber.next(array[i]);
+      for (var i4 = 0; i4 < array.length && !subscriber.closed; i4++) {
+        subscriber.next(array[i4]);
       }
       subscriber.complete();
     });
@@ -1406,658 +1406,374 @@
     };
   }
 
-  // ../core/node_modules/svelte/src/runtime/internal/utils.js
-  function noop2() {
+  // ../core/node_modules/preact/dist/preact.module.js
+  var n;
+  var l;
+  var u;
+  var t;
+  var i;
+  var o;
+  var r;
+  var f;
+  var e;
+  var c;
+  var s;
+  var a;
+  var h = {};
+  var p = [];
+  var v = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+  var y = Array.isArray;
+  function d(n4, l4) {
+    for (var u4 in l4)
+      n4[u4] = l4[u4];
+    return n4;
   }
-  function run(fn) {
-    return fn();
+  function w(n4) {
+    var l4 = n4.parentNode;
+    l4 && l4.removeChild(n4);
   }
-  function blank_object() {
-    return /* @__PURE__ */ Object.create(null);
+  function _(l4, u4, t5) {
+    var i4, o4, r3, f3 = {};
+    for (r3 in u4)
+      "key" == r3 ? i4 = u4[r3] : "ref" == r3 ? o4 = u4[r3] : f3[r3] = u4[r3];
+    if (arguments.length > 2 && (f3.children = arguments.length > 3 ? n.call(arguments, 2) : t5), "function" == typeof l4 && null != l4.defaultProps)
+      for (r3 in l4.defaultProps)
+        void 0 === f3[r3] && (f3[r3] = l4.defaultProps[r3]);
+    return g(l4, f3, i4, o4, null);
   }
-  function run_all(fns) {
-    fns.forEach(run);
+  function g(n4, t5, i4, o4, r3) {
+    var f3 = { type: n4, props: t5, key: i4, ref: o4, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, constructor: void 0, __v: null == r3 ? ++u : r3, __i: -1, __u: 0 };
+    return null == r3 && null != l.vnode && l.vnode(f3), f3;
   }
-  function is_function(thing) {
-    return typeof thing === "function";
+  function k(n4) {
+    return n4.children;
   }
-  function safe_not_equal(a, b) {
-    return a != a ? b == b : a !== b || a && typeof a === "object" || typeof a === "function";
+  function b(n4, l4) {
+    this.props = n4, this.context = l4;
   }
-  function is_empty(obj) {
-    return Object.keys(obj).length === 0;
+  function x(n4, l4) {
+    if (null == l4)
+      return n4.__ ? x(n4.__, n4.__i + 1) : null;
+    for (var u4; l4 < n4.__k.length; l4++)
+      if (null != (u4 = n4.__k[l4]) && null != u4.__e)
+        return u4.__e;
+    return "function" == typeof n4.type ? x(n4) : null;
   }
-
-  // ../core/node_modules/svelte/src/runtime/internal/globals.js
-  var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
-    // @ts-ignore Node typings have this
-    global
-  );
-
-  // ../core/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
-  var ResizeObserverSingleton = class {
-    /**
-     * @private
-     * @readonly
-     * @type {WeakMap<Element, import('./private.js').Listener>}
-     */
-    _listeners = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
-    /**
-     * @private
-     * @type {ResizeObserver}
-     */
-    _observer = void 0;
-    /** @type {ResizeObserverOptions} */
-    options;
-    /** @param {ResizeObserverOptions} options */
-    constructor(options) {
-      this.options = options;
-    }
-    /**
-     * @param {Element} element
-     * @param {import('./private.js').Listener} listener
-     * @returns {() => void}
-     */
-    observe(element2, listener) {
-      this._listeners.set(element2, listener);
-      this._getObserver().observe(element2, this.options);
-      return () => {
-        this._listeners.delete(element2);
-        this._observer.unobserve(element2);
-      };
-    }
-    /**
-     * @private
-     */
-    _getObserver() {
-      return this._observer ?? (this._observer = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          ResizeObserverSingleton.entries.set(entry.target, entry);
-          this._listeners.get(entry.target)?.(entry);
+  function C(n4) {
+    var l4, u4;
+    if (null != (n4 = n4.__) && null != n4.__c) {
+      for (n4.__e = n4.__c.base = null, l4 = 0; l4 < n4.__k.length; l4++)
+        if (null != (u4 = n4.__k[l4]) && null != u4.__e) {
+          n4.__e = n4.__c.base = u4.__e;
+          break;
         }
-      }));
-    }
-  };
-  ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
-
-  // ../core/node_modules/svelte/src/runtime/internal/dom.js
-  var is_hydrating = false;
-  function start_hydrating() {
-    is_hydrating = true;
-  }
-  function end_hydrating() {
-    is_hydrating = false;
-  }
-  function append(target2, node) {
-    target2.appendChild(node);
-  }
-  function append_styles(target2, style_sheet_id, styles) {
-    const append_styles_to = get_root_for_style(target2);
-    if (!append_styles_to.getElementById(style_sheet_id)) {
-      const style = element("style");
-      style.id = style_sheet_id;
-      style.textContent = styles;
-      append_stylesheet(append_styles_to, style);
+      return C(n4);
     }
   }
-  function get_root_for_style(node) {
-    if (!node)
-      return document;
-    const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
-    if (root && /** @type {ShadowRoot} */
-    root.host) {
-      return (
-        /** @type {ShadowRoot} */
-        root
-      );
+  function M(n4) {
+    (!n4.__d && (n4.__d = true) && i.push(n4) && !P.__r++ || o !== l.debounceRendering) && ((o = l.debounceRendering) || r)(P);
+  }
+  function P() {
+    var n4, u4, t5, o4, r3, e4, c4, s4;
+    for (i.sort(f); n4 = i.shift(); )
+      n4.__d && (u4 = i.length, o4 = void 0, e4 = (r3 = (t5 = n4).__v).__e, c4 = [], s4 = [], t5.__P && ((o4 = d({}, r3)).__v = r3.__v + 1, l.vnode && l.vnode(o4), O(t5.__P, o4, r3, t5.__n, t5.__P.namespaceURI, 32 & r3.__u ? [e4] : null, c4, null == e4 ? x(r3) : e4, !!(32 & r3.__u), s4), o4.__v = r3.__v, o4.__.__k[o4.__i] = o4, j(c4, o4, s4), o4.__e != e4 && C(o4)), i.length > u4 && i.sort(f));
+    P.__r = 0;
+  }
+  function S(n4, l4, u4, t5, i4, o4, r3, f3, e4, c4, s4) {
+    var a4, v3, y3, d3, w3, _3 = t5 && t5.__k || p, g2 = l4.length;
+    for (u4.__d = e4, $(u4, l4, _3), e4 = u4.__d, a4 = 0; a4 < g2; a4++)
+      null != (y3 = u4.__k[a4]) && "boolean" != typeof y3 && "function" != typeof y3 && (v3 = -1 === y3.__i ? h : _3[y3.__i] || h, y3.__i = a4, O(n4, y3, v3, i4, o4, r3, f3, e4, c4, s4), d3 = y3.__e, y3.ref && v3.ref != y3.ref && (v3.ref && N(v3.ref, null, y3), s4.push(y3.ref, y3.__c || d3, y3)), null == w3 && null != d3 && (w3 = d3), 65536 & y3.__u || v3.__k === y3.__k ? (e4 && !e4.isConnected && (e4 = x(v3)), e4 = I(y3, e4, n4)) : "function" == typeof y3.type && void 0 !== y3.__d ? e4 = y3.__d : d3 && (e4 = d3.nextSibling), y3.__d = void 0, y3.__u &= -196609);
+    u4.__d = e4, u4.__e = w3;
+  }
+  function $(n4, l4, u4) {
+    var t5, i4, o4, r3, f3, e4 = l4.length, c4 = u4.length, s4 = c4, a4 = 0;
+    for (n4.__k = [], t5 = 0; t5 < e4; t5++)
+      r3 = t5 + a4, null != (i4 = n4.__k[t5] = null == (i4 = l4[t5]) || "boolean" == typeof i4 || "function" == typeof i4 ? null : "string" == typeof i4 || "number" == typeof i4 || "bigint" == typeof i4 || i4.constructor == String ? g(null, i4, null, null, null) : y(i4) ? g(k, { children: i4 }, null, null, null) : void 0 === i4.constructor && i4.__b > 0 ? g(i4.type, i4.props, i4.key, i4.ref ? i4.ref : null, i4.__v) : i4) ? (i4.__ = n4, i4.__b = n4.__b + 1, f3 = L(i4, u4, r3, s4), i4.__i = f3, o4 = null, -1 !== f3 && (s4--, (o4 = u4[f3]) && (o4.__u |= 131072)), null == o4 || null === o4.__v ? (-1 == f3 && a4--, "function" != typeof i4.type && (i4.__u |= 65536)) : f3 !== r3 && (f3 === r3 + 1 ? a4++ : f3 > r3 ? s4 > e4 - r3 ? a4 += f3 - r3 : a4-- : f3 < r3 ? f3 == r3 - 1 && (a4 = f3 - r3) : a4 = 0, f3 !== t5 + a4 && (i4.__u |= 65536))) : (o4 = u4[r3]) && null == o4.key && o4.__e && 0 == (131072 & o4.__u) && (o4.__e == n4.__d && (n4.__d = x(o4)), V(o4, o4, false), u4[r3] = null, s4--);
+    if (s4)
+      for (t5 = 0; t5 < c4; t5++)
+        null != (o4 = u4[t5]) && 0 == (131072 & o4.__u) && (o4.__e == n4.__d && (n4.__d = x(o4)), V(o4, o4));
+  }
+  function I(n4, l4, u4) {
+    var t5, i4;
+    if ("function" == typeof n4.type) {
+      for (t5 = n4.__k, i4 = 0; t5 && i4 < t5.length; i4++)
+        t5[i4] && (t5[i4].__ = n4, l4 = I(t5[i4], l4, u4));
+      return l4;
     }
-    return node.ownerDocument;
-  }
-  function append_stylesheet(node, style) {
-    append(
-      /** @type {Document} */
-      node.head || node,
-      style
-    );
-    return style.sheet;
-  }
-  function insert(target2, node, anchor) {
-    target2.insertBefore(node, anchor || null);
-  }
-  function detach(node) {
-    if (node.parentNode) {
-      node.parentNode.removeChild(node);
-    }
-  }
-  function element(name) {
-    return document.createElement(name);
-  }
-  function text(data) {
-    return document.createTextNode(data);
-  }
-  function space() {
-    return text(" ");
-  }
-  function empty() {
-    return text("");
-  }
-  function listen(node, event, handler, options) {
-    node.addEventListener(event, handler, options);
-    return () => node.removeEventListener(event, handler, options);
-  }
-  function attr(node, attribute, value) {
-    if (value == null)
-      node.removeAttribute(attribute);
-    else if (node.getAttribute(attribute) !== value)
-      node.setAttribute(attribute, value);
-  }
-  function children(element2) {
-    return Array.from(element2.childNodes);
-  }
-  function set_data(text2, data) {
-    data = "" + data;
-    if (text2.data === data)
-      return;
-    text2.data = /** @type {string} */
-    data;
-  }
-  function set_input_value(input, value) {
-    input.value = value == null ? "" : value;
-  }
-  function set_style(node, key, value, important) {
-    if (value == null) {
-      node.style.removeProperty(key);
-    } else {
-      node.style.setProperty(key, value, important ? "important" : "");
-    }
-  }
-  function get_custom_elements_slots(element2) {
-    const result = {};
-    element2.childNodes.forEach(
-      /** @param {Element} node */
-      (node) => {
-        result[node.slot || "default"] = true;
-      }
-    );
-    return result;
-  }
-
-  // ../core/node_modules/svelte/src/runtime/internal/lifecycle.js
-  var current_component;
-  function set_current_component(component) {
-    current_component = component;
-  }
-  function get_current_component() {
-    if (!current_component)
-      throw new Error("Function called outside component initialization");
-    return current_component;
-  }
-  function onDestroy(fn) {
-    get_current_component().$$.on_destroy.push(fn);
-  }
-  function getContext(key) {
-    return get_current_component().$$.context.get(key);
-  }
-
-  // ../core/node_modules/svelte/src/runtime/internal/scheduler.js
-  var dirty_components = [];
-  var binding_callbacks = [];
-  var render_callbacks = [];
-  var flush_callbacks = [];
-  var resolved_promise = /* @__PURE__ */ Promise.resolve();
-  var update_scheduled = false;
-  function schedule_update() {
-    if (!update_scheduled) {
-      update_scheduled = true;
-      resolved_promise.then(flush);
-    }
-  }
-  function add_render_callback(fn) {
-    render_callbacks.push(fn);
-  }
-  var seen_callbacks = /* @__PURE__ */ new Set();
-  var flushidx = 0;
-  function flush() {
-    if (flushidx !== 0) {
-      return;
-    }
-    const saved_component = current_component;
+    n4.__e != l4 && (u4.insertBefore(n4.__e, l4 || null), l4 = n4.__e);
     do {
-      try {
-        while (flushidx < dirty_components.length) {
-          const component = dirty_components[flushidx];
-          flushidx++;
-          set_current_component(component);
-          update(component.$$);
+      l4 = l4 && l4.nextSibling;
+    } while (null != l4 && 8 === l4.nodeType);
+    return l4;
+  }
+  function L(n4, l4, u4, t5) {
+    var i4 = n4.key, o4 = n4.type, r3 = u4 - 1, f3 = u4 + 1, e4 = l4[u4];
+    if (null === e4 || e4 && i4 == e4.key && o4 === e4.type && 0 == (131072 & e4.__u))
+      return u4;
+    if (t5 > (null != e4 && 0 == (131072 & e4.__u) ? 1 : 0))
+      for (; r3 >= 0 || f3 < l4.length; ) {
+        if (r3 >= 0) {
+          if ((e4 = l4[r3]) && 0 == (131072 & e4.__u) && i4 == e4.key && o4 === e4.type)
+            return r3;
+          r3--;
         }
-      } catch (e) {
-        dirty_components.length = 0;
-        flushidx = 0;
-        throw e;
-      }
-      set_current_component(null);
-      dirty_components.length = 0;
-      flushidx = 0;
-      while (binding_callbacks.length)
-        binding_callbacks.pop()();
-      for (let i = 0; i < render_callbacks.length; i += 1) {
-        const callback = render_callbacks[i];
-        if (!seen_callbacks.has(callback)) {
-          seen_callbacks.add(callback);
-          callback();
+        if (f3 < l4.length) {
+          if ((e4 = l4[f3]) && 0 == (131072 & e4.__u) && i4 == e4.key && o4 === e4.type)
+            return f3;
+          f3++;
         }
       }
-      render_callbacks.length = 0;
-    } while (dirty_components.length);
-    while (flush_callbacks.length) {
-      flush_callbacks.pop()();
-    }
-    update_scheduled = false;
-    seen_callbacks.clear();
-    set_current_component(saved_component);
+    return -1;
   }
-  function update($$) {
-    if ($$.fragment !== null) {
-      $$.update();
-      run_all($$.before_update);
-      const dirty = $$.dirty;
-      $$.dirty = [-1];
-      $$.fragment && $$.fragment.p($$.ctx, dirty);
-      $$.after_update.forEach(add_render_callback);
-    }
+  function T(n4, l4, u4) {
+    "-" === l4[0] ? n4.setProperty(l4, null == u4 ? "" : u4) : n4[l4] = null == u4 ? "" : "number" != typeof u4 || v.test(l4) ? u4 : u4 + "px";
   }
-  function flush_render_callbacks(fns) {
-    const filtered = [];
-    const targets = [];
-    render_callbacks.forEach((c) => fns.indexOf(c) === -1 ? filtered.push(c) : targets.push(c));
-    targets.forEach((c) => c());
-    render_callbacks = filtered;
-  }
-
-  // ../core/node_modules/svelte/src/runtime/internal/transitions.js
-  var outroing = /* @__PURE__ */ new Set();
-  function transition_in(block, local) {
-    if (block && block.i) {
-      outroing.delete(block);
-      block.i(local);
-    }
-  }
-
-  // ../core/node_modules/svelte/src/shared/boolean_attributes.js
-  var _boolean_attributes = (
-    /** @type {const} */
-    [
-      "allowfullscreen",
-      "allowpaymentrequest",
-      "async",
-      "autofocus",
-      "autoplay",
-      "checked",
-      "controls",
-      "default",
-      "defer",
-      "disabled",
-      "formnovalidate",
-      "hidden",
-      "inert",
-      "ismap",
-      "loop",
-      "multiple",
-      "muted",
-      "nomodule",
-      "novalidate",
-      "open",
-      "playsinline",
-      "readonly",
-      "required",
-      "reversed",
-      "selected"
-    ]
-  );
-  var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
-
-  // ../core/node_modules/svelte/src/runtime/internal/Component.js
-  function mount_component(component, target2, anchor) {
-    const { fragment, after_update } = component.$$;
-    fragment && fragment.m(target2, anchor);
-    add_render_callback(() => {
-      const new_on_destroy = component.$$.on_mount.map(run).filter(is_function);
-      if (component.$$.on_destroy) {
-        component.$$.on_destroy.push(...new_on_destroy);
-      } else {
-        run_all(new_on_destroy);
-      }
-      component.$$.on_mount = [];
-    });
-    after_update.forEach(add_render_callback);
-  }
-  function destroy_component(component, detaching) {
-    const $$ = component.$$;
-    if ($$.fragment !== null) {
-      flush_render_callbacks($$.after_update);
-      run_all($$.on_destroy);
-      $$.fragment && $$.fragment.d(detaching);
-      $$.on_destroy = $$.fragment = null;
-      $$.ctx = [];
-    }
-  }
-  function make_dirty(component, i) {
-    if (component.$$.dirty[0] === -1) {
-      dirty_components.push(component);
-      schedule_update();
-      component.$$.dirty.fill(0);
-    }
-    component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
-  }
-  function init(component, options, instance3, create_fragment3, not_equal, props, append_styles2 = null, dirty = [-1]) {
-    const parent_component = current_component;
-    set_current_component(component);
-    const $$ = component.$$ = {
-      fragment: null,
-      ctx: [],
-      // state
-      props,
-      update: noop2,
-      not_equal,
-      bound: blank_object(),
-      // lifecycle
-      on_mount: [],
-      on_destroy: [],
-      on_disconnect: [],
-      before_update: [],
-      after_update: [],
-      context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
-      // everything else
-      callbacks: blank_object(),
-      dirty,
-      skip_bound: false,
-      root: options.target || parent_component.$$.root
-    };
-    append_styles2 && append_styles2($$.root);
-    let ready = false;
-    $$.ctx = instance3 ? instance3(component, options.props || {}, (i, ret, ...rest) => {
-      const value = rest.length ? rest[0] : ret;
-      if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
-        if (!$$.skip_bound && $$.bound[i])
-          $$.bound[i](value);
-        if (ready)
-          make_dirty(component, i);
-      }
-      return ret;
-    }) : [];
-    $$.update();
-    ready = true;
-    run_all($$.before_update);
-    $$.fragment = create_fragment3 ? create_fragment3($$.ctx) : false;
-    if (options.target) {
-      if (options.hydrate) {
-        start_hydrating();
-        const nodes = children(options.target);
-        $$.fragment && $$.fragment.l(nodes);
-        nodes.forEach(detach);
-      } else {
-        $$.fragment && $$.fragment.c();
-      }
-      if (options.intro)
-        transition_in(component.$$.fragment);
-      mount_component(component, options.target, options.anchor);
-      end_hydrating();
-      flush();
-    }
-    set_current_component(parent_component);
-  }
-  var SvelteElement;
-  if (typeof HTMLElement === "function") {
-    SvelteElement = class extends HTMLElement {
-      /** The Svelte component constructor */
-      $$ctor;
-      /** Slots */
-      $$s;
-      /** The Svelte component instance */
-      $$c;
-      /** Whether or not the custom element is connected */
-      $$cn = false;
-      /** Component props data */
-      $$d = {};
-      /** `true` if currently in the process of reflecting component props back to attributes */
-      $$r = false;
-      /** @type {Record<string, CustomElementPropDefinition>} Props definition (name, reflected, type etc) */
-      $$p_d = {};
-      /** @type {Record<string, Function[]>} Event listeners */
-      $$l = {};
-      /** @type {Map<Function, Function>} Event listener unsubscribe functions */
-      $$l_u = /* @__PURE__ */ new Map();
-      constructor($$componentCtor, $$slots, use_shadow_dom) {
-        super();
-        this.$$ctor = $$componentCtor;
-        this.$$s = $$slots;
-        if (use_shadow_dom) {
-          this.attachShadow({ mode: "open" });
+  function A(n4, l4, u4, t5, i4) {
+    var o4;
+    n:
+      if ("style" === l4)
+        if ("string" == typeof u4)
+          n4.style.cssText = u4;
+        else {
+          if ("string" == typeof t5 && (n4.style.cssText = t5 = ""), t5)
+            for (l4 in t5)
+              u4 && l4 in u4 || T(n4.style, l4, "");
+          if (u4)
+            for (l4 in u4)
+              t5 && u4[l4] === t5[l4] || T(n4.style, l4, u4[l4]);
         }
+      else if ("o" === l4[0] && "n" === l4[1])
+        o4 = l4 !== (l4 = l4.replace(/(PointerCapture)$|Capture$/i, "$1")), l4 = l4.toLowerCase() in n4 || "onFocusOut" === l4 || "onFocusIn" === l4 ? l4.toLowerCase().slice(2) : l4.slice(2), n4.l || (n4.l = {}), n4.l[l4 + o4] = u4, u4 ? t5 ? u4.u = t5.u : (u4.u = e, n4.addEventListener(l4, o4 ? s : c, o4)) : n4.removeEventListener(l4, o4 ? s : c, o4);
+      else {
+        if ("http://www.w3.org/2000/svg" == i4)
+          l4 = l4.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
+        else if ("width" != l4 && "height" != l4 && "href" != l4 && "list" != l4 && "form" != l4 && "tabIndex" != l4 && "download" != l4 && "rowSpan" != l4 && "colSpan" != l4 && "role" != l4 && l4 in n4)
+          try {
+            n4[l4] = null == u4 ? "" : u4;
+            break n;
+          } catch (n5) {
+          }
+        "function" == typeof u4 || (null == u4 || false === u4 && "-" !== l4[4] ? n4.removeAttribute(l4) : n4.setAttribute(l4, u4));
       }
-      addEventListener(type, listener, options) {
-        this.$$l[type] = this.$$l[type] || [];
-        this.$$l[type].push(listener);
-        if (this.$$c) {
-          const unsub = this.$$c.$on(type, listener);
-          this.$$l_u.set(listener, unsub);
-        }
-        super.addEventListener(type, listener, options);
-      }
-      removeEventListener(type, listener, options) {
-        super.removeEventListener(type, listener, options);
-        if (this.$$c) {
-          const unsub = this.$$l_u.get(listener);
-          if (unsub) {
-            unsub();
-            this.$$l_u.delete(listener);
-          }
-        }
-      }
-      async connectedCallback() {
-        this.$$cn = true;
-        if (!this.$$c) {
-          let create_slot = function(name) {
-            return () => {
-              let node;
-              const obj = {
-                c: function create() {
-                  node = element("slot");
-                  if (name !== "default") {
-                    attr(node, "name", name);
-                  }
-                },
-                /**
-                 * @param {HTMLElement} target
-                 * @param {HTMLElement} [anchor]
-                 */
-                m: function mount(target2, anchor) {
-                  insert(target2, node, anchor);
-                },
-                d: function destroy(detaching) {
-                  if (detaching) {
-                    detach(node);
-                  }
-                }
-              };
-              return obj;
-            };
-          };
-          await Promise.resolve();
-          if (!this.$$cn || this.$$c) {
-            return;
-          }
-          const $$slots = {};
-          const existing_slots = get_custom_elements_slots(this);
-          for (const name of this.$$s) {
-            if (name in existing_slots) {
-              $$slots[name] = [create_slot(name)];
-            }
-          }
-          for (const attribute of this.attributes) {
-            const name = this.$$g_p(attribute.name);
-            if (!(name in this.$$d)) {
-              this.$$d[name] = get_custom_element_value(name, attribute.value, this.$$p_d, "toProp");
-            }
-          }
-          for (const key in this.$$p_d) {
-            if (!(key in this.$$d) && this[key] !== void 0) {
-              this.$$d[key] = this[key];
-              delete this[key];
-            }
-          }
-          this.$$c = new this.$$ctor({
-            target: this.shadowRoot || this,
-            props: {
-              ...this.$$d,
-              $$slots,
-              $$scope: {
-                ctx: []
-              }
-            }
-          });
-          const reflect_attributes = () => {
-            this.$$r = true;
-            for (const key in this.$$p_d) {
-              this.$$d[key] = this.$$c.$$.ctx[this.$$c.$$.props[key]];
-              if (this.$$p_d[key].reflect) {
-                const attribute_value = get_custom_element_value(
-                  key,
-                  this.$$d[key],
-                  this.$$p_d,
-                  "toAttribute"
-                );
-                if (attribute_value == null) {
-                  this.removeAttribute(this.$$p_d[key].attribute || key);
-                } else {
-                  this.setAttribute(this.$$p_d[key].attribute || key, attribute_value);
-                }
-              }
-            }
-            this.$$r = false;
-          };
-          this.$$c.$$.after_update.push(reflect_attributes);
-          reflect_attributes();
-          for (const type in this.$$l) {
-            for (const listener of this.$$l[type]) {
-              const unsub = this.$$c.$on(type, listener);
-              this.$$l_u.set(listener, unsub);
-            }
-          }
-          this.$$l = {};
-        }
-      }
-      // We don't need this when working within Svelte code, but for compatibility of people using this outside of Svelte
-      // and setting attributes through setAttribute etc, this is helpful
-      attributeChangedCallback(attr2, _oldValue, newValue) {
-        if (this.$$r)
+  }
+  function F(n4) {
+    return function(u4) {
+      if (this.l) {
+        var t5 = this.l[u4.type + n4];
+        if (null == u4.t)
+          u4.t = e++;
+        else if (u4.t < t5.u)
           return;
-        attr2 = this.$$g_p(attr2);
-        this.$$d[attr2] = get_custom_element_value(attr2, newValue, this.$$p_d, "toProp");
-        this.$$c?.$set({ [attr2]: this.$$d[attr2] });
-      }
-      disconnectedCallback() {
-        this.$$cn = false;
-        Promise.resolve().then(() => {
-          if (!this.$$cn && this.$$c) {
-            this.$$c.$destroy();
-            this.$$c = void 0;
-          }
-        });
-      }
-      $$g_p(attribute_name) {
-        return Object.keys(this.$$p_d).find(
-          (key) => this.$$p_d[key].attribute === attribute_name || !this.$$p_d[key].attribute && key.toLowerCase() === attribute_name
-        ) || attribute_name;
+        return t5(l.event ? l.event(u4) : u4);
       }
     };
   }
-  function get_custom_element_value(prop, value, props_definition, transform) {
-    const type = props_definition[prop]?.type;
-    value = type === "Boolean" && typeof value !== "boolean" ? value != null : value;
-    if (!transform || !props_definition[prop]) {
-      return value;
-    } else if (transform === "toAttribute") {
-      switch (type) {
-        case "Object":
-        case "Array":
-          return value == null ? null : JSON.stringify(value);
-        case "Boolean":
-          return value ? "" : null;
-        case "Number":
-          return value == null ? null : value;
-        default:
-          return value;
+  function O(n4, u4, t5, i4, o4, r3, f3, e4, c4, s4) {
+    var a4, h4, p4, v3, w3, _3, g2, m3, x2, C3, M2, P3, $2, I2, H, L2 = u4.type;
+    if (void 0 !== u4.constructor)
+      return null;
+    128 & t5.__u && (c4 = !!(32 & t5.__u), r3 = [e4 = u4.__e = t5.__e]), (a4 = l.__b) && a4(u4);
+    n:
+      if ("function" == typeof L2)
+        try {
+          if (m3 = u4.props, x2 = (a4 = L2.contextType) && i4[a4.__c], C3 = a4 ? x2 ? x2.props.value : a4.__ : i4, t5.__c ? g2 = (h4 = u4.__c = t5.__c).__ = h4.__E : ("prototype" in L2 && L2.prototype.render ? u4.__c = h4 = new L2(m3, C3) : (u4.__c = h4 = new b(m3, C3), h4.constructor = L2, h4.render = q), x2 && x2.sub(h4), h4.props = m3, h4.state || (h4.state = {}), h4.context = C3, h4.__n = i4, p4 = h4.__d = true, h4.__h = [], h4._sb = []), null == h4.__s && (h4.__s = h4.state), null != L2.getDerivedStateFromProps && (h4.__s == h4.state && (h4.__s = d({}, h4.__s)), d(h4.__s, L2.getDerivedStateFromProps(m3, h4.__s))), v3 = h4.props, w3 = h4.state, h4.__v = u4, p4)
+            null == L2.getDerivedStateFromProps && null != h4.componentWillMount && h4.componentWillMount(), null != h4.componentDidMount && h4.__h.push(h4.componentDidMount);
+          else {
+            if (null == L2.getDerivedStateFromProps && m3 !== v3 && null != h4.componentWillReceiveProps && h4.componentWillReceiveProps(m3, C3), !h4.__e && (null != h4.shouldComponentUpdate && false === h4.shouldComponentUpdate(m3, h4.__s, C3) || u4.__v === t5.__v)) {
+              for (u4.__v !== t5.__v && (h4.props = m3, h4.state = h4.__s, h4.__d = false), u4.__e = t5.__e, u4.__k = t5.__k, u4.__k.forEach(function(n5) {
+                n5 && (n5.__ = u4);
+              }), M2 = 0; M2 < h4._sb.length; M2++)
+                h4.__h.push(h4._sb[M2]);
+              h4._sb = [], h4.__h.length && f3.push(h4);
+              break n;
+            }
+            null != h4.componentWillUpdate && h4.componentWillUpdate(m3, h4.__s, C3), null != h4.componentDidUpdate && h4.__h.push(function() {
+              h4.componentDidUpdate(v3, w3, _3);
+            });
+          }
+          if (h4.context = C3, h4.props = m3, h4.__P = n4, h4.__e = false, P3 = l.__r, $2 = 0, "prototype" in L2 && L2.prototype.render) {
+            for (h4.state = h4.__s, h4.__d = false, P3 && P3(u4), a4 = h4.render(h4.props, h4.state, h4.context), I2 = 0; I2 < h4._sb.length; I2++)
+              h4.__h.push(h4._sb[I2]);
+            h4._sb = [];
+          } else
+            do {
+              h4.__d = false, P3 && P3(u4), a4 = h4.render(h4.props, h4.state, h4.context), h4.state = h4.__s;
+            } while (h4.__d && ++$2 < 25);
+          h4.state = h4.__s, null != h4.getChildContext && (i4 = d(d({}, i4), h4.getChildContext())), p4 || null == h4.getSnapshotBeforeUpdate || (_3 = h4.getSnapshotBeforeUpdate(v3, w3)), S(n4, y(H = null != a4 && a4.type === k && null == a4.key ? a4.props.children : a4) ? H : [H], u4, t5, i4, o4, r3, f3, e4, c4, s4), h4.base = u4.__e, u4.__u &= -161, h4.__h.length && f3.push(h4), g2 && (h4.__E = h4.__ = null);
+        } catch (n5) {
+          u4.__v = null, c4 || null != r3 ? (u4.__e = e4, u4.__u |= c4 ? 160 : 32, r3[r3.indexOf(e4)] = null) : (u4.__e = t5.__e, u4.__k = t5.__k), l.__e(n5, u4, t5);
+        }
+      else
+        null == r3 && u4.__v === t5.__v ? (u4.__k = t5.__k, u4.__e = t5.__e) : u4.__e = z(t5.__e, u4, t5, i4, o4, r3, f3, c4, s4);
+    (a4 = l.diffed) && a4(u4);
+  }
+  function j(n4, u4, t5) {
+    u4.__d = void 0;
+    for (var i4 = 0; i4 < t5.length; i4++)
+      N(t5[i4], t5[++i4], t5[++i4]);
+    l.__c && l.__c(u4, n4), n4.some(function(u5) {
+      try {
+        n4 = u5.__h, u5.__h = [], n4.some(function(n5) {
+          n5.call(u5);
+        });
+      } catch (n5) {
+        l.__e(n5, u5.__v);
       }
-    } else {
-      switch (type) {
-        case "Object":
-        case "Array":
-          return value && JSON.parse(value);
-        case "Boolean":
-          return value;
-        case "Number":
-          return value != null ? +value : value;
-        default:
-          return value;
-      }
+    });
+  }
+  function z(l4, u4, t5, i4, o4, r3, f3, e4, c4) {
+    var s4, a4, p4, v3, d3, _3, g2, m3 = t5.props, k3 = u4.props, b3 = u4.type;
+    if ("svg" === b3 ? o4 = "http://www.w3.org/2000/svg" : "math" === b3 ? o4 = "http://www.w3.org/1998/Math/MathML" : o4 || (o4 = "http://www.w3.org/1999/xhtml"), null != r3) {
+      for (s4 = 0; s4 < r3.length; s4++)
+        if ((d3 = r3[s4]) && "setAttribute" in d3 == !!b3 && (b3 ? d3.localName === b3 : 3 === d3.nodeType)) {
+          l4 = d3, r3[s4] = null;
+          break;
+        }
+    }
+    if (null == l4) {
+      if (null === b3)
+        return document.createTextNode(k3);
+      l4 = document.createElementNS(o4, b3, k3.is && k3), r3 = null, e4 = false;
+    }
+    if (null === b3)
+      m3 === k3 || e4 && l4.data === k3 || (l4.data = k3);
+    else {
+      if (r3 = r3 && n.call(l4.childNodes), m3 = t5.props || h, !e4 && null != r3)
+        for (m3 = {}, s4 = 0; s4 < l4.attributes.length; s4++)
+          m3[(d3 = l4.attributes[s4]).name] = d3.value;
+      for (s4 in m3)
+        if (d3 = m3[s4], "children" == s4)
+          ;
+        else if ("dangerouslySetInnerHTML" == s4)
+          p4 = d3;
+        else if ("key" !== s4 && !(s4 in k3)) {
+          if ("value" == s4 && "defaultValue" in k3 || "checked" == s4 && "defaultChecked" in k3)
+            continue;
+          A(l4, s4, null, d3, o4);
+        }
+      for (s4 in k3)
+        d3 = k3[s4], "children" == s4 ? v3 = d3 : "dangerouslySetInnerHTML" == s4 ? a4 = d3 : "value" == s4 ? _3 = d3 : "checked" == s4 ? g2 = d3 : "key" === s4 || e4 && "function" != typeof d3 || m3[s4] === d3 || A(l4, s4, d3, m3[s4], o4);
+      if (a4)
+        e4 || p4 && (a4.__html === p4.__html || a4.__html === l4.innerHTML) || (l4.innerHTML = a4.__html), u4.__k = [];
+      else if (p4 && (l4.innerHTML = ""), S(l4, y(v3) ? v3 : [v3], u4, t5, i4, "foreignObject" === b3 ? "http://www.w3.org/1999/xhtml" : o4, r3, f3, r3 ? r3[0] : t5.__k && x(t5, 0), e4, c4), null != r3)
+        for (s4 = r3.length; s4--; )
+          null != r3[s4] && w(r3[s4]);
+      e4 || (s4 = "value", void 0 !== _3 && (_3 !== l4[s4] || "progress" === b3 && !_3 || "option" === b3 && _3 !== m3[s4]) && A(l4, s4, _3, m3[s4], o4), s4 = "checked", void 0 !== g2 && g2 !== l4[s4] && A(l4, s4, g2, m3[s4], o4));
+    }
+    return l4;
+  }
+  function N(n4, u4, t5) {
+    try {
+      "function" == typeof n4 ? n4(u4) : n4.current = u4;
+    } catch (n5) {
+      l.__e(n5, t5);
     }
   }
-  var SvelteComponent = class {
-    /**
-     * ### PRIVATE API
-     *
-     * Do not use, may change at any time
-     *
-     * @type {any}
-     */
-    $$ = void 0;
-    /**
-     * ### PRIVATE API
-     *
-     * Do not use, may change at any time
-     *
-     * @type {any}
-     */
-    $$set = void 0;
-    /** @returns {void} */
-    $destroy() {
-      destroy_component(this, 1);
-      this.$destroy = noop2;
+  function V(n4, u4, t5) {
+    var i4, o4;
+    if (l.unmount && l.unmount(n4), (i4 = n4.ref) && (i4.current && i4.current !== n4.__e || N(i4, null, u4)), null != (i4 = n4.__c)) {
+      if (i4.componentWillUnmount)
+        try {
+          i4.componentWillUnmount();
+        } catch (n5) {
+          l.__e(n5, u4);
+        }
+      i4.base = i4.__P = null;
     }
-    /**
-     * @template {Extract<keyof Events, string>} K
-     * @param {K} type
-     * @param {((e: Events[K]) => void) | null | undefined} callback
-     * @returns {() => void}
-     */
-    $on(type, callback) {
-      if (!is_function(callback)) {
-        return noop2;
-      }
-      const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
-      callbacks.push(callback);
-      return () => {
-        const index = callbacks.indexOf(callback);
-        if (index !== -1)
-          callbacks.splice(index, 1);
-      };
-    }
-    /**
-     * @param {Partial<Props>} props
-     * @returns {void}
-     */
-    $set(props) {
-      if (this.$$set && !is_empty(props)) {
-        this.$$.skip_bound = true;
-        this.$$set(props);
-        this.$$.skip_bound = false;
-      }
-    }
-  };
+    if (i4 = n4.__k)
+      for (o4 = 0; o4 < i4.length; o4++)
+        i4[o4] && V(i4[o4], u4, t5 || "function" != typeof n4.type);
+    t5 || null == n4.__e || w(n4.__e), n4.__c = n4.__ = n4.__e = n4.__d = void 0;
+  }
+  function q(n4, l4, u4) {
+    return this.constructor(n4, u4);
+  }
+  function B(u4, t5, i4) {
+    var o4, r3, f3, e4;
+    l.__ && l.__(u4, t5), r3 = (o4 = "function" == typeof i4) ? null : i4 && i4.__k || t5.__k, f3 = [], e4 = [], O(t5, u4 = (!o4 && i4 || t5).__k = _(k, null, [u4]), r3 || h, h, t5.namespaceURI, !o4 && i4 ? [i4] : r3 ? null : t5.firstChild ? n.call(t5.childNodes) : null, f3, !o4 && i4 ? i4 : r3 ? r3.__e : t5.firstChild, o4, e4), j(f3, u4, e4);
+  }
+  function G(n4, l4) {
+    var u4 = { __c: l4 = "__cC" + a++, __: n4, Consumer: function(n5, l5) {
+      return n5.children(l5);
+    }, Provider: function(n5) {
+      var u5, t5;
+      return this.getChildContext || (u5 = [], (t5 = {})[l4] = this, this.getChildContext = function() {
+        return t5;
+      }, this.shouldComponentUpdate = function(n6) {
+        this.props.value !== n6.value && u5.some(function(n7) {
+          n7.__e = true, M(n7);
+        });
+      }, this.sub = function(n6) {
+        u5.push(n6);
+        var l5 = n6.componentWillUnmount;
+        n6.componentWillUnmount = function() {
+          u5.splice(u5.indexOf(n6), 1), l5 && l5.call(n6);
+        };
+      }), n5.children;
+    } };
+    return u4.Provider.__ = u4.Consumer.contextType = u4;
+  }
+  n = p.slice, l = { __e: function(n4, l4, u4, t5) {
+    for (var i4, o4, r3; l4 = l4.__; )
+      if ((i4 = l4.__c) && !i4.__)
+        try {
+          if ((o4 = i4.constructor) && null != o4.getDerivedStateFromError && (i4.setState(o4.getDerivedStateFromError(n4)), r3 = i4.__d), null != i4.componentDidCatch && (i4.componentDidCatch(n4, t5 || {}), r3 = i4.__d), r3)
+            return i4.__E = i4;
+        } catch (l5) {
+          n4 = l5;
+        }
+    throw n4;
+  } }, u = 0, t = function(n4) {
+    return null != n4 && null == n4.constructor;
+  }, b.prototype.setState = function(n4, l4) {
+    var u4;
+    u4 = null != this.__s && this.__s !== this.state ? this.__s : this.__s = d({}, this.state), "function" == typeof n4 && (n4 = n4(d({}, u4), this.props)), n4 && d(u4, n4), null != n4 && this.__v && (l4 && this._sb.push(l4), M(this));
+  }, b.prototype.forceUpdate = function(n4) {
+    this.__v && (this.__e = true, n4 && this.__h.push(n4), M(this));
+  }, b.prototype.render = k, i = [], r = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, f = function(n4, l4) {
+    return n4.__v.__b - l4.__v.__b;
+  }, P.__r = 0, e = 0, c = F(false), s = F(true), a = 0;
 
-  // ../core/node_modules/svelte/src/shared/version.js
-  var PUBLIC_VERSION = "4";
+  // ../core/node_modules/htm/dist/htm.module.js
+  var n2 = function(t5, s4, r3, e4) {
+    var u4;
+    s4[0] = 0;
+    for (var h4 = 1; h4 < s4.length; h4++) {
+      var p4 = s4[h4++], a4 = s4[h4] ? (s4[0] |= p4 ? 1 : 2, r3[s4[h4++]]) : s4[++h4];
+      3 === p4 ? e4[0] = a4 : 4 === p4 ? e4[1] = Object.assign(e4[1] || {}, a4) : 5 === p4 ? (e4[1] = e4[1] || {})[s4[++h4]] = a4 : 6 === p4 ? e4[1][s4[++h4]] += a4 + "" : p4 ? (u4 = t5.apply(a4, n2(t5, a4, r3, ["", null])), e4.push(u4), a4[0] ? s4[0] |= 2 : (s4[h4 - 2] = 0, s4[h4] = u4)) : e4.push(a4);
+    }
+    return e4;
+  };
+  var t2 = /* @__PURE__ */ new Map();
+  function htm_module_default(s4) {
+    var r3 = t2.get(this);
+    return r3 || (r3 = /* @__PURE__ */ new Map(), t2.set(this, r3)), (r3 = n2(this, r3.get(s4) || (r3.set(s4, r3 = function(n4) {
+      for (var t5, s5, r4 = 1, e4 = "", u4 = "", h4 = [0], p4 = function(n5) {
+        1 === r4 && (n5 || (e4 = e4.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h4.push(0, n5, e4) : 3 === r4 && (n5 || e4) ? (h4.push(3, n5, e4), r4 = 2) : 2 === r4 && "..." === e4 && n5 ? h4.push(4, n5, 0) : 2 === r4 && e4 && !n5 ? h4.push(5, 0, true, e4) : r4 >= 5 && ((e4 || !n5 && 5 === r4) && (h4.push(r4, 0, e4, s5), r4 = 6), n5 && (h4.push(r4, n5, 0, s5), r4 = 6)), e4 = "";
+      }, a4 = 0; a4 < n4.length; a4++) {
+        a4 && (1 === r4 && p4(), p4(a4));
+        for (var l4 = 0; l4 < n4[a4].length; l4++)
+          t5 = n4[a4][l4], 1 === r4 ? "<" === t5 ? (p4(), h4 = [h4], r4 = 3) : e4 += t5 : 4 === r4 ? "--" === e4 && ">" === t5 ? (r4 = 1, e4 = "") : e4 = t5 + e4[0] : u4 ? t5 === u4 ? u4 = "" : e4 += t5 : '"' === t5 || "'" === t5 ? u4 = t5 : ">" === t5 ? (p4(), r4 = 1) : r4 && ("=" === t5 ? (r4 = 5, s5 = e4, e4 = "") : "/" === t5 && (r4 < 5 || ">" === n4[a4][l4 + 1]) ? (p4(), 3 === r4 && (h4 = h4[0]), r4 = h4, (h4 = h4[0]).push(2, 0, r4), r4 = 0) : " " === t5 || "	" === t5 || "\n" === t5 || "\r" === t5 ? (p4(), r4 = 2) : e4 += t5), 3 === r4 && "!--" === e4 && (r4 = 4, h4 = h4[0]);
+      }
+      return p4(), h4;
+    }(s4)), r3), arguments, [])).length > 1 ? r3 : r3[0];
+  }
+
+  // ../core/node_modules/htm/preact/index.module.js
+  var m = htm_module_default.bind(_);
+
+  // ../core/src/app.ts
+  function App(context4, dataTestid) {
+    return m`
+		<${appContext.Provider} value=${context4}>
+			<${ManualRtc}/>
+			<${Playground} dataTestid=${dataTestid}/>
+		<//>
+	`;
+  }
+
+  // ../core/src/app-context.ts
+  var appContext = G(null);
 
   // ../core/src/compute-indication.ts
   function computeIndication(myCharacter, game) {
@@ -2120,44 +1836,44 @@
   }
 
   // ../core/node_modules/tslib/tslib.es6.mjs
-  var extendStatics2 = function(d, b) {
-    extendStatics2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
-      d2.__proto__ = b2;
-    } || function(d2, b2) {
-      for (var p in b2)
-        if (Object.prototype.hasOwnProperty.call(b2, p))
-          d2[p] = b2[p];
+  var extendStatics2 = function(d3, b3) {
+    extendStatics2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b4) {
+      d4.__proto__ = b4;
+    } || function(d4, b4) {
+      for (var p4 in b4)
+        if (Object.prototype.hasOwnProperty.call(b4, p4))
+          d4[p4] = b4[p4];
     };
-    return extendStatics2(d, b);
+    return extendStatics2(d3, b3);
   };
-  function __extends2(d, b) {
-    if (typeof b !== "function" && b !== null)
-      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics2(d, b);
+  function __extends2(d3, b3) {
+    if (typeof b3 !== "function" && b3 !== null)
+      throw new TypeError("Class extends value " + String(b3) + " is not a constructor or null");
+    extendStatics2(d3, b3);
     function __() {
-      this.constructor = d;
+      this.constructor = d3;
     }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    d3.prototype = b3 === null ? Object.create(b3) : (__.prototype = b3.prototype, new __());
   }
-  function __awaiter2(thisArg, _arguments, P, generator) {
+  function __awaiter2(thisArg, _arguments, P3, generator) {
     function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve) {
+      return value instanceof P3 ? value : new P3(function(resolve) {
         resolve(value);
       });
     }
-    return new (P || (P = Promise))(function(resolve, reject) {
+    return new (P3 || (P3 = Promise))(function(resolve, reject) {
       function fulfilled(value) {
         try {
           step(generator.next(value));
-        } catch (e) {
-          reject(e);
+        } catch (e4) {
+          reject(e4);
         }
       }
       function rejected(value) {
         try {
           step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
+        } catch (e4) {
+          reject(e4);
         }
       }
       function step(result) {
@@ -2167,154 +1883,154 @@
     });
   }
   function __generator2(thisArg, body) {
-    var _ = { label: 0, sent: function() {
-      if (t[0] & 1)
-        throw t[1];
-      return t[1];
-    }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    var _3 = { label: 0, sent: function() {
+      if (t5[0] & 1)
+        throw t5[1];
+      return t5[1];
+    }, trys: [], ops: [] }, f3, y3, t5, g2;
+    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
       return this;
-    }), g;
-    function verb(n) {
-      return function(v) {
-        return step([n, v]);
+    }), g2;
+    function verb(n4) {
+      return function(v3) {
+        return step([n4, v3]);
       };
     }
     function step(op) {
-      if (f)
+      if (f3)
         throw new TypeError("Generator is already executing.");
-      while (g && (g = 0, op[0] && (_ = 0)), _)
+      while (g2 && (g2 = 0, op[0] && (_3 = 0)), _3)
         try {
-          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-            return t;
-          if (y = 0, t)
-            op = [op[0] & 2, t.value];
+          if (f3 = 1, y3 && (t5 = op[0] & 2 ? y3["return"] : op[0] ? y3["throw"] || ((t5 = y3["return"]) && t5.call(y3), 0) : y3.next) && !(t5 = t5.call(y3, op[1])).done)
+            return t5;
+          if (y3 = 0, t5)
+            op = [op[0] & 2, t5.value];
           switch (op[0]) {
             case 0:
             case 1:
-              t = op;
+              t5 = op;
               break;
             case 4:
-              _.label++;
+              _3.label++;
               return { value: op[1], done: false };
             case 5:
-              _.label++;
-              y = op[1];
+              _3.label++;
+              y3 = op[1];
               op = [0];
               continue;
             case 7:
-              op = _.ops.pop();
-              _.trys.pop();
+              op = _3.ops.pop();
+              _3.trys.pop();
               continue;
             default:
-              if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                _ = 0;
+              if (!(t5 = _3.trys, t5 = t5.length > 0 && t5[t5.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _3 = 0;
                 continue;
               }
-              if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-                _.label = op[1];
+              if (op[0] === 3 && (!t5 || op[1] > t5[0] && op[1] < t5[3])) {
+                _3.label = op[1];
                 break;
               }
-              if (op[0] === 6 && _.label < t[1]) {
-                _.label = t[1];
-                t = op;
+              if (op[0] === 6 && _3.label < t5[1]) {
+                _3.label = t5[1];
+                t5 = op;
                 break;
               }
-              if (t && _.label < t[2]) {
-                _.label = t[2];
-                _.ops.push(op);
+              if (t5 && _3.label < t5[2]) {
+                _3.label = t5[2];
+                _3.ops.push(op);
                 break;
               }
-              if (t[2])
-                _.ops.pop();
-              _.trys.pop();
+              if (t5[2])
+                _3.ops.pop();
+              _3.trys.pop();
               continue;
           }
-          op = body.call(thisArg, _);
-        } catch (e) {
-          op = [6, e];
-          y = 0;
+          op = body.call(thisArg, _3);
+        } catch (e4) {
+          op = [6, e4];
+          y3 = 0;
         } finally {
-          f = t = 0;
+          f3 = t5 = 0;
         }
       if (op[0] & 5)
         throw op[1];
       return { value: op[0] ? op[1] : void 0, done: true };
     }
   }
-  function __values2(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m)
-      return m.call(o);
-    if (o && typeof o.length === "number")
+  function __values2(o4) {
+    var s4 = typeof Symbol === "function" && Symbol.iterator, m3 = s4 && o4[s4], i4 = 0;
+    if (m3)
+      return m3.call(o4);
+    if (o4 && typeof o4.length === "number")
       return {
         next: function() {
-          if (o && i >= o.length)
-            o = void 0;
-          return { value: o && o[i++], done: !o };
+          if (o4 && i4 >= o4.length)
+            o4 = void 0;
+          return { value: o4 && o4[i4++], done: !o4 };
         }
       };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    throw new TypeError(s4 ? "Object is not iterable." : "Symbol.iterator is not defined.");
   }
-  function __read2(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m)
-      return o;
-    var i = m.call(o), r, ar = [], e;
+  function __read2(o4, n4) {
+    var m3 = typeof Symbol === "function" && o4[Symbol.iterator];
+    if (!m3)
+      return o4;
+    var i4 = m3.call(o4), r3, ar = [], e4;
     try {
-      while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-        ar.push(r.value);
+      while ((n4 === void 0 || n4-- > 0) && !(r3 = i4.next()).done)
+        ar.push(r3.value);
     } catch (error) {
-      e = { error };
+      e4 = { error };
     } finally {
       try {
-        if (r && !r.done && (m = i["return"]))
-          m.call(i);
+        if (r3 && !r3.done && (m3 = i4["return"]))
+          m3.call(i4);
       } finally {
-        if (e)
-          throw e.error;
+        if (e4)
+          throw e4.error;
       }
     }
     return ar;
   }
   function __spreadArray2(to, from2, pack) {
     if (pack || arguments.length === 2)
-      for (var i = 0, l = from2.length, ar; i < l; i++) {
-        if (ar || !(i in from2)) {
+      for (var i4 = 0, l4 = from2.length, ar; i4 < l4; i4++) {
+        if (ar || !(i4 in from2)) {
           if (!ar)
-            ar = Array.prototype.slice.call(from2, 0, i);
-          ar[i] = from2[i];
+            ar = Array.prototype.slice.call(from2, 0, i4);
+          ar[i4] = from2[i4];
         }
       }
     return to.concat(ar || Array.prototype.slice.call(from2));
   }
-  function __await2(v) {
-    return this instanceof __await2 ? (this.v = v, this) : new __await2(v);
+  function __await2(v3) {
+    return this instanceof __await2 ? (this.v = v3, this) : new __await2(v3);
   }
   function __asyncGenerator2(thisArg, _arguments, generator) {
     if (!Symbol.asyncIterator)
       throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+    var g2 = generator.apply(thisArg, _arguments || []), i4, q3 = [];
+    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
       return this;
-    }, i;
-    function verb(n) {
-      if (g[n])
-        i[n] = function(v) {
-          return new Promise(function(a, b) {
-            q.push([n, v, a, b]) > 1 || resume(n, v);
+    }, i4;
+    function verb(n4) {
+      if (g2[n4])
+        i4[n4] = function(v3) {
+          return new Promise(function(a4, b3) {
+            q3.push([n4, v3, a4, b3]) > 1 || resume(n4, v3);
           });
         };
     }
-    function resume(n, v) {
+    function resume(n4, v3) {
       try {
-        step(g[n](v));
-      } catch (e) {
-        settle(q[0][3], e);
+        step(g2[n4](v3));
+      } catch (e4) {
+        settle(q3[0][3], e4);
       }
     }
-    function step(r) {
-      r.value instanceof __await2 ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    function step(r3) {
+      r3.value instanceof __await2 ? Promise.resolve(r3.value.v).then(fulfill, reject) : settle(q3[0][2], r3);
     }
     function fulfill(value) {
       resume("next", value);
@@ -2322,28 +2038,28 @@
     function reject(value) {
       resume("throw", value);
     }
-    function settle(f, v) {
-      if (f(v), q.shift(), q.length)
-        resume(q[0][0], q[0][1]);
+    function settle(f3, v3) {
+      if (f3(v3), q3.shift(), q3.length)
+        resume(q3[0][0], q3[0][1]);
     }
   }
-  function __asyncValues2(o) {
+  function __asyncValues2(o4) {
     if (!Symbol.asyncIterator)
       throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values2 === "function" ? __values2(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+    var m3 = o4[Symbol.asyncIterator], i4;
+    return m3 ? m3.call(o4) : (o4 = typeof __values2 === "function" ? __values2(o4) : o4[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
       return this;
-    }, i);
-    function verb(n) {
-      i[n] = o[n] && function(v) {
+    }, i4);
+    function verb(n4) {
+      i4[n4] = o4[n4] && function(v3) {
         return new Promise(function(resolve, reject) {
-          v = o[n](v), settle(resolve, reject, v.done, v.value);
+          v3 = o4[n4](v3), settle(resolve, reject, v3.done, v3.value);
         });
       };
     }
-    function settle(resolve, reject, d, v) {
-      Promise.resolve(v).then(function(v2) {
-        resolve({ value: v2, done: d });
+    function settle(resolve, reject, d3, v3) {
+      Promise.resolve(v3).then(function(v4) {
+        resolve({ value: v4, done: d3 });
       }, reject);
     }
   }
@@ -2355,9 +2071,9 @@
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/createErrorClass.js
   function createErrorClass2(createImpl) {
-    var _super = function(instance3) {
-      Error.call(instance3);
-      instance3.stack = new Error().stack;
+    var _super = function(instance) {
+      Error.call(instance);
+      instance.stack = new Error().stack;
     };
     var ctorFunc = createImpl(_super);
     ctorFunc.prototype = Object.create(Error.prototype);
@@ -2369,8 +2085,8 @@
   var UnsubscriptionError2 = createErrorClass2(function(_super) {
     return function UnsubscriptionErrorImpl(errors) {
       _super(this);
-      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
-        return i + 1 + ") " + err.toString();
+      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i4) {
+        return i4 + 1 + ") " + err.toString();
       }).join("\n  ") : "";
       this.name = "UnsubscriptionError";
       this.errors = errors;
@@ -2426,8 +2142,8 @@
         if (isFunction2(initialFinalizer)) {
           try {
             initialFinalizer();
-          } catch (e) {
-            errors = e instanceof UnsubscriptionError2 ? e.errors : [e];
+          } catch (e4) {
+            errors = e4 instanceof UnsubscriptionError2 ? e4.errors : [e4];
           }
         }
         var _finalizers = this._finalizers;
@@ -2504,9 +2220,9 @@
       }
     };
     Subscription6.EMPTY = function() {
-      var empty2 = new Subscription6();
-      empty2.closed = true;
-      return empty2;
+      var empty = new Subscription6();
+      empty.closed = true;
+      return empty;
     }();
     return Subscription6;
   }();
@@ -2564,7 +2280,7 @@
   }
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/noop.js
-  function noop3() {
+  function noop2() {
   }
 
   // ../core/node_modules/rxjs/dist/esm5/internal/NotificationFactories.js
@@ -2772,9 +2488,9 @@
   }
   var EMPTY_OBSERVER2 = {
     closed: true,
-    next: noop3,
+    next: noop2,
     error: defaultErrorHandler2,
-    complete: noop3
+    complete: noop2
   };
 
   // ../core/node_modules/rxjs/dist/esm5/internal/symbol/observable.js
@@ -2783,14 +2499,14 @@
   }();
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/identity.js
-  function identity3(x) {
-    return x;
+  function identity2(x2) {
+    return x2;
   }
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/pipe.js
   function pipeFromArray2(fns) {
     if (fns.length === 0) {
-      return identity3;
+      return identity2;
     }
     if (fns.length === 1) {
       return fns[0];
@@ -2869,8 +2585,8 @@
       promiseCtor = getPromiseCtor2(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
         var value;
-        _this.subscribe(function(x) {
-          return value = x;
+        _this.subscribe(function(x2) {
+          return value = x2;
         }, function(err) {
           return reject(err);
         }, function() {
@@ -2898,12 +2614,12 @@
   function hasLift2(source) {
     return isFunction2(source === null || source === void 0 ? void 0 : source.lift);
   }
-  function operate2(init2) {
+  function operate2(init) {
     return function(source) {
       if (hasLift2(source)) {
         return source.lift(function(liftedSource) {
           try {
-            return init2(liftedSource, this);
+            return init(liftedSource, this);
           } catch (err) {
             this.error(err);
           }
@@ -3127,198 +2843,6 @@
     return AnonymousSubject3;
   }(Subject2);
 
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/dateTimestampProvider.js
-  var dateTimestampProvider = {
-    now: function() {
-      return (dateTimestampProvider.delegate || Date).now();
-    },
-    delegate: void 0
-  };
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/Action.js
-  var Action = function(_super) {
-    __extends2(Action2, _super);
-    function Action2(scheduler, work) {
-      return _super.call(this) || this;
-    }
-    Action2.prototype.schedule = function(state, delay) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-      return this;
-    };
-    return Action2;
-  }(Subscription2);
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/intervalProvider.js
-  var intervalProvider = {
-    setInterval: function(handler, timeout) {
-      var args = [];
-      for (var _i = 2; _i < arguments.length; _i++) {
-        args[_i - 2] = arguments[_i];
-      }
-      var delegate = intervalProvider.delegate;
-      if (delegate === null || delegate === void 0 ? void 0 : delegate.setInterval) {
-        return delegate.setInterval.apply(delegate, __spreadArray2([handler, timeout], __read2(args)));
-      }
-      return setInterval.apply(void 0, __spreadArray2([handler, timeout], __read2(args)));
-    },
-    clearInterval: function(handle) {
-      var delegate = intervalProvider.delegate;
-      return ((delegate === null || delegate === void 0 ? void 0 : delegate.clearInterval) || clearInterval)(handle);
-    },
-    delegate: void 0
-  };
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/AsyncAction.js
-  var AsyncAction = function(_super) {
-    __extends2(AsyncAction2, _super);
-    function AsyncAction2(scheduler, work) {
-      var _this = _super.call(this, scheduler, work) || this;
-      _this.scheduler = scheduler;
-      _this.work = work;
-      _this.pending = false;
-      return _this;
-    }
-    AsyncAction2.prototype.schedule = function(state, delay) {
-      var _a;
-      if (delay === void 0) {
-        delay = 0;
-      }
-      if (this.closed) {
-        return this;
-      }
-      this.state = state;
-      var id = this.id;
-      var scheduler = this.scheduler;
-      if (id != null) {
-        this.id = this.recycleAsyncId(scheduler, id, delay);
-      }
-      this.pending = true;
-      this.delay = delay;
-      this.id = (_a = this.id) !== null && _a !== void 0 ? _a : this.requestAsyncId(scheduler, this.id, delay);
-      return this;
-    };
-    AsyncAction2.prototype.requestAsyncId = function(scheduler, _id, delay) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-      return intervalProvider.setInterval(scheduler.flush.bind(scheduler, this), delay);
-    };
-    AsyncAction2.prototype.recycleAsyncId = function(_scheduler, id, delay) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-      if (delay != null && this.delay === delay && this.pending === false) {
-        return id;
-      }
-      if (id != null) {
-        intervalProvider.clearInterval(id);
-      }
-      return void 0;
-    };
-    AsyncAction2.prototype.execute = function(state, delay) {
-      if (this.closed) {
-        return new Error("executing a cancelled action");
-      }
-      this.pending = false;
-      var error = this._execute(state, delay);
-      if (error) {
-        return error;
-      } else if (this.pending === false && this.id != null) {
-        this.id = this.recycleAsyncId(this.scheduler, this.id, null);
-      }
-    };
-    AsyncAction2.prototype._execute = function(state, _delay) {
-      var errored = false;
-      var errorValue;
-      try {
-        this.work(state);
-      } catch (e) {
-        errored = true;
-        errorValue = e ? e : new Error("Scheduled action threw falsy error");
-      }
-      if (errored) {
-        this.unsubscribe();
-        return errorValue;
-      }
-    };
-    AsyncAction2.prototype.unsubscribe = function() {
-      if (!this.closed) {
-        var _a = this, id = _a.id, scheduler = _a.scheduler;
-        var actions = scheduler.actions;
-        this.work = this.state = this.scheduler = null;
-        this.pending = false;
-        arrRemove2(actions, this);
-        if (id != null) {
-          this.id = this.recycleAsyncId(scheduler, id, null);
-        }
-        this.delay = null;
-        _super.prototype.unsubscribe.call(this);
-      }
-    };
-    return AsyncAction2;
-  }(Action);
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/Scheduler.js
-  var Scheduler = function() {
-    function Scheduler2(schedulerActionCtor, now2) {
-      if (now2 === void 0) {
-        now2 = Scheduler2.now;
-      }
-      this.schedulerActionCtor = schedulerActionCtor;
-      this.now = now2;
-    }
-    Scheduler2.prototype.schedule = function(work, delay, state) {
-      if (delay === void 0) {
-        delay = 0;
-      }
-      return new this.schedulerActionCtor(this, work).schedule(state, delay);
-    };
-    Scheduler2.now = dateTimestampProvider.now;
-    return Scheduler2;
-  }();
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/AsyncScheduler.js
-  var AsyncScheduler = function(_super) {
-    __extends2(AsyncScheduler2, _super);
-    function AsyncScheduler2(SchedulerAction, now2) {
-      if (now2 === void 0) {
-        now2 = Scheduler.now;
-      }
-      var _this = _super.call(this, SchedulerAction, now2) || this;
-      _this.actions = [];
-      _this._active = false;
-      return _this;
-    }
-    AsyncScheduler2.prototype.flush = function(action) {
-      var actions = this.actions;
-      if (this._active) {
-        actions.push(action);
-        return;
-      }
-      var error;
-      this._active = true;
-      do {
-        if (error = action.execute(action.state, action.delay)) {
-          break;
-        }
-      } while (action = actions.shift());
-      this._active = false;
-      if (error) {
-        while (action = actions.shift()) {
-          action.unsubscribe();
-        }
-        throw error;
-      }
-    };
-    return AsyncScheduler2;
-  }(Scheduler);
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/scheduler/async.js
-  var asyncScheduler = new AsyncScheduler(AsyncAction);
-  var async = asyncScheduler;
-
   // ../core/node_modules/rxjs/dist/esm5/internal/observable/empty.js
   var EMPTY = new Observable2(function(subscriber) {
     return subscriber.complete();
@@ -3344,8 +2868,8 @@
   }
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/isArrayLike.js
-  var isArrayLike2 = function(x) {
-    return x && typeof x.length === "number" && typeof x !== "function";
+  var isArrayLike2 = function(x2) {
+    return x2 && typeof x2.length === "number" && typeof x2 !== "function";
   };
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/isPromise.js
@@ -3465,8 +2989,8 @@
   }
   function fromArrayLike2(array) {
     return new Observable2(function(subscriber) {
-      for (var i = 0; i < array.length && !subscriber.closed; i++) {
-        subscriber.next(array[i]);
+      for (var i4 = 0; i4 < array.length && !subscriber.closed; i4++) {
+        subscriber.next(array[i4]);
       }
       subscriber.complete();
     });
@@ -3641,12 +3165,12 @@
   // ../core/node_modules/rxjs/dist/esm5/internal/scheduled/scheduleArray.js
   function scheduleArray(input, scheduler) {
     return new Observable2(function(subscriber) {
-      var i = 0;
+      var i4 = 0;
       return scheduler.schedule(function() {
-        if (i === input.length) {
+        if (i4 === input.length) {
           subscriber.complete();
         } else {
-          subscriber.next(input[i++]);
+          subscriber.next(input[i4++]);
           if (!subscriber.closed) {
             this.schedule();
           }
@@ -3771,11 +3295,6 @@
     });
   }
 
-  // ../core/node_modules/rxjs/dist/esm5/internal/util/isDate.js
-  function isValidDate(value) {
-    return value instanceof Date && !isNaN(value);
-  }
-
   // ../core/node_modules/rxjs/dist/esm5/internal/operators/map.js
   function map(project, thisArg) {
     return operate2(function(source, subscriber) {
@@ -3826,8 +3345,8 @@
 
   // ../core/node_modules/rxjs/dist/esm5/internal/util/createObject.js
   function createObject(keys, values) {
-    return keys.reduce(function(result, key, i) {
-      return result[key] = values[i], result;
+    return keys.reduce(function(result, key, i4) {
+      return result[key] = values[i4], result;
     }, {});
   }
 
@@ -3845,12 +3364,12 @@
     }
     var result = new Observable2(combineLatestInit(observables, scheduler, keys ? function(values) {
       return createObject(keys, values);
-    } : identity3));
+    } : identity2));
     return resultSelector ? result.pipe(mapOneOrManyArgs(resultSelector)) : result;
   }
   function combineLatestInit(observables, scheduler, valueTransform) {
     if (valueTransform === void 0) {
-      valueTransform = identity3;
+      valueTransform = identity2;
     }
     return function(subscriber) {
       maybeSchedule(scheduler, function() {
@@ -3858,12 +3377,12 @@
         var values = new Array(length);
         var active = length;
         var remainingFirstValues = length;
-        var _loop_1 = function(i2) {
+        var _loop_1 = function(i5) {
           maybeSchedule(scheduler, function() {
-            var source = from(observables[i2], scheduler);
+            var source = from(observables[i5], scheduler);
             var hasFirstValue = false;
             source.subscribe(createOperatorSubscriber2(subscriber, function(value) {
-              values[i2] = value;
+              values[i5] = value;
               if (!hasFirstValue) {
                 hasFirstValue = true;
                 remainingFirstValues--;
@@ -3878,8 +3397,8 @@
             }));
           }, subscriber);
         };
-        for (var i = 0; i < length; i++) {
-          _loop_1(i);
+        for (var i4 = 0; i4 < length; i4++) {
+          _loop_1(i4);
         }
       }, subscriber);
     };
@@ -3958,10 +3477,10 @@
       concurrent = Infinity;
     }
     if (isFunction2(resultSelector)) {
-      return mergeMap(function(a, i) {
-        return map(function(b, ii) {
-          return resultSelector(a, b, i, ii);
-        })(innerFrom2(project(a, i)));
+      return mergeMap(function(a4, i4) {
+        return map(function(b3, ii) {
+          return resultSelector(a4, b3, i4, ii);
+        })(innerFrom2(project(a4, i4)));
       }, concurrent);
     } else if (typeof resultSelector === "number") {
       concurrent = resultSelector;
@@ -3976,42 +3495,7 @@
     if (concurrent === void 0) {
       concurrent = Infinity;
     }
-    return mergeMap(identity3, concurrent);
-  }
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/observable/timer.js
-  function timer(dueTime, intervalOrScheduler, scheduler) {
-    if (dueTime === void 0) {
-      dueTime = 0;
-    }
-    if (scheduler === void 0) {
-      scheduler = async;
-    }
-    var intervalDuration = -1;
-    if (intervalOrScheduler != null) {
-      if (isScheduler(intervalOrScheduler)) {
-        scheduler = intervalOrScheduler;
-      } else {
-        intervalDuration = intervalOrScheduler;
-      }
-    }
-    return new Observable2(function(subscriber) {
-      var due = isValidDate(dueTime) ? +dueTime - scheduler.now() : dueTime;
-      if (due < 0) {
-        due = 0;
-      }
-      var n = 0;
-      return scheduler.schedule(function() {
-        if (!subscriber.closed) {
-          subscriber.next(n++);
-          if (0 <= intervalDuration) {
-            this.schedule(void 0, intervalDuration);
-          } else {
-            subscriber.complete();
-          }
-        }
-      }, due);
-    });
+    return mergeMap(identity2, concurrent);
   }
 
   // ../core/node_modules/rxjs/dist/esm5/internal/observable/merge.js
@@ -4064,61 +3548,7 @@
         }
         (_b = tapObserver.finalize) === null || _b === void 0 ? void 0 : _b.call(tapObserver);
       }));
-    }) : identity3;
-  }
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/operators/throttle.js
-  function throttle(durationSelector, config3) {
-    return operate2(function(source, subscriber) {
-      var _a = config3 !== null && config3 !== void 0 ? config3 : {}, _b = _a.leading, leading = _b === void 0 ? true : _b, _c = _a.trailing, trailing = _c === void 0 ? false : _c;
-      var hasValue = false;
-      var sendValue = null;
-      var throttled = null;
-      var isComplete = false;
-      var endThrottling = function() {
-        throttled === null || throttled === void 0 ? void 0 : throttled.unsubscribe();
-        throttled = null;
-        if (trailing) {
-          send();
-          isComplete && subscriber.complete();
-        }
-      };
-      var cleanupThrottling = function() {
-        throttled = null;
-        isComplete && subscriber.complete();
-      };
-      var startThrottle = function(value) {
-        return throttled = innerFrom2(durationSelector(value)).subscribe(createOperatorSubscriber2(subscriber, endThrottling, cleanupThrottling));
-      };
-      var send = function() {
-        if (hasValue) {
-          hasValue = false;
-          var value = sendValue;
-          sendValue = null;
-          subscriber.next(value);
-          !isComplete && startThrottle(value);
-        }
-      };
-      source.subscribe(createOperatorSubscriber2(subscriber, function(value) {
-        hasValue = true;
-        sendValue = value;
-        !(throttled && !throttled.closed) && (leading ? send() : startThrottle(value));
-      }, function() {
-        isComplete = true;
-        !(trailing && hasValue && throttled && !throttled.closed) && subscriber.complete();
-      }));
-    });
-  }
-
-  // ../core/node_modules/rxjs/dist/esm5/internal/operators/throttleTime.js
-  function throttleTime(duration, scheduler, config3) {
-    if (scheduler === void 0) {
-      scheduler = asyncScheduler;
-    }
-    var duration$ = timer(duration, scheduler);
-    return throttle(function() {
-      return duration$;
-    }, config3);
+    }) : identity2;
   }
 
   // ../core/node_modules/uid/dist/index.mjs
@@ -4129,9 +3559,9 @@
   while (IDX--)
     HEX[IDX] = (IDX + 256).toString(16).substring(1);
   function uid(len) {
-    var i = 0, tmp = len || 11;
+    var i4 = 0, tmp = len || 11;
     if (!BUFFER || IDX + tmp > SIZE * 2) {
-      for (BUFFER = "", IDX = 0; i < SIZE; i++) {
+      for (BUFFER = "", IDX = 0; i4 < SIZE; i4++) {
         BUFFER += HEX[Math.random() * 256 | 0];
       }
     }
@@ -4147,7 +3577,6 @@
         createConnection,
         serverConnection$
       ] = await context4.createRtcConnection(context4.configStorage);
-      console.log("got connexion");
       initiateBackendHandlers(context4.offlineModeGameStorage, serverConnection$);
       return createConnection();
     } else {
@@ -4167,10 +3596,10 @@
       read() {
         return { ...config3 };
       },
-      save(update2) {
+      save(update) {
         config3 = {
           ...config3,
-          ...update2
+          ...update
         };
         _config$.next(config3);
       },
@@ -4190,10 +3619,10 @@
       read() {
         return { ...game };
       },
-      save(update2) {
+      save(update) {
         game = {
           ...game,
-          ...update2
+          ...update
         };
         _game$.next(game);
       },
@@ -4202,1245 +3631,6 @@
       }
     };
   }
-
-  // ../core/node_modules/svelte/src/runtime/internal/disclose-version/index.js
-  if (typeof window !== "undefined")
-    (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
-
-  // ../core/src/manual-rtc.svelte.js
-  function add_css(target2) {
-    append_styles(target2, "svelte-16q9ix0", "fieldset.svelte-16q9ix0{display:inline;margin:0.2rem}");
-  }
-  function create_if_block(ctx) {
-    let div;
-    let fieldset;
-    let legend;
-    let t1;
-    let t2;
-    let if_block0 = (
-      /*offlineModeCharacter*/
-      ctx[0] === "None" /* None */ && create_if_block_3(ctx)
-    );
-    let if_block1 = (
-      /*offlineModeCharacter*/
-      ctx[0] !== "None" /* None */ && create_if_block_1(ctx)
-    );
-    return {
-      c() {
-        div = element("div");
-        fieldset = element("fieldset");
-        legend = element("legend");
-        legend.textContent = "Connexion WebRTC";
-        t1 = space();
-        if (if_block0)
-          if_block0.c();
-        t2 = space();
-        if (if_block1)
-          if_block1.c();
-        attr(fieldset, "class", "svelte-16q9ix0");
-        set_style(div, "background-color", "white");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-        append(div, fieldset);
-        append(fieldset, legend);
-        append(fieldset, t1);
-        if (if_block0)
-          if_block0.m(fieldset, null);
-        append(fieldset, t2);
-        if (if_block1)
-          if_block1.m(fieldset, null);
-      },
-      p(ctx2, dirty) {
-        if (
-          /*offlineModeCharacter*/
-          ctx2[0] === "None" /* None */
-        ) {
-          if (if_block0) {
-            if_block0.p(ctx2, dirty);
-          } else {
-            if_block0 = create_if_block_3(ctx2);
-            if_block0.c();
-            if_block0.m(fieldset, t2);
-          }
-        } else if (if_block0) {
-          if_block0.d(1);
-          if_block0 = null;
-        }
-        if (
-          /*offlineModeCharacter*/
-          ctx2[0] !== "None" /* None */
-        ) {
-          if (if_block1) {
-            if_block1.p(ctx2, dirty);
-          } else {
-            if_block1 = create_if_block_1(ctx2);
-            if_block1.c();
-            if_block1.m(fieldset, null);
-          }
-        } else if (if_block1) {
-          if_block1.d(1);
-          if_block1 = null;
-        }
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        if (if_block0)
-          if_block0.d();
-        if (if_block1)
-          if_block1.d();
-      }
-    };
-  }
-  function create_if_block_3(ctx) {
-    let fieldset0;
-    let legend0;
-    let t1;
-    let input;
-    let t2;
-    let fieldset1;
-    let legend1;
-    let t4;
-    let button0;
-    let t6;
-    let button1;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        fieldset0 = element("fieldset");
-        legend0 = element("legend");
-        legend0.textContent = "Serveur STUN (Si connexion via internet)";
-        t1 = space();
-        input = element("input");
-        t2 = space();
-        fieldset1 = element("fieldset");
-        legend1 = element("legend");
-        legend1.textContent = "Choix de votre joueur";
-        t4 = space();
-        button0 = element("button");
-        button0.textContent = "Joueur 1";
-        t6 = space();
-        button1 = element("button");
-        button1.textContent = "Joueur 2";
-        attr(input, "placeholder", "stun:<serveur>:<port>");
-        attr(fieldset0, "class", "svelte-16q9ix0");
-        attr(fieldset1, "class", "svelte-16q9ix0");
-      },
-      m(target2, anchor) {
-        insert(target2, fieldset0, anchor);
-        append(fieldset0, legend0);
-        append(fieldset0, t1);
-        append(fieldset0, input);
-        insert(target2, t2, anchor);
-        insert(target2, fieldset1, anchor);
-        append(fieldset1, legend1);
-        append(fieldset1, t4);
-        append(fieldset1, button0);
-        append(fieldset1, t6);
-        append(fieldset1, button1);
-        if (!mounted) {
-          dispose = [
-            listen(
-              input,
-              "change",
-              /*updateStunServer*/
-              ctx[4]
-            ),
-            listen(
-              button0,
-              "click",
-              /*click_handler*/
-              ctx[7]
-            ),
-            listen(
-              button1,
-              "click",
-              /*click_handler_1*/
-              ctx[8]
-            )
-          ];
-          mounted = true;
-        }
-      },
-      p: noop2,
-      d(detaching) {
-        if (detaching) {
-          detach(fieldset0);
-          detach(t2);
-          detach(fieldset1);
-        }
-        mounted = false;
-        run_all(dispose);
-      }
-    };
-  }
-  function create_if_block_1(ctx) {
-    let t;
-    let textarea;
-    let mounted;
-    let dispose;
-    let if_block = (
-      /*signalingEvents*/
-      ctx[2].length && create_if_block_2(ctx)
-    );
-    return {
-      c() {
-        if (if_block)
-          if_block.c();
-        t = space();
-        textarea = element("textarea");
-        attr(textarea, "placeholder", "Recevoir le signalement de l'autre joueur.");
-        set_style(textarea, "width", "10rem");
-      },
-      m(target2, anchor) {
-        if (if_block)
-          if_block.m(target2, anchor);
-        insert(target2, t, anchor);
-        insert(target2, textarea, anchor);
-        set_input_value(
-          textarea,
-          /*receivedSignalingEvents*/
-          ctx[1]
-        );
-        if (!mounted) {
-          dispose = [
-            listen(
-              textarea,
-              "paste",
-              /*receiveSignalingEvents*/
-              ctx[5]
-            ),
-            listen(
-              textarea,
-              "input",
-              /*textarea_input_handler*/
-              ctx[9]
-            )
-          ];
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (
-          /*signalingEvents*/
-          ctx2[2].length
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-          } else {
-            if_block = create_if_block_2(ctx2);
-            if_block.c();
-            if_block.m(t.parentNode, t);
-          }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
-        }
-        if (dirty & /*receivedSignalingEvents*/
-        2) {
-          set_input_value(
-            textarea,
-            /*receivedSignalingEvents*/
-            ctx2[1]
-          );
-        }
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(t);
-          detach(textarea);
-        }
-        if (if_block)
-          if_block.d(detaching);
-        mounted = false;
-        run_all(dispose);
-      }
-    };
-  }
-  function create_if_block_2(ctx) {
-    let div;
-    let button;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        div = element("div");
-        button = element("button");
-        button.textContent = "Copier mon signalement (\u26A0\uFE0F\xA0CONFIDENTIEL\xA0\u26A0\uFE0F, Adresse IP, routage r\xE9seau, ...)";
-        set_style(button, "width", "10rem");
-        attr(div, "class", "container");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-        append(div, button);
-        if (!mounted) {
-          dispose = listen(
-            button,
-            "click",
-            /*copySignalingEventToClipBoard*/
-            ctx[6]
-          );
-          mounted = true;
-        }
-      },
-      p: noop2,
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_fragment(ctx) {
-    let if_block_anchor;
-    let if_block = !/*manualRtcCompleted*/
-    ctx[3] && create_if_block(ctx);
-    return {
-      c() {
-        if (if_block)
-          if_block.c();
-        if_block_anchor = empty();
-      },
-      m(target2, anchor) {
-        if (if_block)
-          if_block.m(target2, anchor);
-        insert(target2, if_block_anchor, anchor);
-      },
-      p(ctx2, [dirty]) {
-        if (!/*manualRtcCompleted*/
-        ctx2[3]) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-          } else {
-            if_block = create_if_block(ctx2);
-            if_block.c();
-            if_block.m(if_block_anchor.parentNode, if_block_anchor);
-          }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
-        }
-      },
-      i: noop2,
-      o: noop2,
-      d(detaching) {
-        if (detaching) {
-          detach(if_block_anchor);
-        }
-        if (if_block)
-          if_block.d(detaching);
-      }
-    };
-  }
-  function instance($$self, $$props, $$invalidate) {
-    var __awaiter3 = this && this.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-          resolve(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    let receivedSignalingEvents;
-    let signalingEvents = [];
-    const context4 = getContext(defaultContextId);
-    const config3 = context4.configStorage.read();
-    let offlineModeCharacter = config3.offlineModeCharacter;
-    let manualRtcCompleted = false;
-    function updateStunServer(event) {
-      context4.configStorage.save({ stunServer: event.target.value });
-    }
-    outcomingSignaling$.subscribe((signalingEvent) => $$invalidate(2, signalingEvents = [...signalingEvents, signalingEvent]));
-    function receiveSignalingEvents() {
-      return __awaiter3(this, void 0, void 0, function* () {
-        setTimeout(
-          function() {
-            broadcastIncomingSignaling(JSON.parse(receivedSignalingEvents));
-            $$invalidate(1, receivedSignalingEvents = void 0);
-            if (offlineModeCharacter === "PlayerA" /* PlayerA */) {
-              $$invalidate(3, manualRtcCompleted = true);
-            }
-          },
-          10
-        );
-      });
-    }
-    function copySignalingEventToClipBoard() {
-      navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
-      $$invalidate(2, signalingEvents = []);
-      if (offlineModeCharacter === "PlayerB" /* PlayerB */) {
-        $$invalidate(3, manualRtcCompleted = true);
-      }
-    }
-    const click_handler = () => $$invalidate(0, offlineModeCharacter = "PlayerA" /* PlayerA */);
-    const click_handler_1 = () => $$invalidate(0, offlineModeCharacter = "PlayerB" /* PlayerB */);
-    function textarea_input_handler() {
-      receivedSignalingEvents = this.value;
-      $$invalidate(1, receivedSignalingEvents);
-    }
-    $$self.$$.update = () => {
-      if ($$self.$$.dirty & /*offlineModeCharacter*/
-      1) {
-        $:
-          context4.configStorage.save({ offlineModeCharacter });
-      }
-    };
-    return [
-      offlineModeCharacter,
-      receivedSignalingEvents,
-      signalingEvents,
-      manualRtcCompleted,
-      updateStunServer,
-      receiveSignalingEvents,
-      copySignalingEventToClipBoard,
-      click_handler,
-      click_handler_1,
-      textarea_input_handler
-    ];
-  }
-  var Manual_rtc = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, instance, create_fragment, safe_not_equal, {}, add_css);
-    }
-  };
-  var manual_rtc_svelte_default = Manual_rtc;
-
-  // ../core/src/playground.svelte.js
-  function create_if_block_13(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "Disconnected from server.";
-        attr(p, "class", "disconnectedFromServer");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_if_block_12(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "Attente d'une connexion.";
-        attr(p, "class", "disconnectedFromServer");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_if_block_11(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "aria-label", "title");
-        attr(div, "class", "title");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block2(ctx) {
-    let div1;
-    let div0;
-    let t0;
-    let t1;
-    let t2;
-    let t3;
-    let t4;
-    let t5;
-    let t6;
-    let t7;
-    let t8;
-    let t9;
-    let p;
-    let t10;
-    let if_block0 = (
-      /*game*/
-      ctx[2].playerA && !/*aWins*/
-      ctx[6] && !/*bWins*/
-      ctx[5] && create_if_block_10(ctx)
-    );
-    let if_block1 = (
-      /*game*/
-      ctx[2].playerB && !/*aWins*/
-      ctx[6] && !/*bWins*/
-      ctx[5] && create_if_block_9(ctx)
-    );
-    let if_block2 = (
-      /*game*/
-      ctx[2].playerA && /*aWins*/
-      ctx[6] && create_if_block_8(ctx)
-    );
-    let if_block3 = (
-      /*game*/
-      ctx[2].playerB && /*aWins*/
-      ctx[6] && create_if_block_7(ctx)
-    );
-    let if_block4 = (
-      /*game*/
-      ctx[2].playerA && /*bWins*/
-      ctx[5] && create_if_block_6(ctx)
-    );
-    let if_block5 = (
-      /*game*/
-      ctx[2].playerB && /*bWins*/
-      ctx[5] && create_if_block_5(ctx)
-    );
-    let if_block6 = (
-      /*game*/
-      ctx[2].state === "Hajime" /* Hajime */ && create_if_block_4(ctx)
-    );
-    let if_block7 = (
-      /*myCharacter*/
-      ctx[1] === "PlayerA" /* PlayerA */ && create_if_block_32(ctx)
-    );
-    let if_block8 = (
-      /*myCharacter*/
-      ctx[1] === "PlayerB" /* PlayerB */ && create_if_block_22(ctx)
-    );
-    let if_block9 = (
-      /*myCharacter*/
-      ctx[1] === "None" /* None */ && create_if_block_14(ctx)
-    );
-    return {
-      c() {
-        div1 = element("div");
-        div0 = element("div");
-        if (if_block0)
-          if_block0.c();
-        t0 = space();
-        if (if_block1)
-          if_block1.c();
-        t1 = space();
-        if (if_block2)
-          if_block2.c();
-        t2 = space();
-        if (if_block3)
-          if_block3.c();
-        t3 = space();
-        if (if_block4)
-          if_block4.c();
-        t4 = space();
-        if (if_block5)
-          if_block5.c();
-        t5 = space();
-        if (if_block6)
-          if_block6.c();
-        t6 = space();
-        if (if_block7)
-          if_block7.c();
-        t7 = space();
-        if (if_block8)
-          if_block8.c();
-        t8 = space();
-        if (if_block9)
-          if_block9.c();
-        t9 = space();
-        p = element("p");
-        t10 = text(
-          /*indication*/
-          ctx[4]
-        );
-        attr(div0, "aria-label", "player");
-        attr(div0, "class", "vue-player");
-        attr(p, "aria-label", "indication");
-        attr(p, "class", "indication");
-        attr(div1, "aria-label", "arena");
-        attr(div1, "class", "arena");
-      },
-      m(target2, anchor) {
-        insert(target2, div1, anchor);
-        append(div1, div0);
-        if (if_block0)
-          if_block0.m(div0, null);
-        append(div0, t0);
-        if (if_block1)
-          if_block1.m(div0, null);
-        append(div0, t1);
-        if (if_block2)
-          if_block2.m(div0, null);
-        append(div0, t2);
-        if (if_block3)
-          if_block3.m(div0, null);
-        append(div0, t3);
-        if (if_block4)
-          if_block4.m(div0, null);
-        append(div0, t4);
-        if (if_block5)
-          if_block5.m(div0, null);
-        append(div1, t5);
-        if (if_block6)
-          if_block6.m(div1, null);
-        append(div1, t6);
-        if (if_block7)
-          if_block7.m(div1, null);
-        append(div1, t7);
-        if (if_block8)
-          if_block8.m(div1, null);
-        append(div1, t8);
-        if (if_block9)
-          if_block9.m(div1, null);
-        append(div1, t9);
-        append(div1, p);
-        append(p, t10);
-      },
-      p(ctx2, dirty) {
-        if (
-          /*game*/
-          ctx2[2].playerA && !/*aWins*/
-          ctx2[6] && !/*bWins*/
-          ctx2[5]
-        ) {
-          if (if_block0) {
-          } else {
-            if_block0 = create_if_block_10(ctx2);
-            if_block0.c();
-            if_block0.m(div0, t0);
-          }
-        } else if (if_block0) {
-          if_block0.d(1);
-          if_block0 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].playerB && !/*aWins*/
-          ctx2[6] && !/*bWins*/
-          ctx2[5]
-        ) {
-          if (if_block1) {
-          } else {
-            if_block1 = create_if_block_9(ctx2);
-            if_block1.c();
-            if_block1.m(div0, t1);
-          }
-        } else if (if_block1) {
-          if_block1.d(1);
-          if_block1 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].playerA && /*aWins*/
-          ctx2[6]
-        ) {
-          if (if_block2) {
-          } else {
-            if_block2 = create_if_block_8(ctx2);
-            if_block2.c();
-            if_block2.m(div0, t2);
-          }
-        } else if (if_block2) {
-          if_block2.d(1);
-          if_block2 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].playerB && /*aWins*/
-          ctx2[6]
-        ) {
-          if (if_block3) {
-          } else {
-            if_block3 = create_if_block_7(ctx2);
-            if_block3.c();
-            if_block3.m(div0, t3);
-          }
-        } else if (if_block3) {
-          if_block3.d(1);
-          if_block3 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].playerA && /*bWins*/
-          ctx2[5]
-        ) {
-          if (if_block4) {
-          } else {
-            if_block4 = create_if_block_6(ctx2);
-            if_block4.c();
-            if_block4.m(div0, t4);
-          }
-        } else if (if_block4) {
-          if_block4.d(1);
-          if_block4 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].playerB && /*bWins*/
-          ctx2[5]
-        ) {
-          if (if_block5) {
-          } else {
-            if_block5 = create_if_block_5(ctx2);
-            if_block5.c();
-            if_block5.m(div0, null);
-          }
-        } else if (if_block5) {
-          if_block5.d(1);
-          if_block5 = null;
-        }
-        if (
-          /*game*/
-          ctx2[2].state === "Hajime" /* Hajime */
-        ) {
-          if (if_block6) {
-          } else {
-            if_block6 = create_if_block_4(ctx2);
-            if_block6.c();
-            if_block6.m(div1, t6);
-          }
-        } else if (if_block6) {
-          if_block6.d(1);
-          if_block6 = null;
-        }
-        if (
-          /*myCharacter*/
-          ctx2[1] === "PlayerA" /* PlayerA */
-        ) {
-          if (if_block7) {
-          } else {
-            if_block7 = create_if_block_32(ctx2);
-            if_block7.c();
-            if_block7.m(div1, t7);
-          }
-        } else if (if_block7) {
-          if_block7.d(1);
-          if_block7 = null;
-        }
-        if (
-          /*myCharacter*/
-          ctx2[1] === "PlayerB" /* PlayerB */
-        ) {
-          if (if_block8) {
-          } else {
-            if_block8 = create_if_block_22(ctx2);
-            if_block8.c();
-            if_block8.m(div1, t8);
-          }
-        } else if (if_block8) {
-          if_block8.d(1);
-          if_block8 = null;
-        }
-        if (
-          /*myCharacter*/
-          ctx2[1] === "None" /* None */
-        ) {
-          if (if_block9) {
-          } else {
-            if_block9 = create_if_block_14(ctx2);
-            if_block9.c();
-            if_block9.m(div1, t9);
-          }
-        } else if (if_block9) {
-          if_block9.d(1);
-          if_block9 = null;
-        }
-        if (dirty & /*indication*/
-        16)
-          set_data(
-            t10,
-            /*indication*/
-            ctx2[4]
-          );
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div1);
-        }
-        if (if_block0)
-          if_block0.d();
-        if (if_block1)
-          if_block1.d();
-        if (if_block2)
-          if_block2.d();
-        if (if_block3)
-          if_block3.d();
-        if (if_block4)
-          if_block4.d();
-        if (if_block5)
-          if_block5.d();
-        if (if_block6)
-          if_block6.d();
-        if (if_block7)
-          if_block7.d();
-        if (if_block8)
-          if_block8.d();
-        if (if_block9)
-          if_block9.d();
-      }
-    };
-  }
-  function create_if_block_10(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "aria-label", "playerA");
-        attr(div, "class", "playerA");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_9(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "aria-label", "playerB");
-        attr(div, "class", "playerB");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_8(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "class", "playerAwins");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_7(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "class", "playerBloses");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_6(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "class", "playerAloses");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_5(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        attr(div, "class", "playerBwins");
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function create_if_block_4(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "!!";
-        attr(p, "aria-label", "exclamationPoints");
-        attr(p, "class", "exclamationPoints");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_if_block_32(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "Joueur 1";
-        attr(p, "class", "playerADisplay");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_if_block_22(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "Joueur 2";
-        attr(p, "class", "playerBDisplay");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_if_block_14(ctx) {
-    let p;
-    return {
-      c() {
-        p = element("p");
-        p.textContent = "Spectateur";
-        attr(p, "class", "spectatorDisplay");
-      },
-      m(target2, anchor) {
-        insert(target2, p, anchor);
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(p);
-        }
-      }
-    };
-  }
-  function create_fragment2(ctx) {
-    let div;
-    let t0;
-    let t1;
-    let t2;
-    let mounted;
-    let dispose;
-    let if_block0 = (
-      /*disconnected*/
-      ctx[3] && create_if_block_13(ctx)
-    );
-    let if_block1 = !/*disconnected*/
-    ctx[3] && !/*game*/
-    ctx[2] && create_if_block_12(ctx);
-    let if_block2 = (
-      /*showTitle*/
-      ctx[7] && /*game*/
-      ctx[2] && create_if_block_11(ctx)
-    );
-    let if_block3 = !/*showTitle*/
-    ctx[7] && create_if_block2(ctx);
-    return {
-      c() {
-        div = element("div");
-        if (if_block0)
-          if_block0.c();
-        t0 = space();
-        if (if_block1)
-          if_block1.c();
-        t1 = space();
-        if (if_block2)
-          if_block2.c();
-        t2 = space();
-        if (if_block3)
-          if_block3.c();
-        attr(div, "class", "main");
-        attr(
-          div,
-          "data-testid",
-          /*dataTestid*/
-          ctx[0]
-        );
-      },
-      m(target2, anchor) {
-        insert(target2, div, anchor);
-        if (if_block0)
-          if_block0.m(div, null);
-        append(div, t0);
-        if (if_block1)
-          if_block1.m(div, null);
-        append(div, t1);
-        if (if_block2)
-          if_block2.m(div, null);
-        append(div, t2);
-        if (if_block3)
-          if_block3.m(div, null);
-        if (!mounted) {
-          dispose = [
-            listen(
-              div,
-              "click",
-              /*click_handler*/
-              ctx[10]
-            ),
-            listen(
-              div,
-              "keydown",
-              /*keydown_handler*/
-              ctx[11]
-            )
-          ];
-          mounted = true;
-        }
-      },
-      p(ctx2, [dirty]) {
-        if (
-          /*disconnected*/
-          ctx2[3]
-        ) {
-          if (if_block0) {
-          } else {
-            if_block0 = create_if_block_13(ctx2);
-            if_block0.c();
-            if_block0.m(div, t0);
-          }
-        } else if (if_block0) {
-          if_block0.d(1);
-          if_block0 = null;
-        }
-        if (!/*disconnected*/
-        ctx2[3] && !/*game*/
-        ctx2[2]) {
-          if (if_block1) {
-          } else {
-            if_block1 = create_if_block_12(ctx2);
-            if_block1.c();
-            if_block1.m(div, t1);
-          }
-        } else if (if_block1) {
-          if_block1.d(1);
-          if_block1 = null;
-        }
-        if (
-          /*showTitle*/
-          ctx2[7] && /*game*/
-          ctx2[2]
-        ) {
-          if (if_block2) {
-          } else {
-            if_block2 = create_if_block_11(ctx2);
-            if_block2.c();
-            if_block2.m(div, t2);
-          }
-        } else if (if_block2) {
-          if_block2.d(1);
-          if_block2 = null;
-        }
-        if (!/*showTitle*/
-        ctx2[7]) {
-          if (if_block3) {
-            if_block3.p(ctx2, dirty);
-          } else {
-            if_block3 = create_if_block2(ctx2);
-            if_block3.c();
-            if_block3.m(div, null);
-          }
-        } else if (if_block3) {
-          if_block3.d(1);
-          if_block3 = null;
-        }
-        if (dirty & /*dataTestid*/
-        1) {
-          attr(
-            div,
-            "data-testid",
-            /*dataTestid*/
-            ctx2[0]
-          );
-        }
-      },
-      i: noop2,
-      o: noop2,
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        if (if_block0)
-          if_block0.d();
-        if (if_block1)
-          if_block1.d();
-        if (if_block2)
-          if_block2.d();
-        if (if_block3)
-          if_block3.d();
-        mounted = false;
-        run_all(dispose);
-      }
-    };
-  }
-  function instance2($$self, $$props, $$invalidate) {
-    let showTitle;
-    let aWins;
-    let bWins;
-    let indication;
-    let { contextId = defaultContextId } = $$props;
-    let { dataTestid = void 0 } = $$props;
-    const context4 = getContext(contextId);
-    const waitConnection = createClientConnection(context4);
-    let myCharacter = null;
-    let game = null;
-    let disconnected = false;
-    let sub;
-    let connexionSub;
-    let controlsSub;
-    waitConnection.then(function(connection) {
-      sub = combineLatest(merge(from(getGame(connection)), observeGame(connection)), merge(from(getMyCharacter(connection)), observeMyCharacter(connection))).pipe(throttleTime(15, void 0, { leading: true, trailing: true })).subscribe(function([_game, _myCharacter]) {
-        $$invalidate(2, game = _game);
-        $$invalidate(1, myCharacter = _myCharacter);
-      });
-      connexionSub = connection.messages$.subscribe({
-        error: () => $$invalidate(3, disconnected = true),
-        complete: () => $$invalidate(3, disconnected = true)
-      });
-      controlsSub = interaction$.subscribe(function() {
-        if (game) {
-          interact(connection).catch(console.error);
-        }
-      });
-    });
-    const interaction$ = new Subject2();
-    onDestroy(function() {
-      sub === null || sub === void 0 ? void 0 : sub.unsubscribe();
-      connexionSub === null || connexionSub === void 0 ? void 0 : connexionSub.unsubscribe();
-      controlsSub === null || controlsSub === void 0 ? void 0 : controlsSub.unsubscribe();
-    });
-    const click_handler = () => interaction$.next(void 0);
-    const keydown_handler = () => interaction$.next(void 0);
-    $$self.$$set = ($$props2) => {
-      if ("contextId" in $$props2)
-        $$invalidate(9, contextId = $$props2.contextId);
-      if ("dataTestid" in $$props2)
-        $$invalidate(0, dataTestid = $$props2.dataTestid);
-    };
-    $$self.$$.update = () => {
-      if ($$self.$$.dirty & /*myCharacter, game*/
-      6) {
-        $:
-          $$invalidate(7, showTitle = isTitleShown(myCharacter, game));
-      }
-      if ($$self.$$.dirty & /*game*/
-      4) {
-        $:
-          $$invalidate(6, aWins = game !== null && (game.state === "AWins" /* AWins */ || game.state === "AWinsByFault" /* AWinsByFault */));
-      }
-      if ($$self.$$.dirty & /*game*/
-      4) {
-        $:
-          $$invalidate(5, bWins = game !== null && (game.state === "BWins" /* BWins */ || game.state === "BWinsByFault" /* BWinsByFault */));
-      }
-      if ($$self.$$.dirty & /*myCharacter, game*/
-      6) {
-        $:
-          $$invalidate(4, indication = computeIndication(myCharacter, game));
-      }
-    };
-    return [
-      dataTestid,
-      myCharacter,
-      game,
-      disconnected,
-      indication,
-      bWins,
-      aWins,
-      showTitle,
-      interaction$,
-      contextId,
-      click_handler,
-      keydown_handler
-    ];
-  }
-  var Playground = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { contextId: 9, dataTestid: 0 });
-    }
-  };
-  var playground_svelte_default = Playground;
-
-  // ../core/src/default-context-id.ts
-  var defaultContextId = "prince-duals-context";
 
   // ../core/src/game-state.ts
   var GameState = /* @__PURE__ */ ((GameState2) => {
@@ -5461,7 +3651,7 @@
   async function getGame(connection) {
     const requestId = uid();
     const response$ = connection.messages$.pipe(
-      map((m) => m.getGameResponse),
+      map((m3) => m3.getGameResponse),
       filter2(Boolean),
       filter2((response2) => response2.requestId === requestId)
     );
@@ -5476,7 +3666,7 @@
   function getGameHandle(gameStorage, connexions$) {
     return connexions$.subscribe(function(connection) {
       const subscription = connection.messages$.pipe(
-        map((m) => m.getGameRequest),
+        map((m3) => m3.getGameRequest),
         filter2(Boolean)
       ).subscribe({
         next(request) {
@@ -5499,9 +3689,9 @@
   async function getMyCharacter(connection) {
     const requestId = uid();
     const response$ = connection.messages$.pipe(
-      map((m) => m.getMyCharacterResponse),
+      map((m3) => m3.getMyCharacterResponse),
       filter2(Boolean),
-      filter2((r) => r.requestId === requestId)
+      filter2((r3) => r3.requestId === requestId)
     );
     const response = firstValueFrom2(response$);
     const request = { getMyCharacterRequest: { requestId } };
@@ -5512,18 +3702,20 @@
   // ../core/src/get-my-character-handle.ts
   function getMyCharacterHandle(gameStorage, connexions$) {
     return connexions$.pipe(
-      mergeMap((connection) => connection.messages$.pipe(
-        map((m) => m.getMyCharacterRequest),
-        filter2(Boolean),
-        tap(function(request) {
-          connection.send({
-            getMyCharacterResponse: {
-              requestId: request.requestId,
-              character: resolveMyCharacter(gameStorage, connection)
-            }
-          });
-        })
-      ))
+      mergeMap(function(connection) {
+        return connection.messages$.pipe(
+          map((m3) => m3.getMyCharacterRequest),
+          filter2(Boolean),
+          tap(function(request) {
+            connection.send({
+              getMyCharacterResponse: {
+                requestId: request.requestId,
+                character: resolveMyCharacter(gameStorage, connection)
+              }
+            });
+          })
+        );
+      })
     ).subscribe();
   }
 
@@ -5567,6 +3759,7 @@
     return connexions$.subscribe(function(connection) {
       const messageSub = connection.messages$.pipe(filter2((message) => Boolean(message.interactEmit))).subscribe({
         next() {
+          console.log("is interacting", connection.id);
           const game = gameStorage.read();
           switch (game.state) {
             case AWins:
@@ -5661,11 +3854,315 @@
     }
   }
 
+  // ../core/node_modules/preact/hooks/dist/hooks.module.js
+  var t3;
+  var r2;
+  var u2;
+  var i2;
+  var o2 = 0;
+  var f2 = [];
+  var c2 = [];
+  var e2 = l;
+  var a2 = e2.__b;
+  var v2 = e2.__r;
+  var l2 = e2.diffed;
+  var m2 = e2.__c;
+  var s2 = e2.unmount;
+  var d2 = e2.__;
+  function h2(n4, t5) {
+    e2.__h && e2.__h(r2, n4, o2 || t5), o2 = 0;
+    var u4 = r2.__H || (r2.__H = { __: [], __h: [] });
+    return n4 >= u4.__.length && u4.__.push({ __V: c2 }), u4.__[n4];
+  }
+  function p2(n4) {
+    return o2 = 1, y2(D, n4);
+  }
+  function y2(n4, u4, i4) {
+    var o4 = h2(t3++, 2);
+    if (o4.t = n4, !o4.__c && (o4.__ = [i4 ? i4(u4) : D(void 0, u4), function(n5) {
+      var t5 = o4.__N ? o4.__N[0] : o4.__[0], r3 = o4.t(t5, n5);
+      t5 !== r3 && (o4.__N = [r3, o4.__[1]], o4.__c.setState({}));
+    }], o4.__c = r2, !r2.u)) {
+      var f3 = function(n5, t5, r3) {
+        if (!o4.__c.__H)
+          return true;
+        var u5 = o4.__c.__H.__.filter(function(n6) {
+          return !!n6.__c;
+        });
+        if (u5.every(function(n6) {
+          return !n6.__N;
+        }))
+          return !c4 || c4.call(this, n5, t5, r3);
+        var i5 = false;
+        return u5.forEach(function(n6) {
+          if (n6.__N) {
+            var t6 = n6.__[0];
+            n6.__ = n6.__N, n6.__N = void 0, t6 !== n6.__[0] && (i5 = true);
+          }
+        }), !(!i5 && o4.__c.props === n5) && (!c4 || c4.call(this, n5, t5, r3));
+      };
+      r2.u = true;
+      var c4 = r2.shouldComponentUpdate, e4 = r2.componentWillUpdate;
+      r2.componentWillUpdate = function(n5, t5, r3) {
+        if (this.__e) {
+          var u5 = c4;
+          c4 = void 0, f3(n5, t5, r3), c4 = u5;
+        }
+        e4 && e4.call(this, n5, t5, r3);
+      }, r2.shouldComponentUpdate = f3;
+    }
+    return o4.__N || o4.__;
+  }
+  function _2(n4, u4) {
+    var i4 = h2(t3++, 3);
+    !e2.__s && C2(i4.__H, u4) && (i4.__ = n4, i4.i = u4, r2.__H.__h.push(i4));
+  }
+  function q2(n4, r3) {
+    var u4 = h2(t3++, 7);
+    return C2(u4.__H, r3) ? (u4.__V = n4(), u4.i = r3, u4.__h = n4, u4.__V) : u4.__;
+  }
+  function P2(n4) {
+    var u4 = r2.context[n4.__c], i4 = h2(t3++, 9);
+    return i4.c = n4, u4 ? (null == i4.__ && (i4.__ = true, u4.sub(r2)), u4.props.value) : n4.__;
+  }
+  function j2() {
+    for (var n4; n4 = f2.shift(); )
+      if (n4.__P && n4.__H)
+        try {
+          n4.__H.__h.forEach(z2), n4.__H.__h.forEach(B2), n4.__H.__h = [];
+        } catch (t5) {
+          n4.__H.__h = [], e2.__e(t5, n4.__v);
+        }
+  }
+  e2.__b = function(n4) {
+    r2 = null, a2 && a2(n4);
+  }, e2.__ = function(n4, t5) {
+    n4 && t5.__k && t5.__k.__m && (n4.__m = t5.__k.__m), d2 && d2(n4, t5);
+  }, e2.__r = function(n4) {
+    v2 && v2(n4), t3 = 0;
+    var i4 = (r2 = n4.__c).__H;
+    i4 && (u2 === r2 ? (i4.__h = [], r2.__h = [], i4.__.forEach(function(n5) {
+      n5.__N && (n5.__ = n5.__N), n5.__V = c2, n5.__N = n5.i = void 0;
+    })) : (i4.__h.forEach(z2), i4.__h.forEach(B2), i4.__h = [], t3 = 0)), u2 = r2;
+  }, e2.diffed = function(n4) {
+    l2 && l2(n4);
+    var t5 = n4.__c;
+    t5 && t5.__H && (t5.__H.__h.length && (1 !== f2.push(t5) && i2 === e2.requestAnimationFrame || ((i2 = e2.requestAnimationFrame) || w2)(j2)), t5.__H.__.forEach(function(n5) {
+      n5.i && (n5.__H = n5.i), n5.__V !== c2 && (n5.__ = n5.__V), n5.i = void 0, n5.__V = c2;
+    })), u2 = r2 = null;
+  }, e2.__c = function(n4, t5) {
+    t5.some(function(n5) {
+      try {
+        n5.__h.forEach(z2), n5.__h = n5.__h.filter(function(n6) {
+          return !n6.__ || B2(n6);
+        });
+      } catch (r3) {
+        t5.some(function(n6) {
+          n6.__h && (n6.__h = []);
+        }), t5 = [], e2.__e(r3, n5.__v);
+      }
+    }), m2 && m2(n4, t5);
+  }, e2.unmount = function(n4) {
+    s2 && s2(n4);
+    var t5, r3 = n4.__c;
+    r3 && r3.__H && (r3.__H.__.forEach(function(n5) {
+      try {
+        z2(n5);
+      } catch (n6) {
+        t5 = n6;
+      }
+    }), r3.__H = void 0, t5 && e2.__e(t5, r3.__v));
+  };
+  var k2 = "function" == typeof requestAnimationFrame;
+  function w2(n4) {
+    var t5, r3 = function() {
+      clearTimeout(u4), k2 && cancelAnimationFrame(t5), setTimeout(n4);
+    }, u4 = setTimeout(r3, 100);
+    k2 && (t5 = requestAnimationFrame(r3));
+  }
+  function z2(n4) {
+    var t5 = r2, u4 = n4.__c;
+    "function" == typeof u4 && (n4.__c = void 0, u4()), r2 = t5;
+  }
+  function B2(n4) {
+    var t5 = r2;
+    n4.__c = n4.__(), r2 = t5;
+  }
+  function C2(n4, t5) {
+    return !n4 || n4.length !== t5.length || t5.some(function(t6, r3) {
+      return t6 !== n4[r3];
+    });
+  }
+  function D(n4, t5) {
+    return "function" == typeof t5 ? t5(n4) : t5;
+  }
+
+  // ../core/node_modules/goober/dist/goober.modern.js
+  var e3 = { data: "" };
+  var t4 = (t5) => "object" == typeof window ? ((t5 ? t5.querySelector("#_goober") : window._goober) || Object.assign((t5 || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : t5 || e3;
+  var l3 = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g;
+  var a3 = /\/\*[^]*?\*\/|  +/g;
+  var n3 = /\n+/g;
+  var o3 = (e4, t5) => {
+    let r3 = "", l4 = "", a4 = "";
+    for (let n4 in e4) {
+      let c4 = e4[n4];
+      "@" == n4[0] ? "i" == n4[1] ? r3 = n4 + " " + c4 + ";" : l4 += "f" == n4[1] ? o3(c4, n4) : n4 + "{" + o3(c4, "k" == n4[1] ? "" : t5) + "}" : "object" == typeof c4 ? l4 += o3(c4, t5 ? t5.replace(/([^,])+/g, (e5) => n4.replace(/(^:.*)|([^,])+/g, (t6) => /&/.test(t6) ? t6.replace(/&/g, e5) : e5 ? e5 + " " + t6 : t6)) : n4) : null != c4 && (n4 = /^--/.test(n4) ? n4 : n4.replace(/[A-Z]/g, "-$&").toLowerCase(), a4 += o3.p ? o3.p(n4, c4) : n4 + ":" + c4 + ";");
+    }
+    return r3 + (t5 && a4 ? t5 + "{" + a4 + "}" : a4) + l4;
+  };
+  var c3 = {};
+  var s3 = (e4) => {
+    if ("object" == typeof e4) {
+      let t5 = "";
+      for (let r3 in e4)
+        t5 += r3 + s3(e4[r3]);
+      return t5;
+    }
+    return e4;
+  };
+  var i3 = (e4, t5, r3, i4, p4) => {
+    let u4 = s3(e4), d3 = c3[u4] || (c3[u4] = ((e5) => {
+      let t6 = 0, r4 = 11;
+      for (; t6 < e5.length; )
+        r4 = 101 * r4 + e5.charCodeAt(t6++) >>> 0;
+      return "go" + r4;
+    })(u4));
+    if (!c3[d3]) {
+      let t6 = u4 !== e4 ? e4 : ((e5) => {
+        let t7, r4, o4 = [{}];
+        for (; t7 = l3.exec(e5.replace(a3, "")); )
+          t7[4] ? o4.shift() : t7[3] ? (r4 = t7[3].replace(n3, " ").trim(), o4.unshift(o4[0][r4] = o4[0][r4] || {})) : o4[0][t7[1]] = t7[2].replace(n3, " ").trim();
+        return o4[0];
+      })(e4);
+      c3[d3] = o3(p4 ? { ["@keyframes " + d3]: t6 } : t6, r3 ? "" : "." + d3);
+    }
+    let f3 = r3 && c3.g ? c3.g : null;
+    return r3 && (c3.g = c3[d3]), ((e5, t6, r4, l4) => {
+      l4 ? t6.data = t6.data.replace(l4, e5) : -1 === t6.data.indexOf(e5) && (t6.data = r4 ? e5 + t6.data : t6.data + e5);
+    })(c3[d3], t5, i4, f3), d3;
+  };
+  var p3 = (e4, t5, r3) => e4.reduce((e5, l4, a4) => {
+    let n4 = t5[a4];
+    if (n4 && n4.call) {
+      let e6 = n4(r3), t6 = e6 && e6.props && e6.props.className || /^go/.test(e6) && e6;
+      n4 = t6 ? "." + t6 : e6 && "object" == typeof e6 ? e6.props ? "" : o3(e6, "") : false === e6 ? "" : e6;
+    }
+    return e5 + l4 + (null == n4 ? "" : n4);
+  }, "");
+  function u3(e4) {
+    let r3 = this || {}, l4 = e4.call ? e4(r3.p) : e4;
+    return i3(l4.unshift ? l4.raw ? p3(l4, [].slice.call(arguments, 1), r3.p) : l4.reduce((e5, t5) => Object.assign(e5, t5 && t5.call ? t5(r3.p) : t5), {}) : l4, t4(r3.target), r3.g, r3.o, r3.k);
+  }
+  var b2 = u3.bind({ g: 1 });
+  var h3 = u3.bind({ k: 1 });
+
+  // ../core/src/manual-rtc.ts
+  function ManualRtc() {
+    let [receivedSignalingEvents, setReceivedSignalingEvents] = p2("");
+    let [signalingEvents, setSignalingEvents] = p2([]);
+    const context4 = P2(appContext);
+    let [config3, setConfig] = p2(context4.configStorage.read());
+    let sub = q2(() => context4.configStorage.watch().subscribe(setConfig), []);
+    let [manualRtcCompleted, setManualRtcCompleted] = p2(false);
+    function updateOfflineModeCharacter(offlineModeCharacter) {
+      context4.configStorage.save({ offlineModeCharacter });
+    }
+    function updateStunServer(event) {
+      context4.configStorage.save({ stunServer: event.target.value });
+    }
+    const sub2 = q2(function() {
+      return outcomingSignaling$.subscribe(function(signalingEvent) {
+        signalingEvents.push(signalingEvent);
+        setSignalingEvents([...signalingEvents]);
+      });
+    }, []);
+    async function receiveSignalingEvents(event) {
+      broadcastIncomingSignaling(JSON.parse(event.target.value));
+      setReceivedSignalingEvents("");
+      if (config3.offlineModeCharacter === "PlayerA" /* PlayerA */) {
+        setManualRtcCompleted(true);
+      }
+    }
+    function copySignalingEventToClipBoard() {
+      navigator.clipboard.writeText(JSON.stringify(signalingEvents, null, 4));
+      setSignalingEvents([]);
+      if (config3.offlineModeCharacter === "PlayerB" /* PlayerB */) {
+        setManualRtcCompleted(true);
+      }
+    }
+    _2(() => {
+      return function() {
+        console.log("unsibscribing from ManualRtc component.");
+        sub.unsubscribe();
+        sub2.unsubscribe();
+      };
+    }, []);
+    const className = u3`
+		background-color: white;
+
+		& fieldset {
+			display: inline;
+			margin: 0.2rem;
+		}
+	`;
+    return !manualRtcCompleted && m`
+		<div className=${className}>
+			<fieldset>
+				<legend> Connexion WebRTC </legend>
+
+				${config3.offlineModeCharacter === "None" /* None */ ? m`
+					<fieldset>
+						<legend> Serveur STUN (Si connexion via internet) </legend>
+						<input placeholder="stun:<serveur>:<port>" onChange=${updateStunServer}/>
+					</fieldset>
+
+					<fieldset>
+						<legend> Choix de votre joueur </legend>
+
+						<button
+							onClick=${() => updateOfflineModeCharacter("PlayerA" /* PlayerA */)}>
+							Joueur 1
+						</button>
+						<button
+							onClick=${() => updateOfflineModeCharacter("PlayerB" /* PlayerB */)}>
+							Joueur 2
+						</button>
+					</fieldset>
+				` : null}
+
+				${config3.offlineModeCharacter !== "None" /* None */ ? m`
+					${signalingEvents.length ? m`
+						<div>
+							<button onClick=${copySignalingEventToClipBoard} style="width: 10rem;">
+								Copier mon signalement (⚠️&nbsp;CONFIDENTIEL&nbsp;⚠️,
+								Adresse IP, routage réseau, ...)
+							</button>
+						</div>
+					` : null}
+
+					<textarea
+						placeholder="Recevoir le signalement de l'autre joueur."
+						onChange=${receiveSignalingEvents}
+						value=${receivedSignalingEvents}
+						style="width: 10rem;"
+					></textarea>
+				` : null}
+			</fieldset>
+		</div>
+	`;
+  }
+
+  // ../core/src/mount-app.ts
+  function mountApp(htmlElement, context4) {
+    B(App(context4), htmlElement);
+  }
+
   // ../core/src/observe-game.ts
   function observeGame(connection) {
     return new Observable2(function(subscriber) {
       const subscription = connection.messages$.pipe(
-        map((m) => m.observeGameBroadcast),
+        map((m3) => m3.observeGameBroadcast),
         filter2(Boolean)
       ).subscribe({
         next(broadcast) {
@@ -5698,7 +4195,7 @@
   // ../core/src/observe-my-character.ts
   function observeMyCharacter(connection) {
     return connection.messages$.pipe(
-      map((m) => m.observeMyCharacterBroadcast?.character),
+      map((m3) => m3.observeMyCharacterBroadcast?.character),
       filter2(Boolean)
     );
   }
@@ -5729,6 +4226,98 @@
     _outcomingSignaling$.next(event);
   }
 
+  // ../core/src/playground.ts
+  function Playground({ dataTestid }) {
+    const context4 = P2(appContext);
+    const waitConnection = q2(
+      () => createClientConnection(context4),
+      []
+    );
+    let [myCharacter, setMyCharacter] = p2(null);
+    let [game, setGame] = p2(null);
+    let [disconnected, setDisconnected] = p2(false);
+    let showTitle = q2(() => isTitleShown(myCharacter, game), [myCharacter, game]);
+    let aWins = q2(() => game !== null && (game.state === "AWins" /* AWins */ || game.state === "AWinsByFault" /* AWinsByFault */), [game]);
+    let bWins = q2(() => game !== null && (game.state === "BWins" /* BWins */ || game.state === "BWinsByFault" /* BWinsByFault */), [game]);
+    let indication = q2(() => computeIndication(myCharacter, game), [myCharacter, game]);
+    const sub = q2(function() {
+      return from(waitConnection).pipe(
+        mergeMap(function(connection) {
+          return combineLatest(
+            merge(
+              from(getGame(connection)),
+              observeGame(connection)
+            ),
+            merge(
+              from(getMyCharacter(connection)),
+              observeMyCharacter(connection)
+            )
+          );
+        })
+      ).subscribe(function([_game, _myCharacter]) {
+        setGame(_game);
+        setMyCharacter(_myCharacter);
+      });
+    }, []);
+    let connexionSub = q2(function() {
+      return from(waitConnection).pipe(
+        mergeMap(function(connection) {
+          return connection.messages$;
+        })
+      ).subscribe({
+        error: () => setDisconnected(true),
+        complete: () => setDisconnected(true)
+      });
+    }, []);
+    const interaction$ = q2(() => new Subject2(), []);
+    let controlsSub = q2(function() {
+      return combineLatest(
+        from(waitConnection),
+        interaction$
+      ).subscribe(function([connection]) {
+        interact(connection).catch(console.error);
+      });
+    }, []);
+    _2(() => {
+      return function() {
+        sub?.unsubscribe();
+        connexionSub?.unsubscribe();
+        controlsSub?.unsubscribe();
+      };
+    }, []);
+    return m`
+		<div
+			class="main"
+			data-testid=${dataTestid}
+			onClick=${() => interaction$.next(void 0)}
+			onKeyDown=${() => interaction$.next(void 0)}
+		>
+			${disconnected && m`<p class="disconnectedFromServer">Disconnected from server.</p>`}
+			${!disconnected && !game && m`<p aria-label="waitConnection" class="disconnectedFromServer">Attente d'une connexion.</p>`}
+			${showTitle && game && m`<div aria-label="title" class="title"></div>`}
+
+			${!showTitle && m`
+				<div aria-label="arena" class="arena">
+					<div aria-label="player" class="vue-player">
+						${game?.playerA && !aWins && !bWins && m`<div aria-label="playerA" class="playerA"></div>`}
+						${game?.playerB && !aWins && !bWins && m`<div aria-label="playerB" class="playerB"></div>`}
+						${game?.playerA && aWins && m`<div class="playerAwins"></div>`}
+						${game?.playerB && aWins && m`<div class="playerBloses"></div>`}
+						${game?.playerA && bWins && m`<div class="playerAloses"></div>`}
+						${game?.playerB && bWins && m`<div class="playerBwins"></div>`}
+					</div>
+
+					${game?.state === "Hajime" /* Hajime */ && m`<p aria-label="exclamationPoints" class="exclamationPoints">!!</p>`}
+					${myCharacter === "PlayerA" /* PlayerA */ && m`<p class="playerADisplay">Joueur 1</p>`}
+					${myCharacter === "PlayerB" /* PlayerB */ && m`<p class="playerBDisplay">Joueur 2</p>`}
+					${myCharacter === "None" /* None */ && m`<p class="spectatorDisplay">Spectateur</p>`}
+					<p aria-label="indication" class="indication">${indication}</p>
+				</div>
+			`}
+		</div>
+	`;
+  }
+
   // ../core/src/resolve-my-character.ts
   function resolveMyCharacter(gameStorage, connection) {
     const game = gameStorage.read();
@@ -5749,7 +4338,7 @@
     const broadcastToWebRTC$ = new Subject();
     const broadcastFromWebRTC$ = new Subject();
     const _offlineServer$ = new Subject();
-    let waitServerPrepare = new Promise((r) => setTimeout(r, 150));
+    let waitServerPrepare = new Promise((r3) => setTimeout(r3, 150));
     let _connected$ = new Subject();
     let tabIsServer = false;
     let acceptedAnswer = false;
@@ -5771,14 +4360,14 @@
     const peerConnection = new RTCPeerConnection(config3.stunServer && {
       iceServers: [{ urls: config3.stunServer }]
     });
-    configStorage2.watch().subscribe(function(c) {
-      config3 = c;
-      peerConnection.setConfiguration(c.stunServer && {
-        iceServers: [{ urls: c.stunServer }]
+    configStorage2.watch().subscribe(function(c4) {
+      config3 = c4;
+      peerConnection.setConfiguration(c4.stunServer && {
+        iceServers: [{ urls: c4.stunServer }]
       });
     });
-    peerConnection.onicecandidate = function(e) {
-      const candidate = e?.candidate?.toJSON();
+    peerConnection.onicecandidate = function(e4) {
+      const candidate = e4?.candidate?.toJSON();
       if (candidate) {
         broadcastOutcomingSignaling({ candidate });
       }
@@ -5831,7 +4420,7 @@
           break;
         case "connected":
           _connected$.next();
-          waitServerPrepare = new Promise((r) => setTimeout(r, 200));
+          waitServerPrepare = new Promise((r3) => setTimeout(r3, 200));
           tabIsServer = acceptedAnswer;
           if (tabIsServer) {
             waitServerPrepare.then(() => {
@@ -5851,19 +4440,19 @@
       }
     });
     const sendChannel = peerConnection.createDataChannel("sendDataChannel");
-    async function sendWhenConnected(m) {
+    async function sendWhenConnected(m3) {
       while (peerConnection.connectionState !== "connected") {
-        await new Promise((r) => setTimeout(r, 50));
+        await new Promise((r3) => setTimeout(r3, 50));
       }
       await waitServerPrepare;
-      sendChannel.send(JSON.stringify(m));
+      sendChannel.send(JSON.stringify(m3));
     }
-    async function sendWhenConnectedInternal(m) {
+    async function sendWhenConnectedInternal(m3) {
       while (peerConnection.connectionState !== "connected") {
-        await new Promise((r) => setTimeout(r, 50));
+        await new Promise((r3) => setTimeout(r3, 50));
       }
       await waitServerPrepare;
-      broadcastToServer$.next(m);
+      broadcastToServer$.next(m3);
     }
     const subscriptionToSendToWebRTC = broadcastToWebRTC$.subscribe({
       next: sendWhenConnected,
@@ -5935,18 +4524,10 @@
     offlineMode: true,
     offlineModeCharacter: "None" /* None */
   });
-  var _context = {
+  var context3 = {
     configStorage,
     createRtcConnection,
     createWsClientConnection
   };
-  var context3 = (/* @__PURE__ */ new Map()).set(defaultContextId, _context);
-  var target = document.getElementById("game-mount-point");
-  if (target) {
-    new playground_svelte_default({ target, context: context3 });
-  }
-  var connTarget = document.getElementById("connection-mount-point");
-  if (connTarget) {
-    new manual_rtc_svelte_default({ target: connTarget, context: context3 });
-  }
+  mountApp(document.body, context3);
 })();
