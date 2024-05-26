@@ -2,13 +2,10 @@ import { createWsClientConnection } from "./create-ws-client-connection";
 import { createRtcConnection } from "./create-rtc-connection";
 
 import {
-	Playground,
-	SvelteContext,
 	Context,
-	defaultContextId,
-	ManualRtc,
 	createConfigStorage,
-	Character
+	Character,
+	mountApp
 } from "core";
 
 const configStorage = createConfigStorage({
@@ -21,24 +18,10 @@ const configStorage = createConfigStorage({
 	offlineModeCharacter: Character.None
 });
 
-const _context: Context = {
+const context: Context = {
 	configStorage,
 	createRtcConnection,
 	createWsClientConnection
 };
 
-const context: SvelteContext = new Map()
-	.set(defaultContextId, _context);
-
-const target = document.getElementById("game-mount-point");
-
-
-if (target) {
-	new Playground({ target, context });
-}
-
-const connTarget = document.getElementById("connection-mount-point");
-
-if (connTarget) {
-	new ManualRtc({ target: connTarget, context });
-}
+mountApp(document.body, context);

@@ -22,9 +22,10 @@ export function interactHandle(gameStorage: GameStorage, connexions$: Observable
 		const messageSub = connection.messages$.pipe(filter(message => Boolean(message.interactEmit)))
 			.subscribe({
 				next() {
+					console.log("is interacting", connection.id);
 					const game: Game = gameStorage.read();
 
-					switch(game.state) {
+					switch (game.state) {
 						case AWins:
 						case BWins:
 						case AWinsByFault:
@@ -80,7 +81,7 @@ export function interactHandle(gameStorage: GameStorage, connexions$: Observable
 				complete() {
 					const game: Game = gameStorage.read();
 
-					switch(connection.id) {
+					switch (connection.id) {
 						case game.playerA:
 							clearTimeout(hajimeTimeout);
 							game.playerA = undefined;

@@ -18,6 +18,6 @@ export function observeMyCharacterHandle(gameStorage: GameStorage, connexions$: 
 				subscription.unsubscribe();
 				messageSubscription.unsubscribe();
 			}
-		})
+		});
 	});
 }

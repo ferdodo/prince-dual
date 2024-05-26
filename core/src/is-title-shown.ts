@@ -9,7 +9,7 @@ export function isTitleShown(myCharacter: Character | null, game: Game | null): 
 		return true;
 	}
 
-	switch(game.state) {
+	switch (game.state) {
 		case GameState.WaitingPlayerA:
 		case GameState.PlayerADisconnected:
 		case GameState.PlayerBDisconnected:

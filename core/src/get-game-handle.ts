@@ -6,7 +6,7 @@ export function getGameHandle(gameStorage: GameStorage, connexions$: Observable<
 	return connexions$.subscribe(function(connection: Connection<Message>) {
 		const subscription = connection.messages$.pipe(
 			map(m => m.getGameRequest),
-			filter(Boolean),
+			filter(Boolean)
 		)
 			.subscribe({
 				next(request: GetGameRequest) {
@@ -16,7 +16,7 @@ export function getGameHandle(gameStorage: GameStorage, connexions$: Observable<
 							game: gameStorage.read()
 						}
 					};
-				
+
 					connection.send(response);
 				},
 				complete() {

@@ -1,6 +1,9 @@
 import { Character, Game, GameState } from "core";
 
-export function computeIndication(myCharacter: Character | null, game: Game | null): string {
+export function computeIndication(
+	myCharacter: Character | null,
+	game: Game | null
+): string {
 	if (myCharacter === null) {
 		return "";
 	}
@@ -9,11 +12,11 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 		return "";
 	}
 
-	switch(game.state) {
+	switch (game.state) {
 		case GameState.WaitingPlayerB:
 			return "Attente d'un deuxieme joueur";
 		case GameState.Matte:
-			switch(myCharacter) {
+			switch (myCharacter) {
 				case Character.PlayerA:
 				case Character.PlayerB:
 					return "Attendez...";
@@ -21,7 +24,7 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 					return "";
 			}
 		case GameState.AWins:
-			switch(myCharacter) {
+			switch (myCharacter) {
 				case Character.PlayerA:
 					return "Vous gagnez !";
 				case Character.PlayerB:
@@ -30,7 +33,7 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 					return "";
 			}
 		case GameState.BWins:
-			switch(myCharacter) {
+			switch (myCharacter) {
 				case Character.PlayerA:
 					return "Vous perdez !";
 				case Character.PlayerB:
@@ -39,7 +42,7 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 					return "";
 			}
 		case GameState.AWinsByFault:
-			switch(myCharacter) {
+			switch (myCharacter) {
 				case Character.PlayerA:
 					return "Gagné ! L'adversaire a frappé trop tôt !";
 				case Character.PlayerB:
@@ -48,7 +51,7 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 					return "";
 			}
 		case GameState.BWinsByFault:
-			switch(myCharacter) {
+			switch (myCharacter) {
 				case Character.PlayerA:
 					return "Perdu ! vous frappez trop tôt !";
 				case Character.PlayerB:
@@ -57,6 +60,6 @@ export function computeIndication(myCharacter: Character | null, game: Game | nu
 					return "";
 			}
 		default:
-			return ""	
+			return "";
 	}
 }

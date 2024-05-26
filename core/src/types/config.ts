@@ -1,7 +1,7 @@
 import { Character } from "core";
 
 export interface Config {
-    webProtocol: string;
+	webProtocol: string;
 	webDomain: string;
 	webPort: number;
 	wsProtocol: string;

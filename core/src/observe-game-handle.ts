@@ -16,6 +16,6 @@ export function observeGameHandle(gameStorage: GameStorage, connexions$: Observa
 				subscription.unsubscribe();
 				messageSubscription.unsubscribe();
 			}
-		})
+		});
 	});
 }

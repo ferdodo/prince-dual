@@ -1,11 +1,4 @@
-import {
-    GetGameRequest,
-    GetGameResponse,
-    GetMyCharacterRequest,
-    GetMyCharacterResponse,
-    ObserveGameBroadcast,
-    ObserveMyCharacterBroadcast
-} from "core";
+import { GetGameRequest, GetGameResponse, GetMyCharacterRequest, GetMyCharacterResponse, ObserveGameBroadcast, ObserveMyCharacterBroadcast } from "core";
 
 export interface Message {
 	interactEmit?: object;

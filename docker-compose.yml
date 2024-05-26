@@ -14,3 +14,9 @@ services:
       context: core
       tags:
         - "prince-duals-core"
+
+  coverage:
+    build:
+      context: coverage
+    ports:
+      - 3388:80

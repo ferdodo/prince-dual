@@ -2,25 +2,23 @@ import { Context, createGameStorage, initiateBackendHandlers, Message } from "co
 import { Connection } from "connection-types";
 
 export async function createClientConnection(context: Context): Promise<Connection<Message>> {
-    const config = context.configStorage.read();
+	const config = context.configStorage.read();
 
 	if (config.offlineMode) {
-        context.offlineModeGameStorage = createGameStorage();
+		context.offlineModeGameStorage = createGameStorage();
 
 		const [
-            createConnection,
-            serverConnection$
-        ] = await context.createRtcConnection(context.configStorage);
+			createConnection,
+			serverConnection$
+		] = await context.createRtcConnection(context.configStorage);
 
-        console.log("got connexion")
-
-        initiateBackendHandlers(context.offlineModeGameStorage, serverConnection$);
-        return createConnection();
+		initiateBackendHandlers(context.offlineModeGameStorage, serverConnection$);
+		return createConnection();
 	} else {
 		return context.createWsClientConnection(
-            config.wsProtocol,
-            config.wsPort,
-            config.webDomain
-        );
+			config.wsProtocol,
+			config.wsPort,
+			config.webDomain
+		);
 	}
 }

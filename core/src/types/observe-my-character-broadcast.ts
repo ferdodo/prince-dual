@@ -1,5 +1,5 @@
 import { Character } from "core";
 
-export type ObserveMyCharacterBroadcast = {
-	character: Character
-};
+export interface ObserveMyCharacterBroadcast {
+	character: Character;
+}

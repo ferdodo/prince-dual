@@ -1,5 +1,5 @@
 import { Game } from "core";
 
 export interface ObserveGameBroadcast {
-	game: Game
+	game: Game;
 }
