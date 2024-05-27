@@ -267,13 +267,13 @@
 
   // node_modules/rxjs/dist/esm5/internal/Subscription.js
   var Subscription = function() {
-    function Subscription6(initialTeardown) {
+    function Subscription3(initialTeardown) {
       this.initialTeardown = initialTeardown;
       this.closed = false;
       this._parentage = null;
       this._finalizers = null;
     }
-    Subscription6.prototype.unsubscribe = function() {
+    Subscription3.prototype.unsubscribe = function() {
       var e_1, _a, e_2, _b;
       var errors;
       if (!this.closed) {
@@ -344,13 +344,13 @@
         }
       }
     };
-    Subscription6.prototype.add = function(teardown) {
+    Subscription3.prototype.add = function(teardown) {
       var _a;
       if (teardown && teardown !== this) {
         if (this.closed) {
           execFinalizer(teardown);
         } else {
-          if (teardown instanceof Subscription6) {
+          if (teardown instanceof Subscription3) {
             if (teardown.closed || teardown._hasParent(this)) {
               return;
             }
@@ -360,15 +360,15 @@
         }
       }
     };
-    Subscription6.prototype._hasParent = function(parent) {
+    Subscription3.prototype._hasParent = function(parent) {
       var _parentage = this._parentage;
       return _parentage === parent || Array.isArray(_parentage) && _parentage.includes(parent);
     };
-    Subscription6.prototype._addParent = function(parent) {
+    Subscription3.prototype._addParent = function(parent) {
       var _parentage = this._parentage;
       this._parentage = Array.isArray(_parentage) ? (_parentage.push(parent), _parentage) : _parentage ? [_parentage, parent] : parent;
     };
-    Subscription6.prototype._removeParent = function(parent) {
+    Subscription3.prototype._removeParent = function(parent) {
       var _parentage = this._parentage;
       if (_parentage === parent) {
         this._parentage = null;
@@ -376,19 +376,19 @@
         arrRemove(_parentage, parent);
       }
     };
-    Subscription6.prototype.remove = function(teardown) {
+    Subscription3.prototype.remove = function(teardown) {
       var _finalizers = this._finalizers;
       _finalizers && arrRemove(_finalizers, teardown);
-      if (teardown instanceof Subscription6) {
+      if (teardown instanceof Subscription3) {
         teardown._removeParent(this);
       }
     };
-    Subscription6.EMPTY = function() {
-      var empty = new Subscription6();
+    Subscription3.EMPTY = function() {
+      var empty = new Subscription3();
       empty.closed = true;
       return empty;
     }();
-    return Subscription6;
+    return Subscription3;
   }();
   var EMPTY_SUBSCRIPTION = Subscription.EMPTY;
   function isSubscription(value) {
@@ -684,18 +684,18 @@
 
   // node_modules/rxjs/dist/esm5/internal/Observable.js
   var Observable = function() {
-    function Observable9(subscribe) {
+    function Observable3(subscribe) {
       if (subscribe) {
         this._subscribe = subscribe;
       }
     }
-    Observable9.prototype.lift = function(operator) {
-      var observable3 = new Observable9();
+    Observable3.prototype.lift = function(operator) {
+      var observable3 = new Observable3();
       observable3.source = this;
       observable3.operator = operator;
       return observable3;
     };
-    Observable9.prototype.subscribe = function(observerOrNext, error, complete) {
+    Observable3.prototype.subscribe = function(observerOrNext, error, complete) {
       var _this = this;
       var subscriber = isSubscriber(observerOrNext) ? observerOrNext : new SafeSubscriber(observerOrNext, error, complete);
       errorContext(function() {
@@ -704,14 +704,14 @@
       });
       return subscriber;
     };
-    Observable9.prototype._trySubscribe = function(sink) {
+    Observable3.prototype._trySubscribe = function(sink) {
       try {
         return this._subscribe(sink);
       } catch (err) {
         sink.error(err);
       }
     };
-    Observable9.prototype.forEach = function(next, promiseCtor) {
+    Observable3.prototype.forEach = function(next, promiseCtor) {
       var _this = this;
       promiseCtor = getPromiseCtor(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
@@ -730,21 +730,21 @@
         _this.subscribe(subscriber);
       });
     };
-    Observable9.prototype._subscribe = function(subscriber) {
+    Observable3.prototype._subscribe = function(subscriber) {
       var _a;
       return (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber);
     };
-    Observable9.prototype[observable] = function() {
+    Observable3.prototype[observable] = function() {
       return this;
     };
-    Observable9.prototype.pipe = function() {
+    Observable3.prototype.pipe = function() {
       var operations = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         operations[_i] = arguments[_i];
       }
       return pipeFromArray(operations)(this);
     };
-    Observable9.prototype.toPromise = function(promiseCtor) {
+    Observable3.prototype.toPromise = function(promiseCtor) {
       var _this = this;
       promiseCtor = getPromiseCtor(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
@@ -758,10 +758,10 @@
         });
       });
     };
-    Observable9.create = function(subscribe) {
-      return new Observable9(subscribe);
+    Observable3.create = function(subscribe) {
+      return new Observable3(subscribe);
     };
-    return Observable9;
+    return Observable3;
   }();
   function getPromiseCtor(promiseCtor) {
     var _a;
@@ -2103,13 +2103,13 @@
 
   // ../core/node_modules/rxjs/dist/esm5/internal/Subscription.js
   var Subscription2 = function() {
-    function Subscription6(initialTeardown) {
+    function Subscription3(initialTeardown) {
       this.initialTeardown = initialTeardown;
       this.closed = false;
       this._parentage = null;
       this._finalizers = null;
     }
-    Subscription6.prototype.unsubscribe = function() {
+    Subscription3.prototype.unsubscribe = function() {
       var e_1, _a, e_2, _b;
       var errors;
       if (!this.closed) {
@@ -2180,13 +2180,13 @@
         }
       }
     };
-    Subscription6.prototype.add = function(teardown) {
+    Subscription3.prototype.add = function(teardown) {
       var _a;
       if (teardown && teardown !== this) {
         if (this.closed) {
           execFinalizer2(teardown);
         } else {
-          if (teardown instanceof Subscription6) {
+          if (teardown instanceof Subscription3) {
             if (teardown.closed || teardown._hasParent(this)) {
               return;
             }
@@ -2196,15 +2196,15 @@
         }
       }
     };
-    Subscription6.prototype._hasParent = function(parent) {
+    Subscription3.prototype._hasParent = function(parent) {
       var _parentage = this._parentage;
       return _parentage === parent || Array.isArray(_parentage) && _parentage.includes(parent);
     };
-    Subscription6.prototype._addParent = function(parent) {
+    Subscription3.prototype._addParent = function(parent) {
       var _parentage = this._parentage;
       this._parentage = Array.isArray(_parentage) ? (_parentage.push(parent), _parentage) : _parentage ? [_parentage, parent] : parent;
     };
-    Subscription6.prototype._removeParent = function(parent) {
+    Subscription3.prototype._removeParent = function(parent) {
       var _parentage = this._parentage;
       if (_parentage === parent) {
         this._parentage = null;
@@ -2212,19 +2212,19 @@
         arrRemove2(_parentage, parent);
       }
     };
-    Subscription6.prototype.remove = function(teardown) {
+    Subscription3.prototype.remove = function(teardown) {
       var _finalizers = this._finalizers;
       _finalizers && arrRemove2(_finalizers, teardown);
-      if (teardown instanceof Subscription6) {
+      if (teardown instanceof Subscription3) {
         teardown._removeParent(this);
       }
     };
-    Subscription6.EMPTY = function() {
-      var empty = new Subscription6();
+    Subscription3.EMPTY = function() {
+      var empty = new Subscription3();
       empty.closed = true;
       return empty;
     }();
-    return Subscription6;
+    return Subscription3;
   }();
   var EMPTY_SUBSCRIPTION2 = Subscription2.EMPTY;
   function isSubscription2(value) {
@@ -2520,18 +2520,18 @@
 
   // ../core/node_modules/rxjs/dist/esm5/internal/Observable.js
   var Observable2 = function() {
-    function Observable9(subscribe) {
+    function Observable3(subscribe) {
       if (subscribe) {
         this._subscribe = subscribe;
       }
     }
-    Observable9.prototype.lift = function(operator) {
-      var observable3 = new Observable9();
+    Observable3.prototype.lift = function(operator) {
+      var observable3 = new Observable3();
       observable3.source = this;
       observable3.operator = operator;
       return observable3;
     };
-    Observable9.prototype.subscribe = function(observerOrNext, error, complete) {
+    Observable3.prototype.subscribe = function(observerOrNext, error, complete) {
       var _this = this;
       var subscriber = isSubscriber2(observerOrNext) ? observerOrNext : new SafeSubscriber2(observerOrNext, error, complete);
       errorContext2(function() {
@@ -2540,14 +2540,14 @@
       });
       return subscriber;
     };
-    Observable9.prototype._trySubscribe = function(sink) {
+    Observable3.prototype._trySubscribe = function(sink) {
       try {
         return this._subscribe(sink);
       } catch (err) {
         sink.error(err);
       }
     };
-    Observable9.prototype.forEach = function(next, promiseCtor) {
+    Observable3.prototype.forEach = function(next, promiseCtor) {
       var _this = this;
       promiseCtor = getPromiseCtor2(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
@@ -2566,21 +2566,21 @@
         _this.subscribe(subscriber);
       });
     };
-    Observable9.prototype._subscribe = function(subscriber) {
+    Observable3.prototype._subscribe = function(subscriber) {
       var _a;
       return (_a = this.source) === null || _a === void 0 ? void 0 : _a.subscribe(subscriber);
     };
-    Observable9.prototype[observable2] = function() {
+    Observable3.prototype[observable2] = function() {
       return this;
     };
-    Observable9.prototype.pipe = function() {
+    Observable3.prototype.pipe = function() {
       var operations = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         operations[_i] = arguments[_i];
       }
       return pipeFromArray2(operations)(this);
     };
-    Observable9.prototype.toPromise = function(promiseCtor) {
+    Observable3.prototype.toPromise = function(promiseCtor) {
       var _this = this;
       promiseCtor = getPromiseCtor2(promiseCtor);
       return new promiseCtor(function(resolve, reject) {
@@ -2594,10 +2594,10 @@
         });
       });
     };
-    Observable9.create = function(subscribe) {
-      return new Observable9(subscribe);
+    Observable3.create = function(subscribe) {
+      return new Observable3(subscribe);
     };
-    return Observable9;
+    return Observable3;
   }();
   function getPromiseCtor2(promiseCtor) {
     var _a;
@@ -3579,13 +3579,12 @@
       ] = await context4.createRtcConnection(context4.configStorage);
       initiateBackendHandlers(context4.offlineModeGameStorage, serverConnection$);
       return createConnection();
-    } else {
-      return context4.createWsClientConnection(
-        config3.wsProtocol,
-        config3.wsPort,
-        config3.webDomain
-      );
     }
+    return context4.createWsClientConnection(
+      config3.wsProtocol,
+      config3.wsPort,
+      config3.webDomain
+    );
   }
 
   // ../core/src/create-config-storage.ts
@@ -4058,12 +4057,12 @@
 
   // ../core/src/manual-rtc.ts
   function ManualRtc({ dataTestid }) {
-    let [receivedSignalingEvents, setReceivedSignalingEvents] = p2("");
-    let [signalingEvents, setSignalingEvents] = p2([]);
+    const [receivedSignalingEvents, setReceivedSignalingEvents] = p2("");
+    const [signalingEvents, setSignalingEvents] = p2([]);
     const context4 = P2(appContext);
-    let [config3, setConfig] = p2(context4.configStorage.read());
-    let sub = q2(() => context4.configStorage.watch().subscribe(setConfig), []);
-    let [manualRtcCompleted, setManualRtcCompleted] = p2(false);
+    const [config3, setConfig] = p2(context4.configStorage.read());
+    const sub = q2(() => context4.configStorage.watch().subscribe(setConfig), [context4]);
+    const [manualRtcCompleted, setManualRtcCompleted] = p2(false);
     function updateOfflineModeCharacter(offlineModeCharacter) {
       context4.configStorage.save({ offlineModeCharacter });
     }
@@ -4075,7 +4074,7 @@
         signalingEvents.push(signalingEvent);
         setSignalingEvents([...signalingEvents]);
       });
-    }, []);
+    }, [signalingEvents]);
     async function receiveSignalingEvents(event) {
       broadcastIncomingSignaling(JSON.parse(event.target.value));
       setReceivedSignalingEvents("");
@@ -4092,11 +4091,10 @@
     }
     _2(() => {
       return function() {
-        console.log("unsibscribing from ManualRtc component.");
         sub.unsubscribe();
         sub2.unsubscribe();
       };
-    }, []);
+    }, [sub, sub2]);
     const className = u3`
 		background-color: white;
 
@@ -4236,15 +4234,15 @@
     const context4 = P2(appContext);
     const waitConnection = q2(
       () => createClientConnection(context4),
-      []
+      [context4]
     );
-    let [myCharacter, setMyCharacter] = p2(null);
-    let [game, setGame] = p2(null);
-    let [disconnected, setDisconnected] = p2(false);
-    let showTitle = q2(() => isTitleShown(myCharacter, game), [myCharacter, game]);
-    let aWins = q2(() => game !== null && (game.state === "AWins" /* AWins */ || game.state === "AWinsByFault" /* AWinsByFault */), [game]);
-    let bWins = q2(() => game !== null && (game.state === "BWins" /* BWins */ || game.state === "BWinsByFault" /* BWinsByFault */), [game]);
-    let indication = q2(() => computeIndication(myCharacter, game), [myCharacter, game]);
+    const [myCharacter, setMyCharacter] = p2(null);
+    const [game, setGame] = p2(null);
+    const [disconnected, setDisconnected] = p2(false);
+    const showTitle = q2(() => isTitleShown(myCharacter, game), [myCharacter, game]);
+    const aWins = q2(() => game !== null && (game.state === "AWins" /* AWins */ || game.state === "AWinsByFault" /* AWinsByFault */), [game]);
+    const bWins = q2(() => game !== null && (game.state === "BWins" /* BWins */ || game.state === "BWinsByFault" /* BWinsByFault */), [game]);
+    const indication = q2(() => computeIndication(myCharacter, game), [myCharacter, game]);
     const sub = q2(function() {
       return from(waitConnection).pipe(
         mergeMap(function(connection) {
@@ -4263,8 +4261,8 @@
         setGame(_game);
         setMyCharacter(_myCharacter);
       });
-    }, []);
-    let connexionSub = q2(function() {
+    }, [waitConnection]);
+    const connexionSub = q2(function() {
       return from(waitConnection).pipe(
         mergeMap(function(connection) {
           return connection.messages$;
@@ -4273,23 +4271,23 @@
         error: () => setDisconnected(true),
         complete: () => setDisconnected(true)
       });
-    }, []);
+    }, [waitConnection]);
     const interaction$ = q2(() => new Subject2(), []);
-    let controlsSub = q2(function() {
+    const controlsSub = q2(function() {
       return combineLatest(
         from(waitConnection),
         interaction$
       ).subscribe(function([connection]) {
         interact(connection).catch(console.error);
       });
-    }, []);
-    _2(() => {
+    }, [waitConnection, interaction$]);
+    _2(function() {
       return function() {
         sub?.unsubscribe();
         connexionSub?.unsubscribe();
         controlsSub?.unsubscribe();
       };
-    }, []);
+    }, [sub, connexionSub, controlsSub]);
     return m`
 		<div
 			class="main"
