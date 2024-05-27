@@ -1763,11 +1763,11 @@
   var m = htm_module_default.bind(_);
 
   // ../core/src/app.ts
-  function App(context4, dataTestid) {
+  function App(context4) {
     return m`
 		<${appContext.Provider} value=${context4}>
 			<${ManualRtc}/>
-			<${Playground} dataTestid=${dataTestid}/>
+			<${Playground}/>
 		<//>
 	`;
   }
@@ -3759,7 +3759,6 @@
     return connexions$.subscribe(function(connection) {
       const messageSub = connection.messages$.pipe(filter2((message) => Boolean(message.interactEmit))).subscribe({
         next() {
-          console.log("is interacting", connection.id);
           const game = gameStorage.read();
           switch (game.state) {
             case AWins:
@@ -4058,7 +4057,7 @@
   var h3 = u3.bind({ k: 1 });
 
   // ../core/src/manual-rtc.ts
-  function ManualRtc() {
+  function ManualRtc({ dataTestid }) {
     let [receivedSignalingEvents, setReceivedSignalingEvents] = p2("");
     let [signalingEvents, setSignalingEvents] = p2([]);
     const context4 = P2(appContext);
@@ -4107,7 +4106,7 @@
 		}
 	`;
     return !manualRtcCompleted && m`
-		<div className=${className}>
+		<div className=${className} data-testid=${dataTestid}>
 			<fieldset>
 				<legend> Connexion WebRTC </legend>
 
@@ -4121,10 +4120,12 @@
 						<legend> Choix de votre joueur </legend>
 
 						<button
+							aria-label="player1Button"
 							onClick=${() => updateOfflineModeCharacter("PlayerA" /* PlayerA */)}>
 							Joueur 1
 						</button>
 						<button
+							aria-label="player2Button"
 							onClick=${() => updateOfflineModeCharacter("PlayerB" /* PlayerB */)}>
 							Joueur 2
 						</button>
@@ -4134,7 +4135,10 @@
 				${config3.offlineModeCharacter !== "None" /* None */ ? m`
 					${signalingEvents.length ? m`
 						<div>
-							<button onClick=${copySignalingEventToClipBoard} style="width: 10rem;">
+							<button
+								onClick=${copySignalingEventToClipBoard}
+								aria-label="copySignalingEventToClipBoard"
+								style="width: 10rem;">
 								Copier mon signalement (⚠️&nbsp;CONFIDENTIEL&nbsp;⚠️,
 								Adresse IP, routage réseau, ...)
 							</button>
@@ -4143,6 +4147,7 @@
 
 					<textarea
 						placeholder="Recevoir le signalement de l'autre joueur."
+						aria-label="signalingEvents"
 						onChange=${receiveSignalingEvents}
 						value=${receivedSignalingEvents}
 						style="width: 10rem;"
@@ -4301,10 +4306,10 @@
 					<div aria-label="player" class="vue-player">
 						${game?.playerA && !aWins && !bWins && m`<div aria-label="playerA" class="playerA"></div>`}
 						${game?.playerB && !aWins && !bWins && m`<div aria-label="playerB" class="playerB"></div>`}
-						${game?.playerA && aWins && m`<div class="playerAwins"></div>`}
-						${game?.playerB && aWins && m`<div class="playerBloses"></div>`}
-						${game?.playerA && bWins && m`<div class="playerAloses"></div>`}
-						${game?.playerB && bWins && m`<div class="playerBwins"></div>`}
+						${game?.playerA && aWins && m`<div aria-label="playerAwins" class="playerAwins"></div>`}
+						${game?.playerB && aWins && m`<div aria-label="playerBloses" class="playerBloses"></div>`}
+						${game?.playerA && bWins && m`<div aria-label="playerAloses" class="playerAloses"></div>`}
+						${game?.playerB && bWins && m`<div aria-label="playerBwins" class="playerBwins"></div>`}
 					</div>
 
 					${game?.state === "Hajime" /* Hajime */ && m`<p aria-label="exclamationPoints" class="exclamationPoints">!!</p>`}
