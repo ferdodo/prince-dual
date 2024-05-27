@@ -7,7 +7,7 @@ import { html } from "htm/preact";
 import {
     ContextFactory,
     broadcastOutcomingSignaling,
-    SignalingEvent,
+    type SignalingEvent,
     ManualRtc,
     appContext,
     incomingSignaling$

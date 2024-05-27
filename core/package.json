@@ -3,9 +3,10 @@
 	"type": "module",
 	"exports": "./src/index.ts",
 	"scripts": {
-		"build": "tsc && vitest run"
+		"build": "tsc && vitest run && biome ci ."
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^1.7.3",
 		"@stryker-mutator/core": "^8.2.6",
 		"@stryker-mutator/vitest-runner": "^8.2.6",
 		"@testing-library/preact": "^3.2.3",

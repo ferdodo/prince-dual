@@ -1,7 +1,7 @@
-import { GameState } from "core";
+import type { GameState } from "core";
 
 export interface Game {
 	state: GameState;
-	playerA?: Number;
-	playerB?: Number;
+	playerA?: number;
+	playerB?: number;
 }

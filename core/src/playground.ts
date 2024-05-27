@@ -1,20 +1,20 @@
-import { Connection } from "connection-types";
+import type { Connection } from "connection-types";
 
 import { Subject, merge, combineLatest, from, mergeMap } from "rxjs";
 
 import {
 	computeIndication,
-	Message,
+	type Message,
 	observeGame,
 	Character,
-	Game,
+	type Game,
 	observeMyCharacter,
 	getGame,
 	getMyCharacter,
 	interact,
 	isTitleShown,
 	GameState,
-	Context,
+	type Context,
 	appContext,
 	createClientConnection
 } from "core";
@@ -27,16 +27,16 @@ export function Playground({ dataTestid }) {
 
 	const waitConnection: Promise<Connection<Message>> = useMemo(
 		() => createClientConnection(context),
-		[]
+		[context]
 	);
 
-	let [myCharacter, setMyCharacter] = useState<Character | null>(null);
-	let [game, setGame] = useState<Game | null>(null);
-	let [disconnected, setDisconnected] = useState(false);
-	let showTitle = useMemo(() => isTitleShown(myCharacter, game), [myCharacter, game]);
-	let aWins = useMemo(() => game !== null && (game.state === GameState.AWins || game.state === GameState.AWinsByFault), [game]);
-	let bWins = useMemo(() => game !== null && (game.state === GameState.BWins || game.state === GameState.BWinsByFault), [game]);
-	let indication = useMemo(() => computeIndication(myCharacter, game), [myCharacter, game]);
+	const [myCharacter, setMyCharacter] = useState<Character | null>(null);
+	const [game, setGame] = useState<Game | null>(null);
+	const [disconnected, setDisconnected] = useState(false);
+	const showTitle = useMemo(() => isTitleShown(myCharacter, game), [myCharacter, game]);
+	const aWins = useMemo(() => game !== null && (game.state === GameState.AWins || game.state === GameState.AWinsByFault), [game]);
+	const bWins = useMemo(() => game !== null && (game.state === GameState.BWins || game.state === GameState.BWinsByFault), [game]);
+	const indication = useMemo(() => computeIndication(myCharacter, game), [myCharacter, game]);
 
 	const sub = useMemo(function() {
 		return from(waitConnection)
@@ -57,9 +57,9 @@ export function Playground({ dataTestid }) {
 				setGame(_game);
 				setMyCharacter(_myCharacter);
 			});
-	}, []);
+	}, [waitConnection]);
 
-	let connexionSub = useMemo(function() {
+	const connexionSub = useMemo(function() {
 		return from(waitConnection)
 			.pipe(
 				mergeMap(function(connection) {
@@ -70,11 +70,11 @@ export function Playground({ dataTestid }) {
 				error: () => setDisconnected(true),
 				complete: () => setDisconnected(true)
 			});
-	}, []);
+	}, [waitConnection]);
 
 	const interaction$ = useMemo(() => new Subject(), []);
 
-	let controlsSub = useMemo(function() {
+	const controlsSub = useMemo(function() {
 		return combineLatest(
 			from(waitConnection),
 			interaction$
@@ -82,15 +82,15 @@ export function Playground({ dataTestid }) {
 			interact(connection)
 				.catch(console.error);
 		});
-	}, []);
+	}, [waitConnection, interaction$]);
 
-	useEffect(() => {
+	useEffect(function() {
 		return function() {
 			sub?.unsubscribe();
 			connexionSub?.unsubscribe();
 			controlsSub?.unsubscribe();
 		};
-	}, []);
+	}, [sub, connexionSub, controlsSub]);
 
 	return html`
 		<div

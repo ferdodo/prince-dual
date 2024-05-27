@@ -1,4 +1,4 @@
-import { Game, GameState, Character } from "core";
+import { type Game, GameState, Character } from "core";
 
 export function isTitleShown(myCharacter: Character | null, game: Game | null): boolean {
 	if (game == null) {

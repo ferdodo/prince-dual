@@ -1,9 +1,9 @@
 import {
-	outcomingSignaling$,
-	broadcastIncomingSignaling,
-	Context,
 	appContext,
-	Character
+	broadcastIncomingSignaling,
+	Character,
+	type Context,
+	outcomingSignaling$
 } from "core";
 
 import { html } from "htm/preact";
@@ -11,12 +11,12 @@ import { useContext, useEffect, useState, useMemo } from "preact/hooks";
 import { css } from "goober";
 
 export function ManualRtc({ dataTestid }) {
-	let [receivedSignalingEvents, setReceivedSignalingEvents] = useState("");
-	let [signalingEvents, setSignalingEvents] = useState([]);
+	const [receivedSignalingEvents, setReceivedSignalingEvents] = useState("");
+	const [signalingEvents, setSignalingEvents] = useState([]);
 	const context: Context = useContext(appContext);
-	let [config, setConfig] = useState(context.configStorage.read());
-	let sub = useMemo(() => context.configStorage.watch().subscribe(setConfig), []);
-	let [manualRtcCompleted, setManualRtcCompleted] = useState(false);
+	const [config, setConfig] = useState(context.configStorage.read());
+	const sub = useMemo(() => context.configStorage.watch().subscribe(setConfig), [context]);
+	const [manualRtcCompleted, setManualRtcCompleted] = useState(false);
 
 	function updateOfflineModeCharacter(offlineModeCharacter: Character) {
 		context.configStorage.save({ offlineModeCharacter });
@@ -31,7 +31,7 @@ export function ManualRtc({ dataTestid }) {
 			signalingEvents.push(signalingEvent)
 			setSignalingEvents([...signalingEvents]);
 		});
-	}, []);
+	}, [signalingEvents]);
 
 	async function receiveSignalingEvents(event) {
 		broadcastIncomingSignaling(JSON.parse(event.target.value));
@@ -53,11 +53,10 @@ export function ManualRtc({ dataTestid }) {
 
 	useEffect(() => {
 		return function() {
-			console.log("unsibscribing from ManualRtc component.")
 			sub.unsubscribe();
 			sub2.unsubscribe();
 		};
-	}, []);
+	}, [sub, sub2]);
 
 	const className = css`
 		background-color: white;

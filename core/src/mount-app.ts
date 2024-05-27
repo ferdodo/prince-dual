@@ -1,4 +1,4 @@
-import { App, Context } from "core";
+import { App, type Context } from "core";
 import { render } from "htm/preact";
 
 export function mountApp(

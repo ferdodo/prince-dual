@@ -1,7 +1,10 @@
-import { GameStorage, Character, Message } from "core";
-import { Connection } from "connection-types";
+import { type GameStorage, Character, type Message } from "core";
+import type { Connection } from "connection-types";
 
-export function resolveMyCharacter(gameStorage: GameStorage, connection: Connection<Message>): Character {
+export function resolveMyCharacter(
+	gameStorage: GameStorage,
+	connection: Connection<Message>
+): Character {
 	const game = gameStorage.read();
 
 	switch (connection.id) {

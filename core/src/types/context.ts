@@ -1,6 +1,6 @@
-import { Message, GameStorage, ConfigStorage } from "core";
-import { Observable } from "rxjs";
-import { Connection } from "connection-types";
+import type { Connection } from "connection-types";
+import type { Message, GameStorage, ConfigStorage } from "core";
+import type { Observable } from "rxjs";
 
 export interface Context {
 	configStorage: ConfigStorage;

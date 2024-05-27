@@ -1,4 +1,4 @@
-import { ConfigStorage, Config } from "core";
+import type { ConfigStorage, Config } from "core";
 import { Subject } from "rxjs";
 
 export function createConfigStorage(_config: Config): ConfigStorage {

@@ -1,6 +1,6 @@
-import { Connection } from "connection-types";
-import { Observable, Subscription } from "rxjs";
-import { resolveMyCharacter, GameStorage, Message } from "core";
+import type { Connection } from "connection-types";
+import type { Observable, Subscription } from "rxjs";
+import { resolveMyCharacter, type GameStorage, type Message } from "core";
 
 export function observeMyCharacterHandle(gameStorage: GameStorage, connexions$: Observable<Connection<Message>>): Subscription {
 	return connexions$.subscribe(function(connection: Connection<Message>) {

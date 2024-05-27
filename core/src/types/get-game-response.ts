@@ -1,4 +1,4 @@
-import { Game } from "core";
+import type { Game } from "core";
 
 export interface GetGameResponse {
 	requestId: string;

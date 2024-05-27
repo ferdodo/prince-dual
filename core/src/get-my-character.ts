@@ -1,6 +1,6 @@
-import { filter, firstValueFrom, map, Observable } from "rxjs";
-import { Character, Message, GetMyCharacterResponse } from "core";
-import { Connection } from "connection-types";
+import { filter, firstValueFrom, map, type Observable } from "rxjs";
+import type { Character, Message, GetMyCharacterResponse } from "core";
+import type { Connection } from "connection-types";
 import { uid } from "uid";
 
 export async function getMyCharacter(connection: Connection<Message>): Promise<Character> {

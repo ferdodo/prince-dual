@@ -21,8 +21,8 @@ test("should run a game in online mode", async function() {
 	const gameStorage = createGameStorage();
 	const serverConnections$ = merge(contextFactoryP1.serverConnexion$, contextFactoryP2.serverConnexion$);
 	initiateBackendHandlers(gameStorage, serverConnections$);
-	const dataTestidP1 = uid() + "-player1";
-	const dataTestidP2 = uid() + "-player2";
+	const dataTestidP1 = `${uid()}-player1`;
+	const dataTestidP2 = `${uid()}-player2`;
 
 	render(html`
 		<${appContext.Provider} value=${contextP1}>
@@ -72,8 +72,8 @@ test("should run a game in offline mode", async function() {
 	contextFactoryP2.setOffline();
 	const contextP1 = contextFactoryP1.build();
 	const contextP2 = contextFactoryP2.build();
-	const dataTestidP1 = uid() + "-player1";
-	const dataTestidP2 = uid() + "-player2";
+	const dataTestidP1 = `${uid()}-player1`;
+	const dataTestidP2 = `${uid()}-player2`;
 
 	render(html`
 		<${appContext.Provider} value=${contextP1}>
@@ -136,8 +136,8 @@ test("should lose the game when interacting early", async function() {
 	const gameStorage = createGameStorage();
 	const serverConnections$ = merge(contextFactoryP1.serverConnexion$, contextFactoryP2.serverConnexion$);
 	initiateBackendHandlers(gameStorage, serverConnections$);
-	const dataTestidP1 = uid() + "-player1";
-	const dataTestidP2 = uid() + "-player2";
+	const dataTestidP1 = `${uid()}-player1`;
+	const dataTestidP2 = `${uid()}-player2`;
 
 	render(html`
 		<${appContext.Provider} value=${contextP1}>

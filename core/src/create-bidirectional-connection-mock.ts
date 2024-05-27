@@ -1,6 +1,6 @@
-import { Message } from "core";
+import type { Message } from "core";
 import { Subject } from "rxjs";
-import { Connection } from "connection-types";
+import type { Connection } from "connection-types";
 
 export function createBidirectionalConnectionMock() {
 	const _clientMessage$: Subject<Message> = new Subject();

@@ -1,5 +1,5 @@
-import { Context, createGameStorage, initiateBackendHandlers, Message } from "core";
-import { Connection } from "connection-types";
+import { type Context, createGameStorage, initiateBackendHandlers, type Message } from "core";
+import type { Connection } from "connection-types";
 
 export async function createClientConnection(context: Context): Promise<Connection<Message>> {
 	const config = context.configStorage.read();
@@ -14,11 +14,11 @@ export async function createClientConnection(context: Context): Promise<Connecti
 
 		initiateBackendHandlers(context.offlineModeGameStorage, serverConnection$);
 		return createConnection();
-	} else {
-		return context.createWsClientConnection(
-			config.wsProtocol,
-			config.wsPort,
-			config.webDomain
-		);
 	}
+
+	return context.createWsClientConnection(
+		config.wsProtocol,
+		config.wsPort,
+		config.webDomain
+	);
 }

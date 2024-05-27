@@ -1,8 +1,15 @@
-import { Subject, Observable, NEVER } from "rxjs";
-import { Connection } from "connection-types";
+import { Subject, type Observable, NEVER } from "rxjs";
+import type { Connection } from "connection-types";
 import { uid } from "uid";
 
-import { Context, ConfigFactory, Message, ConfigStorage, createBidirectionalConnectionMock, createConfigStorage } from "core";
+import {
+	type Context,
+	ConfigFactory,
+	type Message,
+	type ConfigStorage,
+	createBidirectionalConnectionMock,
+	createConfigStorage
+} from "core";
 
 let _rtcServerConnetion$: Subject<Connection<Message>> | null = null;
 

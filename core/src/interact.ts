@@ -1,5 +1,5 @@
-import { Message } from "core";
-import { Connection } from "connection-types";
+import type { Message } from "core";
+import type { Connection } from "connection-types";
 
 export async function interact(connection: Connection<Message>) {
 	const message: Message = { interactEmit: {} };

@@ -1,4 +1,4 @@
-import { Config, Character } from "core";
+import { type Config, Character } from "core";
 
 export class ConfigFactory {
 	build(): Config {

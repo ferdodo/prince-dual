@@ -1,14 +1,14 @@
-import { Observable } from "rxjs";
-import { Connection } from "connection-types";
+import type { Observable } from "rxjs";
+import type { Connection } from "connection-types";
 
 import {
-    Message,
+    type Message,
     interactHandle,
     getGameHandle,
     observeGameHandle,
     getMyCharacterHandle,
     observeMyCharacterHandle,
-    GameStorage
+    type GameStorage
 } from "core";
 
 export function initiateBackendHandlers(

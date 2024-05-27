@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
-import { Game } from "core";
+import type { Observable } from "rxjs";
+import type { Game } from "core";
 
 export interface GameStorage {
 	read: () => Game;

@@ -1,4 +1,4 @@
-import { GameStorage, Game, GameState } from "core";
+import { type GameStorage, type Game, GameState } from "core";
 import { Subject } from "rxjs";
 
 export function createGameStorage(): GameStorage {

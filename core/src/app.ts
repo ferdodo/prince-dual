@@ -1,4 +1,4 @@
-import { Playground, ManualRtc, appContext, Context } from "core";
+import { Playground, ManualRtc, appContext, type Context } from "core";
 import { html } from "htm/preact";
 
 export function App(context: Context) {

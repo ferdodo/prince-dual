@@ -1,4 +1,4 @@
-import { Character } from "core";
+import type { Character } from "core";
 
 export interface Config {
 	webProtocol: string;

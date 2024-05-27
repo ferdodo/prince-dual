@@ -1,6 +1,6 @@
-import { filter, map, firstValueFrom, Observable } from "rxjs";
-import { Game, Message, GetGameResponse } from "core";
-import { Connection } from "connection-types";
+import { filter, map, firstValueFrom, type Observable } from "rxjs";
+import type { Game, Message, GetGameResponse } from "core";
+import type { Connection } from "connection-types";
 import { uid } from "uid";
 
 export async function getGame(connection: Connection<Message>): Promise<Game> {
