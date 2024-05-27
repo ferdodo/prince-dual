@@ -103,16 +103,15 @@ export function Playground({ dataTestid }) {
 			${!disconnected && !game && html`<p aria-label="waitConnection" class="disconnectedFromServer">Attente d'une connexion.</p>`}
 			${showTitle && game && html`<div aria-label="title" class="title"></div>`}
 
-			${
-		!showTitle && html`
+			${ !showTitle && html`
 				<div aria-label="arena" class="arena">
 					<div aria-label="player" class="vue-player">
 						${game?.playerA && !aWins && !bWins && html`<div aria-label="playerA" class="playerA"></div>`}
 						${game?.playerB && !aWins && !bWins && html`<div aria-label="playerB" class="playerB"></div>`}
-						${game?.playerA && aWins && html`<div class="playerAwins"></div>`}
-						${game?.playerB && aWins && html`<div class="playerBloses"></div>`}
-						${game?.playerA && bWins && html`<div class="playerAloses"></div>`}
-						${game?.playerB && bWins && html`<div class="playerBwins"></div>`}
+						${game?.playerA && aWins && html`<div aria-label="playerAwins" class="playerAwins"></div>`}
+						${game?.playerB && aWins && html`<div aria-label="playerBloses" class="playerBloses"></div>`}
+						${game?.playerA && bWins && html`<div aria-label="playerAloses" class="playerAloses"></div>`}
+						${game?.playerB && bWins && html`<div aria-label="playerBwins" class="playerBwins"></div>`}
 					</div>
 
 					${game?.state === GameState.Hajime && html`<p aria-label="exclamationPoints" class="exclamationPoints">!!</p>`}
@@ -121,8 +120,7 @@ export function Playground({ dataTestid }) {
 					${myCharacter === Character.None && html`<p class="spectatorDisplay">Spectateur</p>`}
 					<p aria-label="indication" class="indication">${indication}</p>
 				</div>
-			`
-	}
+			`}
 		</div>
 	`;
 }

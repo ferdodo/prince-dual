@@ -10,7 +10,7 @@ import { html } from "htm/preact";
 import { useContext, useEffect, useState, useMemo } from "preact/hooks";
 import { css } from "goober";
 
-export function ManualRtc() {
+export function ManualRtc({ dataTestid }) {
 	let [receivedSignalingEvents, setReceivedSignalingEvents] = useState("");
 	let [signalingEvents, setSignalingEvents] = useState([]);
 	const context: Context = useContext(appContext);
@@ -69,7 +69,7 @@ export function ManualRtc() {
 	`;
 
 	return !manualRtcCompleted && html`
-		<div className=${className}>
+		<div className=${className} data-testid=${dataTestid}>
 			<fieldset>
 				<legend> Connexion WebRTC </legend>
 
@@ -83,10 +83,12 @@ export function ManualRtc() {
 						<legend> Choix de votre joueur </legend>
 
 						<button
+							aria-label="player1Button"
 							onClick=${() => updateOfflineModeCharacter(Character.PlayerA)}>
 							Joueur 1
 						</button>
 						<button
+							aria-label="player2Button"
 							onClick=${() => updateOfflineModeCharacter(Character.PlayerB)}>
 							Joueur 2
 						</button>
@@ -96,7 +98,10 @@ export function ManualRtc() {
 				${config.offlineModeCharacter !== Character.None ? html`
 					${signalingEvents.length ? html`
 						<div>
-							<button onClick=${copySignalingEventToClipBoard} style="width: 10rem;">
+							<button
+								onClick=${copySignalingEventToClipBoard}
+								aria-label="copySignalingEventToClipBoard"
+								style="width: 10rem;">
 								Copier mon signalement (⚠️&nbsp;CONFIDENTIEL&nbsp;⚠️,
 								Adresse IP, routage réseau, ...)
 							</button>
@@ -105,6 +110,7 @@ export function ManualRtc() {
 
 					<textarea
 						placeholder="Recevoir le signalement de l'autre joueur."
+						aria-label="signalingEvents"
 						onChange=${receiveSignalingEvents}
 						value=${receivedSignalingEvents}
 						style="width: 10rem;"

@@ -22,7 +22,6 @@ export function interactHandle(gameStorage: GameStorage, connexions$: Observable
 		const messageSub = connection.messages$.pipe(filter(message => Boolean(message.interactEmit)))
 			.subscribe({
 				next() {
-					console.log("is interacting", connection.id);
 					const game: Game = gameStorage.read();
 
 					switch (game.state) {
