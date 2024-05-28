@@ -1734,44 +1734,6 @@
     return n4.__v.__b - l4.__v.__b;
   }, P.__r = 0, e = 0, c = F(false), s = F(true), a = 0;
 
-  // ../core/node_modules/htm/dist/htm.module.js
-  var n2 = function(t5, s4, r3, e4) {
-    var u4;
-    s4[0] = 0;
-    for (var h4 = 1; h4 < s4.length; h4++) {
-      var p4 = s4[h4++], a4 = s4[h4] ? (s4[0] |= p4 ? 1 : 2, r3[s4[h4++]]) : s4[++h4];
-      3 === p4 ? e4[0] = a4 : 4 === p4 ? e4[1] = Object.assign(e4[1] || {}, a4) : 5 === p4 ? (e4[1] = e4[1] || {})[s4[++h4]] = a4 : 6 === p4 ? e4[1][s4[++h4]] += a4 + "" : p4 ? (u4 = t5.apply(a4, n2(t5, a4, r3, ["", null])), e4.push(u4), a4[0] ? s4[0] |= 2 : (s4[h4 - 2] = 0, s4[h4] = u4)) : e4.push(a4);
-    }
-    return e4;
-  };
-  var t2 = /* @__PURE__ */ new Map();
-  function htm_module_default(s4) {
-    var r3 = t2.get(this);
-    return r3 || (r3 = /* @__PURE__ */ new Map(), t2.set(this, r3)), (r3 = n2(this, r3.get(s4) || (r3.set(s4, r3 = function(n4) {
-      for (var t5, s5, r4 = 1, e4 = "", u4 = "", h4 = [0], p4 = function(n5) {
-        1 === r4 && (n5 || (e4 = e4.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h4.push(0, n5, e4) : 3 === r4 && (n5 || e4) ? (h4.push(3, n5, e4), r4 = 2) : 2 === r4 && "..." === e4 && n5 ? h4.push(4, n5, 0) : 2 === r4 && e4 && !n5 ? h4.push(5, 0, true, e4) : r4 >= 5 && ((e4 || !n5 && 5 === r4) && (h4.push(r4, 0, e4, s5), r4 = 6), n5 && (h4.push(r4, n5, 0, s5), r4 = 6)), e4 = "";
-      }, a4 = 0; a4 < n4.length; a4++) {
-        a4 && (1 === r4 && p4(), p4(a4));
-        for (var l4 = 0; l4 < n4[a4].length; l4++)
-          t5 = n4[a4][l4], 1 === r4 ? "<" === t5 ? (p4(), h4 = [h4], r4 = 3) : e4 += t5 : 4 === r4 ? "--" === e4 && ">" === t5 ? (r4 = 1, e4 = "") : e4 = t5 + e4[0] : u4 ? t5 === u4 ? u4 = "" : e4 += t5 : '"' === t5 || "'" === t5 ? u4 = t5 : ">" === t5 ? (p4(), r4 = 1) : r4 && ("=" === t5 ? (r4 = 5, s5 = e4, e4 = "") : "/" === t5 && (r4 < 5 || ">" === n4[a4][l4 + 1]) ? (p4(), 3 === r4 && (h4 = h4[0]), r4 = h4, (h4 = h4[0]).push(2, 0, r4), r4 = 0) : " " === t5 || "	" === t5 || "\n" === t5 || "\r" === t5 ? (p4(), r4 = 2) : e4 += t5), 3 === r4 && "!--" === e4 && (r4 = 4, h4 = h4[0]);
-      }
-      return p4(), h4;
-    }(s4)), r3), arguments, [])).length > 1 ? r3 : r3[0];
-  }
-
-  // ../core/node_modules/htm/preact/index.module.js
-  var m = htm_module_default.bind(_);
-
-  // ../core/src/app.ts
-  function App(context4) {
-    return m`
-		<${appContext.Provider} value=${context4}>
-			<${ManualRtc}/>
-			<${Playground}/>
-		<//>
-	`;
-  }
-
   // ../core/src/app-context.ts
   var appContext = G(null);
 
@@ -3852,6 +3814,34 @@
     }
   }
 
+  // ../core/node_modules/htm/dist/htm.module.js
+  var n2 = function(t5, s4, r3, e4) {
+    var u4;
+    s4[0] = 0;
+    for (var h4 = 1; h4 < s4.length; h4++) {
+      var p4 = s4[h4++], a4 = s4[h4] ? (s4[0] |= p4 ? 1 : 2, r3[s4[h4++]]) : s4[++h4];
+      3 === p4 ? e4[0] = a4 : 4 === p4 ? e4[1] = Object.assign(e4[1] || {}, a4) : 5 === p4 ? (e4[1] = e4[1] || {})[s4[++h4]] = a4 : 6 === p4 ? e4[1][s4[++h4]] += a4 + "" : p4 ? (u4 = t5.apply(a4, n2(t5, a4, r3, ["", null])), e4.push(u4), a4[0] ? s4[0] |= 2 : (s4[h4 - 2] = 0, s4[h4] = u4)) : e4.push(a4);
+    }
+    return e4;
+  };
+  var t2 = /* @__PURE__ */ new Map();
+  function htm_module_default(s4) {
+    var r3 = t2.get(this);
+    return r3 || (r3 = /* @__PURE__ */ new Map(), t2.set(this, r3)), (r3 = n2(this, r3.get(s4) || (r3.set(s4, r3 = function(n4) {
+      for (var t5, s5, r4 = 1, e4 = "", u4 = "", h4 = [0], p4 = function(n5) {
+        1 === r4 && (n5 || (e4 = e4.replace(/^\s*\n\s*|\s*\n\s*$/g, ""))) ? h4.push(0, n5, e4) : 3 === r4 && (n5 || e4) ? (h4.push(3, n5, e4), r4 = 2) : 2 === r4 && "..." === e4 && n5 ? h4.push(4, n5, 0) : 2 === r4 && e4 && !n5 ? h4.push(5, 0, true, e4) : r4 >= 5 && ((e4 || !n5 && 5 === r4) && (h4.push(r4, 0, e4, s5), r4 = 6), n5 && (h4.push(r4, n5, 0, s5), r4 = 6)), e4 = "";
+      }, a4 = 0; a4 < n4.length; a4++) {
+        a4 && (1 === r4 && p4(), p4(a4));
+        for (var l4 = 0; l4 < n4[a4].length; l4++)
+          t5 = n4[a4][l4], 1 === r4 ? "<" === t5 ? (p4(), h4 = [h4], r4 = 3) : e4 += t5 : 4 === r4 ? "--" === e4 && ">" === t5 ? (r4 = 1, e4 = "") : e4 = t5 + e4[0] : u4 ? t5 === u4 ? u4 = "" : e4 += t5 : '"' === t5 || "'" === t5 ? u4 = t5 : ">" === t5 ? (p4(), r4 = 1) : r4 && ("=" === t5 ? (r4 = 5, s5 = e4, e4 = "") : "/" === t5 && (r4 < 5 || ">" === n4[a4][l4 + 1]) ? (p4(), 3 === r4 && (h4 = h4[0]), r4 = h4, (h4 = h4[0]).push(2, 0, r4), r4 = 0) : " " === t5 || "	" === t5 || "\n" === t5 || "\r" === t5 ? (p4(), r4 = 2) : e4 += t5), 3 === r4 && "!--" === e4 && (r4 = 4, h4 = h4[0]);
+      }
+      return p4(), h4;
+    }(s4)), r3), arguments, [])).length > 1 ? r3 : r3[0];
+  }
+
+  // ../core/node_modules/htm/preact/index.module.js
+  var m = htm_module_default.bind(_);
+
   // ../core/node_modules/preact/hooks/dist/hooks.module.js
   var t3;
   var r2;
@@ -4055,7 +4045,7 @@
   var b2 = u3.bind({ g: 1 });
   var h3 = u3.bind({ k: 1 });
 
-  // ../core/src/manual-rtc.ts
+  // ../core/src/components/manual-rtc.ts
   function ManualRtc({ dataTestid }) {
     const [receivedSignalingEvents, setReceivedSignalingEvents] = p2("");
     const [signalingEvents, setSignalingEvents] = p2([]);
@@ -4156,80 +4146,17 @@
 	`;
   }
 
-  // ../core/src/mount-app.ts
-  function mountApp(htmlElement, context4) {
-    B(App(context4), htmlElement);
+  // ../core/src/components/app.ts
+  function App(context4) {
+    return m`
+		<${appContext.Provider} value=${context4}>
+			<${ManualRtc}/>
+			<${Playground}/>
+		<//>
+	`;
   }
 
-  // ../core/src/observe-game.ts
-  function observeGame(connection) {
-    return new Observable2(function(subscriber) {
-      const subscription = connection.messages$.pipe(
-        map((m3) => m3.observeGameBroadcast),
-        filter2(Boolean)
-      ).subscribe({
-        next(broadcast) {
-          subscriber.next(broadcast.game);
-        },
-        complete() {
-          subscription.unsubscribe();
-        }
-      });
-    });
-  }
-
-  // ../core/src/observe-game-handle.ts
-  function observeGameHandle(gameStorage, connexions$) {
-    return connexions$.subscribe(function(connection) {
-      const subscription = gameStorage.watch().subscribe(function(game) {
-        connection.send({
-          observeGameBroadcast: { game }
-        });
-      });
-      const messageSubscription = connection.messages$.subscribe({
-        complete() {
-          subscription.unsubscribe();
-          messageSubscription.unsubscribe();
-        }
-      });
-    });
-  }
-
-  // ../core/src/observe-my-character.ts
-  function observeMyCharacter(connection) {
-    return connection.messages$.pipe(
-      map((m3) => m3.observeMyCharacterBroadcast?.character),
-      filter2(Boolean)
-    );
-  }
-
-  // ../core/src/observe-my-character-handle.ts
-  function observeMyCharacterHandle(gameStorage, connexions$) {
-    return connexions$.subscribe(function(connection) {
-      const subscription = gameStorage.watch().subscribe(function() {
-        connection.send({
-          observeMyCharacterBroadcast: {
-            character: resolveMyCharacter(gameStorage, connection)
-          }
-        });
-      });
-      const messageSubscription = connection.messages$.subscribe({
-        complete() {
-          subscription.unsubscribe();
-          messageSubscription.unsubscribe();
-        }
-      });
-    });
-  }
-
-  // ../core/src/outcoming-signaling.ts
-  var _outcomingSignaling$ = new Subject2();
-  var outcomingSignaling$ = _outcomingSignaling$.asObservable();
-  function broadcastOutcomingSignaling(event) {
-    _outcomingSignaling$.next(event);
-  }
-
-  // ../core/src/playground.ts
+  // ../core/src/components/playground.ts
   function Playground({ dataTestid }) {
     const context4 = P2(appContext);
     const waitConnection = q2(
@@ -4319,6 +4246,79 @@
 			`}
 		</div>
 	`;
+  }
+
+  // ../core/src/mount-app.ts
+  function mountApp(htmlElement, context4) {
+    B(App(context4), htmlElement);
+  }
+
+  // ../core/src/observe-game.ts
+  function observeGame(connection) {
+    return new Observable2(function(subscriber) {
+      const subscription = connection.messages$.pipe(
+        map((m3) => m3.observeGameBroadcast),
+        filter2(Boolean)
+      ).subscribe({
+        next(broadcast) {
+          subscriber.next(broadcast.game);
+        },
+        complete() {
+          subscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/observe-game-handle.ts
+  function observeGameHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const subscription = gameStorage.watch().subscribe(function(game) {
+        connection.send({
+          observeGameBroadcast: { game }
+        });
+      });
+      const messageSubscription = connection.messages$.subscribe({
+        complete() {
+          subscription.unsubscribe();
+          messageSubscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/observe-my-character.ts
+  function observeMyCharacter(connection) {
+    return connection.messages$.pipe(
+      map((m3) => m3.observeMyCharacterBroadcast?.character),
+      filter2(Boolean)
+    );
+  }
+
+  // ../core/src/observe-my-character-handle.ts
+  function observeMyCharacterHandle(gameStorage, connexions$) {
+    return connexions$.subscribe(function(connection) {
+      const subscription = gameStorage.watch().subscribe(function() {
+        connection.send({
+          observeMyCharacterBroadcast: {
+            character: resolveMyCharacter(gameStorage, connection)
+          }
+        });
+      });
+      const messageSubscription = connection.messages$.subscribe({
+        complete() {
+          subscription.unsubscribe();
+          messageSubscription.unsubscribe();
+        }
+      });
+    });
+  }
+
+  // ../core/src/outcoming-signaling.ts
+  var _outcomingSignaling$ = new Subject2();
+  var outcomingSignaling$ = _outcomingSignaling$.asObservable();
+  function broadcastOutcomingSignaling(event) {
+    _outcomingSignaling$.next(event);
   }
 
   // ../core/src/resolve-my-character.ts
