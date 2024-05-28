@@ -1,5 +1,5 @@
 import type { Context } from "core/types";
-import { App } from "core";
+import { App } from "core/components";
 import { render } from "htm/preact";
 
 export function mountApp(
