@@ -3,11 +3,11 @@ import { render, screen, within, fireEvent } from "@testing-library/preact";
 import { uid } from "uid";
 import { firstValueFrom, timeout, filter } from "rxjs";
 import { html } from "htm/preact";
+import type { SignalingEvent } from "core/types";
 
 import {
     ContextFactory,
     broadcastOutcomingSignaling,
-    type SignalingEvent,
     ManualRtc,
     appContext,
     incomingSignaling$

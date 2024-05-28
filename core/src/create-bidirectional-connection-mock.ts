@@ -1,4 +1,4 @@
-import type { Message } from "core";
+import type { Message } from "core/types";
 import { Subject } from "rxjs";
 import type { Connection } from "connection-types";
 

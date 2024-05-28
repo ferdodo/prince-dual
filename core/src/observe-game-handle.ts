@@ -1,6 +1,6 @@
 import type { Connection } from "connection-types";
 import type { Observable, Subscription } from "rxjs";
-import type { Game, GameStorage, Message } from "core";
+import type { Game, GameStorage, Message } from "core/types";
 
 export function observeGameHandle(
 	gameStorage: GameStorage,

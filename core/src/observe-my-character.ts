@@ -1,4 +1,5 @@
-import type { Character, Message } from "core";
+import type { Message } from "core/types";
+import type { Character } from "core";
 import { type Observable, filter, map } from "rxjs";
 import type { Connection } from "connection-types";
 

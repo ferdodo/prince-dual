@@ -1,4 +1,5 @@
-import { Character, type Game, GameState } from "core";
+import type { Game } from "core/types";
+import { Character, GameState } from "core";
 
 export function computeIndication(
 	myCharacter: Character | null,

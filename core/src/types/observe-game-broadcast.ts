@@ -1,4 +1,4 @@
-import type { Game } from "core";
+import type { Game } from "core/types";
 
 export interface ObserveGameBroadcast {
 	game: Game;

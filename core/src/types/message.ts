@@ -1,3 +1,4 @@
+
 import type {
 	GetGameRequest,
 	GetGameResponse,
@@ -5,7 +6,7 @@ import type {
 	GetMyCharacterResponse,
 	ObserveGameBroadcast,
 	ObserveMyCharacterBroadcast
-} from "core";
+} from "core/types";
 
 export interface Message {
 	interactEmit?: object;

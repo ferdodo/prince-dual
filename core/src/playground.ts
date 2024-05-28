@@ -1,20 +1,17 @@
 import type { Connection } from "connection-types";
-
 import { Subject, merge, combineLatest, from, mergeMap } from "rxjs";
+import type { Message, Game, Context } from "core/types"; 
 
 import {
 	computeIndication,
-	type Message,
 	observeGame,
 	Character,
-	type Game,
 	observeMyCharacter,
 	getGame,
 	getMyCharacter,
 	interact,
 	isTitleShown,
 	GameState,
-	type Context,
 	appContext,
 	createClientConnection
 } from "core";

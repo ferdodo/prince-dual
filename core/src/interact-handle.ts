@@ -1,6 +1,8 @@
 import type { Connection } from "connection-types";
-import { type Observable, filter, type Subscription } from "rxjs";
-import { type Game, GameState, type GameStorage, type Message } from "core";
+import type { Observable, Subscription } from "rxjs";
+import type { Game, GameStorage, Message } from "core/types";
+import { filter } from "rxjs";
+import { GameState } from "core";
 
 const {
 	WaitingPlayerA,

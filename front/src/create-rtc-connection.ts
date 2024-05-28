@@ -1,13 +1,7 @@
 import { Connection } from "connection-types";
 import { Observable, Subject, share, filter, firstValueFrom } from "rxjs";
-
-import {
-	SignalingEvent,
-	ConfigStorage,
-	broadcastOutcomingSignaling,
-	incomingSignaling$,
-	Character
-} from "core";
+import type { ConfigStorage, SignalingEvent } from "core/types";
+import { broadcastOutcomingSignaling, incomingSignaling$, Character } from "core";
 
 export async function createRtcConnection<T>(
 	configStorage: ConfigStorage

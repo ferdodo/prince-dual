@@ -1,5 +1,6 @@
-import { type GameStorage, Character, type Message } from "core";
+import type { GameStorage, Message } from "core/types";
 import type { Connection } from "connection-types";
+import { Character } from "core";
 
 export function resolveMyCharacter(
 	gameStorage: GameStorage,

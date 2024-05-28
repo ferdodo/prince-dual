@@ -1,4 +1,4 @@
-import type { Config } from "core";
+import type { Config } from "core/types";
 import type { Observable } from "rxjs";
 
 export interface ConfigStorage {

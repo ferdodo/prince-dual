@@ -1,5 +1,6 @@
-import { type Context, createGameStorage, initiateBackendHandlers, type Message } from "core";
+import type { Context, Message } from "core/types";
 import type { Connection } from "connection-types";
+import { createGameStorage, initiateBackendHandlers } from "core";
 
 export async function createClientConnection(context: Context): Promise<Connection<Message>> {
 	const config = context.configStorage.read();

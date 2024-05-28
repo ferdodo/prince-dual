@@ -1,14 +1,8 @@
-import {
-	appContext,
-	broadcastIncomingSignaling,
-	Character,
-	type Context,
-	outcomingSignaling$
-} from "core";
-
+import type { Context } from "core/types";
 import { html } from "htm/preact";
 import { useContext, useEffect, useState, useMemo } from "preact/hooks";
 import { css } from "goober";
+import { appContext, broadcastIncomingSignaling, Character, outcomingSignaling$ } from "core";
 
 export function ManualRtc({ dataTestid }) {
 	const [receivedSignalingEvents, setReceivedSignalingEvents] = useState("");

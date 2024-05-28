@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import type { SignalingEvent } from "core";
+import type { SignalingEvent } from "core/types";
 
 const _incomingSignaling$: Subject<SignalingEvent[]> = new Subject();
 

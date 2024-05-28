@@ -1,6 +1,8 @@
 import type { Connection } from "connection-types";
-import { type Observable, filter, type Subscription, map, mergeMap, tap } from "rxjs";
-import { resolveMyCharacter, type Message, type GetMyCharacterRequest, type GameStorage } from "core";
+import type { Observable, Subscription } from "rxjs";
+import type { Message, GetMyCharacterRequest, GameStorage } from "core/types";
+import { filter, map, mergeMap, tap } from "rxjs";
+import { resolveMyCharacter } from "core";
 
 export function getMyCharacterHandle(
 	gameStorage: GameStorage,

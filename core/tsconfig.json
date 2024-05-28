@@ -5,7 +5,8 @@
 		"noEmit": true,
 		"downlevelIteration": true,
 		"paths": {
-			"core": ["src/index"]
+			"core": ["src/index"],
+			"core/types": ["src/types/index"],
 		},
 		"lib": [
 			"ESNext",

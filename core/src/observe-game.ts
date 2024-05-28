@@ -1,4 +1,4 @@
-import type { Game, Message, ObserveGameBroadcast } from "core";
+import type { Game, Message, ObserveGameBroadcast } from "core/types";
 import { Observable, filter, map } from "rxjs";
 import type { Connection } from "connection-types";
 

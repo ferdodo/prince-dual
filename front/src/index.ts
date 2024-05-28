@@ -1,12 +1,7 @@
 import { createWsClientConnection } from "./create-ws-client-connection";
 import { createRtcConnection } from "./create-rtc-connection";
-
-import {
-	Context,
-	createConfigStorage,
-	Character,
-	mountApp
-} from "core";
+import type { Context } from "core/types";
+import { createConfigStorage, Character, mountApp } from "core";
 
 const configStorage = createConfigStorage({
 	webProtocol: "http",

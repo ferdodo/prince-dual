@@ -1,5 +1,6 @@
 import { filter, firstValueFrom, map, type Observable } from "rxjs";
-import type { Character, Message, GetMyCharacterResponse } from "core";
+import type { Message, GetMyCharacterResponse } from "core/types";
+import type { Character } from "core";
 import type { Connection } from "connection-types";
 import { uid } from "uid";
 
