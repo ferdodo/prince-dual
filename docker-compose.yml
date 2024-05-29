@@ -2,7 +2,7 @@ services:
   front:
     build: front
     ports:
-      - "3366:80"
+      - "3366:5173"
 
   back:
     build: back

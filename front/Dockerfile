@@ -11,6 +11,4 @@ COPY --from=0 /prince-duals/front/node_modules /prince-duals/front/node_modules
 WORKDIR /prince-duals/front
 COPY . .
 RUN npm run build
-
-FROM nginx
-COPY --from=1 /prince-duals/front/public /usr/share/nginx/html
+CMD npm run start
